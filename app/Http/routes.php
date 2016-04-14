@@ -24,3 +24,19 @@ Route::post('/delite', ['as' => 'delite', 'uses' => 'HomeController@delite']);
 Route::get('/personal/{id}/edit', ['as' => 'edit', 'uses' => 'HomeController@edit']);
 
 
+
+Route::get('/pass-context', ['as' => 'pass_context', 'uses' => 'HomeController@passContext']);
+Route::get('/pass-context/create', ['as' => 'passContextCreatForm', 'uses' => 'HomeController@passContextCreatForm']);
+
+Route::post('/create-pass-context', ['as' => 'createPassContext', 'uses' => 'HomeController@createPassContext']);
+Route::post('/delite-pass-context', ['as' => 'delitePassContext', 'uses' => 'HomeController@delitePassContext']);
+Route::get('/pass-context/{id}/edit', ['as' => 'editPassContext', 'uses' => 'HomeController@editPassContext']);
+Route::post('/update-create-pass-context', ['as' => 'updatePassContext', 'uses' => 'HomeController@updatePassContext']);
+
+
+//таблица группы
+Route::get('/groups/create', ['as' => 'createGroupForm', 'uses' => 'HomeController@createGroupForm']);
+Route::post('/create-groups', ['as' => 'createGroups', 'uses' => 'HomeController@createGroups']);
+Route::post('/update-groups', ['as' => 'updateGroups', 'uses' => 'HomeController@updateGroups']);
+Route::get('/groups/{id}/edit', ['as' => 'editGroupForm', 'uses' => 'HomeController@editGroupForm']);
+Route::post('/delite-group', ['as' => 'deliteGroup', 'uses' => 'HomeController@deliteGroup']);

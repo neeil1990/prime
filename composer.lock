@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4e797a07c019f6a1cefdaccd87cdcc19",
-    "content-hash": "082b4bb802fa08bc4b389b633cbe0a30",
+    "hash": "4dd8cb02d6ae42a3d0aca3ab699a275e",
+    "content-hash": "09140f9bf72c54631fa85c041bb67d84",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -277,6 +277,51 @@
                 "string"
             ],
             "time": "2015-11-06 14:35:42"
+        },
+        {
+            "name": "eusonlito/laravel-meta",
+            "version": "v2.0.8.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/eusonlito/laravel-Meta.git",
+                "reference": "1f40edd57f5722d4e95ab4f7e504a75293dae26a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/eusonlito/laravel-Meta/zipball/1f40edd57f5722d4e95ab4f7e504a75293dae26a",
+                "reference": "1f40edd57f5722d4e95ab4f7e504a75293dae26a",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Eusonlito\\LaravelMeta\\": "src/Eusonlito/LaravelMeta/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lito",
+                    "email": "lito@eordes.com"
+                }
+            ],
+            "description": "A package to manage Header Meta Tags",
+            "keywords": [
+                "head",
+                "laravel",
+                "meta",
+                "tags"
+            ],
+            "time": "2016-03-30 07:50:16"
         },
         {
             "name": "jakub-onderka/php-console-color",

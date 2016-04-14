@@ -157,10 +157,13 @@ return [
         App\Providers\RouteServiceProvider::class,
 
 
+
         //debag
         Barryvdh\Debugbar\ServiceProvider::class,
 
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
+        Eusonlito\LaravelMeta\MetaServiceProvider::class,
 
     ],
 
@@ -208,6 +211,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Meta'    => Eusonlito\LaravelMeta\Facade::class,
+
 
     ],
 

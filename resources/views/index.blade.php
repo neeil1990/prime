@@ -5,9 +5,8 @@
 
     <section class="content">
 
-
-      123
-
+        Привет!
+        
     </section>
 
     @stop

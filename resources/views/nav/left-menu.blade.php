@@ -6,10 +6,10 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p>@if(!empty($users_now->name)){{$users_now->name}}@endif</p>
                 <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
         </div>
@@ -25,7 +25,7 @@
                     <i class="fa fa-dashboard"></i> <span>Проекты контекст</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Пароли контекст</a></li>
+                    <li class="active"><a href="/pass-context"><i class="fa fa-circle-o"></i> Пароли контекст</a></li>
                 </ul>
             </li>
             <li class="active"><a href="/personal"><i class="fa fa-circle-o"></i> Сотрудники</a></li>
