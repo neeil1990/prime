@@ -16,10 +16,10 @@ class CreatePassContextsTable extends Migration
             $table->increments('id');
             $table->integer('id_user');
             $table->string('name_project');
-            $table->text('ssa');
-            $table->text('ftp');
-            $table->string('login');
-            $table->string('password');
+            $table->text('loginYandex');
+            $table->text('passYandex');
+            $table->string('loginGoogle');
+            $table->string('passGoogle');
             $table->timestamps();
         });
     }

@@ -17,24 +17,29 @@
         
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu">
-            <li class="header">MAIN NAVIGATION</li>
-            <li class="active"><a href="/"><i class="fa fa-circle-o"></i> Главная</a></li>
+            <li class="header">Панель навигации</li>
+            <li class=""><a href="/"><i class="fa fa-home"></i> <span>Главная</span></a></li>
 
-            <li class="active treeview">
+            <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-dashboard"></i> <span>Проекты контекст</span> <i class="fa fa-angle-left pull-right"></i>
+                    <i class="fa fa-search"></i> <span>Проекты SEO</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="/pass-context"><i class="fa fa-circle-o"></i> Пароли контекст</a></li>
+                    <li class="active"><a href="/pass-seo"><i class="fa fa-lock"></i> <span>Пароли SEO</span></a></li>
+                    <li class="active"><a href="/pass-dev"><i class="fa fa-lock"></i> <span>Пароли DEV</span></a></li>
                 </ul>
             </li>
-            <li class="active"><a href="/personal"><i class="fa fa-circle-o"></i> Сотрудники</a></li>
 
-
-
-
-
-
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-file-text-o"></i> <span>Проекты контекст</span> <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="active"><a href="/pass-context"><i class="fa fa-lock"></i> Пароли контекст</a></li>
+                </ul>
+            </li>
+            <li class=""><a href="/personal"><i class="fa fa-child"></i> <span>Сотрудники</span></a></li>
+            <li class=""><a href="/work-graffik"><i class="fa fa-area-chart"></i> <span>График работы</span></a></li>
         </ul>
     </section>
     <!-- /.sidebar -->

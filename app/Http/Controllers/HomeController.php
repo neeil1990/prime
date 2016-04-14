@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 use App\Groups;
+use App\PassContext;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use App\User;
-use App\PassContext;
+use App\PassSeo;
 
 
 
@@ -25,6 +26,9 @@ class HomeController extends Controller
         $this->middleware('auth');
 
 
+
+
+
     }
 
     public function user_now(){
@@ -40,8 +44,12 @@ class HomeController extends Controller
 
     public function index()
     {
+
+
         return view('index',['users_now' => $this->user_now()]);
     }
+
+
 
 
 
@@ -93,10 +101,10 @@ class HomeController extends Controller
         return $request['arr'];
     }
 
-    public function delitePassContext(Request $request){
+    public function delitePassSeo(Request $request){
         $delite = explode(',',$request['arr']);
         foreach($delite as $del){
-            PassContext::whereRaw('id = ?', [$del])->delete();
+            PassSeo::whereRaw('id = ?', [$del])->delete();
         }
         return $request['arr'];
     }
@@ -107,10 +115,10 @@ class HomeController extends Controller
         return view('page.edit_personal',['user' => $user],['users_now' => $this->user_now()]);
     }
 
-    public function editPassContext($id){
+    public function editPassSeo($id){
         $user_all = User::all();
-        $users = \DB::table('users')->join('pass_contexts','users.id','=','pass_contexts.id_user')->where('pass_contexts.id',$id)->first();
-        return view('page.edit_pass_context',['users' => $users,'user_all' => $user_all],['users_now' => $this->user_now()]);
+        $users = \DB::table('users')->join('pass_seos','users.id','=','pass_seos.id_user')->where('pass_seos.id',$id)->first();
+        return view('page.edit_pass_seo',['users' => $users,'user_all' => $user_all],['users_now' => $this->user_now()]);
     }
 
 
@@ -120,28 +128,28 @@ class HomeController extends Controller
         return redirect()->intended('personal');
     }
 
-    public function updatePassContext(Request $request,PassContext $passContext){
+    public function updatePassSeo(Request $request,PassSeo $passContext){
         $users_pass_context = $request->all();
-        $passContext->UpdatePassContextUser($users_pass_context);
-        return redirect()->intended('pass-context');
+        $passContext->UpdatePassSeoUser($users_pass_context);
+        return redirect()->intended('pass-seo');
     }
 
 
-    public function passContext(PassContext $passContext){
-        $users =$passContext->getUserPassContext(Auth::user()->id);
-        return view('page.pass_context',['users' => $users,'users_now' => $this->user_now(),'admin' => $this->admin()]);
+    public function passSEO(PassSeo $passSeo){
+        $users = $passSeo->getUserPassSeo(Auth::user()->id);
+        return view('page.pass_seo',['users' => $users,'users_now' => $this->user_now(),'admin' => $this->admin()]);
     }
 
-    public function passContextCreatForm(){
+    public function passSeoCreatForm(){
 
         $user = User::all();
-        return view('page.create_pass_context',['users' => $user ,'users_now' => $this->user_now()]);
+        return view('page.create_pass_seo',['users' => $user ,'users_now' => $this->user_now()]);
     }
 
 
-    public function createPassContext(Request $request){
+    public function createPassSeo(Request $request){
 
-        PassContext::create([
+        PassSeo::create([
             'name_project' => $request['name_project'],
             'id_user' => $request['id_user'],
             'ssa' => $request['ssa'],
@@ -150,7 +158,7 @@ class HomeController extends Controller
             'password' => $request['password']
         ]);
 
-        return redirect()->intended('/pass-context');
+        return redirect()->intended('/pass-seo');
     }
 
 
@@ -191,6 +199,70 @@ class HomeController extends Controller
             Groups::whereRaw('id = ?', [$del])->delete();
         }
         return $request['arr'];
+    }
+
+
+    //пароли контекст
+    public function passContext(PassContext $passContext){
+
+        $users = $passContext->getUserPassContext(Auth::user()->id);
+        return view('page.pass_context',['users' => $users,'users_now' => $this->user_now(),'admin' => $this->admin()]);
+
+    }
+
+    public function passContextCreatsForm(){
+        $user = User::all();
+        return view('page.create_pass_context',['users' => $user ,'users_now' => $this->user_now()]);
+    }
+
+    public function createPassContext(Request $request){
+
+        PassContext::create([
+            'name_project' => $request['name_project'],
+            'id_user' => $request['id_user'],
+            'loginYandex' => $request['loginYandex'],
+            'passYandex' => $request['passYandex'],
+            'loginGoogle' => $request['loginGoogle'],
+            'passGoogle' => $request['passGoogle']
+        ]);
+
+        return redirect()->intended('/pass-context');
+
+    }
+
+    public function delitePassContext(Request $request){
+        $delite = explode(',',$request['arr']);
+        foreach($delite as $del){
+            PassContext::whereRaw('id = ?', [$del])->delete();
+        }
+        return $request['arr'];
+    }
+
+    public function editPassContext($id){
+        $user_all = User::all();
+        $users = \DB::table('users')->join('pass_contexts','users.id','=','pass_contexts.id_user')->where('pass_contexts.id',$id)->first();
+        return view('page.edit_pass_context',['users' => $users,'user_all' => $user_all],['users_now' => $this->user_now()]);
+    }
+
+    public function updatePassContext(Request $request,PassContext $passContext){
+        $users_pass_context = $request->all();
+        $passContext->UpdatePassContextUser($users_pass_context);
+        return redirect()->intended('pass-context');
+    }
+
+
+
+    //DEV Password
+
+    public function passDev(){
+
+       return view('page.pass_dev');
+    }
+
+
+    //График работы
+    public function WorkGraff(){
+        return view('page.pass_dev');
     }
 
 

@@ -113,13 +113,33 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             @if (!Auth::guest())
-            <h1>
-                Dashboard
-                <small>Control panel</small>
-            </h1>
+                <script>
+                    $(function(){
+                        var url = window.location.pathname;
+                       if(url == '/'){
+                           $('.title_dashboard').text('Главная');
+                       }
+                        if(url == '/pass-seo'){
+                            $('.title_dashboard').text('Пароли SEO');
+                        }
+                        if(url == '/pass-dev'){
+                            $('.title_dashboard').text('Пароли Develop');
+                        }
+                        if(url == '/pass-context'){
+                            $('.title_dashboard').text('Пароли контекст');
+                        }
+                        if(url == '/personal'){
+                            $('.title_dashboard').text('Сотрудники');
+                        }
+                        if(url == '/work-graffik'){
+                            $('.title_dashboard').text('График работы');
+                        }
+                    });
+                </script>
+            <h1 class="title_dashboard"></h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li class="active">Dashboard</li>
+                <li><a href="/"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active title_dashboard"></li>
             </ol>
                 @endif
         </section>

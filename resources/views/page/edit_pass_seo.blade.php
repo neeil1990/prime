@@ -9,7 +9,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Добавить пароли контекста</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/update-create-pass-context') }}">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/update-create-pass-seo') }}">
                             {!! csrf_field() !!}
 
                             <div class="form-group{{ $errors->has('name_project') ? ' has-error' : '' }}">
@@ -46,57 +46,57 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('loginYandex') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Логин Яндекс</label>
+                            <div class="form-group{{ $errors->has('ssa') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">SSA</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="loginYandex" value="{{$users->loginYandex}}">
+                                    <input type="text" class="form-control" name="ssa" value="{{$users->ssa}}">
 
-                                    @if ($errors->has('loginYandex'))
+                                    @if ($errors->has('ssa'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('loginYandex') }}</strong>
+                                        <strong>{{ $errors->first('ssa') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('passYandex') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Пароль Яндекс</label>
+                            <div class="form-group{{ $errors->has('ftp') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">FTP</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="passYandex" value="{{$users->passYandex}}">
+                                    <input type="text" class="form-control" name="ftp" value="{{$users->ftp}}">
 
-                                    @if ($errors->has('passYandex'))
+                                    @if ($errors->has('ftp'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('passYandex') }}</strong>
+                                        <strong>{{ $errors->first('ftp') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('loginGoogle') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Логин Гугл</label>
+                            <div class="form-group{{ $errors->has('login') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Логин</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="loginGoogle" value="{{$users->loginGoogle}}">
+                                    <input type="text" class="form-control" name="login" value="{{$users->login}}">
 
-                                    @if ($errors->has('loginGoogle'))
+                                    @if ($errors->has('login'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('loginGoogle') }}</strong>
+                                        <strong>{{ $errors->first('login') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('passGoogle') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Пароль Гугл</label>
+                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Пароль</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="passGoogle" value="{{$users->passGoogle}}">
+                                    <input type="text" class="form-control" name="password" value="{{$users->password}}">
 
                                     @if ($errors->has('password'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('passGoogle') }}</strong>
+                                        <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                     @endif
                                 </div>
@@ -107,7 +107,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fa fa-btn fa-user"></i> Изменить
                                     </button>
-                                    <a class="btn btn-link" href="/pass-context">Back</a>
+                                    <a class="btn btn-link" href="/pass-seo">Back</a>
                                 </div>
                             </div>
                         </form>

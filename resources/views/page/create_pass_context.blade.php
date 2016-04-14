@@ -32,8 +32,8 @@
                                 <div class="col-md-6">
                                     <select class="form-control" name="id_user" id="">
                                         @foreach($users as $user)
-                                        <option value="{{$user->id}}">{{$user->name}}</option>
-                                            @endforeach
+                                            <option value="{{$user->id}}">{{$user->name}}</option>
+                                        @endforeach
                                     </select>
                                     @if ($errors->has('specialist'))
                                         <span class="help-block">
@@ -43,57 +43,57 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('ssa') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">SSA</label>
+                            <div class="form-group{{ $errors->has('loginYandex') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Логин Яндекс</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="ssa" value="{{ old('ssa') }}">
+                                    <input type="text" class="form-control" name="loginYandex" value="{{ old('loginYandex') }}">
 
-                                    @if ($errors->has('ssa'))
+                                    @if ($errors->has('loginYandex'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('ssa') }}</strong>
+                                        <strong>{{ $errors->first('loginYandex') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('ftp') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">FTP</label>
+                            <div class="form-group{{ $errors->has('passYandex') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Пароль Яндекс</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="ftp" value="{{ old('ftp') }}">
+                                    <input type="text" class="form-control" name="passYandex" value="{{ old('passYandex') }}">
 
-                                    @if ($errors->has('ftp'))
+                                    @if ($errors->has('passYandex'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('ftp') }}</strong>
+                                        <strong>{{ $errors->first('passYandex') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('login') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Логин</label>
+                            <div class="form-group{{ $errors->has('loginGoogle') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Логин Гугл</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="login" value="{{ old('login') }}">
+                                    <input type="text" class="form-control" name="loginGoogle" value="{{ old('loginGoogle') }}">
 
-                                    @if ($errors->has('login'))
+                                    @if ($errors->has('loginGoogle'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('login') }}</strong>
+                                        <strong>{{ $errors->first('loginGoogle') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Пароль</label>
+                            <div class="form-group{{ $errors->has('passGoogle') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Пароль Гугл</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="password" value="{{ old('password') }}">
+                                    <input type="text" class="form-control" name="passGoogle" value="{{ old('passGoogle') }}">
 
-                                    @if ($errors->has('password'))
+                                    @if ($errors->has('passGoogle'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                                        <strong>{{ $errors->first('passGoogle') }}</strong>
                                     </span>
                                     @endif
                                 </div>

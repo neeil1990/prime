@@ -10,10 +10,10 @@ class PassContext extends Model
         'id_user',
         'name_project',
         'specialist',
-        'ssa',
-        'ftp',
-        'login',
-        'password',
+        'loginYandex',
+        'passYandex',
+        'loginGoogle',
+        'passGoogle',
     ];
 
 
@@ -33,12 +33,10 @@ class PassContext extends Model
             ->update(array(
                 'name_project' => $data['name_project'],
                 'id_user' => $data['id_user'],
-                'ssa' => $data['ssa'],
-                'ftp' => $data['ftp'],
-                'login' => $data['login'],
-                'password' => $data['password']
+                'loginYandex' => $data['loginYandex'],
+                'passYandex' => $data['passYandex'],
+                'loginGoogle' => $data['loginGoogle'],
+                'passGoogle' => $data['passGoogle']
             ));
     }
-
-
 }

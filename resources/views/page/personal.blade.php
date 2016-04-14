@@ -62,6 +62,7 @@
                 @if($admin == 1)
                 <div class="col-md-9">
                     <a href="" class="add_check">Выделить все |</a>
+                    <a href="" style="display: none" class="old_check">Снять все |</a>
                     <a href="" class="button">Удалить |</a>
                     <a href="" class="edit">Изменить</a>
                 </div>
@@ -125,6 +126,7 @@
             @if($admin == 1)
             <div class="col-md-9">
                 <a href="" class="add_check2">Выделить все |</a>
+                <a href="" style="display: none" class="old_check2">Снять все |</a>
                 <a href="" class="button2">Удалить |</a>
                 <a href="" class="edit2">Изменить</a>
             </div>
@@ -136,12 +138,39 @@
     <script>
         $(function(){
 
-            $('.add_check').click(function() {
-                $(".check").prop('checked', true);
+
+
+
+
+
+            $('.old_check').click(function() {
+                $(".check").prop('checked', false);
+                $(this).css('display','none');
+                $(".add_check").removeAttr('style');
                 return false;
             });
+
+            $('.add_check').click(function() {
+
+                $(".check").prop('checked', true);
+                $(this).css('display','none');
+                $(".old_check").removeAttr('style');
+                return false;
+            });
+
+
+            $('.old_check2').click(function() {
+                $(".check2").prop('checked', false);
+                $(this).css('display','none');
+                $(".add_check2").removeAttr('style');
+                return false;
+            });
+
             $('.add_check2').click(function() {
+
                 $(".check2").prop('checked', true);
+                $(this).css('display','none');
+                $(".old_check2").removeAttr('style');
                 return false;
             });
 
@@ -160,18 +189,21 @@
 
             $('.button').click(function() {
                 var arr = $('input:checkbox:checked').map(function() {return this.value;}).get();
-
                 var url = '/delite';
-                $.ajax({
-                    url:     url, //Адрес подгружаемой страницы
-                    type:     "POST", //Тип запроса
-                    dataType: "html", //Тип данных
-                    data: 'arr='+arr+'',
-                    success: function(response) {
 
-                    }
-                });
-                window.location.href="/personal";
+                var DeliteOk = confirm("Точно удалить???");
+                if(DeliteOk) {
+                    $.ajax({
+                        url: url, //Адрес подгружаемой страницы
+                        type: "POST", //Тип запроса
+                        dataType: "html", //Тип данных
+                        data: 'arr=' + arr + '',
+                        success: function (response) {
+
+                        }
+                    });
+                    window.location.href = "/personal";
+                }
                 return false;
             });
 
@@ -179,16 +211,19 @@
                 var arr = $('input:checkbox:checked').map(function() {return this.value;}).get();
 
                 var url = '/delite-group';
-                $.ajax({
-                    url:     url, //Адрес подгружаемой страницы
-                    type:     "POST", //Тип запроса
-                    dataType: "html", //Тип данных
-                    data: 'arr='+arr+'',
-                    success: function(response) {
+                var DeliteOk = confirm("Точно удалить???");
+                if(DeliteOk) {
+                    $.ajax({
+                        url: url, //Адрес подгружаемой страницы
+                        type: "POST", //Тип запроса
+                        dataType: "html", //Тип данных
+                        data: 'arr=' + arr + '',
+                        success: function (response) {
 
-                    }
-                });
-                window.location.href="/personal";
+                        }
+                    });
+                    window.location.href = "/personal";
+                }
                 return false;
             });
 
