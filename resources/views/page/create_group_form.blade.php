@@ -11,17 +11,6 @@
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/create-groups') }}">
                             {!! csrf_field() !!}
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Имя</label>
-
-                                <div class="col-md-6">
-                                    <select name="id_user" class="form-control">
-                                        @foreach($users as $user)
-                                        <option value="{{$user->id}}">{{$user->name}}</option>
-                                            @endforeach
-                                    </select>
-                                </div>
-                            </div>
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Специальность</label>

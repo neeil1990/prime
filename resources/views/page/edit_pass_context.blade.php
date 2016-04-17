@@ -19,6 +19,10 @@
                                     <input type="text" class="form-control" name="name_project" value="{{$users->name_project}}">
                                     <input type="hidden" class="form-control" name="id" value="{{$users->id}}">
 
+                                    @foreach($user as $u)
+                                        <input type="hidden" class="form-control" name="id_sort[]" value="{{$u->id}}">
+                                    @endforeach
+
                                     @if ($errors->has('name_project'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('name_project') }}</strong>
@@ -31,16 +35,39 @@
                                 <label class="col-md-4 control-label">Специалист</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-control" name="id_user" id="">
-                                        <option value="{{$users->id_user}}">{{$users->name}}</option>
-                                        <option value="" disabled="disabled"></option>
-                                        @foreach($user_all as $user)
-                                            <option value="{{$user->id}}">{{$user->name}}</option>
-                                        @endforeach
-                                    </select>
+                                    @foreach($user_all as $us)
+                                        <label>
+                                            <input type="checkbox" name="id_user[]" value="{{$us->id}}" @foreach($user as $u) @if($us->id == $u->id_user) checked @endif @endforeach> {{$us->name}}
+                                        </label><br>
+                                    @endforeach
                                     @if ($errors->has('specialist'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('specialist') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('id_user_gl') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Назначить главным</label>
+
+                                <div class="col-md-6">
+                                    <select name="id_user_gl">
+                                        @foreach($user_all as $us)
+                                            @if($users->id_glavn_user == $us->id)
+                                                <option value="{{$us->id}}">{{$us->name}}</option>
+                                            @endif
+                                        @endforeach
+                                        <option value="" disabled="disabled"></option>
+                                        @foreach($user_all as $us)
+
+                                            <option value="{{$us->id}}">{{$us->name}}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @if ($errors->has('id_user_gl'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('id_user_gl') }}</strong>
                                     </span>
                                     @endif
                                 </div>

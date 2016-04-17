@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePassSeosTable extends Migration
+class CreateSortsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,14 +12,11 @@ class CreatePassSeosTable extends Migration
      */
     public function up()
     {
-        Schema::create('pass_seos', function (Blueprint $table) {
+        Schema::create('sorts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name_project');
-            $table->string('id_glavn_user');
-            $table->text('ssa');
-            $table->text('ftp');
-            $table->string('login');
-            $table->string('password');
+            $table->integer('id_user');
+            $table->integer('id_table');
+            $table->integer('id_type');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreatePassSeosTable extends Migration
      */
     public function down()
     {
-        Schema::drop('pass_seos');
+        Schema::drop('sorts');
     }
 }

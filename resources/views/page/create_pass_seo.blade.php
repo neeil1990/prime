@@ -30,14 +30,32 @@
                                 <label class="col-md-4 control-label">Специалист</label>
 
                                 <div class="col-md-6">
-                                    <select class="form-control" name="id_user" id="">
                                         @foreach($users as $user)
-                                        <option value="{{$user->id}}">{{$user->name}}</option>
+                                        <label>
+                                            <input type="checkbox" name="id_user[]" value="{{$user->id}}"> {{$user->name}}
+                                        </label><br>
                                             @endforeach
-                                    </select>
                                     @if ($errors->has('specialist'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('specialist') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('id_user_gl') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Назначить главным</label>
+
+                                <div class="col-md-6">
+                                   <select name="id_user_gl">
+                                       @foreach($users as $user)
+                                       <option value="{{$user->id}}">{{$user->name}}</option>
+                                           @endforeach
+                                   </select>
+
+                                    @if ($errors->has('id_user_gl'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('id_user_gl') }}</strong>
                                     </span>
                                     @endif
                                 </div>

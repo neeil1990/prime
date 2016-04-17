@@ -20,22 +20,22 @@
             <li class="header">Панель навигации</li>
             <li class=""><a href="/"><i class="fa fa-home"></i> <span>Главная</span></a></li>
 
-            <li class="treeview">
+            <li class="treeview menu_act1">
                 <a href="#">
                     <i class="fa fa-search"></i> <span>Проекты SEO</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="/pass-seo"><i class="fa fa-lock"></i> <span>Пароли SEO</span></a></li>
-                    <li class="active"><a href="/pass-dev"><i class="fa fa-lock"></i> <span>Пароли DEV</span></a></li>
+                    <li class=""><a href="/pass-seo"><i class="fa fa-lock"></i> <span>Пароли SEO</span></a></li>
+                    <li class=""><a href="/pass-dev"><i class="fa fa-lock"></i> <span>Пароли DEV</span></a></li>
                 </ul>
             </li>
 
-            <li class="treeview">
+            <li class="treeview menu_act2">
                 <a href="#">
                     <i class="fa fa-file-text-o"></i> <span>Проекты контекст</span> <i class="fa fa-angle-left pull-right"></i>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active"><a href="/pass-context"><i class="fa fa-lock"></i> Пароли контекст</a></li>
+                    <li class=""><a href="/pass-context"><i class="fa fa-lock"></i> Пароли контекст</a></li>
                 </ul>
             </li>
             <li class=""><a href="/personal"><i class="fa fa-child"></i> <span>Сотрудники</span></a></li>

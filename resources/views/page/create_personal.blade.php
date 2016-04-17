@@ -14,7 +14,7 @@
                             {!! csrf_field() !!}
 
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Name</label>
+                                <label class="col-md-4 control-label">Ф.И.О</label>
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="name" value="{{ old('name') }}">
@@ -31,7 +31,11 @@
                                 <label class="col-md-4 control-label">Специализация</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="specialism" value="{{ old('specialism') }}">
+                                    <select name="specialism" class="form-control">
+                                        @foreach($groups as $group)
+                                        <option value="{{$group->specialnost}}">{{$group->specialnost}}</option>
+                                            @endforeach
+                                    </select>
 
                                     @if ($errors->has('specialism'))
                                         <span class="help-block">
@@ -45,7 +49,11 @@
                                 <label class="col-md-4 control-label">Уровень</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="level" value="{{ old('level') }}">
+                                    <select name="level" class="form-control">
+                                        @foreach($groups as $group)
+                                            <option value="{{$group->level}}">{{$group->level}}</option>
+                                        @endforeach
+                                    </select>
 
                                     @if ($errors->has('level'))
                                         <span class="help-block">
@@ -73,7 +81,11 @@
                                 <label class="col-md-4 control-label">% от проекта SEO</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="seo_procent" value="{{ old('seo_procent') }}">
+                                    <select name="seo_procent" class="form-control">
+                                        @foreach($groups as $group)
+                                            <option value="{{$group->procent_seo}}">{{$group->procent_seo}}</option>
+                                        @endforeach
+                                    </select>
 
                                     @if ($errors->has('seo_procent'))
                                         <span class="help-block">
@@ -101,8 +113,11 @@
                                 <label class="col-md-4 control-label">% от проекта контекста</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="contecst_procent" value="{{ old('contecst_procent') }}">
-
+                                    <select name="contecst_procent" class="form-control">
+                                        @foreach($groups as $group)
+                                            <option value="{{$group->procent_context}}">{{$group->procent_context}}</option>
+                                        @endforeach
+                                    </select>
                                     @if ($errors->has('contecst_procent'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('contecst_procent') }}</strong>
@@ -125,20 +140,6 @@
                                 </div>
                             </div>
 
-                            <div class="form-group{{ $errors->has('itog') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Итог</label>
-
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="itog" value="{{ old('itog') }}">
-
-                                    @if ($errors->has('itog'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('itog') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">E-Mail Address</label>
 
@@ -154,10 +155,11 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Password</label>
+                                <label class="col-md-4 control-label">Пароль</label>
 
                                 <div class="col-md-6">
-                                    <input type="password" class="form-control" name="password">
+                                    <a href="#" id="genirate_password">Сгенерировать пароль</a>
+                                    <input type="text" class="form-control" name="password">
 
                                     @if ($errors->has('password'))
                                         <span class="help-block">
@@ -166,12 +168,31 @@
                                     @endif
                                 </div>
                             </div>
+                            <script>
+                                $(function(){
+                                    function getRandomArbitrary(min, max) {
+                                        var rand = min + Math.random() * (max - min)
+                                        rand = Math.round(rand);
+                                        return rand;
+                                    }
+                                    $('#genirate_password').click(function(){
+                                        var mi = 100000;
+                                        var ma = 999999;
+                                       var rand_number = getRandomArbitrary(mi,ma);
+                                        $('input[name=password]').val(rand_number);
+                                        $('input[name=password_confirmation]').val(rand_number);
+                                        return false;
+
+                                    });
+
+                                });
+                            </script>
 
                             <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Confirm Password</label>
+                                <label class="col-md-4 control-label"></label>
 
                                 <div class="col-md-6">
-                                    <input type="password" class="form-control" name="password_confirmation">
+                                    <input type="hidden" class="form-control" name="password_confirmation">
 
                                     @if ($errors->has('password_confirmation'))
                                         <span class="help-block">

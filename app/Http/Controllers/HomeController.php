@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Groups;
 use App\PassContext;
+use App\Sort;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Http\Requests;
@@ -54,17 +55,17 @@ class HomeController extends Controller
 
 
     public function personal(User $user,Groups $groups){
-       $user_groups = $groups->getUserGroups(Auth::user()->id);
+       $user_groups = $groups->all();
        $users = $user->getUser(Auth::user()->id);
         return view('page.personal',['users' => $users,'user_groups' => $user_groups, 'users_now' => $this->user_now(),'admin' => $this->admin()]);
     }
 
 
 
-    public function createPersonalForm()
+    public function createPersonalForm(Groups $groups)
     {
-
-        return view('page.create_personal',['users_now' => $this->user_now()]);
+        $group = $groups->all();
+        return view('page.create_personal',['users_now' => $this->user_now(),'groups' => $group]);
     }
 
     public function create(Request $request){
@@ -75,6 +76,9 @@ class HomeController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
 
+        $message = 'Привет:'.$request['name'].'<br/>Логин: '.$request['email'].'<br/>'.'Пароль: '.$request['password'];
+        mail($request['email'], 'Личный кабинет PRIME', $message);
+
         User::create([
             'name' => $request['name'],
             'specialism' => $request['specialism'],
@@ -84,7 +88,6 @@ class HomeController extends Controller
             'sum_many_first' => $request['sum_many_first'],
             'contecst_procent' => $request['contecst_procent'],
             'sum_many_last' => $request['sum_many_last'],
-            'itog' => $request['itog'],
             'email' => $request['email'],
             'password' => bcrypt($request['password']),
         ]);
@@ -109,16 +112,32 @@ class HomeController extends Controller
         return $request['arr'];
     }
 
-    public function edit(Request $request,$id){
+    public function edit(Request $request,$id,Groups $groups){
 
+        $group = $groups->all();
         $user = User::where('id', $id)->first();
-        return view('page.edit_personal',['user' => $user],['users_now' => $this->user_now()]);
+        return view('page.edit_personal',['user' => $user, 'users_now' => $this->user_now(),'groups' => $group]);
     }
 
     public function editPassSeo($id){
+
         $user_all = User::all();
-        $users = \DB::table('users')->join('pass_seos','users.id','=','pass_seos.id_user')->where('pass_seos.id',$id)->first();
-        return view('page.edit_pass_seo',['users' => $users,'user_all' => $user_all],['users_now' => $this->user_now()]);
+        $pass_seo = \DB::table('pass_seos')->where('id',$id)->first();
+
+            $user = \DB::table('sorts')
+                ->leftJoin('users','sorts.id_user','=','users.id')
+                ->select('sorts.id_user', 'sorts.id','users.name')
+                ->where('sorts.id_table',$pass_seo->id)
+                ->where('sorts.id_type','1')
+                ->get();
+       // dd($user);
+
+        return view('page.edit_pass_seo',[
+            'users' => $pass_seo,
+            'user_all' => $user_all,
+            'user' => $user,
+            'users_now' => $this->user_now()
+        ]);
     }
 
 
@@ -136,8 +155,27 @@ class HomeController extends Controller
 
 
     public function passSEO(PassSeo $passSeo){
-        $users = $passSeo->getUserPassSeo(Auth::user()->id);
-        return view('page.pass_seo',['users' => $users,'users_now' => $this->user_now(),'admin' => $this->admin()]);
+
+        $users = User::whereRaw('id = ? and admin = 1', [Auth::user()->id])->count();
+        if($users == 1){
+            $users = $passSeo->all();
+        }else{
+            $users = \DB::table('sorts')
+            ->leftJoin('users','sorts.id_user','=','users.id')
+            ->leftJoin('pass_seos','sorts.id_table','=','pass_seos.id')
+            ->where('sorts.id_type','1')
+            ->where('users.id',Auth::user()->id)
+            ->get();
+        }
+       // dd($users);
+        $name = \DB::table('sorts')
+            ->leftJoin('users','sorts.id_user','=','users.id')
+            ->leftJoin('pass_seos','sorts.id_table','=','pass_seos.id')
+            ->where('sorts.id_type','1')->get();
+
+
+
+        return view('page.pass_seo',['users' => $users,'name' => $name,'users_now' => $this->user_now(),'admin' => $this->admin()]);
     }
 
     public function passSeoCreatForm(){
@@ -149,14 +187,23 @@ class HomeController extends Controller
 
     public function createPassSeo(Request $request){
 
-        PassSeo::create([
+
+      $add = PassSeo::create([
             'name_project' => $request['name_project'],
-            'id_user' => $request['id_user'],
+            'id_glavn_user' => $request['id_user_gl'],
             'ssa' => $request['ssa'],
             'ftp' => $request['ftp'],
             'login' => $request['login'],
             'password' => $request['password']
         ]);
+
+        foreach($request['id_user'] as $id_user){
+            Sort::create([
+                'id_user' => $id_user,
+                'id_table' => $add->id,
+                'id_type' => 1,//PassSeo
+            ]);
+        }
 
         return redirect()->intended('/pass-seo');
     }
@@ -169,7 +216,6 @@ class HomeController extends Controller
 
     public function createGroups(Request $request){
         Groups::create([
-            'id_user' => $request['id_user'],
             'specialnost' => $request['specialnost'],
             'level' => $request['level'],
             'oklad' => $request['oklad'],
@@ -205,8 +251,24 @@ class HomeController extends Controller
     //пароли контекст
     public function passContext(PassContext $passContext){
 
-        $users = $passContext->getUserPassContext(Auth::user()->id);
-        return view('page.pass_context',['users' => $users,'users_now' => $this->user_now(),'admin' => $this->admin()]);
+        $users = User::whereRaw('id = ? and admin = 1', [Auth::user()->id])->count();
+        if($users == 1){
+            $users = $passContext->all();
+        }else{
+            $users = \DB::table('sorts')
+                ->leftJoin('users','sorts.id_user','=','users.id')
+                ->leftJoin('pass_contexts','sorts.id_table','=','pass_contexts.id')
+                ->where('sorts.id_type','1')
+                ->where('users.id',Auth::user()->id)
+                ->get();
+        }
+        // dd($users);
+        $name = \DB::table('sorts')
+            ->leftJoin('users','sorts.id_user','=','users.id')
+            ->leftJoin('pass_contexts','sorts.id_table','=','pass_contexts.id')
+            ->where('sorts.id_type','2')->get();
+
+        return view('page.pass_context',['users' => $users,'name' => $name, 'users_now' => $this->user_now(),'admin' => $this->admin()]);
 
     }
 
@@ -217,14 +279,25 @@ class HomeController extends Controller
 
     public function createPassContext(Request $request){
 
-        PassContext::create([
+       $add = PassContext::create([
             'name_project' => $request['name_project'],
-            'id_user' => $request['id_user'],
+            'id_glavn_user' => $request['id_glavn_user'],
             'loginYandex' => $request['loginYandex'],
             'passYandex' => $request['passYandex'],
             'loginGoogle' => $request['loginGoogle'],
             'passGoogle' => $request['passGoogle']
         ]);
+
+
+
+        foreach($request['id_user'] as $id_user){
+
+            Sort::create([
+                'id_user' => $id_user,
+                'id_table' => $add->id,
+                'id_type' => 2 //PassContext
+            ]);
+        }
 
         return redirect()->intended('/pass-context');
 
@@ -239,9 +312,23 @@ class HomeController extends Controller
     }
 
     public function editPassContext($id){
+
         $user_all = User::all();
-        $users = \DB::table('users')->join('pass_contexts','users.id','=','pass_contexts.id_user')->where('pass_contexts.id',$id)->first();
-        return view('page.edit_pass_context',['users' => $users,'user_all' => $user_all],['users_now' => $this->user_now()]);
+        $pass_context = \DB::table('pass_contexts')->where('id',$id)->first();
+
+        $user = \DB::table('sorts')
+            ->leftJoin('users','sorts.id_user','=','users.id')
+            ->select('sorts.id_user', 'sorts.id','users.name')
+            ->where('sorts.id_table',$pass_context->id)
+            ->where('sorts.id_type','2')
+            ->get();
+        // dd($user);
+        return view('page.edit_pass_context',[
+            'user' => $user,
+            'users' => $pass_context,
+            'user_all' => $user_all,
+            'users_now' => $this->user_now()
+        ]);
     }
 
     public function updatePassContext(Request $request,PassContext $passContext){

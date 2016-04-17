@@ -14,7 +14,7 @@
                             {!! csrf_field() !!}
 
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Name</label>
+                                <label class="col-md-4 control-label">Ф.И.О</label>
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="name" value="{{ $user->name }}">
@@ -32,7 +32,14 @@
                                 <label class="col-md-4 control-label">Специализация</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="specialism" value="{{ $user->specialism }}">
+
+                                    <select name="specialism" class="form-control">
+                                        <option value="{{ $user->specialism }}">{{ $user->specialism }}</option>
+                                        <option value="" disabled="disabled"></option>
+                                        @foreach($groups as $group)
+                                            <option value="{{$group->specialnost}}">{{$group->specialnost}}</option>
+                                        @endforeach
+                                    </select>
 
                                     @if ($errors->has('specialism'))
                                         <span class="help-block">
@@ -46,7 +53,13 @@
                                 <label class="col-md-4 control-label">Уровень</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="level" value="{{ $user->level }}">
+                                    <select name="level" class="form-control">
+                                        <option value="{{ $user->level }}">{{ $user->level }}</option>
+                                        <option value="" disabled="disabled"></option>
+                                        @foreach($groups as $group)
+                                            <option value="{{$group->level}}">{{$group->level}}</option>
+                                        @endforeach
+                                    </select>
 
                                     @if ($errors->has('level'))
                                         <span class="help-block">
@@ -74,7 +87,13 @@
                                 <label class="col-md-4 control-label">% от проекта SEO</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="seo_procent" value="{{ $user->seo_procent }}">
+                                    <select name="seo_procent" class="form-control">
+                                        <option value="{{ $user->seo_procent }}">{{ $user->seo_procent }}</option>
+                                        <option value="" disabled="disabled"></option>
+                                        @foreach($groups as $group)
+                                            <option value="{{$group->procent_seo}}">{{$group->procent_seo}}</option>
+                                        @endforeach
+                                    </select>
 
                                     @if ($errors->has('seo_procent'))
                                         <span class="help-block">
@@ -102,7 +121,13 @@
                                 <label class="col-md-4 control-label">% от проекта контекста</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="contecst_procent" value="{{ $user->contecst_procent }}">
+                                    <select name="contecst_procent" class="form-control">
+                                        <option value="{{ $user->contecst_procent }}">{{ $user->contecst_procent }}</option>
+                                        <option value="" disabled="disabled"></option>
+                                        @foreach($groups as $group)
+                                            <option value="{{$group->procent_context}}">{{$group->procent_context}}</option>
+                                        @endforeach
+                                    </select>
 
                                     @if ($errors->has('contecst_procent'))
                                         <span class="help-block">
@@ -121,20 +146,6 @@
                                     @if ($errors->has('sum_many_last'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('sum_many_last') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('itog') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Итог</label>
-
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="itog" value="{{ $user->itog }}">
-
-                                    @if ($errors->has('itog'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('itog') }}</strong>
                                     </span>
                                     @endif
                                 </div>

@@ -44,6 +44,24 @@
     <!-- jQuery UI 1.11.4 -->
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 
+    <script src="{{ asset('/dist/js/jquery-zclip-master/jquery.zclip.js') }}"></script>
+
+    <script>
+
+        $(function(){
+        $(".copytext").zclip({
+            path:'{{ asset('/dist/js/jquery-zclip-master/ZeroClipboard.swf') }}',
+            copy: $(".copytext").text(),
+            beforeCopy:function(){
+                $(this).css('color','green');
+            },
+            afterCopy:function(){
+                $(this).css('color','green');
+            }
+        });
+        });
+    </script>
+
 
 </head>
 <body class="hold-transition skin-blue sidebar-mini  @if(Auth::guest()) sidebar-collapse @endif">
@@ -121,12 +139,15 @@
                        }
                         if(url == '/pass-seo'){
                             $('.title_dashboard').text('Пароли SEO');
+                            $('.menu_act1').addClass('active');
                         }
                         if(url == '/pass-dev'){
                             $('.title_dashboard').text('Пароли Develop');
+                            $('.menu_act1').addClass('active');
                         }
                         if(url == '/pass-context'){
                             $('.title_dashboard').text('Пароли контекст');
+                            $('.menu_act2').addClass('active');
                         }
                         if(url == '/personal'){
                             $('.title_dashboard').text('Сотрудники');

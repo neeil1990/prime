@@ -76,14 +76,15 @@
         </div>
 
 
+        @if($admin == 1)
         <div class="row">
             <div class="col-md-12">
 
                 <div class="box">
                     <div class="box-header">
-                        @if($admin == 1)
+
                         <h3 class="box-title"> <a href="/groups/create">Добавить группу</a></h3>
-                            @endif
+
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
@@ -121,6 +122,8 @@
                 </div>
             </div>
         </div>
+
+        @endif
 
         <div class="row">
             @if($admin == 1)

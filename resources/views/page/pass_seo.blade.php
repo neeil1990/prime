@@ -35,11 +35,19 @@
                                                 <td class=""><input type="checkbox" class="check" value="{{$user->id}}"></td>
                                                 <td class="">{{$user->id}}</td>
                                                 <td class="">{{$user->name_project}}</td>
-                                                <td class="">{{$user->name}}</td>
-                                                <td class="">{{$user->ssa}}</td>
-                                                <td class="">{{$user->ftp}}</td>
-                                                <td class="">{{$user->login}}</td>
-                                                <td class="">{{$user->password}}</td>
+                                                <td class="">@foreach($name as $n)
+                                                        @if($n->id == $user->id)
+                                                            @if($n->id_user == $user->id_glavn_user)
+                                                                <span style="color: red">{{$n->name}}</span><br>
+                                                                @else
+                                                            {{$n->name}}<br>
+                                                                @endif
+                                                        @endif
+                                                    @endforeach</td>
+                                                <td class="copytext">{{$user->ssa}}</td>
+                                                <td class="copytext">{{$user->ftp}}</td>
+                                                <td class="copytext">{{$user->login}}</td>
+                                                <td class="copytext">{{$user->password}}</td>
                                             </tr>
                                         @endforeach
 

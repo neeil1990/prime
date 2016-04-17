@@ -8,6 +8,7 @@ class PassSeo extends Model
 {
     protected $fillable = [
         'id_user',
+        'id_glavn_user',
         'name_project',
         'specialist',
         'ssa',
@@ -16,28 +17,36 @@ class PassSeo extends Model
         'password',
     ];
 
-
-    public function getUserPassSeo($id_now){
-
-        $users = User::whereRaw('id = ? and admin = 1', [$id_now])->count();
-        if($users == 1){
-            $users = \DB::table('users')->join('pass_seos','users.id','=','pass_seos.id_user')->get();
-        }else{
-            $users = \DB::table('users')->join('pass_seos','users.id','=','pass_seos.id_user')->whereRaw('users.id = ? and users.admin = 0', [$id_now])->get();
-        }
-        return $users;
-    }
-
     public function UpdatePassSeoUser($data){
+
         \DB::table('pass_seos')->where('id', $data['id'])
             ->update(array(
                 'name_project' => $data['name_project'],
-                'id_user' => $data['id_user'],
+                'id_glavn_user' => $data['id_user_gl'],
                 'ssa' => $data['ssa'],
                 'ftp' => $data['ftp'],
                 'login' => $data['login'],
                 'password' => $data['password']
             ));
+
+        $create_data = $data;
+
+        foreach($data['id_sort'] as $data){
+            \DB::table('sorts')->whereRaw('id = ?', [$data])->delete();
+        }
+
+        foreach($create_data['id_user'] as $data) {
+
+            \DB::table('sorts')->insert(
+                array(
+                    'id_user' => $data,
+                    'id_table' => $create_data['id'],
+                    'id_type' => 1
+                )
+            );
+        }
+
+
     }
 
 }

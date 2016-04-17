@@ -61,7 +61,6 @@ class User extends Authenticatable
                 'sum_many_first' => $data['sum_many_first'],
                 'contecst_procent' => $data['contecst_procent'],
                 'sum_many_last' => $data['sum_many_last'],
-                'itog' => $data['itog'],
             ));
     }
 

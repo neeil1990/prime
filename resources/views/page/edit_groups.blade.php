@@ -11,19 +11,8 @@
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/update-groups') }}">
                             {!! csrf_field() !!}
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Имя</label>
 
-                                <div class="col-md-6">
-                                    <select name="id_user" class="form-control">
-                                            <option value="{{$users->id_user}}">{{$users->name}}</option>
-                                            <option value="" disabled="disabled"></option>
-                                        @foreach($users_all as $ul)
-                                            <option value="{{$ul->id}}">{{$ul->name}}</option>
-                                            @endforeach
-                                    </select>
-                                </div>
-                            </div>
+
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Специальность</label>
