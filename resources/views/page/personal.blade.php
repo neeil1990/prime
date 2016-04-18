@@ -31,9 +31,13 @@
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Итог</th>
                                         </thead>
                                         <tbody>
+                                        <form action="{{ url('/update-personal-positions') }}" id="myPositionGroup" method="post">
                                         @foreach ($users as $user)
                                         <tr role="row" class="odd">
-                                            <td class=""><input type="checkbox" class="check" value="{{$user->id}}"></td>
+                                            <td class="">
+                                                <input type="checkbox" class="check" value="{{$user->id}}">
+                                                <input type="hidden" name="positions[]" class="positions2" value="{{$user->id}}">
+                                            </td>
                                             <td class="">{{$user->id}}</td>
                                             <td class="">{{$user->name}}</td>
                                             <td class="">{{$user->specialism}}</td>
@@ -46,6 +50,7 @@
                                             <td class="">{{$user->itog}}</td>
                                         </tr>
                                         @endforeach
+                                        </form>
                                         </tbody>
                                     </table>
                                 </div>
@@ -69,6 +74,8 @@
                     @endif
             </div>
 
+        @if($admin == 1)
+
         <div class="row">
             <div class="col-md-9">
                 <h3>Группы</h3>
@@ -76,7 +83,7 @@
         </div>
 
 
-        @if($admin == 1)
+
         <div class="row">
             <div class="col-md-12">
 
@@ -100,17 +107,22 @@
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">% по Контексты</th>
                                         </thead>
                                         <tbody>
+                                        <form action="{{ url('/update-group-positions') }}" id="myPositionGroup" method="post">
                                         @foreach ($user_groups as $user)
                                             <tr role="row" class="odd">
-                                                <td class=""><input type="checkbox" class="check2" value="{{$user->id}}"></td>
+                                                <td class="">
+                                                    <input type="checkbox" class="check2" value="{{$user->id}}">
+                                                    <input type="hidden" class="positions" name="positions[]" value="{{$user->id}}">
+                                                </td>
                                                 <td class="">{{$user->id}}</td>
                                                 <td class="">{{$user->specialnost}}</td>
-                                                <td class="">{{$user->level}}</td>
+                                                <td class="">{{$user->level}}&emsp;&emsp;&emsp;<a href="/groups/create/?level={{$user->level}}"><i class="fa fa-plus"></i></a></td>
                                                 <td class="">{{$user->oklad}}</td>
                                                 <td class="">{{$user->procent_seo}}</td>
                                                 <td class="">{{$user->procent_context}}</td>
                                             </tr>
                                         @endforeach
+                                        </form>
                                         </tbody>
                                     </table>
                                 </div>
@@ -141,10 +153,45 @@
     <script>
         $(function(){
 
+            $("tbody").sortable({
+                items:             "tr",
+                tolerance:         "pointer",
+                scrollSensitivity: 40,
+                opacity:           0.7,
+                forcePlaceholderSize: true,
+                axis: 'y',
 
+                update:function(event, ui)
+                {
+                  var values = $(".positions").map(function(){return $(this).val();}).get();
 
+                    $.ajax({
+                        url: '/update-group-positions', //Адрес подгружаемой страницы
+                        type: "POST", //Тип запроса
+                        dataType: "html", //Тип данных
+                        data: 'arr=' + values + '',
+                        success: function (response) {
+                            console.log(response);
+                        }
+                    });
 
+                    var values2 = $(".positions2").map(function(){return $(this).val();}).get();
 
+                    console.log(values2);
+
+                    $.ajax({
+                        url: '/update-personal-positions', //Адрес подгружаемой страницы
+                        type: "POST", //Тип запроса
+                        dataType: "html", //Тип данных
+                        data: 'arr=' + values2 + '',
+                        success: function (response) {
+                            console.log(response);
+                        }
+                    });
+
+                }
+
+            });
 
             $('.old_check').click(function() {
                 $(".check").prop('checked', false);

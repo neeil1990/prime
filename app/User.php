@@ -42,7 +42,7 @@ class User extends Authenticatable
 
         $users = User::whereRaw('id = ? and admin = 1', [$id])->count();
         if($users == 1){
-            $users = User::all();
+            $users = \DB::table('users')->orderBy('positions')->get();
             return $users;
         }else{
             $users = User::whereRaw('id = ? and admin = 0', [$id])->get();
@@ -62,6 +62,16 @@ class User extends Authenticatable
                 'contecst_procent' => $data['contecst_procent'],
                 'sum_many_last' => $data['sum_many_last'],
             ));
+    }
+
+
+    public function UpdateUserPosition($id,$positions)
+    {
+        \DB::table('users')->where('id', $id)
+            ->update(array(
+                'positions' => $positions
+            ));
+
     }
 
 

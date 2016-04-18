@@ -59,4 +59,12 @@ class PassContext extends Model
             );
         }
     }
+
+
+    public function UpdatePassContexPosition($id,$positions){
+        \DB::table('pass_contexts')->where('id', $id)
+            ->update(array(
+                'positions' => $positions
+            ));
+    }
 }

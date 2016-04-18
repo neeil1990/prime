@@ -25,7 +25,11 @@
                                 <label class="col-md-4 control-label">Уровень</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="level" value="">
+                                    @if(!empty($_GET['level']))
+                                    <input type="text" class="form-control" name="level" value="{{$_GET['level']}}">
+                                        @else
+                                        <input type="text" class="form-control" name="level" value="">
+                                    @endif
                                 </div>
                             </div>
 

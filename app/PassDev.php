@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PassSeo extends Model
+class PassDev extends Model
 {
+
     protected $fillable = [
-        'id_user',
         'id_glavn_user',
         'name_project',
         'specialist',
@@ -17,9 +17,10 @@ class PassSeo extends Model
         'password',
     ];
 
-    public function UpdatePassSeoUser($data){
 
-        \DB::table('pass_seos')->where('id', $data['id'])
+    public function UpdatePassDevUser($data){
+
+        \DB::table('pass_devs')->where('id', $data['id'])
             ->update(array(
                 'name_project' => $data['name_project'],
                 'id_glavn_user' => $data['id_user_gl'],
@@ -41,7 +42,7 @@ class PassSeo extends Model
                 array(
                     'id_user' => $data,
                     'id_table' => $create_data['id'],
-                    'id_type' => 1
+                    'id_type' => 3//PassDEV
                 )
             );
         }
@@ -50,13 +51,13 @@ class PassSeo extends Model
     }
 
 
-    public function UpdatePassSeoPosition($id,$positions)
-    {
-        \DB::table('pass_seos')->where('id', $id)
+    public function UpdatePassDevPosition($id,$positions){
+        \DB::table('pass_devs')->where('id', $id)
             ->update(array(
                 'positions' => $positions
             ));
-
     }
+
+
 
 }

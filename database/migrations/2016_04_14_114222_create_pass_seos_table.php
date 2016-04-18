@@ -14,6 +14,7 @@ class CreatePassSeosTable extends Migration
     {
         Schema::create('pass_seos', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('positions');
             $table->string('name_project');
             $table->string('id_glavn_user');
             $table->text('ssa');

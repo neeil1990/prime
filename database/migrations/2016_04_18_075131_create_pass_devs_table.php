@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGroupsTable extends Migration
+class CreatePassDevsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,15 @@ class CreateGroupsTable extends Migration
      */
     public function up()
     {
-        Schema::create('groups', function (Blueprint $table) {
+        Schema::create('pass_devs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('positions');
-            $table->string('id_user');
-            $table->string('specialnost');
-            $table->string('level');
-            $table->string('oklad');
-            $table->string('procent_seo');
-            $table->string('procent_context');
+            $table->string('name_project');
+            $table->string('id_glavn_user');
+            $table->text('ssa');
+            $table->text('ftp');
+            $table->string('login');
+            $table->string('password');
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ class CreateGroupsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('groups');
+        Schema::drop('pass_devs');
     }
 }

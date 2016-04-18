@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Groups;
 use App\PassContext;
+use App\PassDev;
 use App\Sort;
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -52,10 +53,62 @@ class HomeController extends Controller
 
 
 
+    public function updateGroupPositions(Request $request,Groups $groups){
+
+        $posarr = explode(',',$request['arr']);
+
+        $ids = array_keys($posarr);
+        foreach($posarr as $i=>$position){
+            $groups->UpdateGroupsPosition($position, $ids[$i]);
+        }
+    }
+
+    public function updatePersonalPositions(Request $request,User $user){
+
+        $posarr = explode(',',$request['arr']);
+
+        $ids = array_keys($posarr);
+        foreach($posarr as $i=>$position){
+            $user->UpdateUserPosition($position, $ids[$i]);
+        }
+    }
+
+    public function updatePassSeoPositions(Request $request,PassSeo $passSeo){
+
+        $posarr = explode(',',$request['arr']);
+
+        $ids = array_keys($posarr);
+        foreach($posarr as $i=>$position){
+            $passSeo->UpdatePassSeoPosition($position, $ids[$i]);
+        }
+    }
+
+    public function updatePassDevPositions(Request $request,PassDev $passDev){
+
+        $posarr = explode(',',$request['arr']);
+
+        $ids = array_keys($posarr);
+        foreach($posarr as $i=>$position){
+            $passDev->UpdatePassDevPosition($position, $ids[$i]);
+        }
+    }
+
+    public function updatePassContextPositions(Request $request, PassContext $context){
+
+        $posarr = explode(',',$request['arr']);
+
+        $ids = array_keys($posarr);
+        foreach($posarr as $i=>$position){
+            $context->UpdatePassContexPosition($position, $ids[$i]);
+        }
+    }
+
+
 
 
     public function personal(User $user,Groups $groups){
-       $user_groups = $groups->all();
+
+       $user_groups = \DB::table('groups')->orderBy('positions')->get();
        $users = $user->getUser(Auth::user()->id);
         return view('page.personal',['users' => $users,'user_groups' => $user_groups, 'users_now' => $this->user_now(),'admin' => $this->admin()]);
     }
@@ -158,13 +211,14 @@ class HomeController extends Controller
 
         $users = User::whereRaw('id = ? and admin = 1', [Auth::user()->id])->count();
         if($users == 1){
-            $users = $passSeo->all();
+            $users = \DB::table('pass_seos')->orderBy('positions')->get();
         }else{
             $users = \DB::table('sorts')
             ->leftJoin('users','sorts.id_user','=','users.id')
             ->leftJoin('pass_seos','sorts.id_table','=','pass_seos.id')
             ->where('sorts.id_type','1')
             ->where('users.id',Auth::user()->id)
+            ->orderBy('positions')
             ->get();
         }
        // dd($users);
@@ -228,8 +282,11 @@ class HomeController extends Controller
 
     public function editGroupForm($id){
         $user_all = User::all();
-        $users = \DB::table('users')->join('groups','users.id','=','groups.id_user')->where('groups.id',$id)->first();
-        return view('page.edit_groups',['users' => $users,'users_all' => $user_all],['users_now' => $this->user_now()]);
+        //$users = \DB::table('users')->join('groups','users.id','=','groups.id_user')->where('groups.id',$id)->first();
+        $users = \DB::table('groups')->where('groups.id',$id)->first();
+
+        //dd($users);
+        return view('page.edit_groups',['users' => $users,'users_all' => $user_all ,'users_now' => $this->user_now()]);
     }
 
     public function updateGroups(Request $request,Groups $groups){
@@ -253,13 +310,14 @@ class HomeController extends Controller
 
         $users = User::whereRaw('id = ? and admin = 1', [Auth::user()->id])->count();
         if($users == 1){
-            $users = $passContext->all();
+            $users = \DB::table('pass_contexts')->orderBy('positions')->get();
         }else{
             $users = \DB::table('sorts')
                 ->leftJoin('users','sorts.id_user','=','users.id')
                 ->leftJoin('pass_contexts','sorts.id_table','=','pass_contexts.id')
-                ->where('sorts.id_type','1')
+                ->where('sorts.id_type','2')
                 ->where('users.id',Auth::user()->id)
+                ->orderBy('positions')
                 ->get();
         }
         // dd($users);
@@ -341,15 +399,106 @@ class HomeController extends Controller
 
     //DEV Password
 
-    public function passDev(){
+    public function passDev(PassDev $passDev){
 
-       return view('page.pass_dev');
+        $users = User::whereRaw('id = ? and admin = 1', [Auth::user()->id])->count();
+        if($users == 1){
+            $users = \DB::table('pass_devs')->orderBy('positions')->get();
+        }else{
+            $users = \DB::table('sorts')
+                ->leftJoin('users','sorts.id_user','=','users.id')
+                ->leftJoin('pass_devs','sorts.id_table','=','pass_devs.id')
+                ->where('sorts.id_type','3')
+                ->where('users.id',Auth::user()->id)
+                ->orderBy('positions')
+                ->get();
+        }
+        // dd($users);
+        $name = \DB::table('sorts')
+            ->leftJoin('users','sorts.id_user','=','users.id')
+            ->leftJoin('pass_devs','sorts.id_table','=','pass_devs.id')
+            ->where('sorts.id_type','3')->get();
+
+
+
+        return view('page.pass_dev',['users' => $users,'name' => $name,'users_now' => $this->user_now(),'admin' => $this->admin()]);
     }
+
+    public function passDevCreatForm(){
+
+        $user = User::all();
+        return view('page.create_pass_dev',['users' => $user ,'users_now' => $this->user_now()]);
+
+    }
+
+    public function createPassDev(Request $request){
+
+        $add = PassDev::create([
+            'name_project' => $request['name_project'],
+            'id_glavn_user' => $request['id_user_gl'],
+            'ssa' => $request['ssa'],
+            'ftp' => $request['ftp'],
+            'login' => $request['login'],
+            'password' => $request['password']
+        ]);
+
+        foreach($request['id_user'] as $id_user){
+            Sort::create([
+                'id_user' => $id_user,
+                'id_table' => $add->id,
+                'id_type' => 3,//PassDev
+            ]);
+        }
+
+        return redirect()->intended('/pass-dev');
+
+    }
+
+    public function editPassDev($id){
+
+        $user_all = User::all();
+        $pass_dev = \DB::table('pass_devs')->where('id',$id)->first();
+
+        $user = \DB::table('sorts')
+            ->leftJoin('users','sorts.id_user','=','users.id')
+            ->select('sorts.id_user', 'sorts.id','users.name')
+            ->where('sorts.id_table',$pass_dev->id)
+            ->where('sorts.id_type','3')
+            ->get();
+        // dd($user);
+
+        return view('page.edit_pass_dev',[
+            'users' => $pass_dev,
+            'user_all' => $user_all,
+            'user' => $user,
+            'users_now' => $this->user_now()
+        ]);
+
+    }
+
+    public function updatePassDev(Request $request, PassDev $passDev){
+
+        $users_pass_context = $request->all();
+        $passDev->UpdatePassDevUser($users_pass_context);
+        return redirect()->intended('pass-dev');
+
+    }
+
+    public function delitePassDev(Request $request){
+        $delite = explode(',',$request['arr']);
+        foreach($delite as $del){
+            PassDev::whereRaw('id = ?', [$del])->delete();
+        }
+        return $request['arr'];
+    }
+
+
+
 
 
     //График работы
     public function WorkGraff(){
-        return view('page.pass_dev');
+        return view('page.work-grafik');
     }
 
 

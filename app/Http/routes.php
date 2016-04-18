@@ -16,6 +16,13 @@ Route::get('/', ['as' => 'index', 'uses' => 'HomeController@index']);
 
 Route::get('/personal', ['as' => 'personal', 'uses' => 'HomeController@personal']);
 
+
+Route::post('/update-group-positions', ['as' => 'updateGroupPositions', 'uses' => 'HomeController@updateGroupPositions']);
+Route::post('/update-personal-positions', ['as' => 'updatePersonalPositions', 'uses' => 'HomeController@updatePersonalPositions']);
+Route::post('/update-pass-seo-positions', ['as' => 'updatePassSeoPositions', 'uses' => 'HomeController@updatePassSeoPositions']);
+Route::post('/update-pass-dev-positions', ['as' => 'updatePassDevPositions', 'uses' => 'HomeController@updatePassDevPositions']);
+Route::post('/update-pass-context-positions', ['as' => 'updatePassContextPositions', 'uses' => 'HomeController@updatePassContextPositions']);
+
 Route::get('/personal/create', ['as' => 'createPersonal', 'uses' => 'HomeController@createPersonalForm']);
 Route::post('/create-personal', ['as' => 'create', 'uses' => 'HomeController@create']);
 Route::post('/update-personal', ['as' => 'update', 'uses' => 'HomeController@update']);
@@ -52,6 +59,11 @@ Route::post('/update-create-pass-context', ['as' => 'updatePassContext', 'uses' 
 
 //пароли для разработчика
 Route::get('/pass-dev', ['as' => 'passDev', 'uses' => 'HomeController@passDev']);
+Route::get('/pass-dev/create', ['as' => 'passDevCreatForm', 'uses' => 'HomeController@passDevCreatForm']);
+Route::post('/create-pass-dev', ['as' => 'createPassDev', 'uses' => 'HomeController@createPassDev']);
+Route::post('/delite-pass-dev', ['as' => 'delitePassDev', 'uses' => 'HomeController@delitePassDev']);
+Route::get('/pass-dev/{id}/edit', ['as' => 'editPassDev', 'uses' => 'HomeController@editPassDev']);
+Route::post('/update-create-pass-dev', ['as' => 'updatePassDev', 'uses' => 'HomeController@updatePassDev']);
 
 
 //График работы

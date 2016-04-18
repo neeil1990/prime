@@ -32,7 +32,10 @@
 
                                         @foreach($users as $user)
                                             <tr role="row" class="odd">
-                                                <td class=""><input type="checkbox" class="check" value="{{$user->id}}"></td>
+                                                <td class="">
+                                                    <input type="checkbox" class="check" value="{{$user->id}}">
+                                                    <input type="hidden" class="positions" name="positions[]" value="{{$user->id}}">
+                                                </td>
                                                 <td class="">{{$user->id}}</td>
                                                 <td class="">{{$user->name_project}}</td>
                                                 <td class="">@foreach($name as $n)
@@ -78,6 +81,34 @@
 
     <script>
         $(function(){
+
+
+            $("tbody").sortable({
+                items:             "tr",
+                tolerance:         "pointer",
+                scrollSensitivity: 40,
+                opacity:           0.7,
+                forcePlaceholderSize: true,
+                axis: 'y',
+
+                update:function(event, ui)
+                {
+                    var values = $(".positions").map(function(){return $(this).val();}).get();
+
+                    $.ajax({
+                        url: '/update-pass-seo-positions', //Адрес подгружаемой страницы
+                        type: "POST", //Тип запроса
+                        dataType: "html", //Тип данных
+                        data: 'arr=' + values + '',
+                        success: function (response) {
+                            console.log(response);
+                        }
+                    });
+
+                }
+
+            });
+
 
             $('.old_check').click(function() {
                 $(".check").prop('checked', false);
