@@ -218,7 +218,7 @@ class HomeController extends Controller
             ->leftJoin('pass_seos','sorts.id_table','=','pass_seos.id')
             ->where('sorts.id_type','1')
             ->where('users.id',Auth::user()->id)
-            ->orderBy('positions')
+            ->orderBy('pass_seos.positions')
             ->get();
         }
        // dd($users);
@@ -317,7 +317,7 @@ class HomeController extends Controller
                 ->leftJoin('pass_contexts','sorts.id_table','=','pass_contexts.id')
                 ->where('sorts.id_type','2')
                 ->where('users.id',Auth::user()->id)
-                ->orderBy('positions')
+                ->orderBy('pass_contexts.positions')
                 ->get();
         }
         // dd($users);
@@ -410,7 +410,7 @@ class HomeController extends Controller
                 ->leftJoin('pass_devs','sorts.id_table','=','pass_devs.id')
                 ->where('sorts.id_type','3')
                 ->where('users.id',Auth::user()->id)
-                ->orderBy('positions')
+                ->orderBy('pass_devs.positions')
                 ->get();
         }
         // dd($users);
