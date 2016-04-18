@@ -116,7 +116,7 @@
                                                 </td>
                                                 <td class="">{{$user->id}}</td>
                                                 <td class="">{{$user->specialnost}}</td>
-                                                <td class="">{{$user->level}}&emsp;&emsp;&emsp;<a href="/groups/create/?level={{$user->level}}"><i class="fa fa-plus"></i></a></td>
+                                                <td class="">{{$user->level}}&emsp;&emsp;&emsp;<a href="/groups/create/?level={{$user->specialnost}}"><i class="fa fa-plus"></i></a></td>
                                                 <td class="">{{$user->oklad}}</td>
                                                 <td class="">{{$user->procent_seo}}</td>
                                                 <td class="">{{$user->procent_context}}</td>

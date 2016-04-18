@@ -16,8 +16,11 @@
                                 <label class="col-md-4 control-label">Специальность</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="specialnost" value="">
-
+                                    @if(!empty($_GET['level']))
+                                        <input type="text" class="form-control" name="specialnost" value="{{$_GET['level']}}">
+                                    @else
+                                        <input type="text" class="form-control" name="specialnost" value="">
+                                    @endif
                                 </div>
                             </div>
 
@@ -25,11 +28,8 @@
                                 <label class="col-md-4 control-label">Уровень</label>
 
                                 <div class="col-md-6">
-                                    @if(!empty($_GET['level']))
-                                    <input type="text" class="form-control" name="level" value="{{$_GET['level']}}">
-                                        @else
                                         <input type="text" class="form-control" name="level" value="">
-                                    @endif
+
                                 </div>
                             </div>
 
@@ -66,7 +66,7 @@
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fa fa-btn fa-user"></i> Добавить
                                     </button>
-                                    <a class="btn btn-link" href="/pass-context">Back</a>
+                                    <a class="btn btn-link" href="/personal">Back</a>
                                 </div>
                             </div>
                         </form>
