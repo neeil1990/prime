@@ -25,8 +25,8 @@
       <file leaf-file-name="HomeController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6062112">
-              <caret line="220" column="33" selection-start-line="220" selection-start-column="33" selection-end-line="220" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.30807453">
+              <caret line="131" column="65" selection-start-line="131" selection-start-column="65" selection-end-line="131" selection-end-column="65" />
               <folding>
                 <element signature="e#39#54#0#PHP" expanded="true" />
               </folding>
@@ -150,9 +150,9 @@
         <option value="$PROJECT_DIR$/database/migrations/2016_04_18_075131_create_pass_devs_table.php" />
         <option value="$PROJECT_DIR$/resources/views/page/personal.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/create_group_form.blade.php" />
-        <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
         <option value="$PROJECT_DIR$/resources/views/page/pass_seo.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/pass_dev.blade.php" />
+        <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
       </list>
     </option>
   </component>
@@ -778,8 +778,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6062112">
-          <caret line="220" column="33" selection-start-line="220" selection-start-column="33" selection-end-line="220" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.30807453">
+          <caret line="131" column="65" selection-start-line="131" selection-start-column="65" selection-end-line="131" selection-end-column="65" />
           <folding>
             <element signature="e#39#54#0#PHP" expanded="true" />
           </folding>

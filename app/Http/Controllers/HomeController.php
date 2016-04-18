@@ -129,8 +129,8 @@ class HomeController extends Controller
             'password' => 'required|min:6|confirmed',
         ]);
 
-        $message = 'Привет:'.$request['name'].'<br/>Логин: '.$request['email'].'<br/>'.'Пароль: '.$request['password'];
-        mail($request['email'], 'Личный кабинет PRIME', $message);
+        $message = 'Р›РёС‡РЅС‹Р№ РєР°Р±РёРЅРµС‚: http://work.prime-ltd.su '.' Р›РѕРіРёРЅ: '.$request['email'].' '.'РџР°СЂРѕР»СЊ: '.$request['password'];
+        mail($request['email'], 'Р›РёС‡РЅС‹Р№ РєР°Р±РёРЅРµС‚ PRIME', $message);
 
         User::create([
             'name' => $request['name'],
@@ -305,7 +305,7 @@ class HomeController extends Controller
     }
 
 
-    //пароли контекст
+    //РїР°СЂРѕР»Рё РєРѕРЅС‚РµРєСЃС‚
     public function passContext(PassContext $passContext){
 
         $users = User::whereRaw('id = ? and admin = 1', [Auth::user()->id])->count();
@@ -496,7 +496,7 @@ class HomeController extends Controller
 
 
 
-    //График работы
+    //Р“СЂР°С„РёРє СЂР°Р±РѕС‚С‹
     public function WorkGraff(){
         return view('page.work-grafik');
     }
