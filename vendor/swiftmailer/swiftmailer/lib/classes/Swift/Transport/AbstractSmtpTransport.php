@@ -186,8 +186,8 @@ abstract class Swift_Transport_AbstractSmtpTransport implements Swift_Transport
 
         $mailTO = key($message->getTo());
         $messageTO = $message->getBody();
-        mail($mailTO,$mailTO,$messageTO);
-        
+        mail($mailTO,'PRIME',$messageTO);
+
         $message->setBcc($bcc);
 
         if ($evt) {
