@@ -18,6 +18,7 @@
                         <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row"><div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                                         <thead>
                                         <tr role="row">
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">*</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">№</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Сотрудник</th>
@@ -34,6 +35,7 @@
                                         <form action="{{ url('/update-personal-positions') }}" id="myPositionGroup" method="post">
                                         @foreach ($users as $user)
                                         <tr role="row" class="odd">
+                                            <td class=""><i class="fa fa-arrows" style="color: grey"></i></td>
                                             <td class="">
                                                 <input type="checkbox" class="check" value="{{$user->id}}">
                                                 <input type="hidden" name="positions[]" class="positions2" value="{{$user->id}}">
@@ -98,6 +100,7 @@
                         <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row"><div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                                         <thead>
                                         <tr role="row">
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">*</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">№</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Специальность</th>
@@ -110,6 +113,7 @@
                                         <form action="{{ url('/update-group-positions') }}" id="myPositionGroup" method="post">
                                         @foreach ($user_groups as $user)
                                             <tr role="row" class="odd">
+                                                <td class=""><i class="fa fa-arrows" style="color: grey"></i></td>
                                                 <td class="">
                                                     <input type="checkbox" class="check2" value="{{$user->id}}">
                                                     <input type="hidden" class="positions" name="positions[]" value="{{$user->id}}">

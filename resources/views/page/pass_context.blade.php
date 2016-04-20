@@ -23,6 +23,7 @@
                                     <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                                         <thead>
                                         <tr role="row">
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">*</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">№</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Имя проекта</th>
@@ -38,6 +39,7 @@
 
                                         @foreach($users as $user)
                                             <tr role="row" class="odd">
+                                                <td class=""><i class="fa fa-arrows" style="color: grey"></i></td>
                                                 <td class="">
                                                     <input type="checkbox" class="check" value="{{$user->id}}">
                                                     <input type="hidden" name="positions[]" class="positions" value="{{$user->id}}">
