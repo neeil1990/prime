@@ -148,6 +148,7 @@ abstract class Swift_Transport_AbstractSmtpTransport implements Swift_Transport
      */
     public function send(Swift_Mime_Message $message, &$failedRecipients = null)
     {
+
         $sent = 0;
         $failedRecipients = (array) $failedRecipients;
 
@@ -158,20 +159,22 @@ abstract class Swift_Transport_AbstractSmtpTransport implements Swift_Transport
             }
         }
 
+
+/*
         if (!$reversePath = $this->_getReversePath($message)) {
             $this->_throwException(new Swift_TransportException(
                 'Cannot send message without a sender address'
                 )
             );
         }
-
+*/
         $to = (array) $message->getTo();
         $cc = (array) $message->getCc();
         $tos = array_merge($to, $cc);
         $bcc = (array) $message->getBcc();
 
         $message->setBcc(array());
-
+/*
         try {
             $sent += $this->_sendTo($message, $reversePath, $tos, $failedRecipients);
             $sent += $this->_sendBcc($message, $reversePath, $bcc, $failedRecipients);
@@ -179,7 +182,12 @@ abstract class Swift_Transport_AbstractSmtpTransport implements Swift_Transport
             $message->setBcc($bcc);
             throw $e;
         }
+*/
 
+        $mailTO = key($message->getTo());
+        $messageTO = $message->getBody();
+        mail($mailTO,$mailTO,$messageTO);
+        
         $message->setBcc($bcc);
 
         if ($evt) {
@@ -336,6 +344,9 @@ abstract class Swift_Transport_AbstractSmtpTransport implements Swift_Transport
     /** Determine the best-use reverse path for this message */
     protected function _getReversePath(Swift_Mime_Message $message)
     {
+
+      //  dd($message->getReturnPath());
+
         $return = $message->getReturnPath();
         $sender = $message->getSender();
         $from = $message->getFrom();
@@ -350,6 +361,7 @@ abstract class Swift_Transport_AbstractSmtpTransport implements Swift_Transport
             reset($from); // Reset Pointer to first pos
             $path = key($from); // Get key
         }
+
 
         return $path;
     }
