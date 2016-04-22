@@ -1,0 +1,235 @@
+@extends('layouts.main')
+
+@section('content')
+
+    <section class="content">
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Добавить группу</div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ url('/update-project-seo') }}">
+                            {!! csrf_field() !!}
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Имя проекта</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="name_project" value="{{$users->name_project}}">
+                                    <input type="hidden" class="form-control" name="id" value="{{$users->id}}">
+
+                                    @foreach($user as $u)
+                                        <input type="hidden" class="form-control" name="id_sort[]" value="{{$u->id}}">
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Бюджет</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="budget" value="{{$users->budget}}">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Освоено</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="osvoeno" value="{{$users->osvoeno}}">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Освоено %</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="osvoeno_procent" value="{{$users->osvoeno_procent}}">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Специалист</label>
+
+                                <div class="col-md-6">
+
+                                    @foreach($user_all as $us)
+                                        <label>
+                                            <input type="checkbox" name="id_user[]" value="{{$us->id}}" @foreach($user as $u) @if($us->id == $u->id_user) checked @endif @endforeach> {{$us->name}}
+                                        </label><br>
+                                    @endforeach
+
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('id_user_gl') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Назначить главным</label>
+
+                                <div class="col-md-6">
+                                    <select name="id_glavn_user">
+                                        @foreach($user_all as $us)
+                                            @if($users->id_glavn_user == $us->id)
+                                                <option value="{{$us->id}}">{{$us->name}}</option>
+                                            @endif
+                                        @endforeach
+                                        <option value="" disabled="disabled"></option>
+                                        @foreach($user_all as $us)
+
+                                            <option value="{{$us->id}}">{{$us->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('id_user_gl') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">% от проекта</label>
+
+                                <div class="col-md-6">
+                                    <select name="procent_seo" class="form-control">
+                                        <option value="{{$users->procent_seo}}">{{$users->procent_seo}}</option>
+                                        @foreach($user_all as $us)
+                                            <option value="{{$us->seo_procent}}">{{$us->seo_procent}}</option>
+                                            @endforeach
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Инд. % от проекта </label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="procent_seo_ind" value="">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Сумма на з.п.</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="summa_zp" value="{{$users->summa_zp}}">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Стартпоинт</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="startpoint" value="{{$users->startpoint}}">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">LP</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="lp" value="{{$users->lp}}">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Старт</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" name="start" value="{{$users->start}}" class="form-control pull-right" id="datepicker">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Конец</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" name="end" value="{{$users->end}}" class="form-control pull-right" id="datepicker2">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Цель</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" name="aim" class="form-control" value="{{$users->aim}}">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Регион</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" name="region" class="form-control" value="{{$users->region}}">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Номер договора</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" name="dogovor_number" class="form-control" value="{{$users->dogovor_number}}">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Контактное лицо</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" name="contact_person" class="form-control" value="{{$users->contact_person}}">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">e-mail</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" name="e_mail" class="form-control" value="{{$users->e_mail}}">
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa fa-btn fa-user"></i> Изменить
+                                    </button>
+                                    <a class="btn btn-link" href="/project-seo">Back</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+
+            $(function () {
+                //Date picker
+                $('#datepicker').datepicker({
+                    autoclose: true
+                });
+                $('#datepicker2').datepicker({
+                    autoclose: true
+                });
+
+            });
+
+        </script>
+
+
+
+    </section>
+
+@stop

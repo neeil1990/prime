@@ -11,6 +11,8 @@ return array(
     'CreatePassDevsTable' => $baseDir . '/database/migrations/2016_04_18_075131_create_pass_devs_table.php',
     'CreatePassSeosTable' => $baseDir . '/database/migrations/2016_04_14_114222_create_pass_seos_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreateProjectContextsTable' => $baseDir . '/database/migrations/2016_04_22_122403_create_project_contexts_table.php',
+    'CreateProjectSeosTable' => $baseDir . '/database/migrations/2016_04_22_095531_create_project_seos_table.php',
     'CreateSortsTable' => $baseDir . '/database/migrations/2016_04_15_101212_create_sorts_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',

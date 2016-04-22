@@ -142,21 +142,27 @@
                        }
                         if(url == '/pass-seo'){
                             $('.title_dashboard').text('Пароли SEO');
-                            $('.menu_act1').addClass('active');
+
                         }
                         if(url == '/pass-dev'){
                             $('.title_dashboard').text('Пароли Develop');
-                            $('.menu_act1').addClass('active');
+
                         }
                         if(url == '/pass-context'){
                             $('.title_dashboard').text('Пароли контекст');
-                            $('.menu_act2').addClass('active');
+
                         }
                         if(url == '/personal'){
                             $('.title_dashboard').text('Сотрудники');
                         }
                         if(url == '/work-graffik'){
                             $('.title_dashboard').text('График работы');
+                        }
+                        if(url == '/project-seo'){
+                            $('.title_dashboard').text('Проекты SEO');
+                        }
+                        if(url == '/project-context'){
+                            $('.title_dashboard').text('Проекты контекст');
                         }
                     });
                 </script>

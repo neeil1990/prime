@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 use App\Groups;
 use App\PassContext;
 use App\PassDev;
+use App\ProjectContext;
+use App\ProjectSeo;
 use App\Sort;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Http\Requests;
@@ -499,6 +502,244 @@ class HomeController extends Controller
     //График работы
     public function WorkGraff(){
         return view('page.work-grafik');
+    }
+
+
+    //Проекты сео
+
+    public function projectSeo(){
+
+        $users = User::whereRaw('id = ? and admin = 1', [Auth::user()->id])->count();
+        if($users == 1){
+            $users = \DB::table('project_seos')->orderBy('positions')->get();
+        }else{
+            $users = \DB::table('sorts')
+                ->leftJoin('users','sorts.id_user','=','users.id')
+                ->leftJoin('project_seos','sorts.id_table','=','project_seos.id')
+                ->where('sorts.id_type','4')
+                ->where('users.id',Auth::user()->id)
+                ->orderBy('project_seos.positions')
+                ->get();
+        }
+        foreach($users as $key=>$u){
+            $difference = intval(abs(
+                strtotime($u->start) - strtotime($u->end)
+            ));
+
+            $users[$key]->interval_date = $difference / (3600 * 24);
+        }
+
+        $name = \DB::table('sorts')
+            ->leftJoin('users','sorts.id_user','=','users.id')
+            ->leftJoin('project_seos','sorts.id_table','=','project_seos.id')
+            ->where('sorts.id_type','4')->get();
+
+
+        return view('page.project-seo',['users' => $users,'name' => $name,'users_now' => $this->user_now(),'admin' => $this->admin()]);
+    }
+
+    public function projectSeoCreateForm(){
+        $user = User::all();
+       return view('page.project-seo-crate-form',['users' => $user]);
+    }
+
+    public function createProjectSeo(Request $request){
+
+        if(!empty($request['procent_seo_ind'])){
+            $procent_seo = $request['procent_seo_ind'];
+        }else{
+            $procent_seo = $request['procent_seo'];
+        }
+
+        $add = ProjectSeo::create([
+            'name_project' => $request['name_project'],
+            'budget' => $request['budget'],
+            'osvoeno' => $request['osvoeno'],
+            'osvoeno_procent' => $request['osvoeno_procent'],
+            'id_glavn_user' => $request['id_glavn_user'],
+            'procent_seo' => $procent_seo,
+            'summa_zp' => $request['summa_zp'],
+            'startpoint' => $request['startpoint'],
+            'lp' => $request['lp'],
+            'start' => $request['start'],
+            'end' => $request['end'],
+            'aim' => $request['aim'],
+            'region' => $request['region'],
+            'dogovor_number' => $request['dogovor_number'],
+            'contact_person' => $request['contact_person'],
+            'e_mail' => $request['e_mail']
+        ]);
+
+        foreach($request['id_user'] as $id_user){
+            Sort::create([
+                'id_user' => $id_user,
+                'id_table' => $add->id,
+                'id_type' => 4,//ProjectSeo
+            ]);
+        }
+
+        return redirect()->intended('/project-seo');
+
+    }
+
+
+    public function UpdateProjectSeoPosition(Request $request, ProjectSeo $projectSeo){
+
+        $posarr = explode(',',$request['arr']);
+
+        $ids = array_keys($posarr);
+        foreach($posarr as $i=>$position){
+            $projectSeo->UpdateProjectSeoPosition($position, $ids[$i]);
+        }
+
+    }
+
+    public function deliteProjectSeo(Request $request){
+        $delite = explode(',',$request['arr']);
+        foreach($delite as $del){
+            ProjectSeo::whereRaw('id = ?', [$del])->delete();
+        }
+        return $request['arr'];
+    }
+
+    public function editProjectSeo($id){
+
+        $user_all = User::all();
+        $project_seos = \DB::table('project_seos')->where('id',$id)->first();
+
+        $user = \DB::table('sorts')
+            ->leftJoin('users','sorts.id_user','=','users.id')
+            ->select('sorts.id_user', 'sorts.id','users.name')
+            ->where('sorts.id_table',$project_seos->id)
+            ->where('sorts.id_type','4')
+            ->get();
+        // dd($user);
+
+        return view('page.edit_prodject_seo_form',[
+            'users' => $project_seos,
+            'user_all' => $user_all,
+            'user' => $user,
+            'users_now' => $this->user_now()
+        ]);
+    }
+
+    public function updateProjectSeo(Request $request,ProjectSeo $projectSeo){
+        $users_pass_context = $request->all();
+        $projectSeo->UpdateProjectSeoUser($users_pass_context);
+        return redirect()->intended('project-seo');
+    }
+
+
+
+
+    //Проекты context
+
+    public function projectContext(){
+
+        $users = User::whereRaw('id = ? and admin = 1', [Auth::user()->id])->count();
+        if($users == 1){
+            $users = \DB::table('project_contexts')->orderBy('positions')->get();
+        }else{
+            $users = \DB::table('sorts')
+                ->leftJoin('users','sorts.id_user','=','users.id')
+                ->leftJoin('project_contexts','sorts.id_table','=','project_contexts.id')
+                ->where('sorts.id_type','5')
+                ->where('users.id',Auth::user()->id)
+                ->orderBy('project_contexts.positions')
+                ->get();
+        }
+        foreach($users as $key => $u){
+            $sum = $u->ya_direct+$u->go_advords;
+            $users[$key]->sum_zp = $sum*$u->procent_seo/100;
+        }
+        $name = \DB::table('sorts')
+            ->leftJoin('users','sorts.id_user','=','users.id')
+            ->leftJoin('project_contexts','sorts.id_table','=','project_contexts.id')
+            ->where('sorts.id_type','5')->get();
+
+
+        return view('page.project-context',['users' => $users,'name' => $name,'users_now' => $this->user_now(),'admin' => $this->admin()]);
+    }
+
+    public function projectContextCreateForm(){
+        $user = User::all();
+        return view('page.project_context_create_form',['users' => $user]);
+    }
+
+    public function createProjectContext(Request $request){
+
+        if(!empty($request['procent_seo_ind'])){
+            $procent_seo = $request['procent_seo_ind'];
+        }else{
+            $procent_seo = $request['procent_seo'];
+        }
+
+        $add = ProjectContext::create([
+            'id_glavn_user' => $request['id_glavn_user'],
+            'name_project' => $request['name_project'],
+            'ya_direct' => $request['ya_direct'],
+            'go_advords' => $request['go_advords'],
+            'ost_bslsnse_ya' => $request['ost_bslsnse_ya'],
+            'ost_bslsnse_go' => $request['ost_bslsnse_go'],
+            'procent_seo' => $procent_seo
+        ]);
+
+        foreach($request['id_user'] as $id_user){
+            Sort::create([
+                'id_user' => $id_user,
+                'id_table' => $add->id,
+                'id_type' => 5,
+            ]);
+        }
+
+        return redirect()->intended('/project-context');
+
+    }
+
+    public function deliteProjectContext(Request $request){
+        $delite = explode(',',$request['arr']);
+        foreach($delite as $del){
+            ProjectContext::whereRaw('id = ?', [$del])->delete();
+        }
+        return $request['arr'];
+    }
+
+    public function updateProjectContextPositions(Request $request, ProjectContext $projectContext){
+
+        $posarr = explode(',',$request['arr']);
+
+        $ids = array_keys($posarr);
+        foreach($posarr as $i=>$position){
+            $projectContext->UpdateProjectContextPosition($position, $ids[$i]);
+        }
+
+    }
+
+    public function editProjectContext($id){
+        $user_all = User::all();
+        $project_contexts = \DB::table('project_contexts')->where('id',$id)->first();
+
+        $user = \DB::table('sorts')
+            ->leftJoin('users','sorts.id_user','=','users.id')
+            ->select('sorts.id_user', 'sorts.id','users.name')
+            ->where('sorts.id_table',$project_contexts->id)
+            ->where('sorts.id_type','5')
+            ->get();
+        // dd($user);
+
+        return view('page.edit_prodject_context_form',[
+            'users' => $project_contexts,
+            'user_all' => $user_all,
+            'user' => $user,
+            'users_now' => $this->user_now()
+        ]);
+
+    }
+
+    public function updateProjectContext(Request $request, ProjectContext $projectContext){
+        $users_pass_context = $request->all();
+        $projectContext->UpdateProjectContextUser($users_pass_context);
+        return redirect()->intended('project-context');
     }
 
 
