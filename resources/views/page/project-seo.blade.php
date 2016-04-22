@@ -68,8 +68,8 @@
                                                 </td>
                                                 <td class="">{{$user->procent_seo}}</td>
                                                 <td class="">{{$user->summa_zp}}</td>
-                                                <td class=""><a id="startpoint" href="{{$user->startpoint}}">{{$user->startpoint}}</a></td>
-                                                <td class=""><a id="lp" href="{{$user->lp}}">{{$user->lp}}</a></td>
+                                                <td class=""><a id="startpoint" href="{{$user->startpoint}}"> >>>> </a></td>
+                                                <td class=""><a id="lp" href="{{$user->lp}}"> >>>> </a></td>
                                                 <td class="">{{$user->start}}</td>
                                                 <td class="">{{$user->end}}</td>
                                                 <td class="" style="@if($user->interval_date < 30) background-color: limegreen; @endif">{{$user->interval_date}}</td>

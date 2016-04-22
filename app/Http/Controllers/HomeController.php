@@ -46,6 +46,29 @@ class HomeController extends Controller
         return $users;
     }
 
+    public function showProcentGroup(Request $request){
+
+        $procent = \DB::table('groups')
+            ->where('specialnost',$request['arr1'])
+            ->where('level',$request['arr2'])
+            ->get();
+
+
+       return json_encode($procent[0]);
+
+    }
+
+    public function showProcentUsers(Request $request){
+
+        $procent = \DB::table('users')
+            ->where('id',$request['arr1'])
+            ->get();
+
+
+        return json_encode($procent[0]);
+
+    }
+
 
     public function index()
     {

@@ -31,7 +31,7 @@
                                 <label class="col-md-4 control-label">Специализация</label>
 
                                 <div class="col-md-6">
-                                    <select name="specialism" class="form-control">
+                                    <select name="specialism" class="form-control" id="special">
                                         @foreach($groups as $group)
                                         <option value="{{$group->specialnost}}">{{$group->specialnost}}</option>
                                             @endforeach
@@ -49,7 +49,7 @@
                                 <label class="col-md-4 control-label">Уровень</label>
 
                                 <div class="col-md-6">
-                                    <select name="level" class="form-control">
+                                    <select name="level" class="form-control" id="level">
                                         @foreach($groups as $group)
                                             <option value="{{$group->level}}">{{$group->level}}</option>
                                         @endforeach
@@ -81,11 +81,7 @@
                                 <label class="col-md-4 control-label">% от проекта SEO</label>
 
                                 <div class="col-md-6">
-                                    <select name="seo_procent" class="form-control">
-                                        @foreach($groups as $group)
-                                            <option value="{{$group->procent_seo}}">{{$group->procent_seo}}</option>
-                                        @endforeach
-                                    </select>
+                                    <input type="text" class="form-control" name="seo_procent" value="{{ old('personal_specialism') }}">
 
                                     @if ($errors->has('seo_procent'))
                                         <span class="help-block">
@@ -113,11 +109,7 @@
                                 <label class="col-md-4 control-label">% от проекта контекста</label>
 
                                 <div class="col-md-6">
-                                    <select name="contecst_procent" class="form-control">
-                                        @foreach($groups as $group)
-                                            <option value="{{$group->procent_context}}">{{$group->procent_context}}</option>
-                                        @endforeach
-                                    </select>
+                                    <input type="text" class="form-control" name="contecst_procent" value="{{ old('personal_specialism') }}">
                                     @if ($errors->has('contecst_procent'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('contecst_procent') }}</strong>
@@ -219,5 +211,54 @@
 
 
     </section>
+
+    <script>
+        $(function(){
+
+            $('#special').change(function(){
+                var specialnost = $(this).val();
+                var level = $('#level').val();
+                $('input[name=contecst_procent]').val('');
+                $('input[name=seo_procent]').val('');
+
+                $.ajax({
+                    url: '/show-procent-group', //Адрес подгружаемой страницы
+                    type: "POST", //Тип запроса
+                    dataType: 'json',
+                    data: 'arr1=' + specialnost + '&arr2=' + level + '',
+                    success: function (response) {
+
+                        $('input[name=contecst_procent]').val(response.procent_context);
+                        $('input[name=seo_procent]').val(response.procent_seo);
+                    }
+                });
+
+            });
+
+            $('#level').change(function(){
+                var specialnost = $('#special').val();
+                var level = $(this).val();
+                $('input[name=contecst_procent]').val('');
+                $('input[name=seo_procent]').val('');
+
+                $.ajax({
+                    url: '/show-procent-group', //Адрес подгружаемой страницы
+                    type: "POST", //Тип запроса
+                    dataType: 'json',
+                    data: 'arr1=' + specialnost + '&arr2=' + level + '',
+                    success: function (response) {
+
+                        $('input[name=contecst_procent]').val(response.procent_context);
+                        $('input[name=seo_procent]').val(response.procent_seo);
+                    }
+                });
+
+            });
+
+
+
+        });
+
+    </script>
 
 @stop

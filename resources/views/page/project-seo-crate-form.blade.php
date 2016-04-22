@@ -63,7 +63,7 @@
                                 <label class="col-md-4 control-label">Назначить главным</label>
 
                                 <div class="col-md-6">
-                                    <select name="id_glavn_user">
+                                    <select name="id_glavn_user" id="id_glavn_user">
                                         @foreach($users as $user)
                                             <option value="{{$user->id}}">{{$user->name}}</option>
                                         @endforeach
@@ -76,22 +76,10 @@
                                 <label class="col-md-4 control-label">% от проекта</label>
 
                                 <div class="col-md-6">
-                                    <select name="procent_seo" class="form-control">
-                                        @foreach($users as $user)
-                                            <option value="{{$user->seo_procent}}">{{$user->seo_procent}}</option>
-                                        @endforeach
-                                    </select>
-
+                                    <input type="text" class="form-control" name="procent_seo" value="">
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label class="col-md-4 control-label">Инд. % от проекта </label>
-
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="procent_seo_ind" value="">
-                                </div>
-                            </div>
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Сумма на з.п.</label>
@@ -202,6 +190,26 @@
         <script>
 
             $(function () {
+
+                $('#id_glavn_user').change(function(){
+                    var specialnost = $(this).val();
+
+                    $('input[name=procent_seo]').val('');
+
+                    $.ajax({
+                        url: '/show-procent-users', //Адрес подгружаемой страницы
+                        type: "POST", //Тип запроса
+                        dataType: 'json',
+                        data: 'arr1=' + specialnost + '',
+                        success: function (response) {
+
+                            $('input[name=procent_seo]').val(response.seo_procent);
+                        }
+                    });
+
+                });
+
+
                 //Date picker
                 $('#datepicker').datepicker({
                     autoclose: true
