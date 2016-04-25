@@ -1,3 +1,8 @@
 RewriteEngine On
 
 RewriteRule ^(.*)$ public/$1 [L]
+# Beget FileManager Auth rules
+AuthName "Protected area, need authorization"
+AuthType Basic
+AuthUserFile /home/b/bziksv/work.prime-ltd.su/public_html/.htpasswd
+require valid-user

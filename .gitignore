@@ -1,5 +1,6 @@
-
-
-
+.cache/
+.htpasswd
+.bash_history
 .env
 .idea
+.htaccess
