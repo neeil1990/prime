@@ -52,16 +52,15 @@
     <script>
 
         $(function(){
-        $(".copytext").zclip({
-            path:'{{ asset('/dist/js/jquery-zclip-master/ZeroClipboard.swf') }}',
-            copy: $(".copytext").text(),
-            beforeCopy:function(){
-                $(this).css('color','green');
-            },
-            afterCopy:function(){
-                $(this).css('color','green');
-            }
-        });
+
+
+
+
+            $('.copytext').click(function(){
+                $(this).select();
+            });
+
+
         });
     </script>
 
@@ -139,31 +138,83 @@
                         var url = window.location.pathname;
                        if(url == '/'){
                            $('.title_dashboard').text('Главная');
+                           $('.menu3').addClass('active');
                        }
                         if(url == '/pass-seo'){
                             $('.title_dashboard').text('Пароли SEO');
+                            $('.menu4').addClass('active');
+                            $('.menu1').addClass('menu-open');
+                            $('.menu1').css('display','block');
 
                         }
                         if(url == '/pass-dev'){
                             $('.title_dashboard').text('Пароли Develop');
+                            $('.menu5').addClass('active');
+                            $('.menu1').addClass('menu-open');
+                            $('.menu1').css('display','block');
 
                         }
                         if(url == '/pass-context'){
                             $('.title_dashboard').text('Пароли контекст');
+                            $('.menu6').addClass('active');
+                            $('.menu2').addClass('menu-open');
+                            $('.menu2').css('display','block');
 
                         }
                         if(url == '/personal'){
                             $('.title_dashboard').text('Сотрудники');
+                            $('.menu7').addClass('active');
                         }
                         if(url == '/work-graffik'){
                             $('.title_dashboard').text('График работы');
+                            $('.menu8').addClass('active');
                         }
                         if(url == '/project-seo'){
                             $('.title_dashboard').text('Проекты SEO');
+                            $('.nav_mouseover1').addClass('active');
+                            $('.menu1').addClass('menu-open');
+                            $('.menu1').css('display','block');
                         }
                         if(url == '/project-context'){
                             $('.title_dashboard').text('Проекты контекст');
+                            $('.nav_mouseover2').addClass('active');
+                            $('.menu2').addClass('menu-open');
+                            $('.menu2').css('display','block');
                         }
+
+                        var a = new Array(
+                                {"attr1":".nav_mouseover1","attr2":".menu1"},
+                                {"attr1":".nav_mouseover2","attr2":".menu2"}
+                        );
+
+                        $.each(a,function(data,li){
+
+                            $(li.attr1).mouseover(function(){
+                                $(this).addClass('active');
+                                $(li.attr2).addClass('menu-open');
+                                $(li.attr2).css('display','block');
+                            });
+
+                            $(li.attr2).mouseover(function(){
+                                $(this).addClass('active');
+                                $(li.attr2).addClass('menu-open');
+                                $(li.attr2).css('display','block');
+                            });
+
+                            $(li.attr2).mouseleave(function(){
+                                $(li.attr1).removeClass('active');
+                                $(li.attr2).removeClass('menu-open');
+                                $(li.attr2).removeAttr('style');
+                            });
+
+                            $(li.attr1).mouseleave(function(){
+                                $(li.attr1).removeClass('active');
+                                $(li.attr2).removeClass('menu-open');
+                                $(li.attr2).removeAttr('style');
+                            });
+
+                        });
+
                     });
                 </script>
             <h1 class="title_dashboard"></h1>

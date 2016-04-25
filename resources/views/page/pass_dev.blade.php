@@ -3,6 +3,15 @@
 
 @section('content')
 
+    <style>
+        textarea{
+            border:none;
+        }
+        textarea:hover{
+            background-color:#f4f4f4 ;
+        }
+    </style>
+
     <section class="content">
 
         <div class="row">
@@ -51,10 +60,10 @@
                                                         @endif
                                                     @endforeach
                                                 </td>
-                                                <td class="copytext">{{$user->ssa}}</td>
-                                                <td class="copytext">{{$user->ftp}}</td>
-                                                <td class="copytext">{{$user->login}}</td>
-                                                <td class="copytext">{{$user->password}}</td>
+                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->ssa}}</textarea></td>
+                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->ftp}}</textarea></td>
+                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->login}}</textarea></td>
+                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->password}}</textarea></td>
                                             </tr>
                                         @endforeach
 

@@ -51,6 +51,19 @@ class User extends Authenticatable
     }
 
     public function UpdateUser($data){
+
+        if(!empty($data['password'])){
+
+            $message = 'Личный кабинет: http://work.prime-ltd.su '.' Логин: '.$data['email'].' '.'Пароль: '.$data['password'];
+            mail($data['email'], 'Личный кабинет PRIME', $message);
+
+            User::where('id', $data['id'])
+                ->update(array(
+                    'password' => bcrypt($data['password']),
+                ));
+
+        }
+
         User::where('id', $data['id'])
             ->update(array(
                 'name' => $data['name'],
@@ -61,6 +74,7 @@ class User extends Authenticatable
                 'sum_many_first' => $data['sum_many_first'],
                 'contecst_procent' => $data['contecst_procent'],
                 'sum_many_last' => $data['sum_many_last'],
+                'email' => $data['email'],
             ));
     }
 

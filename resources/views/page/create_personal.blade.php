@@ -162,15 +162,20 @@
                             </div>
                             <script>
                                 $(function(){
-                                    function getRandomArbitrary(min, max) {
-                                        var rand = min + Math.random() * (max - min)
-                                        rand = Math.round(rand);
-                                        return rand;
+                                    function getRandomArbitrary() {
+                                        var result       = '';
+                                        var words        = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+                                        var max_position = words.length - 1;
+                                        for( i = 0; i < 10; ++i ) {
+                                            position = Math.floor ( Math.random() * max_position );
+                                            result = result + words.substring(position, position + 1);
+                                        }
+                                        return result;
+
                                     }
                                     $('#genirate_password').click(function(){
-                                        var mi = 100000;
-                                        var ma = 999999;
-                                       var rand_number = getRandomArbitrary(mi,ma);
+
+                                        var rand_number = getRandomArbitrary();
                                         $('input[name=password]').val(rand_number);
                                         $('input[name=password_confirmation]').val(rand_number);
                                         return false;

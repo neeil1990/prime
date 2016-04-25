@@ -142,6 +142,73 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">E-Mail Address</label>
+
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" name="email" value="{{ $user->email }}">
+
+                                    @if ($errors->has('email'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Пароль</label>
+
+                                <div class="col-md-6">
+                                    <a href="#" id="genirate_password">Сгенерировать пароль</a>
+                                    <input type="text" class="form-control" name="password">
+
+                                    @if ($errors->has('password'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <script>
+                                $(function(){
+                                    function getRandomArbitrary() {
+                                            var result       = '';
+                                            var words        = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+                                            var max_position = words.length - 1;
+                                            for( i = 0; i < 10; ++i ) {
+                                                position = Math.floor ( Math.random() * max_position );
+                                                result = result + words.substring(position, position + 1);
+                                            }
+                                            return result;
+
+                                    }
+                                    $('#genirate_password').click(function(){
+
+                                        var rand_number = getRandomArbitrary();
+                                        $('input[name=password]').val(rand_number);
+                                        $('input[name=password_confirmation]').val(rand_number);
+                                        return false;
+
+                                    });
+
+                                });
+                            </script>
+
+                            <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label"></label>
+
+                                <div class="col-md-6">
+                                    <input type="hidden" class="form-control" name="password_confirmation">
+
+                                    @if ($errors->has('password_confirmation'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">

@@ -77,7 +77,7 @@
                                 <label class="col-md-4 control-label">Назначить главным</label>
 
                                 <div class="col-md-6">
-                                    <select name="id_glavn_user">
+                                    <select name="id_glavn_user" id="id_glavn_user">
                                         @foreach($user_all as $us)
                                             @if($users->id_glavn_user == $us->id)
                                                 <option value="{{$us->id}}">{{$us->name}}</option>
@@ -98,21 +98,13 @@
                                 <label class="col-md-4 control-label">% от проекта</label>
 
                                 <div class="col-md-6">
-                                    <select name="procent_seo" class="form-control">
-                                        <option value="{{$users->procent_seo}}">{{$users->procent_seo}}</option>
-                                        @foreach($user_all as $us)
-                                            <option value="{{$us->seo_procent}}">{{$us->seo_procent}}</option>
-                                        @endforeach
-                                    </select>
-
+                                    <input type="text" name="procent_seo" value="{{$users->procent_seo}}" class="form-control">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Инд. % от проекта </label>
-
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="procent_seo_ind" value="">
+                                    <input type="hidden" class="form-control" name="procent_seo_ind" value="">
                                 </div>
                             </div>
 
@@ -134,6 +126,25 @@
         <script>
 
             $(function () {
+
+                $('#id_glavn_user').change(function(){
+                    var specialnost = $(this).val();
+
+                    $('input[name=procent_seo]').val('');
+
+                    $.ajax({
+                        url: '/show-procent-users', //Адрес подгружаемой страницы
+                        type: "POST", //Тип запроса
+                        dataType: 'json',
+                        data: 'arr1=' + specialnost + '',
+                        success: function (response) {
+
+                            $('input[name=procent_seo]').val(response.contecst_procent);
+                        }
+                    });
+
+                });
+                
                 //Date picker
                 $('#datepicker').datepicker({
                     autoclose: true

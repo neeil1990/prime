@@ -3,6 +3,14 @@
 
 @section('content')
 
+    <style>
+        textarea{
+            border:none;
+        }
+        textarea:hover{
+            background-color:#f4f4f4 ;
+        }
+    </style>
     <section class="content">
 
         <div class="row">
@@ -56,10 +64,10 @@
                                                             @endif
                                                         @endif
                                                     @endforeach</td>
-                                                <td class="">{{$user->loginYandex}}</td>
-                                                <td class="">{{$user->passYandex}}</td>
-                                                <td class="">{{$user->loginGoogle}}</td>
-                                                <td class="">{{$user->passGoogle}}</td>
+                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->loginYandex}}</textarea></td>
+                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->passYandex}}</textarea></td>
+                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->loginGoogle}}</textarea></td>
+                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->passGoogle}}</textarea></td>
                                             </tr>
                                         @endforeach
 

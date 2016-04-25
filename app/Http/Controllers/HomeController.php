@@ -222,6 +222,7 @@ class HomeController extends Controller
 
     public function update(Request $request,User $updateUser){
         $users = $request->all();
+
         $updateUser->UpdateUser($users);
         return redirect()->intended('personal');
     }
