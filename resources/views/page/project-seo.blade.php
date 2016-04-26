@@ -39,6 +39,8 @@
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Номер договора</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Контактное лицо</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">e-mail</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Дополнительная информация</th>
+
                                         </thead>
                                         <tbody>
 
@@ -110,6 +112,17 @@
                                                 <td class="">{{$user->dogovor_number}}</td>
                                                 <td class="">{{$user->contact_person}}</td>
                                                 <td class="">{{$user->e_mail}}</td>
+
+                                                        <td class="">
+                                                            @if(!empty($user->value_serialize))
+                                                                <ul style="    margin: 0px 0px 0px -43px;min-width: 200px;">
+                                                                @foreach(unserialize($user->value_serialize) as $val)
+                                                                    <li style="border-bottom: 1px solid grey;list-style: none">{{$val}}</li>
+                                                                @endforeach
+                                                                </ul>
+                                                            @endif
+                                                        </td>
+
                                             </tr>
                                             @endforeach
                                         </tbody>

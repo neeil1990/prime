@@ -13,7 +13,7 @@
                             {!! csrf_field() !!}
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Имя проекта</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Имя проекта</label>
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="name_project" value="">
@@ -21,7 +21,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Я.Директ </label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Я.Директ </label>
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="ya_direct" value="">
@@ -29,7 +29,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Г.Адвордс</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Г.Адвордс</label>
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="go_advords" value="">
@@ -38,7 +38,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Остаток на балансе Яндекса</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Остаток на балансе Яндекса</label>
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="ost_bslsnse_ya" value="">
@@ -47,7 +47,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Остаток на балансе Гугл</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Остаток на балансе Гугл</label>
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="ost_bslsnse_go" value="">
@@ -57,7 +57,7 @@
 
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Специалист</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Специалист</label>
 
                                 <div class="col-md-6">
                                     @foreach($users as $user)
@@ -69,7 +69,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('id_user_gl') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Назначить главным</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Назначить главным</label>
 
                                 <div class="col-md-6">
                                     <select name="id_glavn_user" id="id_glavn_user">
@@ -83,7 +83,7 @@
 
 
                             <div class="form-group{{ $errors->has('id_user_gl') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">% от проекта</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> % от проекта</label>
 
                                 <div class="col-md-6">
                                     <input type="text" name="procent_seo" class="form-control">
@@ -97,9 +97,15 @@
                                 </div>
                             </div>
 
+                            <div class="form-group one">
+
+                            </div>
+
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
+                                    <a href="#" id="add_input">Добавить поле</a> |
+                                    <a href="#" id="remove">Удалить поле</a><br><br>
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fa fa-btn fa-user"></i> Добавить
                                     </button>
@@ -115,6 +121,45 @@
         <script>
 
             $(function () {
+
+
+
+                $(".form-horizontal").sortable({
+                    items:             ".form-group",
+                    tolerance:         "pointer",
+                    scrollSensitivity: 40,
+                    opacity:           0.7,
+                    forcePlaceholderSize: true,
+                    axis: 'y',
+
+                    update:function(event, ui)
+                    {
+
+                    }
+
+                });
+
+
+
+
+                var i = $('input').size() + 1;
+
+                $('#add_input').click(function() {
+                    $('<label class="col-md-4 control-label field2"></label><div class="col-md-6 field" style="margin-bottom: 10px;"><input type="text" name="value_serialize[]" class="form-control"></div>').fadeIn('slow').appendTo('.one');
+                    return false;
+                });
+
+                $('#remove').click(function() {
+                    if(i > 1) {
+                        $('.field:last').remove();
+                        $('.field2:last').remove();
+                        i--;
+                    }
+                    return false;
+                });
+
+
+
 
                 $('#id_glavn_user').change(function(){
                     var specialnost = $(this).val();

@@ -15,7 +15,8 @@ class ProjectContext extends Model
         'ost_bslsnse_ya',
         'ost_bslsnse_go',
         'id_glavn_user',
-        'procent_seo'
+        'procent_seo',
+        'value_serialize'
     ];
 
     public function UpdateProjectContextPosition($id,$positions){
@@ -27,11 +28,8 @@ class ProjectContext extends Model
 
     public function UpdateProjectContextUser($data){
 
-        if(!empty($data['procent_seo_ind'])){
-            $procent_seo = $data['procent_seo_ind'];
-        }else{
-            $procent_seo = $data['procent_seo'];
-        }
+
+
         \DB::table('project_contexts')->where('id', $data['id'])
             ->update(array(
                 'name_project' => $data['name_project'],
@@ -40,7 +38,8 @@ class ProjectContext extends Model
                 'ost_bslsnse_ya' => $data['ost_bslsnse_ya'],
                 'ost_bslsnse_go' => $data['ost_bslsnse_go'],
                 'id_glavn_user' => $data['id_glavn_user'],
-                'procent_seo' => $procent_seo
+                'procent_seo' => $data['procent_seo'],
+                'value_serialize' => serialize($data['value_serialize'])
             ));
 
         $create_data = $data;

@@ -32,6 +32,7 @@ class CreateProjectSeosTable extends Migration
             $table->string('dogovor_number');
             $table->string('contact_person');
             $table->string('e_mail');
+            $table->text('value_serialize');
             $table->timestamps();
         });
     }

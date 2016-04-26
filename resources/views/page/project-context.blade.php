@@ -30,6 +30,7 @@
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Специалист</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">% от проекта</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Сумма на з.п.</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Дополнительная информация</th>
                                         </thead>
                                         <tbody>
 
@@ -50,7 +51,7 @@
                                                     @foreach($name as $n)
                                                         @if($n->id == $user->id)
                                                             @if($n->id_user == $user->id_glavn_user)
-                                                                <span style="color: red">{{$n->name}}</span><br>
+                                                                <span style="color: red;">{{$n->name}}</span><br>
                                                             @else
                                                                 {{$n->name}}<br>
                                                             @endif
@@ -59,6 +60,15 @@
                                                 </td>
                                                 <td class="">{{$user->procent_seo}}</td>
                                                 <td class="">{{$user->sum_zp}}</td>
+                                                <td class="">
+                                                    @if(!empty($user->value_serialize))
+                                                        <ul style="    margin: 0px 0px 0px -43px;min-width: 200px;">
+                                                            @foreach(unserialize($user->value_serialize) as $val)
+                                                                <li style="border-bottom: 1px solid grey;list-style: none">{{$val}}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    @endif
+                                                </td>
                                             </tr>
                                             @endforeach
                                         </tbody>

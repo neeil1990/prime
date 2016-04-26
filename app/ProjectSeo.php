@@ -23,6 +23,7 @@ class ProjectSeo extends Model
         'dogovor_number',
         'contact_person',
         'e_mail',
+        'value_serialize',
     ];
 
 
@@ -37,11 +38,7 @@ class ProjectSeo extends Model
 
     public function UpdateProjectSeoUser($data){
 
-        if(!empty($data['procent_seo_ind'])){
-            $procent_seo = $data['procent_seo_ind'];
-        }else{
-            $procent_seo = $data['procent_seo'];
-        }
+
         \DB::table('project_seos')->where('id', $data['id'])
             ->update(array(
                 'name_project' => $data['name_project'],
@@ -49,7 +46,7 @@ class ProjectSeo extends Model
                 'osvoeno' => $data['osvoeno'],
                 'osvoeno_procent' => $data['osvoeno_procent'],
                 'id_glavn_user' => $data['id_glavn_user'],
-                'procent_seo' => $procent_seo,
+                'procent_seo' => $data['procent_seo'],
                 'summa_zp' => $data['summa_zp'],
                 'startpoint' => $data['startpoint'],
                 'lp' => $data['lp'],
@@ -59,7 +56,8 @@ class ProjectSeo extends Model
                 'region' => $data['region'],
                 'dogovor_number' => $data['dogovor_number'],
                 'contact_person' => $data['contact_person'],
-                'e_mail' => $data['e_mail']
+                'e_mail' => $data['e_mail'],
+                'value_serialize' => serialize($data['value_serialize'])
             ));
 
         $create_data = $data;

@@ -564,7 +564,7 @@ class HomeController extends Controller
         $arrBudget['budget'] = array_sum($arrBudget['budget']);
         $arrBudget['osvoeno'] = array_sum($arrBudget['osvoeno']);
 
-        //dd($arrBudget);
+       // dd($users);
 
         $name = \DB::table('sorts')
             ->leftJoin('users','sorts.id_user','=','users.id')
@@ -582,19 +582,13 @@ class HomeController extends Controller
 
     public function createProjectSeo(Request $request){
 
-        if(!empty($request['procent_seo_ind'])){
-            $procent_seo = $request['procent_seo_ind'];
-        }else{
-            $procent_seo = $request['procent_seo'];
-        }
-
         $add = ProjectSeo::create([
             'name_project' => $request['name_project'],
             'budget' => $request['budget'],
             'osvoeno' => $request['osvoeno'],
             'osvoeno_procent' => $request['osvoeno_procent'],
             'id_glavn_user' => $request['id_glavn_user'],
-            'procent_seo' => $procent_seo,
+            'procent_seo' => $request['procent_seo'],
             'summa_zp' => $request['summa_zp'],
             'startpoint' => $request['startpoint'],
             'lp' => $request['lp'],
@@ -604,7 +598,8 @@ class HomeController extends Controller
             'region' => $request['region'],
             'dogovor_number' => $request['dogovor_number'],
             'contact_person' => $request['contact_person'],
-            'e_mail' => $request['e_mail']
+            'e_mail' => $request['e_mail'],
+            'value_serialize' => serialize($request['value_serialize'])
         ]);
 
         foreach($request['id_user'] as $id_user){
@@ -712,12 +707,6 @@ class HomeController extends Controller
 
     public function createProjectContext(Request $request){
 
-        if(!empty($request['procent_seo_ind'])){
-            $procent_seo = $request['procent_seo_ind'];
-        }else{
-            $procent_seo = $request['procent_seo'];
-        }
-
         $add = ProjectContext::create([
             'id_glavn_user' => $request['id_glavn_user'],
             'name_project' => $request['name_project'],
@@ -725,7 +714,8 @@ class HomeController extends Controller
             'go_advords' => $request['go_advords'],
             'ost_bslsnse_ya' => $request['ost_bslsnse_ya'],
             'ost_bslsnse_go' => $request['ost_bslsnse_go'],
-            'procent_seo' => $procent_seo
+            'procent_seo' => $request['procent_seo'],
+            'value_serialize' => serialize($request['value_serialize'])
         ]);
 
         foreach($request['id_user'] as $id_user){

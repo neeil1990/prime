@@ -10,10 +10,10 @@
                     <div class="panel-heading">Добавить группу</div>
                     <div class="panel-body">
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/create-project-seo') }}">
-                            {!! csrf_field() !!}
 
+                            {!! csrf_field() !!}
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Имя проекта</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Имя проекта</label>
 
                                 <div class="col-md-6">
                                         <input type="text" class="form-control" name="name_project" value="">
@@ -21,7 +21,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Бюджет</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Бюджет</label>
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="budget" value="">
@@ -30,7 +30,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Освоено</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Освоено</label>
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="osvoeno" value="">
@@ -39,7 +39,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Освоено %</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Освоено %</label>
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="osvoeno_procent" value="">
@@ -48,7 +48,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Специалист</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Специалист</label>
 
                                 <div class="col-md-6">
                                     @foreach($users as $user)
@@ -60,7 +60,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('id_user_gl') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Назначить главным</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Назначить главным</label>
 
                                 <div class="col-md-6">
                                     <select name="id_glavn_user" id="id_glavn_user">
@@ -73,7 +73,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('id_user_gl') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">% от проекта</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> % от проекта</label>
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="procent_seo" value="">
@@ -82,7 +82,7 @@
 
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Сумма на з.п.</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Сумма на з.п.</label>
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="summa_zp" value="">
@@ -91,7 +91,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Стартпоинт</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Стартпоинт</label>
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="startpoint" value="">
@@ -100,7 +100,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">LP</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> LP</label>
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="lp" value="">
@@ -109,7 +109,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Старт</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Старт</label>
 
                                 <div class="col-md-6">
                                     <input type="text" name="start" class="form-control pull-right" id="datepicker">
@@ -118,7 +118,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Конец</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Конец</label>
 
                                 <div class="col-md-6">
                                     <input type="text" name="end" class="form-control pull-right" id="datepicker2">
@@ -127,7 +127,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Цель</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Цель</label>
 
                                 <div class="col-md-6">
                                     <input type="text" name="aim" class="form-control">
@@ -136,7 +136,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Регион</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Регион</label>
 
                                 <div class="col-md-6">
                                     <input type="text" name="region" class="form-control">
@@ -145,7 +145,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Номер договора</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Номер договора</label>
 
                                 <div class="col-md-6">
                                     <input type="text" name="dogovor_number" class="form-control">
@@ -154,7 +154,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Контактное лицо</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Контактное лицо</label>
 
                                 <div class="col-md-6">
                                     <input type="text" name="contact_person" class="form-control">
@@ -163,7 +163,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">e-mail</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> e-mail</label>
 
                                 <div class="col-md-6">
                                     <input type="text" name="e_mail" class="form-control">
@@ -173,8 +173,16 @@
 
 
 
+                            <div class="form-group one">
+
+                            </div>
+
+
+
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
+                                    <a href="#" id="add_input">Добавить поле</a> |
+                                    <a href="#" id="remove">Удалить поле</a><br><br>
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fa fa-btn fa-user"></i> Добавить
                                     </button>
@@ -182,6 +190,7 @@
                                 </div>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -190,6 +199,42 @@
         <script>
 
             $(function () {
+
+                $(".form-horizontal").sortable({
+                    items:             ".form-group",
+                    tolerance:         "pointer",
+                    scrollSensitivity: 40,
+                    opacity:           0.7,
+                    forcePlaceholderSize: true,
+                    axis: 'y',
+
+                    update:function(event, ui)
+                    {
+
+                    }
+
+                });
+
+
+                var i = $('input').size() + 1;
+
+                $('#add_input').click(function() {
+                    $('<label class="col-md-4 control-label field2"></label><div class="col-md-6 field" style="margin-bottom: 10px;"><input type="text" name="value_serialize[]" class="form-control"></div>').fadeIn('slow').appendTo('.one');
+                    return false;
+                });
+
+                $('#remove').click(function() {
+                    if(i > 1) {
+                        $('.field:last').remove();
+                        $('.field2:last').remove();
+                        i--;
+                    }
+                    return false;
+                });
+
+
+
+
 
                 $('#id_glavn_user').change(function(){
                     var specialnost = $(this).val();
