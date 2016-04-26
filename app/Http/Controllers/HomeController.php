@@ -136,7 +136,12 @@ class HomeController extends Controller
 
        $user_groups = \DB::table('groups')->orderBy('positions')->get();
        $users = $user->getUser(Auth::user()->id);
-        return view('page.personal',['users' => $users,'user_groups' => $user_groups, 'users_now' => $this->user_now(),'admin' => $this->admin()]);
+        $arrUser = array();
+        foreach($users as $u){
+            $arrUser[] = $u->itog;
+        }
+
+        return view('page.personal',['itog_sum' => array_sum($arrUser), 'count_user' => count($users), 'users' => $users,'user_groups' => $user_groups, 'users_now' => $this->user_now(),'admin' => $this->admin()]);
     }
 
 

@@ -76,6 +76,13 @@
                     @endif
             </div>
 
+        <div class="row">
+            <div class="col-md-9">
+                Активных сотрудников: {{$count_user}} |
+                Сумма на З.П.: {{$itog_sum}}
+            </div>
+        </div>
+
         @if($admin == 1)
 
         <div class="row">
