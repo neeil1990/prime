@@ -72,7 +72,39 @@
                                                 <td class=""><a id="lp" href="{{$user->lp}}"> >>>> </a></td>
                                                 <td class="">{{$user->start}}</td>
                                                 <td class="">{{$user->end}}</td>
-                                                <td class="" style="@if($user->interval_date < 30) background-color: limegreen; @endif">{{$user->interval_date}}</td>
+                                                <td class="" style="
+                                                @if($user->interval_date < 90)
+                                                        background-color: #7CC045;
+                                                @endif
+                                                @if($user->interval_date < 80)
+                                                        background-color: #C8DA2A;
+                                                @endif
+                                                @if($user->interval_date < 70)
+                                                        background-color: #F37F1F;
+                                                @endif
+                                                @if($user->interval_date < 60)
+                                                        background-color: #F4711F;
+                                                @endif
+                                                @if($user->interval_date < 50)
+                                                        background-color: #F16523;
+                                                @endif
+                                                @if($user->interval_date < 40)
+                                                        background-color: #EF5924;
+                                                @endif
+                                                @if($user->interval_date < 30)
+                                                        background-color: #F04723;
+                                                @endif
+                                                @if($user->interval_date < 20)
+                                                        background-color: #EB3625;
+                                                @endif
+                                                @if($user->interval_date < 10)
+                                                        background-color: #ED1B24;
+                                                @endif
+                                                @if($user->interval_date == 0)
+                                                        background-color: #F5F5F5;
+                                                @endif
+                                                        ">{{$user->interval_date}}
+                                                </td>
                                                 <td class="">{{$user->aim}}</td>
                                                 <td class="">{{$user->region}}</td>
                                                 <td class="">{{$user->dogovor_number}}</td>
