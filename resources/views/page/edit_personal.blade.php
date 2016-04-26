@@ -129,10 +129,9 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('sum_many_last') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Сумма на зп</label>
 
                                 <div class="col-md-6">
-                                    <input type="text" class="form-control" name="sum_many_last" value="{{ $user->sum_many_last }}">
+                                    <input type="hidden" class="form-control" name="sum_many_last" value="{{ $user->sum_many_last }}">
 
                                     @if ($errors->has('sum_many_last'))
                                         <span class="help-block">
