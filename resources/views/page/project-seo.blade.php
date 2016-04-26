@@ -134,6 +134,13 @@
                 </div>
             @endif
         </div>
+        <div class="row">
+            <div class="col-md-9">
+                Количество активных проектов: {{$count_seo_prodject}} |
+                Бюджет активных проектов: {{$budget_seo_osvoeno['budget']}} |
+                Освоенный бюджет: {{$budget_seo_osvoeno['osvoeno']}}
+            </div>
+        </div>
 
     </section>
 

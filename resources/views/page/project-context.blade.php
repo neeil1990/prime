@@ -83,6 +83,12 @@
                 </div>
             @endif
         </div>
+        <div class="row">
+            <div class="col-md-9">
+                Количество активных проектов: {{$count_context_project}} |
+                Бюджет активных проектов: {{$budget_context_project}}
+            </div>
+        </div>
 
     </section>
 

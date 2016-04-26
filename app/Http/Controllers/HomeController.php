@@ -545,13 +545,21 @@ class HomeController extends Controller
                 ->orderBy('project_seos.positions')
                 ->get();
         }
+        $arrBudget = array();
         foreach($users as $key=>$u){
             $difference = intval(abs(
                 strtotime($u->start) - strtotime($u->end)
             ));
-
             $users[$key]->interval_date = $difference / (3600 * 24);
+
+            $arrBudget['budget'][] = $u->budget;
+            $arrBudget['osvoeno'][] = $u->osvoeno;
+
         }
+        $arrBudget['budget'] = array_sum($arrBudget['budget']);
+        $arrBudget['osvoeno'] = array_sum($arrBudget['osvoeno']);
+
+        //dd($arrBudget);
 
         $name = \DB::table('sorts')
             ->leftJoin('users','sorts.id_user','=','users.id')
@@ -559,7 +567,7 @@ class HomeController extends Controller
             ->where('sorts.id_type','4')->get();
 
 
-        return view('page.project-seo',['users' => $users,'name' => $name,'users_now' => $this->user_now(),'admin' => $this->admin()]);
+        return view('page.project-seo',['budget_seo_osvoeno' => $arrBudget, 'count_seo_prodject' => count($users),'users' => $users,'name' => $name,'users_now' => $this->user_now(),'admin' => $this->admin()]);
     }
 
     public function projectSeoCreateForm(){
@@ -672,17 +680,24 @@ class HomeController extends Controller
                 ->orderBy('project_contexts.positions')
                 ->get();
         }
+
+        $arrBuget = array();
         foreach($users as $key => $u){
             $sum = $u->ya_direct+$u->go_advords;
             $users[$key]->sum_zp = $sum*$u->procent_seo/100;
+
+            $arrBuget[] = $u->ya_direct;
+            $arrBuget[] = $u->go_advords;
+
         }
         $name = \DB::table('sorts')
             ->leftJoin('users','sorts.id_user','=','users.id')
             ->leftJoin('project_contexts','sorts.id_table','=','project_contexts.id')
             ->where('sorts.id_type','5')->get();
 
+        //dd();
 
-        return view('page.project-context',['users' => $users,'name' => $name,'users_now' => $this->user_now(),'admin' => $this->admin()]);
+        return view('page.project-context',['budget_context_project' => array_sum($arrBuget), 'count_context_project' => count($users), 'users' => $users,'name' => $name,'users_now' => $this->user_now(),'admin' => $this->admin()]);
     }
 
     public function projectContextCreateForm(){
