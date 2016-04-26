@@ -185,13 +185,15 @@
 
                             <div class="form-group one">
 
-                                @foreach(unserialize($users->value_serialize) as $val)
+                                @if(!empty($users->value_serialize))
+                                @foreach($users->value_serialize as $val)
                                     <label class="col-md-4 control-label field2"></label>
 
                                     <div class="col-md-6 field" style="margin-bottom: 10px;">
                                         <input type="text" name="value_serialize[]" value="{{$val}}" class="form-control">
                                     </div>
                                     @endforeach
+                                    @endif
 
                             </div>
 

@@ -116,7 +116,7 @@
                                                         <td class="">
                                                             @if(!empty($user->value_serialize))
                                                                 <ul style="    margin: 0px 0px 0px -43px;min-width: 200px;">
-                                                                @foreach(unserialize($user->value_serialize) as $val)
+                                                                @foreach($user->value_serialize as $val)
                                                                     <li style="border-bottom: 1px solid grey;list-style: none">{{$val}}</li>
                                                                 @endforeach
                                                                 </ul>

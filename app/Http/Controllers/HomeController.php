@@ -557,6 +557,8 @@ class HomeController extends Controller
             ));
             $users[$key]->interval_date = $difference / (3600 * 24);
 
+            $users[$key]->value_serialize = unserialize($u->value_serialize);
+
             $arrBudget['budget'][] = $u->budget;
             $arrBudget['osvoeno'][] = $u->osvoeno;
 
