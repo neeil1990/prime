@@ -595,8 +595,18 @@ class HomeController extends Controller
             $arrBudget['osvoeno'][] = $u->osvoeno;
 
         }
-        $arrBudget['budget'] = array_sum($arrBudget['budget']);
-        $arrBudget['osvoeno'] = array_sum($arrBudget['osvoeno']);
+        if(!empty($arrBudget['budget'])){
+            $arrBudget['budget'] = array_sum($arrBudget['budget']);
+        }else{
+            $arrBudget['budget'] = 0;
+        }
+        if(!empty($arrBudget['osvoeno'])){
+            $arrBudget['osvoeno'] = array_sum($arrBudget['osvoeno']);
+        }else{
+            $arrBudget['osvoeno'] = 0;
+        }
+
+
 
        // dd($users);
 
