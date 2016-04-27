@@ -17,6 +17,11 @@
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="name_project" value="">
+                                    @if ($errors->first('name_project'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('name_project') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
 
@@ -65,6 +70,11 @@
                                             <input type="checkbox" name="id_user[]" value="{{$user->id}}"> {{$user->name}}
                                         </label><br>
                                     @endforeach
+                                        @if ($errors->first('id_user'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('id_user') }}</strong>
+                                    </span>
+                                        @endif
                                 </div>
                             </div>
 

@@ -38,6 +38,12 @@ class ProjectSeo extends Model
 
     public function UpdateProjectSeoUser($data){
 
+        if(empty($data['value_serialize'])){
+            $value_serialize = '';
+        }else{
+            $value_serialize = serialize($data['value_serialize']);
+        }
+
 
         \DB::table('project_seos')->where('id', $data['id'])
             ->update(array(
@@ -57,7 +63,7 @@ class ProjectSeo extends Model
                 'dogovor_number' => $data['dogovor_number'],
                 'contact_person' => $data['contact_person'],
                 'e_mail' => $data['e_mail'],
-                'value_serialize' => serialize($data['value_serialize'])
+                'value_serialize' => $value_serialize
             ));
 
         $create_data = $data;

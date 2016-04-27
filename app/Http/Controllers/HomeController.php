@@ -233,6 +233,12 @@ class HomeController extends Controller
     }
 
     public function updatePassSeo(Request $request,PassSeo $passContext){
+
+        $this->validate($request,[
+            'name_project' => 'required',
+            'id_user' => 'required'
+        ]);
+
         $users_pass_context = $request->all();
         $passContext->UpdatePassSeoUser($users_pass_context);
         return redirect()->intended('pass-seo');
@@ -273,6 +279,10 @@ class HomeController extends Controller
 
     public function createPassSeo(Request $request){
 
+        $this->validate($request,[
+            'name_project' => 'required',
+            'id_user' => 'required'
+        ]);
 
       $add = PassSeo::create([
             'name_project' => $request['name_project'],
@@ -369,6 +379,11 @@ class HomeController extends Controller
 
     public function createPassContext(Request $request){
 
+        $this->validate($request,[
+            'name_project' => 'required',
+            'id_user' => 'required'
+        ]);
+
        $add = PassContext::create([
             'name_project' => $request['name_project'],
             'id_glavn_user' => $request['id_glavn_user'],
@@ -412,7 +427,8 @@ class HomeController extends Controller
             ->where('sorts.id_table',$pass_context->id)
             ->where('sorts.id_type','2')
             ->get();
-        // dd($user);
+
+
         return view('page.edit_pass_context',[
             'user' => $user,
             'users' => $pass_context,
@@ -422,6 +438,12 @@ class HomeController extends Controller
     }
 
     public function updatePassContext(Request $request,PassContext $passContext){
+
+        $this->validate($request,[
+            'name_project' => 'required',
+            'id_user' => 'required'
+        ]);
+
         $users_pass_context = $request->all();
         $passContext->UpdatePassContextUser($users_pass_context);
         return redirect()->intended('pass-context');
@@ -464,6 +486,11 @@ class HomeController extends Controller
     }
 
     public function createPassDev(Request $request){
+
+        $this->validate($request,[
+        'name_project' => 'required',
+        'id_user' => 'required'
+        ]);
 
         $add = PassDev::create([
             'name_project' => $request['name_project'],
@@ -509,6 +536,11 @@ class HomeController extends Controller
     }
 
     public function updatePassDev(Request $request, PassDev $passDev){
+
+        $this->validate($request,[
+            'name_project' => 'required',
+            'id_user' => 'required'
+        ]);
 
         $users_pass_context = $request->all();
         $passDev->UpdatePassDevUser($users_pass_context);
@@ -584,6 +616,13 @@ class HomeController extends Controller
 
     public function createProjectSeo(Request $request){
 
+        $this->validate($request, [
+            'name_project' => 'required',
+            'id_glavn_user' => 'required',
+            'id_user' => 'required',
+        ]);
+
+
         $add = ProjectSeo::create([
             'name_project' => $request['name_project'],
             'budget' => $request['budget'],
@@ -647,7 +686,9 @@ class HomeController extends Controller
             ->where('sorts.id_table',$project_seos->id)
             ->where('sorts.id_type','4')
             ->get();
-        // dd($user);
+
+            $project_seos->value_serialize = unserialize($project_seos->value_serialize);
+
 
         return view('page.edit_prodject_seo_form',[
             'users' => $project_seos,
@@ -658,6 +699,12 @@ class HomeController extends Controller
     }
 
     public function updateProjectSeo(Request $request,ProjectSeo $projectSeo){
+        $this->validate($request, [
+            'name_project' => 'required',
+            'id_glavn_user' => 'required',
+            'id_user' => 'required',
+        ]);
+
         $users_pass_context = $request->all();
         $projectSeo->UpdateProjectSeoUser($users_pass_context);
         return redirect()->intended('project-seo');
@@ -691,6 +738,7 @@ class HomeController extends Controller
             $arrBuget[] = $u->ya_direct;
             $arrBuget[] = $u->go_advords;
 
+            $users[$key]->value_serialize = unserialize($u->value_serialize);
         }
         $name = \DB::table('sorts')
             ->leftJoin('users','sorts.id_user','=','users.id')
@@ -708,6 +756,12 @@ class HomeController extends Controller
     }
 
     public function createProjectContext(Request $request){
+
+        $this->validate($request, [
+            'name_project' => 'required',
+            'id_user' => 'required',
+        ]);
+
 
         $add = ProjectContext::create([
             'id_glavn_user' => $request['id_glavn_user'],
@@ -763,6 +817,8 @@ class HomeController extends Controller
             ->get();
         // dd($user);
 
+        $project_contexts->value_serialize = unserialize($project_contexts->value_serialize);
+
         return view('page.edit_prodject_context_form',[
             'users' => $project_contexts,
             'user_all' => $user_all,
@@ -773,6 +829,11 @@ class HomeController extends Controller
     }
 
     public function updateProjectContext(Request $request, ProjectContext $projectContext){
+        $this->validate($request, [
+            'name_project' => 'required',
+            'id_user' => 'required',
+        ]);
+
         $users_pass_context = $request->all();
         $projectContext->UpdateProjectContextUser($users_pass_context);
         return redirect()->intended('project-context');

@@ -28,6 +28,12 @@ class ProjectContext extends Model
 
     public function UpdateProjectContextUser($data){
 
+        if(empty($data['value_serialize'])){
+            $value_serialize = '';
+        }else{
+            $value_serialize = serialize($data['value_serialize']);
+        }
+
 
 
         \DB::table('project_contexts')->where('id', $data['id'])
@@ -39,7 +45,7 @@ class ProjectContext extends Model
                 'ost_bslsnse_go' => $data['ost_bslsnse_go'],
                 'id_glavn_user' => $data['id_glavn_user'],
                 'procent_seo' => $data['procent_seo'],
-                'value_serialize' => serialize($data['value_serialize'])
+                'value_serialize' => $value_serialize
             ));
 
         $create_data = $data;

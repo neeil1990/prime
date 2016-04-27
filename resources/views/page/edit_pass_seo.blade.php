@@ -40,9 +40,9 @@
                                             <input type="checkbox" name="id_user[]" value="{{$us->id}}" @foreach($user as $u) @if($us->id == $u->id_user) checked @endif @endforeach> {{$us->name}}
                                         </label><br>
                                     @endforeach
-                                    @if ($errors->has('specialist'))
+                                    @if ($errors->has('id_user'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('specialist') }}</strong>
+                                        <strong>{{ $errors->first('id_user') }}</strong>
                                     </span>
                                     @endif
                                 </div>

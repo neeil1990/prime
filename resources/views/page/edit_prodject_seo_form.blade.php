@@ -22,6 +22,11 @@
                                     @foreach($user as $u)
                                         <input type="hidden" class="form-control" name="id_sort[]" value="{{$u->id}}">
                                     @endforeach
+                                    @if ($errors->first('name_project'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('name_project') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
 
@@ -62,6 +67,11 @@
                                             <input type="checkbox" name="id_user[]" value="{{$us->id}}" @foreach($user as $u) @if($us->id == $u->id_user) checked @endif @endforeach> {{$us->name}}
                                         </label><br>
                                     @endforeach
+                                        @if ($errors->first('id_user'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('id_user') }}</strong>
+                                    </span>
+                                        @endif
 
                                 </div>
                             </div>
@@ -82,6 +92,11 @@
                                             <option value="{{$us->id}}">{{$us->name}}</option>
                                         @endforeach
                                     </select>
+                                    @if ($errors->first('id_glavn_user'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('id_glavn_user') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
 

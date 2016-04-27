@@ -17,6 +17,11 @@
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="name_project" value="{{$users->name_project}}">
+                                    @if ($errors->first('name_project'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('name_project') }}</strong>
+                                    </span>
+                                    @endif
                                     <input type="hidden" class="form-control" name="id" value="{{$users->id}}">
 
                                     @foreach($user as $u)
@@ -70,6 +75,11 @@
                                             <input type="checkbox" name="id_user[]" value="{{$us->id}}" @foreach($user as $u) @if($us->id == $u->id_user) checked @endif @endforeach> {{$us->name}}
                                         </label><br>
                                     @endforeach
+                                        @if ($errors->first('id_user'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('id_user') }}</strong>
+                                    </span>
+                                        @endif
                                 </div>
                             </div>
 
@@ -110,14 +120,16 @@
 
                             <div class="form-group one">
 
-                                @foreach(unserialize($users->value_serialize) as $val)
+
+                                @if(!empty($users->value_serialize))
+                                    @foreach($users->value_serialize as $val)
                                     <label class="col-md-4 control-label field2"></label>
 
                                     <div class="col-md-6 field" style="margin-bottom: 10px;">
                                         <input type="text" name="value_serialize[]" value="{{$val}}" class="form-control">
                                     </div>
                                 @endforeach
-
+                                    @endif
                             </div>
 
 
