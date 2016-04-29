@@ -1,7 +1,7 @@
 <?php
 $CFG = array (
   'charsets' => 'cp1251 utf8 latin1',
-  'lang' => 'auto',
+  'lang' => 'ru',
   'time_web' => '600',
   'time_cron' => '600',
   'backup_path' => 'backup/',
