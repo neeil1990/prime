@@ -53,8 +53,19 @@
                                                     <input type="checkbox" class="check" value="{{$user->id}}">
                                                     <input type="hidden" class="positions" name="positions[]" value="{{$user->id}}">
                                                 </td>
-                                                <td class="">{{$user->id}}</td>
-                                                <td class="">{{$user->name_project}}</td>
+                                                <td class=""><a class="favicon_view{{$user->id}}"></a></td>
+                                                <td class="favicon_url{{$user->id}}">{{$user->name_project}}</td>
+                                                <script>
+                                                    var url_fav = '.favicon_url'+'{{$user->id}}';
+                                                    var view_fav = '.favicon_view'+'{{$user->id}}';
+
+                                                    $(view_fav).css({
+                                                        background: "url(//favicon.yandex.net/favicon/" + $(url_fav).text() +
+                                                        ") center no-repeat",
+                                                        "padding": "10px 15px 12px 15px"
+
+                                                    });
+                                                </script>
                                                 <td class="">{{$user->budget}}</td>
                                                 <td class="">{{$user->osvoeno}}</td>
                                                 <td class="">{{$user->osvoeno_procent}}</td>

@@ -182,6 +182,12 @@
                                 {"attr1":".nav_mouseover2","attr2":".menu2"}
                         );
 
+                        $('.nav_mouseover1').click(function(){
+                            window.location.href = '/project-seo';
+                        });
+                        $('.nav_mouseover2').click(function(){
+                            window.location.href = '/project-context';
+                        });
 
                         $.each(a,function(data,li){
 
@@ -218,6 +224,12 @@
                             }
 
                             });
+
+
+
+
+
+
                     });
 
                 </script>
