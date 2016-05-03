@@ -51,7 +51,9 @@
                                 <div class="col-md-6">
                                     <select name="level" class="form-control" id="level">
                                         @foreach($groups as $group)
+                                            @if(!empty($group->level))
                                             <option value="{{$group->level}}">{{$group->level}}</option>
+                                            @endif
                                         @endforeach
                                     </select>
 

@@ -32,12 +32,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="project-seo.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="project-seo.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/page/project-seo.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2877698">
+            <state vertical-scroll-proportion="-8.275862">
               <caret line="40" column="192" selection-start-line="40" selection-start-column="192" selection-end-line="40" selection-end-column="192" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="create_personal.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/page/create_personal.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.46402878">
+              <caret line="55" column="50" selection-start-line="55" selection-start-column="50" selection-end-line="55" selection-end-column="50" />
+              <folding>
+                <marker date="1462277825682" expanded="true" signature="8871:10092" placeholder="..." />
+                <marker date="1462277825682" expanded="true" signature="8882:10091" placeholder="..." />
+                <marker date="1462277825682" expanded="true" signature="8950:9621" placeholder="..." />
+                <marker date="1462277825682" expanded="true" signature="9283:9527" placeholder="..." />
+                <marker date="1462277825682" expanded="true" signature="9689:10055" placeholder="..." />
+                <marker date="1462277825682" expanded="true" signature="9700:10054" placeholder="..." />
+                <marker date="1462277825682" expanded="true" signature="11559:13179" placeholder="..." />
+                <marker date="1462277825682" expanded="true" signature="11570:13178" placeholder="..." />
+                <marker date="1462277825682" expanded="true" signature="11605:12366" placeholder="..." />
+                <marker date="1462277825682" expanded="true" signature="11616:12348" placeholder="..." />
+                <marker date="1462277825682" expanded="true" signature="12139:12330" placeholder="..." />
+                <marker date="1462277825682" expanded="true" signature="12401:13164" placeholder="..." />
+                <marker date="1462277825682" expanded="true" signature="12412:13146" placeholder="..." />
+                <marker date="1462277825682" expanded="true" signature="12937:13128" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -132,7 +157,6 @@
         <option value="$PROJECT_DIR$/.htaccess" />
         <option value="$PROJECT_DIR$/resources/views/auth/emails/password.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/edit_personal.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/page/create_personal.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/personal.blade.php" />
         <option value="$PROJECT_DIR$/database/migrations/2016_04_22_122403_create_project_contexts_table.php" />
         <option value="$PROJECT_DIR$/resources/views/nav/left-menu.blade.php" />
@@ -157,6 +181,7 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
         <option value="$PROJECT_DIR$/resources/views/page/edit_prodject_seo_form.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/project-seo.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/page/create_personal.blade.php" />
       </list>
     </option>
   </component>
@@ -411,7 +436,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="1000" extended-state="7" />
+    <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -540,13 +565,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.092699885">
           <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/page/create_personal.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33093524">
-          <caret line="123" column="55" selection-start-line="123" selection-start-column="55" selection-end-line="123" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -819,9 +837,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/page/project-seo.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2877698">
+        <state vertical-scroll-proportion="-8.275862">
           <caret line="40" column="192" selection-start-line="40" selection-start-column="192" selection-end-line="40" selection-end-column="192" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/page/create_personal.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46402878">
+          <caret line="55" column="50" selection-start-line="55" selection-start-column="50" selection-end-line="55" selection-end-column="50" />
+          <folding>
+            <marker date="1462277825682" expanded="true" signature="8871:10092" placeholder="..." />
+            <marker date="1462277825682" expanded="true" signature="8882:10091" placeholder="..." />
+            <marker date="1462277825682" expanded="true" signature="8950:9621" placeholder="..." />
+            <marker date="1462277825682" expanded="true" signature="9283:9527" placeholder="..." />
+            <marker date="1462277825682" expanded="true" signature="9689:10055" placeholder="..." />
+            <marker date="1462277825682" expanded="true" signature="9700:10054" placeholder="..." />
+            <marker date="1462277825682" expanded="true" signature="11559:13179" placeholder="..." />
+            <marker date="1462277825682" expanded="true" signature="11570:13178" placeholder="..." />
+            <marker date="1462277825682" expanded="true" signature="11605:12366" placeholder="..." />
+            <marker date="1462277825682" expanded="true" signature="11616:12348" placeholder="..." />
+            <marker date="1462277825682" expanded="true" signature="12139:12330" placeholder="..." />
+            <marker date="1462277825682" expanded="true" signature="12401:13164" placeholder="..." />
+            <marker date="1462277825682" expanded="true" signature="12412:13146" placeholder="..." />
+            <marker date="1462277825682" expanded="true" signature="12937:13128" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
