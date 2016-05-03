@@ -26,9 +26,9 @@
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Уровень</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Специалист</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">% от проекта SEO</th>
-
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Оклад</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">% от проекта контекста</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Оклад</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Сумма на зп</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Итог</th>
                                         </thead>
                                         <tbody>
@@ -46,9 +46,9 @@
                                             <td class="">{{$user->level}}</td>
                                             <td class="">{{$user->personal_specialism}}</td>
                                             <td class="">{{$user->seo_procent}}</td>
-
-                                            <td class="">{{$user->contecst_procent}}</td>
                                             <td class="">{{$user->sum_many_first}}</td>
+                                            <td class="">{{$user->contecst_procent}}</td>
+                                            <td class="">{{$user->sum_many_last}}</td>
                                             <td class="">{{$user->itog}}</td>
                                         </tr>
                                         @endforeach
