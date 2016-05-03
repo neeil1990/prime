@@ -53,14 +53,9 @@
 
         $(function(){
 
-
-
-
             $('.copytext').click(function(){
                 $(this).select();
             });
-
-
         });
     </script>
 
@@ -187,6 +182,7 @@
                                 {"attr1":".nav_mouseover2","attr2":".menu2"}
                         );
 
+
                         $.each(a,function(data,li){
 
                             $(li.attr1).mouseover(function(){
@@ -195,27 +191,35 @@
                                 $(li.attr2).css('display','block');
                             });
 
-                            $(li.attr2).mouseover(function(){
-                                $(this).addClass('active');
-                                $(li.attr2).addClass('menu-open');
-                                $(li.attr2).css('display','block');
+
+                                $(li.attr2).mouseover(function () {
+                                    $(this).addClass('active');
+                                    $(li.attr2).addClass('menu-open');
+                                    $(li.attr2).css('display', 'block');
+                                });
+
+
+                            if(url != '/project-seo' && url != '/pass-seo' && url != '/pass-dev'){
+                                $(li.attr2).mouseleave(function () {
+                                    $(li.attr1).removeClass('active');
+                                    $(li.attr2).removeClass('menu-open');
+                                    $(li.attr2).removeAttr('style');
+                                });
+                            }
+
+
+                            if(url != '/pass-context' && url != '/project-context') {
+                                $(li.attr1).mouseleave(function () {
+                                    $(li.attr1).removeClass('active');
+                                    $(li.attr2).removeClass('menu-open');
+                                    $(li.attr2).removeAttr('style');
+                                });
+
+                            }
+
                             });
-
-                            $(li.attr2).mouseleave(function(){
-                                $(li.attr1).removeClass('active');
-                                $(li.attr2).removeClass('menu-open');
-                                $(li.attr2).removeAttr('style');
-                            });
-
-                            $(li.attr1).mouseleave(function(){
-                                $(li.attr1).removeClass('active');
-                                $(li.attr2).removeClass('menu-open');
-                                $(li.attr2).removeAttr('style');
-                            });
-
-                        });
-
                     });
+
                 </script>
             <h1 class="title_dashboard"></h1>
             <ol class="breadcrumb">

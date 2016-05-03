@@ -649,6 +649,7 @@ class HomeController extends Controller
             'region' => $request['region'],
             'dogovor_number' => $request['dogovor_number'],
             'contact_person' => $request['contact_person'],
+            'phone_person' => $request['phone_person'],
             'e_mail' => $request['e_mail'],
             'value_serialize' => serialize($request['value_serialize'])
         ]);

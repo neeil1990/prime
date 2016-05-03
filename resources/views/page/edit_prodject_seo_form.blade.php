@@ -190,6 +190,15 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="col-md-4 control-label">Номер телефона</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" name="phone_person" class="form-control" value="{{$users->phone_person}}">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-md-4 control-label">e-mail</label>
 
                                 <div class="col-md-6">

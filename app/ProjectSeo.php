@@ -22,6 +22,7 @@ class ProjectSeo extends Model
         'region',
         'dogovor_number',
         'contact_person',
+        'phone_person',
         'e_mail',
         'value_serialize',
     ];
@@ -62,6 +63,7 @@ class ProjectSeo extends Model
                 'region' => $data['region'],
                 'dogovor_number' => $data['dogovor_number'],
                 'contact_person' => $data['contact_person'],
+                'phone_person' => $data['phone_person'],
                 'e_mail' => $data['e_mail'],
                 'value_serialize' => $value_serialize
             ));
