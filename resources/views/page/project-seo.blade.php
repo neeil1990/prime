@@ -21,7 +21,7 @@
                                         <tr role="row">
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">*</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">№</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Имя проекта</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Бюджет</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Освоено</th>
@@ -53,18 +53,15 @@
                                                     <input type="checkbox" class="check" value="{{$user->id}}">
                                                     <input type="hidden" class="positions" name="positions[]" value="{{$user->id}}">
                                                 </td>
-                                                <td class=""><a class="favicon_view{{$user->id}}"></a></td>
+                                                <td class="favicon_view{{$user->id}}">
+
+                                                </td>
                                                 <td class="favicon_url{{$user->id}}">{{$user->name_project}}</td>
                                                 <script>
                                                     var url_fav = '.favicon_url'+'{{$user->id}}';
                                                     var view_fav = '.favicon_view'+'{{$user->id}}';
-
-                                                    $(view_fav).css({
-                                                        background: "url(//favicon.yandex.net/favicon/" + $(url_fav).text() +
-                                                        ") center no-repeat",
-                                                        "padding": "10px 15px 12px 15px"
-
-                                                    });
+                                                    var url = 'http://' + $(url_fav).text() + '/favicon.ico';
+                                                    $(view_fav).html('<img src='+ url +' style="max-width:30px">');
                                                 </script>
                                                 <td class="">{{$user->budget}}</td>
                                                 <td class="">{{$user->osvoeno}}</td>
@@ -172,6 +169,7 @@
 
     <script>
         $(function(){
+
             $("tbody").sortable({
                 items:             "tr",
                 tolerance:         "pointer",
