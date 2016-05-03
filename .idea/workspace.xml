@@ -44,11 +44,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="create_personal.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="create_personal.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/page/create_personal.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4352518">
-              <caret line="233" column="25" selection-start-line="233" selection-start-column="25" selection-end-line="233" selection-end-column="25" />
+            <state vertical-scroll-proportion="-11.793103">
+              <caret line="93" column="75" selection-start-line="93" selection-start-column="70" selection-end-line="93" selection-end-column="75" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="personal.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/page/personal.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.8884892">
+              <caret line="50" column="87" selection-start-line="50" selection-start-column="87" selection-end-line="50" selection-end-column="87" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="edit_personal.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/page/edit_personal.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-53.793102">
+              <caret line="102" column="75" selection-start-line="102" selection-start-column="70" selection-end-line="102" selection-end-column="75" />
               <folding />
             </state>
           </provider>
@@ -83,7 +103,6 @@
         <option value="$PROJECT_DIR$/public/dist/css/AdminLTE.min.css" />
         <option value="$PROJECT_DIR$/.htaccess" />
         <option value="$PROJECT_DIR$/resources/views/auth/emails/password.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/page/edit_personal.blade.php" />
         <option value="$PROJECT_DIR$/database/migrations/2016_04_22_122403_create_project_contexts_table.php" />
         <option value="$PROJECT_DIR$/vendor/laravel/framework/src/Illuminate/Validation/Validator.php" />
         <option value="$PROJECT_DIR$/config/app.php" />
@@ -109,10 +128,11 @@
         <option value="$PROJECT_DIR$/resources/views/page/pass_seo.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/project-context.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/pass_context.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/page/personal.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
         <option value="$PROJECT_DIR$/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/resources/views/page/create_personal.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/page/edit_personal.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/page/personal.blade.php" />
       </list>
     </option>
   </component>
@@ -471,13 +491,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/page/edit_personal.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32853717">
-          <caret line="133" column="55" selection-start-line="133" selection-start-column="55" selection-end-line="133" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2016_04_22_122403_create_project_contexts_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5551559">
@@ -730,14 +743,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/page/personal.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2086331">
-          <caret line="22" column="44" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/page/pass_context.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4232614">
@@ -790,8 +795,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/page/create_personal.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4352518">
-          <caret line="233" column="25" selection-start-line="233" selection-start-column="25" selection-end-line="233" selection-end-column="25" />
+        <state vertical-scroll-proportion="-11.793103">
+          <caret line="93" column="75" selection-start-line="93" selection-start-column="70" selection-end-line="93" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/page/edit_personal.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-53.793102">
+          <caret line="102" column="75" selection-start-line="102" selection-start-column="70" selection-end-line="102" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/page/personal.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8884892">
+          <caret line="50" column="87" selection-start-line="50" selection-start-column="87" selection-end-line="50" selection-end-column="87" />
           <folding />
         </state>
       </provider>

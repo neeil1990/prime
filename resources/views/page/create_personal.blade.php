@@ -91,7 +91,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('sum_many_first') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Сумма на зп</label>
+                                <label class="col-md-4 control-label">Оклад</label>
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="sum_many_first" value="{{ old('sum_many_first') }}">
