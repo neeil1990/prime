@@ -50,11 +50,8 @@
 
                                 <div class="col-md-6">
                                     <select name="level" class="form-control" id="level">
-                                        @foreach($groups as $group)
-                                            @if(!empty($group->level))
-                                            <option value="{{$group->level}}">{{$group->level}}</option>
-                                            @endif
-                                        @endforeach
+
+
                                     </select>
 
                                     @if ($errors->has('level'))
@@ -220,6 +217,51 @@
 
     <script>
         $(function(){
+
+            var specialnost = $('#special').val();
+
+            $.ajax({
+                url: '/show-level-group', //Адрес подгружаемой страницы
+                type: "POST", //Тип запроса
+                dataType: 'json',
+                data: 'arr1=' + specialnost,
+                success: function (response) {
+
+                    $('#level').html('');
+                    $.each(response, function(i,data){
+                        if(data.level != '') {
+                            $('#level').append('<option value="' + data.level + '">' + data.level + '</option>');
+                        }
+
+
+                    });
+                }
+            });
+
+            $('#special').change(function(){
+                var specialnost = $(this).val();
+                $.ajax({
+                    url: '/show-level-group', //Адрес подгружаемой страницы
+                    type: "POST", //Тип запроса
+                    dataType: 'json',
+                    data: 'arr1=' + specialnost ,
+                    success: function (response) {
+
+                        $('#level').html('');
+                        $.each(response, function(i,data){
+                            if(data.level != '') {
+                                $('#level').append('<option value="' + data.level + '">' + data.level + '</option>');
+                            }
+                        });
+                    }
+                });
+
+            });
+
+
+
+
+
 
             $('#special').change(function(){
                 var specialnost = $(this).val();
