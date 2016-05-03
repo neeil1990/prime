@@ -21,7 +21,7 @@
                                         <tr role="row">
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">*</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">№</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Имя проекта</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Я.Директ</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Г.Адвордс</th>
@@ -41,8 +41,14 @@
                                                     <input type="checkbox" class="check" value="{{$user->id}}">
                                                     <input type="hidden" class="positions" name="positions[]" value="{{$user->id}}">
                                                 </td>
-                                                <td class="">{{$user->id}}</td>
-                                                <td class="">{{$user->name_project}}</td>
+                                                <td class="favicon_view{{$user->id}}"></td>
+                                                <td class="favicon_url{{$user->id}}">{{$user->name_project}}</td>
+                                                <script>
+                                                    var url_fav = '.favicon_url'+'{{$user->id}}';
+                                                    var view_fav = '.favicon_view'+'{{$user->id}}';
+                                                    var url = 'http://' + $(url_fav).text() + '/favicon.ico';
+                                                    $(view_fav).html('<img src='+ url +' style="max-width:30px">');
+                                                </script>
                                                 <td class="">{{$user->ya_direct}}</td>
                                                 <td class="">{{$user->go_advords}}</td>
                                                 <td class="">{{$user->ost_bslsnse_ya}}</td>

@@ -20,7 +20,7 @@
                                         <tr role="row">
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">*</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">№</th>
+                                            
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Сотрудник</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Специализация</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Уровень</th>
@@ -40,7 +40,7 @@
                                                 <input type="checkbox" class="check" value="{{$user->id}}">
                                                 <input type="hidden" name="positions[]" class="positions2" value="{{$user->id}}">
                                             </td>
-                                            <td class="">{{$user->id}}</td>
+
                                             <td class="">{{$user->name}}</td>
                                             <td class="">{{$user->specialism}}</td>
                                             <td class="">{{$user->level}}</td>
@@ -109,7 +109,6 @@
                                         <tr role="row">
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">*</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">№</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Специальность</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Уровень</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Оклад</th>
@@ -125,7 +124,7 @@
                                                     <input type="checkbox" class="check2" value="{{$user->id}}">
                                                     <input type="hidden" class="positions" name="positions[]" value="{{$user->id}}">
                                                 </td>
-                                                <td class="">{{$user->id}}</td>
+
                                                 <td class="">{{$user->specialnost}}</td>
                                                 <td class="">{{$user->level}}&emsp;&emsp;&emsp;<a href="/groups/create/?level={{$user->specialnost}}"><i class="fa fa-plus"></i></a></td>
                                                 <td class="">{{$user->oklad}}</td>
