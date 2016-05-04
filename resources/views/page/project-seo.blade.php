@@ -4,6 +4,14 @@
 @section('content')
 
     <section class="content">
+        <style>
+            textarea{
+                border:none;
+            }
+            textarea:hover{
+                background-color:#f4f4f4 ;
+            }
+        </style>
 
         <div class="row">
             <div class="col-md-12">
@@ -54,7 +62,7 @@
                                                     <input type="hidden" class="positions" name="positions[]" value="{{$user->id}}">
                                                 </td>
                                                 <td class="favicon_view{{$user->id}}"></td>
-                                                <td class="favicon_url{{$user->id}}">{{$user->name_project}}</td>
+                                                <td class="favicon_url{{$user->id}}"><textarea class="copytext" rows="1" type="text">{{$user->name_project}}</textarea></td>
                                                 <script>
                                                     var url_fav = '.favicon_url'+'{{$user->id}}';
                                                     var view_fav = '.favicon_view'+'{{$user->id}}';
@@ -115,11 +123,11 @@
                                                         ">{{$user->interval_date}}
                                                 </td>
                                                 <td class="">{{$user->aim}}</td>
-                                                <td class="">{{$user->region}}</td>
-                                                <td class="">{{$user->dogovor_number}}</td>
-                                                <td class="">{{$user->contact_person}}</td>
-                                                <td class="">{{$user->phone_person}}</td>
-                                                <td class="">{{$user->e_mail}}</td>
+                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->region}}</textarea></td>
+                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->dogovor_number}}</textarea></td>
+                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->contact_person}}</textarea></td>
+                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->phone_person}}</textarea></td>
+                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->e_mail}}</textarea></td>
 
                                                         <td class="">
                                                             @if(!empty($user->value_serialize))

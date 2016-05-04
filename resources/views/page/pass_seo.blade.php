@@ -47,7 +47,7 @@
                                                     <input type="hidden" class="positions" name="positions[]" value="{{$user->id}}">
                                                 </td>
                                                 <td class="favicon_view{{$user->id}}"></td>
-                                                <td class="favicon_url{{$user->id}}">{{$user->name_project}}</td>
+                                                <td class="favicon_url{{$user->id}}"><textarea class="copytext" rows="1" type="text">{{$user->name_project}}</textarea></td>
                                                 <script>
                                                     var url_fav = '.favicon_url'+'{{$user->id}}';
                                                     var view_fav = '.favicon_view'+'{{$user->id}}';
