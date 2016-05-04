@@ -172,8 +172,12 @@ class HomeController extends Controller
         $message = 'Личный кабинет: http://work.prime-ltd.su '.' Логин: '.$request['email'].' '.'Пароль: '.$request['password'];
         mail($request['email'], 'Личный кабинет PRIME', $message);
 
+        if($request['admin'] == null){
+            $request['admin'] = 0;
+        }
         User::create([
             'name' => $request['name'],
+            'admin' => $request['admin'],
             'specialism' => $request['specialism'],
             'level' => $request['level'],
             'personal_specialism' => $request['personal_specialism'],
@@ -235,6 +239,9 @@ class HomeController extends Controller
 
 
     public function update(Request $request,User $updateUser){
+        if($request['admin'] == null){
+            $request['admin'] = 0;
+        }
         $users = $request->all();
 
         $updateUser->UpdateUser($users);

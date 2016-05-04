@@ -52,6 +52,8 @@ class User extends Authenticatable
 
     public function UpdateUser($data){
 
+
+
         if(!empty($data['password'])){
 
             $message = 'Личный кабинет: http://work.prime-ltd.su '.' Логин: '.$data['email'].' '.'Пароль: '.$data['password'];
@@ -67,6 +69,7 @@ class User extends Authenticatable
         User::where('id', $data['id'])
             ->update(array(
                 'name' => $data['name'],
+                'admin' => $data['admin'],
                 'specialism' => $data['specialism'],
                 'level' => $data['level'],
                 'personal_specialism' => $data['personal_specialism'],

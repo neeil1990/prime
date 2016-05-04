@@ -28,6 +28,20 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('admin') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Администратор</label>
+
+                                <div class="col-md-6">
+                                    <input type="checkbox" class="minimal" name="admin" value="1" @if($user->admin == 1)checked="checked"@endif>
+
+                                    @if ($errors->has('admin'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('admin') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group{{ $errors->has('specialism') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Специализация</label>
 
