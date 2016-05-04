@@ -25,6 +25,8 @@
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Специализация</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Уровень</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Специалист</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Проекты SEO</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Проекты Контекст</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">% от проекта SEO</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Оклад</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">% от проекта контекста</th>
@@ -45,6 +47,8 @@
                                             <td class="">{{$user->specialism}}</td>
                                             <td class="">{{$user->level}}</td>
                                             <td class="">{{$user->personal_specialism}}</td>
+                                            <td class=""><a href="/view-seo-and-context-project/{{$user->id}}">{{$user->project_seos_count}}</a></td>
+                                            <td class=""><a href="/view-seo-and-context-project/{{$user->id}}">{{$user->project_contexts_count}}</a></td>
                                             <td class="">{{$user->seo_procent}}</td>
                                             <td class="">{{$user->sum_many_first}}</td>
                                             <td class="">{{$user->contecst_procent}}</td>

@@ -24,6 +24,10 @@ class CreateProjectContextsTable extends Migration
             $table->string('ost_bslsnse_go');
             $table->string('id_glavn_user');
             $table->string('procent_seo');
+            $table->text('dogovor_number');
+            $table->string('contact_person');
+            $table->string('phone_person');
+            $table->string('e_mail');
             $table->text('value_serialize');
             $table->timestamps();
         });

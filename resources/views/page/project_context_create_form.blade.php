@@ -107,6 +107,41 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Номер договора</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" name="dogovor_number" class="form-control">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Контактное лицо</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" name="contact_person" class="form-control">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Номер телефона</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" name="phone_person" class="form-control" data-inputmask="'mask': '(999) 999-9999'" data-mask="">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> e-mail</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" name="e_mail" class="form-control">
+
+                                </div>
+                            </div>
+
                             <div class="form-group one">
 
                             </div>
@@ -127,7 +162,7 @@
                 </div>
             </div>
         </div>
-
+        <script src="{{ asset('/plugins/input-mask/jquery.inputmask.js')}}"></script>
         <script>
 
             $(function () {

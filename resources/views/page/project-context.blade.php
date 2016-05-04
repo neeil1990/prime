@@ -15,7 +15,7 @@
                         @endif
                     </div>
                     <!-- /.box-header -->
-                    <div class="box-body" >
+                    <div class="box-body" style="overflow-y: auto;">
                         <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row"><div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                                         <thead>
                                         <tr role="row">
@@ -30,6 +30,10 @@
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Специалист</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">% от проекта</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Сумма на з.п.</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Номер договора</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Контактное лицо</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Номер телефона</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">e-mail</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Дополнительная информация</th>
                                         </thead>
                                         <tbody>
@@ -66,6 +70,10 @@
                                                 </td>
                                                 <td class="">{{$user->procent_seo}}</td>
                                                 <td class="">{{$user->sum_zp}}</td>
+                                                <td class="">{{$user->dogovor_number}}</td>
+                                                <td class="">{{$user->contact_person}}</td>
+                                                <td class="">{{$user->phone_person}}</td>
+                                                <td class="">{{$user->e_mail}}</td>
                                                 <td class="">
                                                     @if(!empty($user->value_serialize))
                                                         <ul style="    margin: 0px 0px 0px -43px;min-width: 200px;">

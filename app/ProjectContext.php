@@ -16,7 +16,11 @@ class ProjectContext extends Model
         'ost_bslsnse_go',
         'id_glavn_user',
         'procent_seo',
-        'value_serialize'
+        'value_serialize',
+        'dogovor_number',
+        'contact_person',
+        'phone_person',
+        'e_mail'
     ];
 
     public function UpdateProjectContextPosition($id,$positions){
@@ -44,6 +48,10 @@ class ProjectContext extends Model
                 'ost_bslsnse_ya' => $data['ost_bslsnse_ya'],
                 'ost_bslsnse_go' => $data['ost_bslsnse_go'],
                 'id_glavn_user' => $data['id_glavn_user'],
+                'dogovor_number' => $data['dogovor_number'],
+                'contact_person' => $data['contact_person'],
+                'phone_person' => $data['phone_person'],
+                'e_mail' => $data['e_mail'],
                 'procent_seo' => $data['procent_seo'],
                 'value_serialize' => $value_serialize
             ));

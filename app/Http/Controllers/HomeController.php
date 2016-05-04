@@ -87,6 +87,94 @@ class HomeController extends Controller
     }
 
 
+    public function viewSeoAndContextProject($id){
+
+        $name = \DB::table('users')->where('id',$id)->select('name')->first();
+
+        //////////////////////////////
+        //// Project SEO
+        /////////////////////////////
+
+        $project_seo = \DB::table('sorts')
+            ->leftJoin('project_seos','sorts.id_table','=','project_seos.id')
+            ->where('sorts.id_user',$id)
+            ->where('project_seos.id_glavn_user',$id)
+            ->where('sorts.id_type','4')//ProgectSeo
+            ->get();
+
+        $arrBudget = array();
+        foreach($project_seo as $key=>$u){
+            $difference = intval(abs(
+                strtotime($u->start) - strtotime($u->end)
+            ));
+            $project_seo[$key]->interval_date = $difference / (3600 * 24);
+
+            $project_seo[$key]->value_serialize = unserialize($u->value_serialize);
+
+            $arrBudget['budget'][] = $u->budget;
+            $arrBudget['osvoeno'][] = $u->osvoeno;
+
+        }
+        if(!empty($arrBudget['budget'])){
+            $arrBudget['budget'] = array_sum($arrBudget['budget']);
+        }else{
+            $arrBudget['budget'] = 0;
+        }
+        if(!empty($arrBudget['osvoeno'])){
+            $arrBudget['osvoeno'] = array_sum($arrBudget['osvoeno']);
+        }else{
+            $arrBudget['osvoeno'] = 0;
+        }
+
+        //////////////////////////////
+        //// Project SEO END!
+        /////////////////////////////
+
+
+        //////////////////////////////
+        //// Project Context
+        /////////////////////////////
+
+        $project_context = \DB::table('sorts')
+            ->leftJoin('project_contexts','sorts.id_table','=','project_contexts.id')
+            ->where('sorts.id_user',$id)
+            ->where('project_contexts.id_glavn_user',$id)
+            ->where('sorts.id_type','5')//ProgectContext
+            ->get();
+
+        //dd($project_context);
+
+        $arrBuget = array();
+        foreach($project_context as $key => $u){
+            $sum = $u->ya_direct+$u->go_advords;
+            $project_context[$key]->sum_zp = $sum*$u->procent_seo/100;
+
+            $arrBuget[] = $u->ya_direct;
+            $arrBuget[] = $u->go_advords;
+
+            $project_context[$key]->value_serialize = unserialize($u->value_serialize);
+        }
+
+
+
+        //////////////////////////////
+        //// Project Context END!
+        /////////////////////////////
+
+        return view('page.view-seo-and-context-project',[
+            'budget_seo_osvoeno' => $arrBudget,
+            'name_user' => $name,
+            'project_context' => $project_context,
+            'count_seo_prodject' => count($project_seo),
+            'users' => $project_seo,
+            'users_now' => $this->user_now(),
+            'admin' => $this->admin(),
+            'budget_context_project' => array_sum($arrBuget),
+            'count_context_project' => count($project_context)
+        ]);
+    }
+
+
 
     public function updateGroupPositions(Request $request,Groups $groups){
 
@@ -145,12 +233,28 @@ class HomeController extends Controller
 
        $user_groups = \DB::table('groups')->orderBy('positions')->get();
        $users = $user->getUser(Auth::user()->id);
+
+        foreach($users as $key => $us) {
+            $project_seos = \DB::table('project_seos')->where('id_glavn_user',$us->id)->count();
+            $project_contexts = \DB::table('project_contexts')->where('id_glavn_user',$us->id)->count();
+
+            $users[$key]->project_seos_count = $project_seos;
+            $users[$key]->project_contexts_count = $project_contexts;
+        }
+
         $arrUser = array();
         foreach($users as $u){
             $arrUser[] = $u->itog;
         }
 
-        return view('page.personal',['itog_sum' => array_sum($arrUser), 'count_user' => count($users), 'users' => $users,'user_groups' => $user_groups, 'users_now' => $this->user_now(),'admin' => $this->admin()]);
+        return view('page.personal',[
+            'itog_sum' => array_sum($arrUser),
+            'count_user' => count($users),
+            'users' => $users,
+            'user_groups' => $user_groups,
+            'users_now' => $this->user_now(),
+            'admin' => $this->admin()
+        ]);
     }
 
 
@@ -798,6 +902,10 @@ class HomeController extends Controller
             'ost_bslsnse_ya' => $request['ost_bslsnse_ya'],
             'ost_bslsnse_go' => $request['ost_bslsnse_go'],
             'procent_seo' => $request['procent_seo'],
+            'dogovor_number' => $request['dogovor_number'],
+            'contact_person' => $request['contact_person'],
+            'phone_person' => $request['phone_person'],
+            'e_mail' => $request['e_mail'],
             'value_serialize' => serialize($request['value_serialize'])
         ]);
 
