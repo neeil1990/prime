@@ -18,6 +18,11 @@ Route::get('/', ['as' => 'index', 'uses' => 'HomeController@index']);
 Route::get('/personal', ['as' => 'personal', 'uses' => 'HomeController@personal']);
 
 
+Route::get('/setting-field-seo', ['as' => '/settingFieldSeo', 'uses' => 'HomeController@settingFieldSeo']);
+Route::get('/setting-field-context', ['as' => '/settingFieldContext', 'uses' => 'HomeController@settingFieldContext']);
+Route::post('/update-setting-field', ['as' => 'updateSettingField', 'uses' => 'HomeController@updateSettingField']);
+
+
 Route::get('/view-seo-and-context-project/{id}', ['as' => 'viewSeoAndContextProject', 'uses' => 'HomeController@viewSeoAndContextProject']);
 
 

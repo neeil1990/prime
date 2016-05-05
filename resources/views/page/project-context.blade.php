@@ -28,22 +28,49 @@
                         <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row"><div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                                         <thead>
                                         <tr role="row">
+
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">*</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
+                                            @if($setting_field[0]->value == 1 or $admin == 1)
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Имя проекта</th>
+                                            @endif
+                                            @if($setting_field[1]->value == 1 or $admin == 1)
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Я.Директ</th>
+                                            @endif
+                                            @if($setting_field[2]->value == 1 or $admin == 1)
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Г.Адвордс</th>
+                                            @endif
+                                            @if($setting_field[3]->value == 1 or $admin == 1)
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Остаток на балансе Яндекса</th>
+                                            @endif
+                                            @if($setting_field[4]->value == 1 or $admin == 1)
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Остаток на балансе Гугл</th>
+                                            @endif
+                                            @if($setting_field[5]->value == 1 or $admin == 1)
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Специалист</th>
+                                            @endif
+                                            @if($setting_field[6]->value == 1 or $admin == 1)
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">% от проекта</th>
+                                            @endif
+                                            @if($setting_field[7]->value == 1 or $admin == 1)
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Сумма на з.п.</th>
+                                            @endif
+                                            @if($setting_field[8]->value == 1 or $admin == 1)
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Номер договора</th>
+                                            @endif
+                                            @if($setting_field[9]->value == 1 or $admin == 1)
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Контактное лицо</th>
+                                            @endif
+                                            @if($setting_field[10]->value == 1 or $admin == 1)
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Номер телефона</th>
+                                            @endif
+                                            @if($setting_field[11]->value == 1 or $admin == 1)
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">e-mail</th>
+                                            @endif
+                                            @if($setting_field[12]->value == 1 or $admin == 1)
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Дополнительная информация</th>
+                                            @endif
                                         </thead>
                                         <tbody>
 
@@ -55,6 +82,7 @@
                                                     <input type="hidden" class="positions" name="positions[]" value="{{$user->id}}">
                                                 </td>
                                                 <td class="favicon_view{{$user->id}}"></td>
+                                                @if($setting_field[0]->value == 1 or $admin == 1)
                                                 <td class="favicon_url{{$user->id}}"><textarea class="copytext" rows="1" type="text">{{$user->name_project}}</textarea></td>
                                                 <script>
                                                     var url_fav = '.favicon_url'+'{{$user->id}}';
@@ -62,10 +90,20 @@
                                                     var url = 'http://' + $(url_fav).text() + '/favicon.ico';
                                                     $(view_fav).html('<img src='+ url +' style="max-width:30px">');
                                                 </script>
+                                                @endif
+                                                @if($setting_field[1]->value == 1 or $admin == 1)
                                                 <td class="">{{$user->ya_direct}}</td>
+                                                @endif
+                                                @if($setting_field[2]->value == 1 or $admin == 1)
                                                 <td class="">{{$user->go_advords}}</td>
+                                                @endif
+                                                @if($setting_field[3]->value == 1 or $admin == 1)
                                                 <td class="">{{$user->ost_bslsnse_ya}}</td>
+                                                @endif
+                                                @if($setting_field[4]->value == 1 or $admin == 1)
                                                 <td class="">{{$user->ost_bslsnse_go}}</td>
+                                                @endif
+                                                @if($setting_field[5]->value == 1 or $admin == 1)
                                                 <td class="">
                                                     @foreach($name as $n)
                                                         @if($n->id == $user->id)
@@ -77,14 +115,27 @@
                                                         @endif
                                                     @endforeach
                                                 </td>
+                                                @endif
+                                                @if($setting_field[6]->value == 1 or $admin == 1)
                                                 <td class="">{{$user->procent_seo}}</td>
+                                                @endif
+                                                @if($setting_field[7]->value == 1 or $admin == 1)
                                                 <td class="">{{$user->sum_zp}}</td>
+                                                @endif
+                                                @if($setting_field[8]->value == 1 or $admin == 1)
                                                 <td class=""><textarea class="copytext" rows="1" type="text">{{$user->dogovor_number}}</textarea></td>
+                                                @endif
+                                                @if($setting_field[9]->value == 1 or $admin == 1)
                                                 <td class=""><textarea class="copytext" rows="1" type="text">{{$user->contact_person}}</textarea></td>
+                                                @endif
+                                                @if($setting_field[10]->value == 1 or $admin == 1)
                                                 <td class=""><textarea class="copytext" rows="1" type="text">{{$user->phone_person}}</textarea></td>
+                                                @endif
+                                                @if($setting_field[11]->value == 1 or $admin == 1)
                                                 <td class=""><textarea class="copytext" rows="1" type="text">{{$user->e_mail}}</textarea></td>
+                                                @endif
+                                                @if($setting_field[12]->value == 1 or $admin == 1)
                                                 <td class="">
-
                                                     @if(!empty($user->value_serialize))
                                                         <ul style="    margin: 0px 0px 0px -43px;min-width: 200px;">
                                                             @foreach($user->value_serialize as $val)
@@ -93,6 +144,7 @@
                                                         </ul>
                                                     @endif
                                                 </td>
+                                                @endif
                                             </tr>
                                             @endforeach
                                         </tbody>
@@ -113,7 +165,8 @@
                     <a href="" class="add_check">Выделить все |</a>
                     <a href="" style="display: none" class="old_check">Снять все |</a>
                     <a href="" class="button">Удалить |</a>
-                    <a href="" class="edit">Изменить</a>
+                    <a href="" class="edit">Изменить</a> |
+                    <a href="/setting-field-context" >Настройка полей</a>
                 </div>
             @endif
         </div>

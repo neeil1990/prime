@@ -87,7 +87,38 @@ class HomeController extends Controller
     }
 
 
+    //Настройка полей для проектов сео
+    public function settingFieldSeo(){
+
+       $arrSettingFieldSeo = \DB::table('setting_fields')->where('table_value','seo')->get();
+        return view('page.setting_field_seo',['settings_sield' => $arrSettingFieldSeo]);
+
+    }
+
+    //Настройка полей для проектов context
+    public function settingFieldContext(){
+
+        $arrSettingFieldContext = \DB::table('setting_fields')->where('table_value','context')->get();
+        return view('page.setting_field_context',['settings_sield' => $arrSettingFieldContext]);
+
+    }
+    public function updateSettingField(Request $request){
+
+        \DB::table('setting_fields')
+            ->where('field', $request['name'])
+            ->where('table_value', $request['table_value'])
+            ->update(array(
+                'value' => $request['value']
+            ));
+    }
+
+
     public function viewSeoAndContextProject($id){
+
+        $setting_field_seo = \DB::table('setting_fields')->where('table_value','seo')->get();
+        $setting_field_context = \DB::table('setting_fields')->where('table_value','context')->get();
+
+        //dd($setting_field_context);
 
         $name = \DB::table('users')->where('id',$id)->select('name')->first();
 
@@ -170,7 +201,9 @@ class HomeController extends Controller
             'users_now' => $this->user_now(),
             'admin' => $this->admin(),
             'budget_context_project' => array_sum($arrBuget),
-            'count_context_project' => count($project_context)
+            'count_context_project' => count($project_context),
+            'setting_field_seo' => $setting_field_seo,
+            'setting_field_context' => $setting_field_context
         ]);
     }
 
@@ -690,6 +723,8 @@ class HomeController extends Controller
 
     public function projectSeo(){
 
+        $setting_field = \DB::table('setting_fields')->where('table_value','seo')->get();
+
         $users = User::whereRaw('id = ? and admin = 1', [Auth::user()->id])->count();
         if($users == 1){
             $users = \DB::table('project_seos')->orderBy('positions')->get();
@@ -736,7 +771,15 @@ class HomeController extends Controller
             ->where('sorts.id_type','4')->get();
 
 
-        return view('page.project-seo',['budget_seo_osvoeno' => $arrBudget, 'count_seo_prodject' => count($users),'users' => $users,'name' => $name,'users_now' => $this->user_now(),'admin' => $this->admin()]);
+        return view('page.project-seo',[
+            'budget_seo_osvoeno' => $arrBudget,
+            'count_seo_prodject' => count($users),
+            'users' => $users,
+            'name' => $name,
+            'users_now' => $this->user_now(),
+            'admin' => $this->admin(),
+            'setting_field' => $setting_field
+        ]);
     }
 
     public function projectSeoCreateForm(){
@@ -848,6 +891,9 @@ class HomeController extends Controller
 
     public function projectContext(){
 
+        $setting_field = \DB::table('setting_fields')->where('table_value','context')->get();
+
+
         $users = User::whereRaw('id = ? and admin = 1', [Auth::user()->id])->count();
         if($users == 1){
             $users = \DB::table('project_contexts')->orderBy('positions')->get();
@@ -878,7 +924,15 @@ class HomeController extends Controller
 
         //dd();
 
-        return view('page.project-context',['budget_context_project' => array_sum($arrBuget), 'count_context_project' => count($users), 'users' => $users,'name' => $name,'users_now' => $this->user_now(),'admin' => $this->admin()]);
+        return view('page.project-context',[
+            'budget_context_project' => array_sum($arrBuget),
+            'count_context_project' => count($users),
+            'users' => $users,
+            'name' => $name,
+            'users_now' => $this->user_now(),
+            'admin' => $this->admin(),
+            'setting_field' => $setting_field
+        ]);
     }
 
     public function projectContextCreateForm(){
