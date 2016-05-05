@@ -22,22 +22,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
+      <file leaf-file-name="project-context.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/page/project-context.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.7931035">
-              <caret line="20" column="136" selection-start-line="20" selection-start-column="97" selection-end-line="20" selection-end-column="136" />
+            <state vertical-scroll-proportion="-6.8965516">
+              <caret line="90" column="123" selection-start-line="90" selection-start-column="123" selection-end-line="90" selection-end-column="123" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="project-context.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/page/project-context.blade.php">
+      <file leaf-file-name="project-seo.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/page/project-seo.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5755396">
-              <caret line="81" column="145" selection-start-line="81" selection-start-column="145" selection-end-line="81" selection-end-column="145" />
-              <folding />
+            <state vertical-scroll-proportion="0.35491607">
+              <caret line="135" column="195" selection-start-line="135" selection-start-column="195" selection-end-line="135" selection-end-column="195" />
+              <folding>
+                <element signature="e#12286#12341#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -99,8 +101,8 @@
         <option value="$PROJECT_DIR$/resources/views/page/pass_seo.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/pass_dev.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/pass_context.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/page/project-seo.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/project-context.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/page/project-seo.blade.php" />
       </list>
     </option>
   </component>
@@ -165,6 +167,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -251,50 +254,9 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prime" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prime" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prime" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="prime" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Http" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controllers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -603,7 +565,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-42.75862">
           <caret line="65" column="29" selection-start-line="65" selection-start-column="29" selection-end-line="65" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -639,7 +600,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-22.758621">
           <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -647,7 +607,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-17.241379">
           <caret line="34" column="143" selection-start-line="34" selection-start-column="143" selection-end-line="34" selection-end-column="143" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -655,9 +614,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-23.448277">
           <caret line="142" column="34" selection-start-line="109" selection-start-column="27" selection-end-line="142" selection-end-column="34" />
-          <folding>
-            <marker date="1462350427499" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -665,9 +621,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.26378897">
           <caret line="11" column="97" selection-start-line="11" selection-start-column="97" selection-end-line="11" selection-end-column="119" />
-          <folding>
-            <marker date="1462350886482" expanded="true" signature="-1:-1" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -675,7 +628,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.586206">
           <caret line="32" column="20" selection-start-line="32" selection-start-column="20" selection-end-line="32" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -683,7 +635,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.67146283">
           <caret line="29" column="34" selection-start-line="29" selection-start-column="28" selection-end-line="29" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -691,7 +642,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.27218226">
           <caret line="40" column="33" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -699,7 +649,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-14.137931">
           <caret line="95" column="14" selection-start-line="91" selection-start-column="7" selection-end-line="95" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -707,9 +656,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.35971224">
           <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
-          <folding>
-            <element signature="e#7676#9911#0#HTML" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -717,9 +663,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6062112">
           <caret line="172" column="61" selection-start-line="172" selection-start-column="61" selection-end-line="172" selection-end-column="61" />
-          <folding>
-            <element signature="e#39#54#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -727,7 +670,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-13.0">
           <caret line="50" column="167" selection-start-line="50" selection-start-column="167" selection-end-line="50" selection-end-column="167" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -735,7 +677,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.65467626">
           <caret line="56" column="167" selection-start-line="56" selection-start-column="167" selection-end-line="56" selection-end-column="167" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -743,7 +684,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.3297362">
           <caret line="223" column="85" selection-start-line="223" selection-start-column="8" selection-end-line="223" selection-end-column="85" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -751,21 +691,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.11990408">
           <caret line="5" column="9" selection-start-line="4" selection-start-column="1" selection-end-line="11" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/page/project-seo.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52757794">
-          <caret line="125" column="137" selection-start-line="125" selection-start-column="61" selection-end-line="125" selection-end-column="137" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.7931035">
+        <state vertical-scroll-proportion="0.0">
           <caret line="20" column="136" selection-start-line="20" selection-start-column="97" selection-end-line="20" selection-end-column="136" />
           <folding />
         </state>
@@ -773,9 +704,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/page/project-context.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5755396">
-          <caret line="81" column="145" selection-start-line="81" selection-start-column="145" selection-end-line="81" selection-end-column="145" />
+        <state vertical-scroll-proportion="-6.8965516">
+          <caret line="90" column="123" selection-start-line="90" selection-start-column="123" selection-end-line="90" selection-end-column="123" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/page/project-seo.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35491607">
+          <caret line="135" column="195" selection-start-line="135" selection-start-column="195" selection-end-line="135" selection-end-column="195" />
+          <folding>
+            <element signature="e#12286#12341#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

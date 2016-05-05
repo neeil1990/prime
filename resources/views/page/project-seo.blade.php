@@ -133,7 +133,7 @@
                                                             @if(!empty($user->value_serialize))
                                                                 <ul style="    margin: 0px 0px 0px -43px;min-width: 200px;">
                                                                 @foreach($user->value_serialize as $val)
-                                                                    <li style="border-bottom: 1px solid grey;list-style: none">{{$val}}</li>
+                                                                    <li style="border-bottom: 1px solid grey;list-style: none"> <textarea class="copytext" rows="1" type="text">{{$val}}</textarea></li>
                                                                 @endforeach
                                                                 </ul>
                                                             @endif
