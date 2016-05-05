@@ -52,7 +52,7 @@
                                             <td class="">{{$user->seo_procent}}</td>
                                             <td class="">{{$user->sum_many_first}}</td>
                                             <td class="">{{$user->contecst_procent}}</td>
-                                            <td class="">{{$user->sum_many_last}}</td>
+                                            <td class="">{{$user->procent_context_itog}}</td>
                                             <td class="">{{$user->itog}}</td>
                                         </tr>
                                         @endforeach

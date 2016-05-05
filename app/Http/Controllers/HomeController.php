@@ -267,21 +267,35 @@ class HomeController extends Controller
        $user_groups = \DB::table('groups')->orderBy('positions')->get();
        $users = $user->getUser(Auth::user()->id);
 
+        $arrItog = array();
         foreach($users as $key => $us) {
+
+            $project_context_itog = \DB::table('sorts')
+                ->leftJoin('project_contexts','sorts.id_table','=','project_contexts.id')
+                ->where('sorts.id_user',$us->id)
+                ->where('sorts.id_type','5')//ProgectContext
+                ->get();
+
+            $arrContextItog = array();
+            foreach($project_context_itog as $itog){
+                $arrContextItog[] = ($itog->ya_direct+$itog->go_advords)*$itog->procent_seo/100;
+            }
+
+            $users[$key]->procent_context_itog = array_sum($arrContextItog);
+
+            $users[$key]->itog = $us->sum_many_first+array_sum($arrContextItog);
+            $arrItog[] = $us->sum_many_first+array_sum($arrContextItog);
+
+
             $project_seos = \DB::table('project_seos')->where('id_glavn_user',$us->id)->count();
             $project_contexts = \DB::table('project_contexts')->where('id_glavn_user',$us->id)->count();
 
             $users[$key]->project_seos_count = $project_seos;
             $users[$key]->project_contexts_count = $project_contexts;
         }
-
-        $arrUser = array();
-        foreach($users as $u){
-            $arrUser[] = $u->itog;
-        }
-
+        
         return view('page.personal',[
-            'itog_sum' => array_sum($arrUser),
+            'itog_sum' =>  array_sum($arrItog),
             'count_user' => count($users),
             'users' => $users,
             'user_groups' => $user_groups,
