@@ -6,7 +6,7 @@
     <section class="content">
 
         <div class="row palv_settings">
-            @if($admin == 1)
+
                 <div class="col-md-12">
                     <div class="box box-warning">
                         <div class="box-header with-border">
@@ -20,6 +20,7 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body" style="display: block;">
+                            @if($admin == 1)
 
                             <a href="" class="add_check">
                                 <small class="label label-primary">Выделить все</small>
@@ -40,6 +41,7 @@
                             <a href="/setting-field-context" >
                                 <small class="label label-primary">Настройка полей</small>
                             </a>
+                            @endif
 
                             <div class="row">
                                 <div class="col-md-9">
@@ -53,7 +55,7 @@
                     </div>
 
                 </div>
-            @endif
+
         </div>
 
 

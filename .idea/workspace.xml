@@ -22,44 +22,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="HomeController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="HomeController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.70559007">
+            <state vertical-scroll-proportion="-9.793103">
               <caret line="87" column="37" selection-start-line="87" selection-start-column="37" selection-end-line="87" selection-end-column="37" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="create_pass_dev.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/page/create_pass_dev.blade.php">
+      <file leaf-file-name="pass_seo.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/page/pass_seo.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-25.51724">
-              <caret line="39" column="74" selection-start-line="39" selection-start-column="74" selection-end-line="39" selection-end-column="74" />
+            <state vertical-scroll-proportion="-0.6896552">
+              <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="project-seo.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/page/project-seo.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.2413793">
-              <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="67" selection-end-column="0" />
-              <folding>
-                <element signature="e#270#2554#0#HTML" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="project-context.blade.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="project-context.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/page/project-context.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-24.931034">
-              <caret line="217" column="14" selection-start-line="217" selection-start-column="14" selection-end-line="217" selection-end-column="14" />
-              <folding />
+            <state vertical-scroll-proportion="0.7122302">
+              <caret line="43" column="34" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
+              <folding>
+                <element signature="e#796#819#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -116,13 +106,13 @@
         <option value="$PROJECT_DIR$/resources/views/page/edit_pass_dev.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/edit_pass_seo.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/nav/left-menu.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/page/project-seo.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/main.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/page/pass_seo.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/pass_dev.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/pass_context.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/page/project-context.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
+        <option value="$PROJECT_DIR$/resources/views/page/project-seo.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/page/pass_seo.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/page/project-context.blade.php" />
       </list>
     </option>
   </component>
@@ -421,7 +411,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1296" height="1000" extended-state="7" />
+    <frame x="-8" y="-8" width="1296" height="1000" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -797,18 +787,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/page/pass_seo.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.344828">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="54" selection-end-column="0" />
-          <folding>
-            <element signature="e#238#1882#0#HTML" expanded="false" />
-            <element signature="e#975#998#0#HTML" expanded="true" />
-            <element signature="e#1220#1241#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/page/pass_context.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.38369304">
@@ -821,37 +799,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/page/project-seo.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/page/create_pass_dev.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.2413793">
-          <caret line="15" column="2" selection-start-line="15" selection-start-column="2" selection-end-line="67" selection-end-column="0" />
-          <folding>
-            <element signature="e#270#2554#0#HTML" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/page/project-context.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.931034">
-          <caret line="217" column="14" selection-start-line="217" selection-start-column="14" selection-end-line="217" selection-end-column="14" />
+        <state vertical-scroll-proportion="0.8872902">
+          <caret line="39" column="74" selection-start-line="39" selection-start-column="74" selection-end-line="39" selection-end-column="74" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/page/create_pass_dev.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/page/project-seo.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-25.51724">
-          <caret line="39" column="74" selection-start-line="39" selection-start-column="74" selection-end-line="39" selection-end-column="74" />
+        <state vertical-scroll-proportion="0.646283">
+          <caret line="51" column="34" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.70559007">
+        <state vertical-scroll-proportion="-9.793103">
           <caret line="87" column="37" selection-start-line="87" selection-start-column="37" selection-end-line="87" selection-end-column="37" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/page/pass_seo.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.6896552">
+          <caret line="16" column="12" selection-start-line="16" selection-start-column="12" selection-end-line="16" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/page/project-context.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7122302">
+          <caret line="43" column="34" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
+          <folding>
+            <element signature="e#796#819#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
