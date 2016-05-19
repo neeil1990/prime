@@ -49,6 +49,12 @@
 
     <script src="{{ asset('/dist/js/jquery-zclip-master/jquery.zclip.js') }}"></script>
 
+
+    <script src="{{ asset('/dist/js/hcsticky/jquery.hc-sticky.min.js') }}"></script>
+
+
+
+
     <script>
 
         $(function(){
@@ -245,6 +251,17 @@
         <!-- /.content -->
     </div><!-- /.content-wrapper -->
     <footer class="main-footer">
+        <script>
+            $(function(){
+                $('.palv_settings').css('z-index','1000');
+                $('.palv_settings').hcSticky({
+                    top: 25,
+                    bottomEnd: 155,
+                    noContainer: true
+                });
+            });
+        </script>
+
         <div class="pull-right hidden-xs">
             <b>Version</b> 2.3.0
         </div>

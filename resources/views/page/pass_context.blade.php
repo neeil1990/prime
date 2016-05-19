@@ -13,6 +13,47 @@
     </style>
     <section class="content">
 
+        <div class="row palv_settings">
+            @if($admin == 1)
+                <div class="col-md-12">
+                    <div class="box box-warning">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="fa fa-cogs"></i></h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                            <!-- /.box-tools -->
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body" style="display: block;">
+
+                            <a href="" class="add_check">
+                                <small class="label label-primary">Выделить все</small>
+                            </a>
+
+                            <a href="" style="display: none" class="old_check">
+                                <small class="label label-primary">Снять все</small>
+                            </a>
+
+                            <a href="" class="button">
+                                <small class="label label-primary">Удалить</small>
+                            </a>
+
+                            <a href="" class="edit">
+                                <small class="label label-primary">Изменить</small>
+                            </a>
+
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+
+                </div>
+            @endif
+        </div>
+
+
         <div class="row">
             <div class="col-md-12">
 
@@ -94,17 +135,6 @@
 
                 </div>
             </div>
-        </div>
-
-        <div class="row">
-            @if($admin == 1)
-                <div class="col-md-9">
-                    <a href="" class="add_check">Выделить все |</a>
-                    <a href="" style="display: none" class="old_check">Снять все |</a>
-                    <a href="" class="button">Удалить |</a>
-                    <a href="" class="edit">Изменить</a>
-                </div>
-            @endif
         </div>
 
     </section>

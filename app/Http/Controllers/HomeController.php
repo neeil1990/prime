@@ -309,7 +309,11 @@ class HomeController extends Controller
     public function createPersonalForm(Groups $groups)
     {
         $group = $groups->all();
-        return view('page.create_personal',['users_now' => $this->user_now(),'groups' => $group]);
+        return view('page.create_personal',[
+            'users_now' => $this->user_now(),
+            'groups' => $group,
+            'admin' => $this->admin()
+        ]);
     }
 
     public function create(Request $request){
@@ -364,7 +368,12 @@ class HomeController extends Controller
 
         $group = $groups->all();
         $user = User::where('id', $id)->first();
-        return view('page.edit_personal',['user' => $user, 'users_now' => $this->user_now(),'groups' => $group]);
+        return view('page.edit_personal',[
+            'user' => $user,
+            'admin' => $this->admin(),
+            'users_now' => $this->user_now(),
+            'groups' => $group
+        ]);
     }
 
     public function editPassSeo($id){
@@ -381,6 +390,7 @@ class HomeController extends Controller
        // dd($user);
 
         return view('page.edit_pass_seo',[
+            'admin' => $this->admin(),
             'users' => $pass_seo,
             'user_all' => $user_all,
             'user' => $user,
@@ -440,7 +450,11 @@ class HomeController extends Controller
     public function passSeoCreatForm(){
 
         $user = User::all();
-        return view('page.create_pass_seo',['users' => $user ,'users_now' => $this->user_now()]);
+        return view('page.create_pass_seo',[
+            'users' => $user ,
+            'users_now' => $this->user_now(),
+            'admin' => $this->admin()
+        ]);
     }
 
 
@@ -475,7 +489,11 @@ class HomeController extends Controller
 
     public function createGroupForm(){
         $user = User::all();
-        return view('page.create_group_form',['users' => $user],['users_now' => $this->user_now()]);
+        return view('page.create_group_form',[
+            'users' => $user,
+            'users_now' => $this->user_now(),
+            'admin' => $this->admin()
+        ]);
     }
 
     public function createGroups(Request $request){
@@ -496,7 +514,12 @@ class HomeController extends Controller
         $users = \DB::table('groups')->where('groups.id',$id)->first();
 
         //dd($users);
-        return view('page.edit_groups',['users' => $users,'users_all' => $user_all ,'users_now' => $this->user_now()]);
+        return view('page.edit_groups',[
+            'users' => $users,
+            'admin' => $this->admin(),
+            'users_all' => $user_all ,
+            'users_now' => $this->user_now()
+        ]);
     }
 
     public function updateGroups(Request $request,Groups $groups){
@@ -542,7 +565,11 @@ class HomeController extends Controller
 
     public function passContextCreatsForm(){
         $user = User::all();
-        return view('page.create_pass_context',['users' => $user ,'users_now' => $this->user_now()]);
+        return view('page.create_pass_context',[
+            'users' => $user ,
+            'users_now' => $this->user_now(),
+            'admin' => $this->admin()
+        ]);
     }
 
     public function createPassContext(Request $request){
@@ -599,6 +626,7 @@ class HomeController extends Controller
 
         return view('page.edit_pass_context',[
             'user' => $user,
+            'admin' => $this->admin(),
             'users' => $pass_context,
             'user_all' => $user_all,
             'users_now' => $this->user_now()
@@ -649,7 +677,11 @@ class HomeController extends Controller
     public function passDevCreatForm(){
 
         $user = User::all();
-        return view('page.create_pass_dev',['users' => $user ,'users_now' => $this->user_now()]);
+        return view('page.create_pass_dev',[
+            'users' => $user ,
+            'admin' => $this->admin(),
+            'users_now' => $this->user_now()
+        ]);
 
     }
 
@@ -696,6 +728,7 @@ class HomeController extends Controller
 
         return view('page.edit_pass_dev',[
             'users' => $pass_dev,
+            'admin' => $this->admin(),
             'user_all' => $user_all,
             'user' => $user,
             'users_now' => $this->user_now()
@@ -799,7 +832,10 @@ class HomeController extends Controller
 
     public function projectSeoCreateForm(){
         $user = User::all();
-       return view('page.project-seo-crate-form',['users' => $user]);
+       return view('page.project-seo-crate-form',[
+           'users' => $user,
+           'admin' => $this->admin()
+       ]);
     }
 
     public function createProjectSeo(Request $request){
@@ -881,6 +917,7 @@ class HomeController extends Controller
 
         return view('page.edit_prodject_seo_form',[
             'users' => $project_seos,
+            'admin' => $this->admin(),
             'user_all' => $user_all,
             'user' => $user,
             'users_now' => $this->user_now()
@@ -952,7 +989,10 @@ class HomeController extends Controller
 
     public function projectContextCreateForm(){
         $user = User::all();
-        return view('page.project_context_create_form',['users' => $user]);
+        return view('page.project_context_create_form',[
+            'users' => $user,
+            'admin' => $this->admin()
+        ]);
     }
 
     public function createProjectContext(Request $request){
@@ -1025,6 +1065,7 @@ class HomeController extends Controller
 
         return view('page.edit_prodject_context_form',[
             'users' => $project_contexts,
+            'admin' => $this->admin(),
             'user_all' => $user_all,
             'user' => $user,
             'users_now' => $this->user_now()
