@@ -19,6 +19,7 @@ class CreatePassSeosTable extends Migration
             $table->string('id_glavn_user');
             $table->text('ssa');
             $table->text('ftp');
+            $table->text('admin_url');
             $table->string('login');
             $table->string('password');
             $table->timestamps();

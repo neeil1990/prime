@@ -13,6 +13,7 @@ class PassSeo extends Model
         'specialist',
         'ssa',
         'ftp',
+        'admin_url',
         'login',
         'password',
     ];
@@ -25,6 +26,7 @@ class PassSeo extends Model
                 'id_glavn_user' => $data['id_user_gl'],
                 'ssa' => $data['ssa'],
                 'ftp' => $data['ftp'],
+                'admin_url' => $data['admin_url'],
                 'login' => $data['login'],
                 'password' => $data['password']
             ));

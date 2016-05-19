@@ -59,9 +59,15 @@
                                                     @foreach($name as $n)
                                                         @if($n->id == $user->id)
                                                             @if($n->id_user == $user->id_glavn_user)
-                                                                <span style="color: red">{{$n->name}}</span><br>
+                                                                <small class="label label-danger">
+                                                                    <i class="fa fa-user"></i>&nbsp;
+                                                                    {{$n->name}}
+                                                                </small><br>
                                                             @else
-                                                                {{$n->name}}<br>
+                                                                <small class="label label-default">
+                                                                    <i class="fa fa-user"></i>&nbsp;
+                                                                {{$n->name}}
+                                                                    </small><br>
                                                             @endif
                                                         @endif
                                                     @endforeach

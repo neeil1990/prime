@@ -74,7 +74,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('ssa') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">SSA</label>
+                                <label class="col-md-4 control-label">SSH</label>
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="ssa" value="{{$users->ssa}}">
@@ -96,6 +96,20 @@
                                     @if ($errors->has('ftp'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('ftp') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('admin_url') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Админка</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="admin_url" value="{{$users->admin_url}}">
+
+                                    @if ($errors->has('admin_url'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('admin_url') }}</strong>
                                     </span>
                                     @endif
                                 </div>

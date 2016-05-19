@@ -456,6 +456,7 @@ class HomeController extends Controller
             'id_glavn_user' => $request['id_user_gl'],
             'ssa' => $request['ssa'],
             'ftp' => $request['ftp'],
+            'admin_url' => $request['admin_url'],
             'login' => $request['login'],
             'password' => $request['password']
         ]);
