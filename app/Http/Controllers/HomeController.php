@@ -83,7 +83,10 @@ class HomeController extends Controller
     {
 
 
-        return view('index',['users_now' => $this->user_now()]);
+        return view('index',[
+            'users_now' => $this->user_now(),
+            'admin' => $this->admin()
+        ]);
     }
 
 
