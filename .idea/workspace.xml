@@ -32,11 +32,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="edit_pass_seo.blade.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/page/edit_pass_seo.blade.php">
+      <file leaf-file-name="pass_seo.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/page/pass_seo.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.21582733">
-              <caret line="9" column="66" selection-start-line="9" selection-start-column="66" selection-end-line="9" selection-end-column="66" />
+            <state vertical-scroll-proportion="-2.0689654">
+              <caret line="114" column="21" selection-start-line="114" selection-start-column="21" selection-end-line="114" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.blade.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/layouts/main.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.827586">
+              <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="left-menu.blade.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/nav/left-menu.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.78417265">
+              <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -71,8 +91,6 @@
         <option value="$PROJECT_DIR$/database/migrations/2016_04_22_095531_create_project_seos_table.php" />
         <option value="$PROJECT_DIR$/app/ProjectSeo.php" />
         <option value="$PROJECT_DIR$/resources/views/page/edit_prodject_seo_form.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/nav/left-menu.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/layouts/main.blade.php" />
         <option value="$PROJECT_DIR$/public/dist/js/favicon.js" />
         <option value="$PROJECT_DIR$/resources/views/page/create_personal.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/edit_personal.blade.php" />
@@ -94,13 +112,15 @@
         <option value="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" />
         <option value="$PROJECT_DIR$/resources/views/page/create_pass_seo.blade.php" />
         <option value="$PROJECT_DIR$/app/PassSeo.php" />
-        <option value="$PROJECT_DIR$/resources/views/page/pass_seo.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/pass_dev.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/project-seo.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/project-context.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/pass_context.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/edit_pass_dev.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/page/edit_pass_seo.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/main.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/page/pass_seo.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/nav/left-menu.blade.php" />
       </list>
     </option>
   </component>
@@ -221,6 +241,50 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="page" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="prime" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="prime" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="nav" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="prime" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="prime" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="resources" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layouts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -529,24 +593,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/nav/left-menu.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-28.275862">
-          <caret line="41" column="17" selection-start-line="41" selection-start-column="17" selection-end-line="41" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/dist/js/favicon.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.023923445">
           <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/main.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.0">
-          <caret line="453" column="36" selection-start-line="453" selection-start-column="0" selection-end-line="453" selection-end-column="57" />
         </state>
       </provider>
     </entry>
@@ -743,10 +793,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/page/pass_seo.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/page/edit_pass_seo.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9532374">
-          <caret line="66" column="96" selection-start-line="65" selection-start-column="59" selection-end-line="66" selection-end-column="96" />
+        <state vertical-scroll-proportion="0.21582733">
+          <caret line="9" column="66" selection-start-line="9" selection-start-column="66" selection-end-line="9" selection-end-column="66" />
           <folding />
         </state>
       </provider>
@@ -759,10 +809,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/page/edit_pass_seo.blade.php">
+    <entry file="file://$PROJECT_DIR$/resources/views/page/pass_seo.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21582733">
-          <caret line="9" column="66" selection-start-line="9" selection-start-column="66" selection-end-line="9" selection-end-column="66" />
+        <state vertical-scroll-proportion="-2.0689654">
+          <caret line="114" column="21" selection-start-line="114" selection-start-column="21" selection-end-line="114" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/main.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.827586">
+          <caret line="52" column="0" selection-start-line="52" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/nav/left-menu.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.78417265">
+          <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
           <folding />
         </state>
       </provider>
