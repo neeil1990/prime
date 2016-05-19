@@ -790,8 +790,19 @@ class HomeController extends Controller
         }
         $arrBudget = array();
         foreach($users as $key=>$u){
+            if(!empty($u->start)) {
+                $start = explode('/', $u->start);
+            }else{
+                $start = array('00','00','0000');
+            }
+            if(!empty($u->end)) {
+                $end = explode('/', $u->end);
+            }else{
+                $end = array('00','00','0000');
+            }
+            
             $difference = intval(abs(
-                strtotime($u->start) - strtotime($u->end)
+                strtotime($start[1].'/'.$start[0].'/'.$start[2]) - strtotime($end[1].'/'.$end[0].'/'.$end[2])
             ));
             $users[$key]->interval_date = $difference / (3600 * 24);
 
@@ -811,8 +822,6 @@ class HomeController extends Controller
         }else{
             $arrBudget['osvoeno'] = 0;
         }
-
-
 
        // dd($users);
 
