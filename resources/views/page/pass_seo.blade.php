@@ -78,6 +78,8 @@
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Пароль</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">SSH</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">FTP</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Логин</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Пароль</th>
                                         </thead>
                                         <tbody>
 
@@ -112,10 +114,12 @@
                                                         @endif
                                                     @endforeach</td>
                                                 <td class=""><textarea class="copytext" rows="1" type="text">{{$user->admin_url}}</textarea></td>
-                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->login}}</textarea></td>
-                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->password}}</textarea></td>
+                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->admin_login}}</textarea></td>
+                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->admin_pass}}</textarea></td>
                                                 <td class="">{{$user->ssa}}</td>
                                                 <td class=""><textarea class="copytext" rows="1" type="text">{{$user->ftp}}</textarea></td>
+                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->login}}</textarea></td>
+                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->password}}</textarea></td>
 
                                             </tr>
                                         @endforeach

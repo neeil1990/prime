@@ -14,6 +14,8 @@ class PassSeo extends Model
         'ssa',
         'ftp',
         'admin_url',
+        'admin_login',
+        'admin_pass',
         'login',
         'password',
     ];
@@ -27,6 +29,8 @@ class PassSeo extends Model
                 'ssa' => $data['ssa'],
                 'ftp' => $data['ftp'],
                 'admin_url' => $data['admin_url'],
+                'admin_login' => $data['admin_login'],
+                'admin_pass' => $data['admin_pass'],
                 'login' => $data['login'],
                 'password' => $data['password']
             ));

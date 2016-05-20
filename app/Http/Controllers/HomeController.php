@@ -475,6 +475,8 @@ class HomeController extends Controller
             'ssa' => $request['ssa'],
             'ftp' => $request['ftp'],
             'admin_url' => $request['admin_url'],
+            'admin_login' => $request['admin_login'],
+            'admin_pass' => $request['admin_pass'],
             'login' => $request['login'],
             'password' => $request['password']
         ]);

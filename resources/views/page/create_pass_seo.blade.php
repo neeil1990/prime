@@ -61,6 +61,48 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('admin_url') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Админка</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="admin_url" value="{{ old('admin_url') }}">
+
+                                    @if ($errors->has('admin_url'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('admin_url') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('admin_login') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Логин</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="admin_login" value="{{ old('admin_login') }}">
+
+                                    @if ($errors->has('admin_login'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('admin_login') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('admin_pass') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Пароль</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="admin_pass" value="{{ old('admin_pass') }}">
+
+                                    @if ($errors->has('admin_pass'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('admin_pass') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group{{ $errors->has('ssa') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">SSH</label>
 
@@ -85,20 +127,6 @@
                                     @if ($errors->has('ftp'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('ftp') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-group{{ $errors->has('admin_url') ? ' has-error' : '' }}">
-                                <label class="col-md-4 control-label">Админка</label>
-
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control" name="admin_url" value="{{ old('admin_url') }}">
-
-                                    @if ($errors->has('admin_url'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('admin_url') }}</strong>
                                     </span>
                                     @endif
                                 </div>

@@ -20,6 +20,8 @@ class CreatePassSeosTable extends Migration
             $table->text('ssa');
             $table->text('ftp');
             $table->text('admin_url');
+            $table->text('admin_login');
+            $table->text('admin_pass');
             $table->string('login');
             $table->string('password');
             $table->timestamps();
