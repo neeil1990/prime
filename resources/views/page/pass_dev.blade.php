@@ -113,7 +113,7 @@
                                                         @endif
                                                     @endforeach
                                                 </td>
-                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->ssa}}</textarea></td>
+                                                <td class="">{{$user->ssa}}</td>
                                                 <td class=""><textarea class="copytext" rows="1" type="text">{{$user->ftp}}</textarea></td>
                                                 <td class=""><textarea class="copytext" rows="1" type="text">{{$user->login}}</textarea></td>
                                                 <td class=""><textarea class="copytext" rows="1" type="text">{{$user->password}}</textarea></td>
