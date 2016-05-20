@@ -17,6 +17,9 @@ class CreatePassDevsTable extends Migration
             $table->integer('positions');
             $table->string('name_project');
             $table->string('id_glavn_user');
+            $table->text('admin_url');
+            $table->text('admin_login');
+            $table->text('admin_pass');
             $table->text('ssa');
             $table->text('ftp');
             $table->string('login');

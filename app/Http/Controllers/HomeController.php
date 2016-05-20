@@ -703,6 +703,9 @@ class HomeController extends Controller
         $add = PassDev::create([
             'name_project' => $request['name_project'],
             'id_glavn_user' => $request['id_user_gl'],
+            'admin_url' => $request['admin_url'],
+            'admin_login' => $request['admin_login'],
+            'admin_pass' => $request['admin_pass'],
             'ssa' => $request['ssa'],
             'ftp' => $request['ftp'],
             'login' => $request['login'],
