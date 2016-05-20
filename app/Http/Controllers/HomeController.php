@@ -435,6 +435,7 @@ class HomeController extends Controller
             ->leftJoin('users','sorts.id_user','=','users.id')
             ->leftJoin('pass_seos','sorts.id_table','=','pass_seos.id')
             ->where('sorts.id_type','1')
+            ->where('pass_seos.name_project','!=','')
             ->where('users.id',Auth::user()->id)
             ->orderBy('pass_seos.positions')
             ->get();
@@ -552,6 +553,7 @@ class HomeController extends Controller
                 ->leftJoin('users','sorts.id_user','=','users.id')
                 ->leftJoin('pass_contexts','sorts.id_table','=','pass_contexts.id')
                 ->where('sorts.id_type','2')
+                ->where('pass_contexts.name_project','!=','')
                 ->where('users.id',Auth::user()->id)
                 ->orderBy('pass_contexts.positions')
                 ->get();
@@ -662,6 +664,7 @@ class HomeController extends Controller
                 ->leftJoin('users','sorts.id_user','=','users.id')
                 ->leftJoin('pass_devs','sorts.id_table','=','pass_devs.id')
                 ->where('sorts.id_type','3')
+                ->where('pass_devs.name_project','!=','')
                 ->where('users.id',Auth::user()->id)
                 ->orderBy('pass_devs.positions')
                 ->get();
@@ -784,6 +787,7 @@ class HomeController extends Controller
                 ->leftJoin('users','sorts.id_user','=','users.id')
                 ->leftJoin('project_seos','sorts.id_table','=','project_seos.id')
                 ->where('sorts.id_type','4')
+                ->where('project_seos.name_project','!=','')
                 ->where('users.id',Auth::user()->id)
                 ->orderBy('project_seos.positions')
                 ->get();
@@ -967,9 +971,12 @@ class HomeController extends Controller
                 ->leftJoin('project_contexts','sorts.id_table','=','project_contexts.id')
                 ->where('sorts.id_type','5')
                 ->where('users.id',Auth::user()->id)
+                ->where('project_contexts.name_project','!=','')
                 ->orderBy('project_contexts.positions')
                 ->get();
         }
+
+        //var_dump($users);
 
         $arrBuget = array();
         foreach($users as $key => $u){
