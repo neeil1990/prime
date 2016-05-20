@@ -13,9 +13,11 @@
             }
         </style>
 
+
+
         <div class="row palv_settings">
 
-                <div class="col-md-12">
+                <div class="col-md-12 dinamic_block">
                     <div class="box box-warning">
                         <div class="box-header with-border">
                             <h3 class="box-title"><i class="fa fa-cogs"></i></h3>

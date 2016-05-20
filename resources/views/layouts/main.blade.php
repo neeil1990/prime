@@ -81,7 +81,7 @@
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
             <!-- Sidebar toggle button-->
-            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+            <a href="#" class="sidebar-toggle one_click" data-toggle="offcanvas" role="button">
                 <span class="sr-only">Toggle navigation</span>
             </a>
 
@@ -253,9 +253,61 @@
     <footer class="main-footer">
         <script>
             $(function(){
+
+                function explode( delimiter, string ) {	// Split a string by string
+                    //
+                    // +   original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+                    // +   improved by: kenneth
+                    // +   improved by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+
+                    var emptyArray = { 0: '' };
+
+                    if ( arguments.length != 2
+                            || typeof arguments[0] == 'undefined'
+                            || typeof arguments[1] == 'undefined' )
+                    {
+                        return null;
+                    }
+
+                    if ( delimiter === ''
+                            || delimiter === false
+                            || delimiter === null )
+                    {
+                        return false;
+                    }
+
+                    if ( typeof delimiter == 'function'
+                            || typeof delimiter == 'object'
+                            || typeof string == 'function'
+                            || typeof string == 'object' )
+                    {
+                        return emptyArray;
+                    }
+
+                    if ( delimiter === true ) {
+                        delimiter = '1';
+                    }
+
+                    return string.toString().split ( delimiter.toString() );
+                }
+
+
+                $('.sidebar-toggle').click(function(){
+
+                    var doc_w = $(document).width() - 280;
+                    $('.dinamic_block').css('width',''+doc_w+'');
+
+                   var clas_b = $('body').attr('class');
+                   var b = explode( ' ', clas_b );
+
+                    if(b[2] == 'sidebar-collapse'){
+                        $('.dinamic_block').removeAttr('style');
+                    }
+                });
+
                 $('.palv_settings').css('z-index','1000');
                 $('.palv_settings').hcSticky({
-                    top: 25,
+                    top: 0,
                     bottomEnd: 155,
                     noContainer: true
                 });

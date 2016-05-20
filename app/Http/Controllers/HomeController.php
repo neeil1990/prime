@@ -800,7 +800,7 @@ class HomeController extends Controller
             }else{
                 $end = array('00','00','0000');
             }
-            
+
             $difference = intval(abs(
                 strtotime($start[1].'/'.$start[0].'/'.$start[2]) - strtotime($end[1].'/'.$end[0].'/'.$end[2])
             ));
