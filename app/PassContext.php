@@ -15,6 +15,7 @@ class PassContext extends Model
         'passYandex',
         'loginGoogle',
         'passGoogle',
+        'value_serialize',
     ];
 
 
@@ -31,6 +32,11 @@ class PassContext extends Model
 
     public function UpdatePassContextUser($data){
 
+        if(empty($data['value_serialize'])){
+            $value_serialize = '';
+        }else{
+            $value_serialize = serialize($data['value_serialize']);
+        }
 
         \DB::table('pass_contexts')->where('id', $data['id'])
             ->update(array(
@@ -39,7 +45,8 @@ class PassContext extends Model
                 'loginYandex' => $data['loginYandex'],
                 'passYandex' => $data['passYandex'],
                 'loginGoogle' => $data['loginGoogle'],
-                'passGoogle' => $data['passGoogle']
+                'passGoogle' => $data['passGoogle'],
+                'value_serialize' => $value_serialize
             ));
 
         $create_data = $data;

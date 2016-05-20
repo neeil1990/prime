@@ -18,9 +18,16 @@ class PassSeo extends Model
         'admin_pass',
         'login',
         'password',
+        'value_serialize',
     ];
 
     public function UpdatePassSeoUser($data){
+
+        if(empty($data['value_serialize'])){
+            $value_serialize = '';
+        }else{
+            $value_serialize = serialize($data['value_serialize']);
+        }
 
         \DB::table('pass_seos')->where('id', $data['id'])
             ->update(array(
@@ -32,7 +39,8 @@ class PassSeo extends Model
                 'admin_login' => $data['admin_login'],
                 'admin_pass' => $data['admin_pass'],
                 'login' => $data['login'],
-                'password' => $data['password']
+                'password' => $data['password'],
+                'value_serialize' => $value_serialize
             ));
 
         $create_data = $data;

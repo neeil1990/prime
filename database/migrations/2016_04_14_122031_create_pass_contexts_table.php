@@ -21,6 +21,7 @@ class CreatePassContextsTable extends Migration
             $table->text('passYandex');
             $table->string('loginGoogle');
             $table->string('passGoogle');
+            $table->string('value_serialize');
             $table->timestamps();
         });
     }

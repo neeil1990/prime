@@ -94,7 +94,10 @@ class HomeController extends Controller
     public function settingFieldSeo(){
 
        $arrSettingFieldSeo = \DB::table('setting_fields')->where('table_value','seo')->get();
-        return view('page.setting_field_seo',['settings_sield' => $arrSettingFieldSeo]);
+        return view('page.setting_field_seo',[
+            'settings_sield' => $arrSettingFieldSeo,
+            'admin' => $this->admin()
+        ]);
 
     }
 
@@ -102,9 +105,43 @@ class HomeController extends Controller
     public function settingFieldContext(){
 
         $arrSettingFieldContext = \DB::table('setting_fields')->where('table_value','context')->get();
-        return view('page.setting_field_context',['settings_sield' => $arrSettingFieldContext]);
+        return view('page.setting_field_context',[
+            'settings_sield' => $arrSettingFieldContext,
+            'admin' => $this->admin()
+        ]);
 
     }
+
+    //Настройка полей для passSeo
+    public function settingFieldPassSeo(){
+
+        $arrSettingFieldContext = \DB::table('setting_fields')->where('table_value','pass_seo')->get();
+        return view('page.setting_field_pass_seo',[
+            'settings_sield' => $arrSettingFieldContext,
+            'admin' => $this->admin()
+        ]);
+    }
+
+    //Настройка полей для passDev
+    public function settingFieldPassDev(){
+
+        $arrSettingFieldContext = \DB::table('setting_fields')->where('table_value','pass_dev')->get();
+        return view('page.setting_field_pass_dev',[
+            'settings_sield' => $arrSettingFieldContext,
+            'admin' => $this->admin()
+        ]);
+    }
+
+    //Настройка полей для passContext
+    public function settingFieldPassContext(){
+
+        $arrSettingFieldContext = \DB::table('setting_fields')->where('table_value','pass_context')->get();
+        return view('page.setting_field_pass_context',[
+            'settings_sield' => $arrSettingFieldContext,
+            'admin' => $this->admin()
+        ]);
+    }
+
     public function updateSettingField(Request $request){
 
         \DB::table('setting_fields')
@@ -392,6 +429,8 @@ class HomeController extends Controller
                 ->get();
        // dd($user);
 
+        $pass_seo->value_serialize = unserialize($pass_seo->value_serialize);
+
         return view('page.edit_pass_seo',[
             'admin' => $this->admin(),
             'users' => $pass_seo,
@@ -427,6 +466,8 @@ class HomeController extends Controller
 
     public function passSEO(PassSeo $passSeo){
 
+        $setting_field = \DB::table('setting_fields')->where('table_value','pass_seo')->get();
+
         $users = User::whereRaw('id = ? and admin = 1', [Auth::user()->id])->count();
         if($users == 1){
             $users = \DB::table('pass_seos')->orderBy('positions')->get();
@@ -440,6 +481,11 @@ class HomeController extends Controller
             ->orderBy('pass_seos.positions')
             ->get();
         }
+
+        foreach($users as $key=>$u){
+            $users[$key]->value_serialize = unserialize($u->value_serialize);
+        }
+
        // dd($users);
         $name = \DB::table('sorts')
             ->leftJoin('users','sorts.id_user','=','users.id')
@@ -448,7 +494,13 @@ class HomeController extends Controller
 
 
 
-        return view('page.pass_seo',['users' => $users,'name' => $name,'users_now' => $this->user_now(),'admin' => $this->admin()]);
+        return view('page.pass_seo',[
+            'users' => $users,
+            'name' => $name,
+            'users_now' => $this->user_now(),
+            'admin' => $this->admin(),
+            'setting_field' => $setting_field
+        ]);
     }
 
     public function passSeoCreatForm(){
@@ -478,7 +530,8 @@ class HomeController extends Controller
             'admin_login' => $request['admin_login'],
             'admin_pass' => $request['admin_pass'],
             'login' => $request['login'],
-            'password' => $request['password']
+            'password' => $request['password'],
+            'value_serialize' => serialize($request['value_serialize'])
         ]);
 
         foreach($request['id_user'] as $id_user){
@@ -547,6 +600,8 @@ class HomeController extends Controller
     //пароли контекст
     public function passContext(PassContext $passContext){
 
+        $setting_field = \DB::table('setting_fields')->where('table_value','pass_context')->get();
+
         $users = User::whereRaw('id = ? and admin = 1', [Auth::user()->id])->count();
         if($users == 1){
             $users = \DB::table('pass_contexts')->orderBy('positions')->get();
@@ -560,13 +615,24 @@ class HomeController extends Controller
                 ->orderBy('pass_contexts.positions')
                 ->get();
         }
+
+        foreach($users as $key=>$u){
+            $users[$key]->value_serialize = unserialize($u->value_serialize);
+        }
+
         // dd($users);
         $name = \DB::table('sorts')
             ->leftJoin('users','sorts.id_user','=','users.id')
             ->leftJoin('pass_contexts','sorts.id_table','=','pass_contexts.id')
             ->where('sorts.id_type','2')->get();
 
-        return view('page.pass_context',['users' => $users,'name' => $name, 'users_now' => $this->user_now(),'admin' => $this->admin()]);
+        return view('page.pass_context',[
+            'setting_field' => $setting_field,
+            'users' => $users,
+            'name' => $name,
+            'users_now' => $this->user_now(),
+            'admin' => $this->admin()
+        ]);
 
     }
 
@@ -592,7 +658,8 @@ class HomeController extends Controller
             'loginYandex' => $request['loginYandex'],
             'passYandex' => $request['passYandex'],
             'loginGoogle' => $request['loginGoogle'],
-            'passGoogle' => $request['passGoogle']
+            'passGoogle' => $request['passGoogle'],
+            'value_serialize' => serialize($request['value_serialize'])
         ]);
 
 
@@ -630,6 +697,7 @@ class HomeController extends Controller
             ->where('sorts.id_type','2')
             ->get();
 
+        $pass_context->value_serialize = unserialize($pass_context->value_serialize);
 
         return view('page.edit_pass_context',[
             'user' => $user,
@@ -658,6 +726,8 @@ class HomeController extends Controller
 
     public function passDev(PassDev $passDev){
 
+        $setting_field = \DB::table('setting_fields')->where('table_value','pass_dev')->get();
+
         $users = User::whereRaw('id = ? and admin = 1', [Auth::user()->id])->count();
         if($users == 1){
             $users = \DB::table('pass_devs')->orderBy('positions')->get();
@@ -671,6 +741,10 @@ class HomeController extends Controller
                 ->orderBy('pass_devs.positions')
                 ->get();
         }
+
+        foreach($users as $key=>$u){
+            $users[$key]->value_serialize = unserialize($u->value_serialize);
+        }
         // dd($users);
         $name = \DB::table('sorts')
             ->leftJoin('users','sorts.id_user','=','users.id')
@@ -679,7 +753,13 @@ class HomeController extends Controller
 
 
 
-        return view('page.pass_dev',['users' => $users,'name' => $name,'users_now' => $this->user_now(),'admin' => $this->admin()]);
+        return view('page.pass_dev',[
+            'setting_field' => $setting_field,
+            'users' => $users,
+            'name' => $name,
+            'users_now' => $this->user_now(),
+            'admin' => $this->admin()
+        ]);
     }
 
     public function passDevCreatForm(){
@@ -709,7 +789,8 @@ class HomeController extends Controller
             'ssa' => $request['ssa'],
             'ftp' => $request['ftp'],
             'login' => $request['login'],
-            'password' => $request['password']
+            'password' => $request['password'],
+            'value_serialize' => serialize($request['value_serialize'])
         ]);
 
         foreach($request['id_user'] as $id_user){
@@ -736,6 +817,8 @@ class HomeController extends Controller
             ->where('sorts.id_type','3')
             ->get();
         // dd($user);
+
+        $pass_dev->value_serialize = unserialize($pass_dev->value_serialize);
 
         return view('page.edit_pass_dev',[
             'users' => $pass_dev,

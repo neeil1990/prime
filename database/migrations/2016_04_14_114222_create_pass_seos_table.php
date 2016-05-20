@@ -24,6 +24,7 @@ class CreatePassSeosTable extends Migration
             $table->text('admin_pass');
             $table->string('login');
             $table->string('password');
+            $table->string('value_serialize');
             $table->timestamps();
         });
     }

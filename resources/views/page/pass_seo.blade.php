@@ -45,6 +45,10 @@
                                 <small class="label label-primary">Изменить</small>
                             </a>
 
+                            <a href="/setting_field_pass_seo" >
+                                <small class="label label-primary">Настройка полей</small>
+                            </a>
+
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -71,15 +75,11 @@
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">*</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Имя проекта</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Специалист</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Админка</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Логин</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Пароль</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">SSH</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">FTP</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Логин</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Пароль</th>
+                                            @foreach($setting_field as $val)
+                                                @if($val->value == 1 or $admin == 1)
+                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"> @if($val->value == 0) <i style="color:red" class="fa fa-close"></i> @endif {{$val->name}}</th>
+                                                 @endif
+                                             @endforeach
                                         </thead>
                                         <tbody>
 
@@ -91,13 +91,16 @@
                                                     <input type="hidden" class="positions" name="positions[]" value="{{$user->id}}">
                                                 </td>
                                                 <td class="favicon_view{{$user->id}}"></td>
+                                                @if($setting_field[0]->value == 1 or $admin == 1)
                                                 <td class="favicon_url{{$user->id}}"><textarea class="copytext" rows="1" type="text">{{$user->name_project}}</textarea></td>
+                                                @endif
                                                 <script>
                                                     var url_fav = '.favicon_url'+'{{$user->id}}';
                                                     var view_fav = '.favicon_view'+'{{$user->id}}';
                                                     var url = 'http://' + $(url_fav).text() + '/favicon.ico';
                                                     $(view_fav).html('<img src='+ url +' style="max-width:30px">');
                                                 </script>
+                                                @if($setting_field[1]->value == 1 or $admin == 1)
                                                 <td class="">@foreach($name as $n)
                                                         @if($n->id == $user->id)
                                                             @if($n->id_user == $user->id_glavn_user)
@@ -113,13 +116,39 @@
                                                                 @endif
                                                         @endif
                                                     @endforeach</td>
+                                                @endif
+                                                @if($setting_field[2]->value == 1 or $admin == 1)
                                                 <td class=""><textarea class="copytext" rows="1" type="text">{{$user->admin_url}}</textarea></td>
+                                                @endif
+                                                @if($setting_field[3]->value == 1 or $admin == 1)
                                                 <td class=""><textarea class="copytext" rows="1" type="text">{{$user->admin_login}}</textarea></td>
+                                                @endif
+                                                @if($setting_field[4]->value == 1 or $admin == 1)
                                                 <td class=""><textarea class="copytext" rows="1" type="text">{{$user->admin_pass}}</textarea></td>
+                                                @endif
+                                                @if($setting_field[5]->value == 1 or $admin == 1)
                                                 <td class="">{{$user->ssa}}</td>
+                                                @endif
+                                                @if($setting_field[6]->value == 1 or $admin == 1)
                                                 <td class=""><textarea class="copytext" rows="1" type="text">{{$user->ftp}}</textarea></td>
+                                                @endif
+                                                @if($setting_field[7]->value == 1 or $admin == 1)
                                                 <td class=""><textarea class="copytext" rows="1" type="text">{{$user->login}}</textarea></td>
+                                                @endif
+                                                @if($setting_field[8]->value == 1 or $admin == 1)
                                                 <td class=""><textarea class="copytext" rows="1" type="text">{{$user->password}}</textarea></td>
+                                                @endif
+                                                @if($setting_field[9]->value == 1 or $admin == 1)
+                                                <td class="">
+                                                    @if(!empty($user->value_serialize))
+                                                        <ul style="    margin: 0px 0px 0px -43px;min-width: 200px;">
+                                                            @foreach($user->value_serialize as $val)
+                                                                <li style="border-bottom: 1px solid grey;list-style: none"> <textarea class="copytext" rows="1" type="text">{{$val}}</textarea></li>
+                                                            @endforeach
+                                                        </ul>
+                                                    @endif
+                                                </td>
+                                                @endif
 
                                             </tr>
                                         @endforeach

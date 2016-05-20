@@ -24,6 +24,7 @@ class CreatePassDevsTable extends Migration
             $table->text('ftp');
             $table->string('login');
             $table->string('password');
+            $table->string('value_serialize');
             $table->timestamps();
         });
     }

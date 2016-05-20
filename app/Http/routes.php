@@ -20,6 +20,10 @@ Route::get('/personal', ['as' => 'personal', 'uses' => 'HomeController@personal'
 
 Route::get('/setting-field-seo', ['as' => '/settingFieldSeo', 'uses' => 'HomeController@settingFieldSeo']);
 Route::get('/setting-field-context', ['as' => '/settingFieldContext', 'uses' => 'HomeController@settingFieldContext']);
+Route::get('/setting_field_pass_seo', ['as' => 'settingFieldPassSeo', 'uses' => 'HomeController@settingFieldPassSeo']);
+Route::get('/setting_field_pass_dev', ['as' => 'settingFieldPassDev', 'uses' => 'HomeController@settingFieldPassDev']);
+Route::get('/setting_field_pass_context', ['as' => 'settingFieldPassContext', 'uses' => 'HomeController@settingFieldPassContext']);
+
 Route::post('/update-setting-field', ['as' => 'updateSettingField', 'uses' => 'HomeController@updateSettingField']);
 
 

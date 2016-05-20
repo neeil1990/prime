@@ -159,8 +159,14 @@
                                 </div>
                             </div>
 
+                            <div class="form-group one">
+
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
+                                    <a href="#" id="add_input">Добавить поле</a> |
+                                    <a href="#" id="remove">Удалить поле</a><br><br>
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fa fa-btn fa-user"></i> Добавить
                                     </button>
@@ -176,5 +182,30 @@
 
 
     </section>
+
+    <script>
+
+
+        $(function () {
+
+            var i = $('input').size() + 1;
+
+            $('#add_input').click(function() {
+                $('<label class="col-md-4 control-label field2"></label><div class="col-md-6 field" style="margin-bottom: 10px;"><input type="text" name="value_serialize[]" class="form-control"></div>').fadeIn('slow').appendTo('.one');
+                return false;
+            });
+
+            $('#remove').click(function() {
+                if(i > 1) {
+                    $('.field:last').remove();
+                    $('.field2:last').remove();
+                    i--;
+                }
+                return false;
+            });
+
+        });
+
+    </script>
 
 @stop

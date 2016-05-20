@@ -18,10 +18,17 @@ class PassDev extends Model
         'ftp',
         'login',
         'password',
+        'value_serialize',
     ];
 
 
     public function UpdatePassDevUser($data){
+
+        if(empty($data['value_serialize'])){
+            $value_serialize = '';
+        }else{
+            $value_serialize = serialize($data['value_serialize']);
+        }
 
         \DB::table('pass_devs')->where('id', $data['id'])
             ->update(array(
@@ -33,7 +40,8 @@ class PassDev extends Model
                 'ssa' => $data['ssa'],
                 'ftp' => $data['ftp'],
                 'login' => $data['login'],
-                'password' => $data['password']
+                'password' => $data['password'],
+                'value_serialize' => $value_serialize
             ));
 
         $create_data = $data;

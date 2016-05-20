@@ -254,6 +254,209 @@ class SettingField extends Seeder
             'table_value' => 'context'
         ]);
 
+        //passSEO
+
+        \App\SettingField::create([
+            'name' => 'Имя проекта',
+            'field' => 'name_project_pass_seo',
+            'value' => '1',
+            'table_value' => 'pass_seo'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Специалист',
+            'field' => 'specialist_pass_seo',
+            'value' => '1',
+            'table_value' => 'pass_seo'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Админка',
+            'field' => 'admin_pass_seo',
+            'value' => '1',
+            'table_value' => 'pass_seo'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Логин',
+            'field' => 'login_pass_seo',
+            'value' => '1',
+            'table_value' => 'pass_seo'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Пароль',
+            'field' => 'pass_pass_seo',
+            'value' => '1',
+            'table_value' => 'pass_seo'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'SSH',
+            'field' => 'SSH_pass_seo',
+            'value' => '1',
+            'table_value' => 'pass_seo'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'FTP',
+            'field' => 'FTP_pass_seo',
+            'value' => '1',
+            'table_value' => 'pass_seo'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Логин',
+            'field' => 'login_two_pass_seo',
+            'value' => '1',
+            'table_value' => 'pass_seo'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Пароль',
+            'field' => 'pass_two_pass_seo',
+            'value' => '1',
+            'table_value' => 'pass_seo'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Дополнительная информация',
+            'field' => 'dop_infa_pass_seo',
+            'value' => '1',
+            'table_value' => 'pass_seo'
+        ]);
+
+
+        //passDev
+
+        \App\SettingField::create([
+            'name' => 'Имя проекта',
+            'field' => 'name_project_pass_seo',
+            'value' => '1',
+            'table_value' => 'pass_dev'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Специалист',
+            'field' => 'specialist_pass_dev',
+            'value' => '1',
+            'table_value' => 'pass_dev'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Админка',
+            'field' => 'admin_pass_dev',
+            'value' => '1',
+            'table_value' => 'pass_dev'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Логин',
+            'field' => 'login_pass_dev',
+            'value' => '1',
+            'table_value' => 'pass_dev'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Пароль',
+            'field' => 'pass_pass_dev',
+            'value' => '1',
+            'table_value' => 'pass_dev'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'SSH',
+            'field' => 'SSH_pass_dev',
+            'value' => '1',
+            'table_value' => 'pass_dev'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'FTP',
+            'field' => 'FTP_pass_dev',
+            'value' => '1',
+            'table_value' => 'pass_dev'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Логин',
+            'field' => 'login_two_pass_dev',
+            'value' => '1',
+            'table_value' => 'pass_dev'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Пароль',
+            'field' => 'pass_two_pass_dev',
+            'value' => '1',
+            'table_value' => 'pass_dev'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Дополнительная информация',
+            'field' => 'dop_infa_pass_dev',
+            'value' => '1',
+            'table_value' => 'pass_dev'
+        ]);
+
+        //passContext
+
+        \App\SettingField::create([
+            'name' => 'Имя проекта',
+            'field' => 'name_project_pass_context',
+            'value' => '1',
+            'table_value' => 'pass_context'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Специалист',
+            'field' => 'specialist_pass_context',
+            'value' => '1',
+            'table_value' => 'pass_context'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Логин Яндекс',
+            'field' => 'login_yandex_pass_context',
+            'value' => '1',
+            'table_value' => 'pass_context'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Пароль Яндекс',
+            'field' => 'pass_yandex_pass_context',
+            'value' => '1',
+            'table_value' => 'pass_context'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Логин Гугл',
+            'field' => 'login_google_pass_context',
+            'value' => '1',
+            'table_value' => 'pass_context'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Пароль Гугл',
+            'field' => 'pass_google_pass_context',
+            'value' => '1',
+            'table_value' => 'pass_context'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Дополнительная информация',
+            'field' => 'dop_infa_pass_context',
+            'value' => '1',
+            'table_value' => 'pass_context'
+        ]);
+
+
+
+
+
+
+
+
     }
 
 
