@@ -170,6 +170,10 @@
                             $('.title_dashboard').text('График работы');
                             $('.menu8').addClass('active');
                         }
+                        if(url == '/service-and-password'){
+                            $('.title_dashboard').text('Сервисы & Пароли');
+                            $('.menu9').addClass('active');
+                        }
                         if(url == '/project-seo'){
                             $('.title_dashboard').text('Проекты SEO');
                             $('.nav_mouseover1').addClass('active');
