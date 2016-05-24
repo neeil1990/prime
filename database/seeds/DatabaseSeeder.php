@@ -451,6 +451,42 @@ class SettingField extends Seeder
         ]);
 
 
+        //Сервисы & Пароли
+
+        \App\SettingField::create([
+            'name' => 'Имя проекта',
+            'field' => 'name_project_service_and_pass',
+            'value' => '1',
+            'table_value' => 'service_and_pass'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Специалист',
+            'field' => 'specialist_service_and_pass',
+            'value' => '1',
+            'table_value' => 'service_and_pass'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Логин',
+            'field' => 'login_service_and_pass',
+            'value' => '1',
+            'table_value' => 'service_and_pass'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Пароль',
+            'field' => 'pass_service_and_pass',
+            'value' => '1',
+            'table_value' => 'service_and_pass'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Дополнительная информация',
+            'field' => 'dop_infa_service_and_pass',
+            'value' => '1',
+            'table_value' => 'service_and_pass'
+        ]);
 
 
 

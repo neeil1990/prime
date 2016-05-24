@@ -13,6 +13,7 @@ return array(
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateProjectContextsTable' => $baseDir . '/database/migrations/2016_04_22_122403_create_project_contexts_table.php',
     'CreateProjectSeosTable' => $baseDir . '/database/migrations/2016_04_22_095531_create_project_seos_table.php',
+    'CreateServiceAndPassesTable' => $baseDir . '/database/migrations/2016_05_23_125447_create_service_and_passes_table.php',
     'CreateSettingFieldsTable' => $baseDir . '/database/migrations/2016_05_05_095404_create_setting_fields_table.php',
     'CreateSortsTable' => $baseDir . '/database/migrations/2016_04_15_101212_create_sorts_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
@@ -521,6 +522,7 @@ return array(
     'SebastianBergmann\\RecursionContext\\Exception' => $vendorDir . '/sebastian/recursion-context/src/Exception.php',
     'SebastianBergmann\\RecursionContext\\InvalidArgumentException' => $vendorDir . '/sebastian/recursion-context/src/InvalidArgumentException.php',
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
+    'SettingField' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
 );

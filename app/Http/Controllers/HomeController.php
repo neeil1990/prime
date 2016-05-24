@@ -6,6 +6,7 @@ use App\PassContext;
 use App\PassDev;
 use App\ProjectContext;
 use App\ProjectSeo;
+use App\ServiceAndPass;
 use App\Sort;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -1191,6 +1192,131 @@ class HomeController extends Controller
         return redirect()->intended('project-context');
     }
 
+
+    //Сервисы & Пароли
+
+    public function serviceAndPassword(){
+
+        $setting_field = \DB::table('setting_fields')->where('table_value','service_and_pass')->get();
+
+
+        $users = User::whereRaw('id = ? and admin = 1', [Auth::user()->id])->count();
+        if($users == 1){
+            $users = \DB::table('service_and_passes')->orderBy('positions')->get();
+        }else{
+            $users = \DB::table('sorts')
+                ->leftJoin('users','sorts.id_user','=','users.id')
+                ->leftJoin('service_and_passes','sorts.id_table','=','service_and_passes.id')
+                ->where('sorts.id_type','6')
+                ->where('users.id',Auth::user()->id)
+                ->where('service_and_passes.name_project','!=','')
+                ->orderBy('service_and_passes.positions')
+                ->get();
+        }
+
+        $name = \DB::table('sorts')
+            ->leftJoin('users','sorts.id_user','=','users.id')
+            ->leftJoin('service_and_passes','sorts.id_table','=','service_and_passes.id')
+            ->where('sorts.id_type','6')->get();
+
+
+        return view('page.service-and-password',[
+            'admin' => $this->admin(),
+            'setting_field' => $setting_field,
+            'name' => $name,
+            'users' => $users
+        ]);
+
+    }
+
+    public function serviceAndPasswordCreateForm(){
+        $user = User::all();
+        return view('page.service-and-password-create-form',[
+            'admin' => $this->admin(),
+            'users' => $user
+        ]);
+    }
+
+    public function createServiceAndPassword(Request $request){
+
+        $this->validate($request, [
+            'name_project' => 'required',
+            'id_user' => 'required',
+        ]);
+
+
+        $add = ServiceAndPass::create([
+            'name_project' => $request['name_project'],
+            'login' => $request['login'],
+            'password' => $request['password'],
+            'dop_infa' => $request['dop_infa'],
+        ]);
+
+        foreach($request['id_user'] as $id_user){
+            Sort::create([
+                'id_user' => $id_user,
+                'id_table' => $add->id,
+                'id_type' => 6,
+            ]);
+        }
+
+        return redirect()->intended('/service-and-password');
+
+    }
+
+    public function deliteServiceAndPass(Request $request){
+        $delite = explode(',',$request['arr']);
+        foreach($delite as $del){
+            ServiceAndPass::whereRaw('id = ?', [$del])->delete();
+        }
+        return $request['arr'];
+    }
+
+
+    public function editServiceAndPassword($id){
+
+        $user_all = User::all();
+        $project_contexts = \DB::table('service_and_passes')->where('id',$id)->first();
+
+        $user = \DB::table('sorts')
+            ->leftJoin('users','sorts.id_user','=','users.id')
+            ->select('sorts.id_user', 'sorts.id','users.name')
+            ->where('sorts.id_table',$project_contexts->id)
+            ->where('sorts.id_type','6')
+            ->get();
+        // dd($user);
+
+        return view('page.edit_service_and_passes_form',[
+            'users' => $project_contexts,
+            'admin' => $this->admin(),
+            'user_all' => $user_all,
+            'user' => $user,
+            'users_now' => $this->user_now()
+        ]);
+
+    }
+
+    public function updateServiceAndPassword(Request $request,ServiceAndPass $serviceAndPass){
+
+        $this->validate($request, [
+            'name_project' => 'required',
+            'id_user' => 'required',
+        ]);
+
+        $users_pass_context = $request->all();
+        $serviceAndPass->UpdateServiceAndPass($users_pass_context);
+        return redirect()->intended('service-and-password');
+
+
+    }
+
+    public function settingFieldServiceAndPassword(){
+        $arrSettingFieldSeo = \DB::table('setting_fields')->where('table_value','service_and_pass')->get();
+        return view('page.setting-field-service-and-password',[
+            'settings_sield' => $arrSettingFieldSeo,
+            'admin' => $this->admin()
+        ]);
+    }
 
 
 }

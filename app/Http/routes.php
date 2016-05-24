@@ -19,6 +19,7 @@ Route::get('/personal', ['as' => 'personal', 'uses' => 'HomeController@personal'
 
 
 Route::get('/setting-field-seo', ['as' => '/settingFieldSeo', 'uses' => 'HomeController@settingFieldSeo']);
+Route::get('/setting-field-service-and-password', ['as' => 'settingFieldServiceAndPassword', 'uses' => 'HomeController@settingFieldServiceAndPassword']);
 Route::get('/setting-field-context', ['as' => '/settingFieldContext', 'uses' => 'HomeController@settingFieldContext']);
 Route::get('/setting_field_pass_seo', ['as' => 'settingFieldPassSeo', 'uses' => 'HomeController@settingFieldPassSeo']);
 Route::get('/setting_field_pass_dev', ['as' => 'settingFieldPassDev', 'uses' => 'HomeController@settingFieldPassDev']);
@@ -107,5 +108,10 @@ Route::post('/create-project-context', ['as' => 'createProjectContext', 'uses' =
 Route::post('/delite-project-context', ['as' => 'deliteProjectContext', 'uses' => 'HomeController@deliteProjectContext']);
 Route::get('/project-context/{id}/edit', ['as' => 'editProjectContext', 'uses' => 'HomeController@editProjectContext']);
 Route::post('/update-project-context', ['as' => 'updateProjectContext', 'uses' => 'HomeController@updateProjectContext']);
-
-
+//Сервисы & Пароли
+Route::get('/service-and-password', ['as' => 'serviceAndPassword', 'uses' => 'HomeController@serviceAndPassword']);
+Route::get('/service-and-password/create', ['as' => 'serviceAndPasswordCreateForm', 'uses' => 'HomeController@serviceAndPasswordCreateForm']);
+Route::post('/create-service-and-password', ['as' => 'createServiceAndPassword', 'uses' => 'HomeController@createServiceAndPassword']);
+Route::post('/delite-service-and-pass', ['as' => 'deliteServiceAndPass', 'uses' => 'HomeController@deliteServiceAndPass']);
+Route::get('/service-and-password/{id}/edit', ['as' => 'editServiceAndPassword', 'uses' => 'HomeController@editServiceAndPassword']);
+Route::post('/update-service-and-password', ['as' => 'updateServiceAndPassword', 'uses' => 'HomeController@updateServiceAndPassword']);
