@@ -883,22 +883,22 @@ class HomeController extends Controller
         }
         $arrBudget = array();
         foreach($users as $key=>$u){
-            if(!empty($u->start)) {
-                $start = explode('/', $u->start);
-            }else{
-                $start = array('00','00','0000');
-            }
+
             if(!empty($u->end)) {
                 $end = explode('/', $u->end);
             }else{
                 $end = array('00','00','0000');
             }
 
-            $difference = intval(abs(
-                strtotime($start[1].'/'.$start[0].'/'.$start[2]) - strtotime($end[1].'/'.$end[0].'/'.$end[2])
-            ));
-            $users[$key]->interval_date = $difference / (3600 * 24);
-
+            $data_now = date('m/d/Y');
+            if(strtotime($data_now) >= strtotime($end[1].'/'.$end[0].'/'.$end[2])){
+                $users[$key]->interval_date = 0;
+            }else {
+                $difference = intval(abs(
+                    strtotime($data_now) - strtotime($end[1] . '/' . $end[0] . '/' . $end[2])
+                ));
+                $users[$key]->interval_date = $difference / (3600 * 24);
+            }
             $users[$key]->value_serialize = unserialize($u->value_serialize);
 
             $arrBudget['budget'][] = $u->budget;
