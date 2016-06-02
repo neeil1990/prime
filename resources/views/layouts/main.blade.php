@@ -255,6 +255,56 @@
         <!-- /.content -->
     </div><!-- /.content-wrapper -->
     <footer class="main-footer">
+
+        <script>
+
+
+            var grid = document.getElementById('example2');
+
+            grid.onclick = function(e) {
+                if (e.target.tagName != 'TH') return;
+
+                // Если TH -- сортируем
+                sortGrid(e.target.cellIndex, e.target.getAttribute('data-type'));
+            };
+
+            function sortGrid(colNum, type) {
+                var tbody = grid.getElementsByTagName('tbody')[0];
+
+                // Составить массив из TR
+                var rowsArray = [].slice.call(tbody.rows);
+
+                // определить функцию сравнения, в зависимости от типа
+                var compare;
+
+                switch (type) {
+                    case 'number':
+                        compare = function(rowA, rowB) {
+                            return rowA.cells[colNum].innerHTML - rowB.cells[colNum].innerHTML;
+                        };
+                        break;
+                    case 'string':
+                        compare = function(rowA, rowB) {
+                            return rowA.cells[colNum].innerHTML > rowB.cells[colNum].innerHTML ? 1 : -1;
+                        };
+                        break;
+                }
+
+
+                rowsArray.sort(compare);
+
+
+                grid.removeChild(tbody);
+
+                for (var i = 0; i < rowsArray.length; i++) {
+                    tbody.appendChild(rowsArray[i]);
+                }
+
+                grid.appendChild(tbody);
+
+            }
+        </script>
+
         <script>
             $(function(){
 

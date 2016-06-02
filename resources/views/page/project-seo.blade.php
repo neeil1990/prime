@@ -83,7 +83,11 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body" style="overflow-y: auto;">
-                        <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row"><div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                        <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                            <div class="row"><div class="col-sm-6"></div>
+                                <div class="col-sm-6"></div>
+                            </div><div class="row"><div class="col-sm-12">
+                                    <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                                         <thead>
                                         <tr role="row">
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
@@ -92,7 +96,7 @@
 
                                             @foreach($setting_field as $val)
                                                 @if($val->value == 1 or $admin == 1)
-                                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"> @if($val->value == 0) <i style="color:red" class="fa fa-close"></i> @endif {{$val->name}}</th>
+                                                    <th class="sorting" tabindex="0" @if($val->name == 'Имя проекта') data-type="string" @endif aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"> @if($val->value == 0) <i style="color:red" class="fa fa-close"></i> @endif {{$val->name}}</th>
                                                 @endif
                                             @endforeach
 
@@ -243,6 +247,8 @@
 
 
     </section>
+
+
 
     <script>
         $(function(){
