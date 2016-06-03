@@ -93,7 +93,7 @@ class HomeController extends Controller
 
 
         $params = array(
-            'token'  => 'ARPD0LoAAyvgnUF4o_cPQ7G8IAA5TICs2g',
+            'token'  => 'ARLtxCoAAywcydJlFeaJSSyJCTxhAq7K9Q',
             'method' => "GetBalance",
             'locale' => 'ru',
             'param' => array(
