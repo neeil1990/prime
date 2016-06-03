@@ -53,7 +53,7 @@ class HomeController extends Controller
 
         $client_id = '0a467c6365c9443cbfdc1354fca92150'; // Id приложения
         $client_secret = '893dc5dd47dd47fc8fcd3d40ea25bf7f'; // Пароль приложения
-        $redirect_uri = 'http://promo-prime.ru/get_balans.php'; // Callback URI
+        $redirect_uri = 'http://promo-prime.ru/get-balans'; // Callback URI
 
 
         $url = 'https://oauth.yandex.ru/authorize';

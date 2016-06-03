@@ -18,7 +18,7 @@ Route::get('/', ['as' => 'index', 'uses' => 'HomeController@index']);
 Route::get('/personal', ['as' => 'personal', 'uses' => 'HomeController@personal']);
 
 
-Route::get('/get-balanse', ['as' => 'getBalanse', 'uses' => 'HomeController@getBalanse']);
+Route::get('/get-balans', ['as' => 'getBalanse', 'uses' => 'HomeController@getBalanse']);
 
 
 Route::get('/setting-field-seo', ['as' => '/settingFieldSeo', 'uses' => 'HomeController@settingFieldSeo']);
