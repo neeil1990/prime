@@ -47,6 +47,86 @@ class HomeController extends Controller
         return $users;
     }
 
+
+    public function getBalanse(){
+
+
+        $client_id = '6efc6ca8fb964ff0ad14ba7bf773890a'; // Id приложения
+        $client_secret = '8160e6c023b743b08c9090116a9f695f'; // Пароль приложения
+        $redirect_uri = 'http://localhost'; // Callback URI
+
+
+        $url = 'https://oauth.yandex.ru/authorize';
+
+        $params = array(
+            'response_type' => 'code',
+            'client_id'     => $client_id,
+            'display'       => 'popup'
+        );
+
+
+        echo $link = '<p><a href="' . $url . '?' . urldecode(http_build_query($params)) . '">Аутентификация через Yandex</a></p>';
+
+        if (isset($_GET['code'])) {
+            $result = false;
+
+            $params = array(
+                'grant_type'    => 'authorization_code',
+                'code'          => $_GET['code'],
+                'client_id'     => $client_id,
+                'client_secret' => $client_secret
+            );
+
+            $url = 'https://oauth.yandex.ru/token';
+        }
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, urldecode(http_build_query($params)));
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        $result = curl_exec($curl);
+        curl_close($curl);
+
+        $tokenInfo = json_decode($result, true);
+
+
+        $params = array(
+            'token'  => 'ARPD0LoAAyvgnUF4o_cPQ7G8IAA5TICs2g',
+            'method' => "GetBalance",
+            'locale' => 'ru',
+            'param' => array(
+                '14146373'
+
+            )
+        );
+
+
+        $getBalanse = json_encode($params);
+
+        var_dump($tokenInfo['access_token']);
+
+        $HEADER = array(
+            'Accept-Language: ru',
+            'Content-Type: application/json; charset=utf-8'
+        );
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, 'https://api.direct.yandex.ru/v4/json/');
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl,CURLOPT_HTTPHEADER, $HEADER);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $getBalanse);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        $result = curl_exec($curl);
+        curl_close($curl);
+
+
+        var_dump($result);
+    }
+
+
     public function showProcentGroup(Request $request){
 
         $procent = \DB::table('groups')
