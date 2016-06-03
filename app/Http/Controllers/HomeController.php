@@ -105,7 +105,7 @@ class HomeController extends Controller
 
         $getBalanse = json_encode($params);
 
-        var_dump($tokenInfo['access_token']);
+        //var_dump($tokenInfo['access_token']);
 
         $HEADER = array(
             'Accept-Language: ru',
