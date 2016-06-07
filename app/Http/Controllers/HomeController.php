@@ -94,7 +94,7 @@ class HomeController extends Controller
         var_dump($tokenInfo);
 
         $params = array(
-            'token'  => 'ARLtxCoAAywcydJlFeaJSSyJCTxhAq7K9Q',
+            'token'  => 'ARLtxCoAAywc6BktMsd0RFu97hhGx8XUFA',
             'method' => "GetBalance",
             'locale' => 'ru',
             'param' => array(
