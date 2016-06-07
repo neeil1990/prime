@@ -91,6 +91,7 @@ class HomeController extends Controller
 
         $tokenInfo = json_decode($result, true);
 
+        var_dump($tokenInfo);
 
         $params = array(
             'token'  => 'ARLtxCoAAywcydJlFeaJSSyJCTxhAq7K9Q',
