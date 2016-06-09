@@ -129,7 +129,7 @@
 
 
                                                     <div class="update_token_yandex">
-                                                        <small class="label label-primary" style="cursor: pointer">Обновить/Закрыть</small>
+                                                        <small class="label label-primary obnovit" style="cursor: pointer">Обновить/Закрыть</small>
 
                                                         <form method="POST" action="/update-token-yandex-form" class="update_token_yandex_form" style="display: none;">
                                                         <div class="input-group input-group-sm">
@@ -217,9 +217,9 @@
     <script>
         $(function(){
 
-            $('.update_token_yandex').click(function(){
-               var form = $(this).find('.update_token_yandex_form');
-                    $(form).toggle('slow');
+            $('.obnovit').click(function(){
+               var rod = $(this).parent(".update_token_yandex")
+               var doch = $(rod).children(".update_token_yandex_form").toggle('slow')
             });
 
 
