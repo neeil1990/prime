@@ -1081,16 +1081,16 @@ class HomeController extends Controller
         $balanse_yandex = \DB::table('token_yandexes')->get();
 
         $arrBalanseYa = array();
-
+        foreach($balanse_yandex as $ya){
 
             $params = array(
-                'token'  => 'AQAAAAAUht7CAAM6hYuDsliJFUd7lTssNdaHhxE',
+                'token'  => $ya->token_yandex,
                 'method' => "AccountManagement",
                 'param' => array(
                     'Action' => 'Get',
                     'locale' => 'ru',
                     'SelectionCriteria' => array(
-                        'Logins' => array('direct.arenda-vrn.com')
+                        'Logins' => array($ya->login)
                     ),
                 )
             );
@@ -1115,7 +1115,7 @@ class HomeController extends Controller
             var_dump(json_decode($result));
 
 
-
+        }
 
     }
 
