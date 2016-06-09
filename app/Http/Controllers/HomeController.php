@@ -1112,8 +1112,9 @@ class HomeController extends Controller
             $result = curl_exec($curl);
             curl_close($curl);
 
-            var_dump(json_decode($result));
+            $ac_ya = json_decode($result);
 
+            var_dump($ac_ya['data']['Accounts'][0]['Amount']);
 
         }
 
