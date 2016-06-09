@@ -54,12 +54,13 @@ class HomeController extends Controller
 
     public function updateTokenYandexForm(Request $request){
 
+
+        \Session::put('yandex_token_id', $request['yandex_token_id']);
+
         TokenYandex::create([
             'id_company' => trim($request['yandex_token_id']),
             'login' => trim($request['yandex_login_token'])
         ]);
-
-        $_SESSION['yandex_token_id'] = $request['yandex_token_id'];
 
         $client_id = '63deb679ff8b483ebb32ca26c141b23e'; // Id приложения
 
@@ -71,9 +72,9 @@ class HomeController extends Controller
             'display'       => 'popup'
         );
 
-        $link = '' . $url . '?' . urldecode(http_build_query($params)) . '';
+        //$link = '' . $url . '?' . urldecode(http_build_query($params)) . '';
 
-        return redirect()->intended($link);
+        return redirect()->intended('/project-context?code=6441563');
 
 
     }
@@ -1106,8 +1107,10 @@ class HomeController extends Controller
 
             $tokenInfo = json_decode($result, true);
 
+            $yandex_token_id =  \Session::get('yandex_token_id');
+
             \DB::table('token_yandexes')
-                ->where('id_company', $_SESSION['yandex_token_id'])
+                ->where('id_company', $yandex_token_id)
                 ->update(array(
                     'token_yandex' => $tokenInfo['access_token']
                 ));
