@@ -1113,7 +1113,7 @@ class HomeController extends Controller
             curl_close($curl);
 
             $ac_ya = json_decode($result);
-            
+
             \DB::table('project_contexts')
                 ->where('id', $ya->id_company)
                 ->update(array(
@@ -1155,14 +1155,15 @@ class HomeController extends Controller
 
             $tokenInfo = json_decode($result, true);
 
-            $yandex_token_id =  \Session::get('yandex_token_id');
+            if(!empty($tokenInfo['access_token'])) {
+                $yandex_token_id = \Session::get('yandex_token_id');
 
-            \DB::table('token_yandexes')
-                ->where('id_company', $yandex_token_id)
-                ->update(array(
-                    'token_yandex' => $tokenInfo['access_token']
-                ));
-
+                \DB::table('token_yandexes')
+                    ->where('id_company', $yandex_token_id)
+                    ->update(array(
+                        'token_yandex' => $tokenInfo['access_token']
+                    ));
+            }
         }
 
         $setting_field = \DB::table('setting_fields')->where('table_value','context')->get();
