@@ -1076,6 +1076,49 @@ class HomeController extends Controller
     }
 
 
+    public function getBalanseYandex(){
+
+        $balanse_yandex = \DB::table('token_yandexes')->get();
+
+        $arrBalanseYa = array();
+
+
+            $params = array(
+                'token'  => 'AQAAAAAUht7CAAM6hYuDsliJFUd7lTssNdaHhxE',
+                'method' => "AccountManagement",
+                'param' => array(
+                    'Action' => 'Get',
+                    'locale' => 'ru',
+                    'SelectionCriteria' => array(
+                        'Logins' => array('direct.arenda-vrn.com')
+                    ),
+                )
+            );
+
+            $getBalanse = json_encode($params);
+
+            $HEADER = array(
+                'Accept-Language: ru',
+                'Content-Type: application/json; charset=utf-8'
+            );
+
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, 'https://api.direct.yandex.ru/live/v4/json/');
+            curl_setopt($curl, CURLOPT_POST, 1);
+            curl_setopt($curl,CURLOPT_HTTPHEADER, $HEADER);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $getBalanse);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            $result = curl_exec($curl);
+            curl_close($curl);
+
+            var_dump(json_decode($result));
+
+
+
+
+    }
+
 
 
     //Проекты context

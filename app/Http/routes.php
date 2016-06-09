@@ -18,6 +18,9 @@ Route::get('/', ['as' => 'index', 'uses' => 'HomeController@index']);
 Route::get('/personal', ['as' => 'personal', 'uses' => 'HomeController@personal']);
 
 
+Route::get('/get-balanse-yandex', ['as' => 'getBalanseYandex', 'uses' => 'HomeController@getBalanseYandex']);
+
+
 
 Route::post('/update-token-yandex-form', ['as' => 'updateTokenYandexForm', 'uses' => 'HomeController@updateTokenYandexForm']);
 
