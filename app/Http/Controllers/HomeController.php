@@ -72,9 +72,9 @@ class HomeController extends Controller
             'display'       => 'popup'
         );
 
-        //$link = '' . $url . '?' . urldecode(http_build_query($params)) . '';
+        $link = '' . $url . '?' . urldecode(http_build_query($params)) . '';
 
-        return redirect()->intended('/project-context?code=6441563');
+        return redirect()->intended($link);
 
 
     }
