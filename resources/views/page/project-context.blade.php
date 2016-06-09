@@ -118,7 +118,21 @@
                                                 <td class="">{{$user->go_advords}}</td>
                                                 @endif
                                                 @if($setting_field[3]->value == 1 or $admin == 1)
-                                                <td class="">{{$user->ost_bslsnse_ya}}</td>
+                                                <td class="">
+
+                                                    <div class="update_token_yandex">Обновить
+
+                                                      <form method="POST" action="/update-token-yandex-form" class="update_token_yandex_form" style="display: none;">
+                                                          {!! csrf_field() !!}
+                                                          <input type="hidden" name="yandex_token_id" value="{{$user->id}}">
+                                                          <input type="text" placeholder="введите логин яндекс" name="yandex_login_token" value="">
+                                                          <input type="submit" value="ok"></form>
+
+                                                    </div>
+
+                                                    {{$user->ost_bslsnse_ya}}
+
+                                                </td>
                                                 @endif
                                                 @if($setting_field[4]->value == 1 or $admin == 1)
                                                 <td class="">{{$user->ost_bslsnse_go}}</td>
@@ -189,6 +203,13 @@
 
     <script>
         $(function(){
+
+            $('.update_token_yandex').click(function(){
+               var form = $(this).find('.update_token_yandex_form');
+                $(form).removeAttr('style');
+            });
+
+
             $("tbody").sortable({
                 items:             "tr",
                 tolerance:         "pointer",

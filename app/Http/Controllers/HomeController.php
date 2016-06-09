@@ -8,6 +8,7 @@ use App\ProjectContext;
 use App\ProjectSeo;
 use App\ServiceAndPass;
 use App\Sort;
+use App\TokenYandex;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Validator;
@@ -48,13 +49,19 @@ class HomeController extends Controller
     }
 
 
-    public function getBalanse(){
 
 
-        $client_id = '0a467c6365c9443cbfdc1354fca92150'; // Id приложения
-        $client_secret = '893dc5dd47dd47fc8fcd3d40ea25bf7f'; // Пароль приложения
-        $redirect_uri = 'http://promo-prime.ru/get-balans'; // Callback URI
 
+    public function updateTokenYandexForm(Request $request){
+
+        TokenYandex::create([
+            'id_company' => trim($request['yandex_token_id']),
+            'login' => trim($request['yandex_login_token'])
+        ]);
+
+        $_SESSION['yandex_token_id'] = $request['yandex_token_id'];
+
+        $client_id = '63deb679ff8b483ebb32ca26c141b23e'; // Id приложения
 
         $url = 'https://oauth.yandex.ru/authorize';
 
@@ -64,68 +71,13 @@ class HomeController extends Controller
             'display'       => 'popup'
         );
 
+        $link = '<p><a href="' . $url . '?' . urldecode(http_build_query($params)) . '">Аутентификация через Yandex</a></p>';
 
-        echo $link = '<p><a href="' . $url . '?' . urldecode(http_build_query($params)) . '">Аутентификация через Yandex</a></p>';
-
-        if (isset($_GET['code'])) {
-            $result = false;
-
-            $params = array(
-                'grant_type'    => 'authorization_code',
-                'code'          => $_GET['code'],
-                'client_id'     => $client_id,
-                'client_secret' => $client_secret
-            );
-
-            $url = 'https://oauth.yandex.ru/token';
-        }
-
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, urldecode(http_build_query($params)));
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        $result = curl_exec($curl);
-        curl_close($curl);
-
-        $tokenInfo = json_decode($result, true);
-
-        var_dump($tokenInfo);
-
-        $params = array(
-            'token'  => 'ARLtxCoAAywc6BktMsd0RFu97hhGx8XUFA',
-            'method' => "GetBalance",
-            'locale' => 'ru',
-            'param' => array(
-                '14146373'
-
-            )
-        );
+        return redirect()->intended($link);
 
 
-        $getBalanse = json_encode($params);
-
-        //var_dump($tokenInfo['access_token']);
-
-        $HEADER = array(
-            'Accept-Language: ru',
-            'Content-Type: application/json; charset=utf-8'
-        );
-
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, 'https://api.direct.yandex.ru/v4/json/');
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl,CURLOPT_HTTPHEADER, $HEADER);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $getBalanse);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        $result = curl_exec($curl);
-        curl_close($curl);
-
-
-        var_dump($result);
     }
+
 
 
     public function showProcentGroup(Request $request){
@@ -1128,6 +1080,39 @@ class HomeController extends Controller
     //Проекты context
 
     public function projectContext(){
+
+        if (isset($_GET['code'])) {
+
+            $client_id = '63deb679ff8b483ebb32ca26c141b23e'; // Id приложения
+            $client_secret = 'd453b19a29624959a06fd26f76aa8075'; // Пароль приложения
+
+            $params = array(
+                'grant_type'    => 'authorization_code',
+                'code'          => $_GET['code'],
+                'client_id'     => $client_id,
+                'client_secret' => $client_secret
+            );
+
+            $url = 'https://oauth.yandex.ru/token';
+
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_POST, 1);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, urldecode(http_build_query($params)));
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            $result = curl_exec($curl);
+            curl_close($curl);
+
+            $tokenInfo = json_decode($result, true);
+
+            \DB::table('token_yandexes')
+                ->where('id_company', $_SESSION['yandex_token_id'])
+                ->update(array(
+                    'token_yandex' => $tokenInfo['access_token']
+                ));
+
+        }
 
         $setting_field = \DB::table('setting_fields')->where('table_value','context')->get();
 

@@ -18,7 +18,8 @@ Route::get('/', ['as' => 'index', 'uses' => 'HomeController@index']);
 Route::get('/personal', ['as' => 'personal', 'uses' => 'HomeController@personal']);
 
 
-Route::get('/get-balans', ['as' => 'getBalanse', 'uses' => 'HomeController@getBalanse']);
+
+Route::post('/update-token-yandex-form', ['as' => 'updateTokenYandexForm', 'uses' => 'HomeController@updateTokenYandexForm']);
 
 
 Route::get('/setting-field-seo', ['as' => '/settingFieldSeo', 'uses' => 'HomeController@settingFieldSeo']);
