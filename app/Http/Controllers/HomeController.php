@@ -71,7 +71,7 @@ class HomeController extends Controller
             'display'       => 'popup'
         );
 
-        $link = '<p><a href="' . $url . '?' . urldecode(http_build_query($params)) . '">Аутентификация через Yandex</a></p>';
+        $link = '' . $url . '?' . urldecode(http_build_query($params)) . '';
 
         return redirect()->intended($link);
 
