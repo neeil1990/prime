@@ -1123,12 +1123,23 @@ class HomeController extends Controller
             curl_close($curl);
 
             $ac_ya = json_decode($result);
-
+			
+			
+				
+				
+			if(empty($ac_ya->data->Accounts[0]->Amount)){
+				\DB::table('project_contexts')
+                ->where('id', $ya->id_company)
+                ->update(array(
+                    'ost_bslsnse_ya' => 0
+                ));
+			}else{
             \DB::table('project_contexts')
                 ->where('id', $ya->id_company)
                 ->update(array(
                     'ost_bslsnse_ya' => $ac_ya->data->Accounts[0]->Amount
                 ));
+			}
 
         }
 
