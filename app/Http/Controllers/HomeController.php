@@ -57,10 +57,20 @@ class HomeController extends Controller
 
         \Session::put('yandex_token_id', $request['yandex_token_id']);
 
-        TokenYandex::create([
-            'id_company' => trim($request['yandex_token_id']),
-            'login' => trim($request['yandex_login_token'])
-        ]);
+        $results = \DB::table('token_yandexes')->where('id_company', $request['yandex_token_id'])->first();
+
+        if(isset($results->id)){
+            \DB::table('token_yandexes')
+                ->where('id', $results->id)
+                ->update(array(
+                    'login' => trim($request['yandex_login_token'])
+                ));
+        }else{
+            TokenYandex::create([
+                'id_company' => trim($request['yandex_token_id']),
+                'login' => trim($request['yandex_login_token'])
+            ]);
+        }
 
         $client_id = '63deb679ff8b483ebb32ca26c141b23e'; // Id приложения
 
