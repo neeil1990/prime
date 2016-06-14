@@ -11,16 +11,70 @@
 |
 */
 
+
+//Route::get('/get-balanse-yandex', ['as' => 'getBalanseYandex', 'uses' => 'HomeController@getBalanseYandex']);
+
+Route::get('/get-balanse-yandex', function()
+{
+    $balanse_yandex = \DB::table('token_yandexes')->get();
+
+    $arrBalanseYa = array();
+    foreach($balanse_yandex as $ya){
+
+        $params = array(
+            'token'  => $ya->token_yandex,
+            'method' => "AccountManagement",
+            'param' => array(
+                'Action' => 'Get',
+                'locale' => 'ru',
+                'SelectionCriteria' => array(
+                    'Logins' => array($ya->login)
+                ),
+            )
+        );
+
+        $getBalanse = json_encode($params);
+
+        $HEADER = array(
+            'Accept-Language: ru',
+            'Content-Type: application/json; charset=utf-8'
+        );
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, 'https://api.direct.yandex.ru/live/v4/json/');
+        curl_setopt($curl, CURLOPT_POST, 1);
+        curl_setopt($curl,CURLOPT_HTTPHEADER, $HEADER);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $getBalanse);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        $result = curl_exec($curl);
+        curl_close($curl);
+
+        $ac_ya = json_decode($result);
+
+
+        if(empty($ac_ya->data->Accounts[0]->Amount)){
+            \DB::table('project_contexts')
+                ->where('id', $ya->id_company)
+                ->update(array(
+                    'ost_bslsnse_ya' => 0
+                ));
+        }else{
+            \DB::table('project_contexts')
+                ->where('id', $ya->id_company)
+                ->update(array(
+                    'ost_bslsnse_ya' => $ac_ya->data->Accounts[0]->Amount
+                ));
+        }
+
+    }
+});
+
 Route::auth();
 
 Route::get('/', ['as' => 'index', 'uses' => 'HomeController@index']);
 
 Route::get('/personal', ['as' => 'personal', 'uses' => 'HomeController@personal']);
-
-
-Route::get('/get-balanse-yandex', ['as' => 'getBalanseYandex', 'uses' => 'HomeController@getBalanseYandex']);
-
-
 
 Route::post('/update-token-yandex-form', ['as' => 'updateTokenYandexForm', 'uses' => 'HomeController@updateTokenYandexForm']);
 
