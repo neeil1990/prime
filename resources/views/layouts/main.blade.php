@@ -359,7 +359,7 @@
                     }
                 });
 
-                $('.palv_settings').css('z-index','1000');
+                $('.palv_settings').css('z-index','10');
                 $('.palv_settings').hcSticky({
                     top: 0,
                     bottomEnd: 155,
