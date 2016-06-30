@@ -215,10 +215,21 @@ class HomeController extends Controller
 
         $arrBudget = array();
         foreach($project_seo as $key=>$u){
-            $difference = intval(abs(
-                strtotime($u->start) - strtotime($u->end)
-            ));
-            $project_seo[$key]->interval_date = $difference / (3600 * 24);
+            if(!empty($u->end)) {
+                $end = explode('/', $u->end);
+            }else{
+                $end = array('00','00','0000');
+            }
+
+            $data_now = date('m/d/Y');
+            if(strtotime($data_now) >= strtotime($end[1].'/'.$end[0].'/'.$end[2])){
+                $project_seo[$key]->interval_date = 0;
+            }else {
+                $difference = intval(abs(
+                    strtotime($data_now) - strtotime($end[1] . '/' . $end[0] . '/' . $end[2])
+                ));
+                $project_seo[$key]->interval_date = $difference / (3600 * 24);
+            }
 
             $project_seo[$key]->value_serialize = unserialize($u->value_serialize);
 
@@ -938,6 +949,7 @@ class HomeController extends Controller
                 ));
                 $users[$key]->interval_date = $difference / (3600 * 24);
             }
+
             $users[$key]->value_serialize = unserialize($u->value_serialize);
 
             $arrBudget['budget'][] = $u->budget;

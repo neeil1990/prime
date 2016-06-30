@@ -169,7 +169,7 @@
                                                 @endif
                                                 @if($setting_field[11]->value == 1 or $admin == 1)
                                                 <td class="" style="
-                                                @if($user->interval_date < 90)
+                                                @if($user->interval_date < 500)
                                                         background-color: #7CC045;
                                                 @endif
                                                 @if($user->interval_date < 80)
