@@ -1077,7 +1077,7 @@ class HomeController extends Controller
             ->leftJoin('project_seos','sorts.id_table','=','project_seos.id')
             ->where('sorts.id_type','4')->get();
 
-        if(empty(count($countStatus['countArchive']))){
+        if(empty($countStatus['countArchive'])){
             $countStatus['countArchive'] = 0;
         }else{
             $countStatus['countArchive'] = count($countStatus['countArchive']);
