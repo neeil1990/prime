@@ -59,7 +59,9 @@
                                     Количество активных проектов: {{$count_seo_prodject}} |
                                     Бюджет активных проектов: {{$budget_seo_osvoeno['budget']}} |
                                     Освоенный бюджет: {{$budget_seo_osvoeno['osvoeno']}} |
+                                    @if($admin == 1)
                                     Архив: <a href="/archive-page-project/project-seo/">{{$count_status}}</a>
+                                    @endif
                                 </div>
                             </div>
 
