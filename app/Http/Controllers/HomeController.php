@@ -1306,12 +1306,18 @@ class HomeController extends Controller
 
         //dd();
 
+        if(empty($countStatus['countArchive'])){
+            $countStatus['countArchive'] = 0;
+        }else{
+            $countStatus['countArchive'] = count($countStatus['countArchive']);
+        }
+
         return view('page.project-context',[
             'budget_context_project' => array_sum($arrBuget),
             'count_context_project' => count($countStatus['active']),
             'users' => $users,
             'name' => $name,
-            'count_status' => count($countStatus['countArchive']),
+            'count_status' => $countStatus['countArchive'],
             'archive' => $archive,
             'users_now' => $this->user_now(),
             'admin' => $this->admin(),
