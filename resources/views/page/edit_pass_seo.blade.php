@@ -12,6 +12,11 @@
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/update-create-pass-seo') }}">
                             {!! csrf_field() !!}
 
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Активность</label>
+                                <input type="checkbox" name="status" value="1" @if($users->status == 1) checked="checked" @endif >
+                            </div>
+
                             <div class="form-group{{ $errors->has('name_project') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Имя проекта</label>
 

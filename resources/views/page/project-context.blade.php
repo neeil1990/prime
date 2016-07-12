@@ -46,7 +46,8 @@
                             <div class="row">
                                 <div class="col-md-9">
                                     Количество активных проектов: {{$count_context_project}} |
-                                    Бюджет активных проектов: {{$budget_context_project}}
+                                    Бюджет активных проектов: {{$budget_context_project}} |
+                                    Архив: <a href="/archive-page-project/project-context/">{{$count_status}}</a>
                                 </div>
                             </div>
 
@@ -99,6 +100,7 @@
                                         <tbody>
 
                                         @foreach($users as $user)
+                                            @if($user->status == $archive)
                                             <tr role="row" class="odd">
                                                 <td class=""><i class="fa fa-arrows" style="color: grey"></i></td>
                                                 <td class="">
@@ -198,6 +200,7 @@
                                                 </td>
                                                 @endif
                                             </tr>
+                                            @endif
                                             @endforeach
                                         </tbody>
                                     </table>

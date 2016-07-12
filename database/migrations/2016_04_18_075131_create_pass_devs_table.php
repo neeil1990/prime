@@ -15,6 +15,7 @@ class CreatePassDevsTable extends Migration
         Schema::create('pass_devs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('positions');
+            $table->integer('status');
             $table->string('name_project');
             $table->string('id_glavn_user');
             $table->text('admin_url');

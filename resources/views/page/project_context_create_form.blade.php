@@ -13,6 +13,11 @@
                             {!! csrf_field() !!}
 
                             <div class="form-group">
+                                <label class="col-md-4 control-label">Активность</label>
+                                <input type="checkbox" name="status" value="1">
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Имя проекта</label>
 
                                 <div class="col-md-6">

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProjectSeo extends Model
 {
     protected $fillable = [
+        'status',
         'name_project',
         'budget',
         'osvoeno',
@@ -45,9 +46,13 @@ class ProjectSeo extends Model
             $value_serialize = serialize($data['value_serialize']);
         }
 
+        if(!isset($data['status'])){
+            $data['status'] = 0;
+        }
 
         \DB::table('project_seos')->where('id', $data['id'])
             ->update(array(
+                'status' => $data['status'],
                 'name_project' => $data['name_project'],
                 'budget' => $data['budget'],
                 'osvoeno' => $data['osvoeno'],

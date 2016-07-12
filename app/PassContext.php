@@ -8,6 +8,7 @@ class PassContext extends Model
 {
     protected $fillable = [
         'id_user',
+        'status',
         'name_project',
         'id_glavn_user',
         'specialist',
@@ -38,9 +39,14 @@ class PassContext extends Model
             $value_serialize = serialize($data['value_serialize']);
         }
 
+        if(!isset($data['status'])){
+            $data['status'] = 0;
+        }
+
         \DB::table('pass_contexts')->where('id', $data['id'])
             ->update(array(
                 'name_project' => $data['name_project'],
+                'status' => $data['status'],
                 'id_glavn_user' => $data['id_user_gl'],
                 'loginYandex' => $data['loginYandex'],
                 'passYandex' => $data['passYandex'],

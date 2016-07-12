@@ -74,6 +74,9 @@ Route::auth();
 
 Route::get('/', ['as' => 'index', 'uses' => 'HomeController@index']);
 
+//Архив
+Route::get('/archive-page-project/{name}', ['as' => 'archivePageProject', 'uses' => 'HomeController@archivePageProject']);
+
 Route::get('/personal', ['as' => 'personal', 'uses' => 'HomeController@personal']);
 
 Route::post('/update-token-yandex-form', ['as' => 'updateTokenYandexForm', 'uses' => 'HomeController@updateTokenYandexForm']);

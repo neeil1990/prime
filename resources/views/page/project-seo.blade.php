@@ -58,7 +58,8 @@
 
                                     Количество активных проектов: {{$count_seo_prodject}} |
                                     Бюджет активных проектов: {{$budget_seo_osvoeno['budget']}} |
-                                    Освоенный бюджет: {{$budget_seo_osvoeno['osvoeno']}}
+                                    Освоенный бюджет: {{$budget_seo_osvoeno['osvoeno']}} |
+                                    Архив: <a href="/archive-page-project/project-seo/">{{$count_status}}</a>
                                 </div>
                             </div>
 
@@ -105,6 +106,7 @@
 
 
                                         @foreach($users as $user)
+                                            @if($user->status == $archive)
                                             <tr role="row" class="odd">
                                                 <td class=""><i class="fa fa-arrows" style="color: grey"></i></td>
                                                 <td class="">
@@ -232,6 +234,7 @@
                                                 @endif
 
                                             </tr>
+                                            @endif
                                             @endforeach
                                         </tbody>
                                     </table>

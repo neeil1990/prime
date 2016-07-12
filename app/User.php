@@ -13,6 +13,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'status',
         'name',
         'specialism',
         'level',
@@ -38,17 +39,8 @@ class User extends Authenticatable
     ];
 
 
-    public function getUser($id){
 
-        $users = User::whereRaw('id = ? and admin = 1', [$id])->count();
-        if($users == 1){
-            $users = \DB::table('users')->orderBy('positions')->get();
-            return $users;
-        }else{
-            $users = User::whereRaw('id = ? and admin = 0', [$id])->get();
-            return $users;
-        }
-    }
+
 
     public function UpdateUser($data){
 
@@ -66,8 +58,13 @@ class User extends Authenticatable
 
         }
 
+        if(!isset($data['status'])){
+            $data['status'] = 0;
+        }
+
         User::where('id', $data['id'])
             ->update(array(
+                'status' => $data['status'],
                 'name' => $data['name'],
                 'admin' => $data['admin'],
                 'specialism' => $data['specialism'],

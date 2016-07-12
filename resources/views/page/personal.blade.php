@@ -36,6 +36,7 @@
                                         <tbody>
                                         <form action="{{ url('/update-personal-positions') }}" id="myPositionGroup" method="post">
                                         @foreach ($users as $user)
+                                                @if($user->status == $archive)
                                         <tr role="row" class="odd">
                                             <td class=""><i class="fa fa-arrows" style="color: grey"></i></td>
                                             <td class="">
@@ -55,6 +56,7 @@
                                             <td class="">{{$user->procent_context_itog}}</td>
                                             <td class="">{{$user->itog}}</td>
                                         </tr>
+                                                @endif
                                         @endforeach
                                         </form>
                                         </tbody>
@@ -75,7 +77,8 @@
                     <a href="" class="add_check">Выделить все |</a>
                     <a href="" style="display: none" class="old_check">Снять все |</a>
                     <a href="" class="button">Удалить |</a>
-                    <a href="" class="edit">Изменить</a>
+                    <a href="" class="edit">Изменить</a> |
+                    Архив: <a href="/archive-page-project/personal/">{{$count_archive}}</a>
                 </div>
                     @endif
             </div>

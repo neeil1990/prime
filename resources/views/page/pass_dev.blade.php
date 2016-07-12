@@ -50,6 +50,13 @@
                                 <small class="label label-primary">Настройка полей</small>
                             </a>
 
+
+                            <div class="row">
+                                <div class="col-md-9">
+                                    Архив: <a href="/archive-page-project/pass-dev/">{{$count_archive}}</a>
+                                </div>
+                            </div>
+
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -85,6 +92,7 @@
                                         <tbody>
 
                                         @foreach($users as $user)
+                                            @if($user->status == $archive)
                                             <tr role="row" class="odd">
                                                 <td class=""><i class="fa fa-arrows" style="color: grey"></i></td>
                                                 <td class="">
@@ -153,6 +161,7 @@
                                                 </td>
                                                 @endif
                                             </tr>
+                                            @endif
                                         @endforeach
 
                                         </tbody>

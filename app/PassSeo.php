@@ -8,6 +8,7 @@ class PassSeo extends Model
 {
     protected $fillable = [
         'id_user',
+        'status',
         'id_glavn_user',
         'name_project',
         'specialist',
@@ -29,8 +30,13 @@ class PassSeo extends Model
             $value_serialize = serialize($data['value_serialize']);
         }
 
+        if(!isset($data['status'])){
+            $data['status'] = 0;
+        }
+
         \DB::table('pass_seos')->where('id', $data['id'])
             ->update(array(
+                'status' => $data['status'],
                 'name_project' => $data['name_project'],
                 'id_glavn_user' => $data['id_user_gl'],
                 'ssa' => $data['ssa'],

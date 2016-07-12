@@ -44,6 +44,36 @@ class HomeController extends Controller
     }
 
 
+    public function archivePageProject($name){
+
+        if($name == 'project-seo'){
+            return $this->projectSeo(0);
+        }
+        if($name == 'pass-seo'){
+            return $this->passSEO(0);
+        }
+        if($name == 'pass-dev'){
+            return $this->passDev(0);
+        }
+        if($name == 'project-context'){
+            return $this->projectContext(0);
+        }
+        if($name == 'pass-context'){
+            return $this->passContext(0);
+        }
+        if($name == 'service-and-password'){
+            return $this->serviceAndPassword(0);
+        }
+        if($name == 'personal'){
+            return $this->personal(0);
+        }
+        //dd($name);
+
+        return view('page.archive-page-project',[
+            'admin' => $this->admin()
+        ]);
+    }
+
 
 
 
@@ -353,13 +383,26 @@ class HomeController extends Controller
 
 
 
-    public function personal(User $user,Groups $groups){
+    public function personal($archive = 1){
+
 
        $user_groups = \DB::table('groups')->orderBy('positions')->get();
-       $users = $user->getUser(Auth::user()->id);
+
+        $users = User::whereRaw('id = ? and admin = 1', [Auth::user()->id])->count();
+        if($users == 1){
+            $users = \DB::table('users')->orderBy('positions')->get();
+        }else{
+            $users = User::whereRaw('id = ? and admin = 0', [Auth::user()->id])->get();
+        }
+
 
         $arrItog = array();
+        $countArchive = array();
         foreach($users as $key => $us) {
+            if($us->status == 0){
+                $countArchive[] = $us->id;
+            }
+
 
             $project_context_itog = \DB::table('sorts')
                 ->leftJoin('project_contexts','sorts.id_table','=','project_contexts.id')
@@ -389,6 +432,8 @@ class HomeController extends Controller
             'itog_sum' =>  array_sum($arrItog),
             'count_user' => count($users),
             'users' => $users,
+            'archive' => $archive,
+            'count_archive' => count($countArchive),
             'user_groups' => $user_groups,
             'users_now' => $this->user_now(),
             'admin' => $this->admin()
@@ -421,7 +466,12 @@ class HomeController extends Controller
         if($request['admin'] == null){
             $request['admin'] = 0;
         }
+        if(!isset($request['status'])){
+            $request['status'] = 0;
+        }
+
         User::create([
+            'status' => $request['status'],
             'name' => $request['name'],
             'admin' => $request['admin'],
             'specialism' => $request['specialism'],
@@ -515,7 +565,7 @@ class HomeController extends Controller
     }
 
 
-    public function passSEO(PassSeo $passSeo){
+    public function passSEO($archive = 1){
 
         $setting_field = \DB::table('setting_fields')->where('table_value','pass_seo')->get();
 
@@ -533,7 +583,11 @@ class HomeController extends Controller
             ->get();
         }
 
+        $countArchive = array();
         foreach($users as $key=>$u){
+            if($u->status == 0) {
+                $countArchive[] = $u->id;
+            }
             $users[$key]->value_serialize = unserialize($u->value_serialize);
         }
 
@@ -548,6 +602,8 @@ class HomeController extends Controller
         return view('page.pass_seo',[
             'users' => $users,
             'name' => $name,
+            'count_archive' => count($countArchive),
+            'archive' => $archive,
             'users_now' => $this->user_now(),
             'admin' => $this->admin(),
             'setting_field' => $setting_field
@@ -572,7 +628,12 @@ class HomeController extends Controller
             'id_user' => 'required'
         ]);
 
+        if(!isset($request['status'])){
+            $request['status'] = 0;
+        }
+
       $add = PassSeo::create([
+            'status' => $request['status'],
             'name_project' => $request['name_project'],
             'id_glavn_user' => $request['id_user_gl'],
             'ssa' => $request['ssa'],
@@ -649,7 +710,7 @@ class HomeController extends Controller
 
 
     //пароли контекст
-    public function passContext(PassContext $passContext){
+    public function passContext($archive = 1){
 
         $setting_field = \DB::table('setting_fields')->where('table_value','pass_context')->get();
 
@@ -667,7 +728,13 @@ class HomeController extends Controller
                 ->get();
         }
 
+        $countArchive = array();
         foreach($users as $key=>$u){
+
+            if($u->status == 0){
+                $countArchive[] = $u->id;
+            }
+
             $users[$key]->value_serialize = unserialize($u->value_serialize);
         }
 
@@ -681,6 +748,8 @@ class HomeController extends Controller
             'setting_field' => $setting_field,
             'users' => $users,
             'name' => $name,
+            'archive' => $archive,
+            'count_archive' => count($countArchive),
             'users_now' => $this->user_now(),
             'admin' => $this->admin()
         ]);
@@ -703,7 +772,14 @@ class HomeController extends Controller
             'id_user' => 'required'
         ]);
 
+
+
+        if(!isset($request['status'])){
+            $request['status'] = 0;
+        }
+
        $add = PassContext::create([
+            'status' => $request['status'],
             'name_project' => $request['name_project'],
             'id_glavn_user' => $request['id_glavn_user'],
             'loginYandex' => $request['loginYandex'],
@@ -775,7 +851,7 @@ class HomeController extends Controller
 
     //DEV Password
 
-    public function passDev(PassDev $passDev){
+    public function passDev($archive = 1){
 
         $setting_field = \DB::table('setting_fields')->where('table_value','pass_dev')->get();
 
@@ -793,7 +869,12 @@ class HomeController extends Controller
                 ->get();
         }
 
+        $countArchive = array();
         foreach($users as $key=>$u){
+            if($u->status == 0){
+                $countArchive[] = $u->id;
+            }
+
             $users[$key]->value_serialize = unserialize($u->value_serialize);
         }
         // dd($users);
@@ -808,6 +889,8 @@ class HomeController extends Controller
             'setting_field' => $setting_field,
             'users' => $users,
             'name' => $name,
+            'count_archive' => count($countArchive),
+            'archive' => $archive,
             'users_now' => $this->user_now(),
             'admin' => $this->admin()
         ]);
@@ -831,7 +914,12 @@ class HomeController extends Controller
         'id_user' => 'required'
         ]);
 
+        if(!isset($request['status'])){
+            $request['status'] = 0;
+        }
+
         $add = PassDev::create([
+            'status' => $request['status'],
             'name_project' => $request['name_project'],
             'id_glavn_user' => $request['id_user_gl'],
             'admin_url' => $request['admin_url'],
@@ -914,7 +1002,7 @@ class HomeController extends Controller
 
     //Проекты сео
 
-    public function projectSeo(){
+    public function projectSeo($archive = 1){
 
         $setting_field = \DB::table('setting_fields')->where('table_value','seo')->get();
 
@@ -932,7 +1020,15 @@ class HomeController extends Controller
                 ->get();
         }
         $arrBudget = array();
+        $countStatus = array();
         foreach($users as $key=>$u){
+
+            if($u->status == 0){
+                $countStatus['countArchive'][] = $u->status;
+            }
+            if($u->status == 1){
+                $countStatus['active'][] = $u->id;
+            }
 
             if(!empty($u->end)) {
                 $end = explode('/', $u->end);
@@ -952,8 +1048,15 @@ class HomeController extends Controller
 
             $users[$key]->value_serialize = unserialize($u->value_serialize);
 
-            $arrBudget['budget'][] = $u->budget;
-            $arrBudget['osvoeno'][] = $u->osvoeno;
+            if($u->status == $archive) {
+
+                $arrBudget['budget'][] = $u->budget;
+                $arrBudget['osvoeno'][] = $u->osvoeno;
+            }elseif($u->status == $archive){
+
+                $arrBudget['budget'][] = $u->budget;
+                $arrBudget['osvoeno'][] = $u->osvoeno;
+            }
 
         }
         if(!empty($arrBudget['budget'])){
@@ -977,9 +1080,11 @@ class HomeController extends Controller
 
         return view('page.project-seo',[
             'budget_seo_osvoeno' => $arrBudget,
-            'count_seo_prodject' => count($users),
+            'count_seo_prodject' => count($countStatus['active']),
+            'count_status' => count($countStatus['countArchive']),
             'users' => $users,
             'name' => $name,
+            'archive' => $archive,
             'users_now' => $this->user_now(),
             'admin' => $this->admin(),
             'setting_field' => $setting_field
@@ -1002,9 +1107,14 @@ class HomeController extends Controller
             'id_user' => 'required',
         ]);
 
+        if(!isset($request['status'])){
+            $request['status'] = 0;
+        }
+
 
         $add = ProjectSeo::create([
             'name_project' => $request['name_project'],
+            'status' => $request['status'],
             'budget' => $request['budget'],
             'osvoeno' => $request['osvoeno'],
             'osvoeno_procent' => $request['osvoeno_procent'],
@@ -1099,7 +1209,7 @@ class HomeController extends Controller
 
     //Проекты context
 
-    public function projectContext(){
+    public function projectContext($archive = 1){
 
         if (isset($_GET['code'])) {
 
@@ -1154,6 +1264,8 @@ class HomeController extends Controller
                 ->get();
         }
 
+
+
         //var_dump($users);
 
         $arrBuget = array();
@@ -1161,8 +1273,24 @@ class HomeController extends Controller
             $sum = $u->ya_direct+$u->go_advords;
             $users[$key]->sum_zp = $sum*$u->procent_seo/100;
 
-            $arrBuget[] = $u->ya_direct;
-            $arrBuget[] = $u->go_advords;
+
+            if($u->status == 0){
+                $countStatus['countArchive'][] = $u->status;
+            }
+            if($u->status == 1){
+                $countStatus['active'][] = $u->id;
+            }
+
+
+            if($u->status == $archive){
+                $arrBuget[] = $u->ya_direct;
+                $arrBuget[] = $u->go_advords;
+            }elseif($u->status == $archive){
+
+                $arrBuget[] = $u->ya_direct;
+                $arrBuget[] = $u->go_advords;
+            }
+
 
             $users[$key]->value_serialize = unserialize($u->value_serialize);
         }
@@ -1175,9 +1303,11 @@ class HomeController extends Controller
 
         return view('page.project-context',[
             'budget_context_project' => array_sum($arrBuget),
-            'count_context_project' => count($users),
+            'count_context_project' => count($countStatus['active']),
             'users' => $users,
             'name' => $name,
+            'count_status' => count($countStatus['countArchive']),
+            'archive' => $archive,
             'users_now' => $this->user_now(),
             'admin' => $this->admin(),
             'setting_field' => $setting_field
@@ -1199,8 +1329,13 @@ class HomeController extends Controller
             'id_user' => 'required',
         ]);
 
+        if(!isset($request['status'])){
+            $request['status'] = 0;
+        }
+
 
         $add = ProjectContext::create([
+            'status' => $request['status'],
             'id_glavn_user' => $request['id_glavn_user'],
             'name_project' => $request['name_project'],
             'ya_direct' => $request['ya_direct'],
@@ -1284,7 +1419,7 @@ class HomeController extends Controller
 
     //Сервисы & Пароли
 
-    public function serviceAndPassword(){
+    public function serviceAndPassword($archive = 1){
 
         $setting_field = \DB::table('setting_fields')->where('table_value','service_and_pass')->get();
 
@@ -1308,11 +1443,20 @@ class HomeController extends Controller
             ->leftJoin('service_and_passes','sorts.id_table','=','service_and_passes.id')
             ->where('sorts.id_type','6')->get();
 
+        $countArchive = array();
+        foreach($users as $u){
+            if($u->status == 0){
+                $countArchive[] = $u->id;
+            }
+        }
+
 
         return view('page.service-and-password',[
             'admin' => $this->admin(),
             'setting_field' => $setting_field,
             'name' => $name,
+            'archive' => $archive,
+            'count_archive' => count($countArchive),
             'users' => $users
         ]);
 
@@ -1334,7 +1478,13 @@ class HomeController extends Controller
         ]);
 
 
+        if(!isset($request['status'])){
+            $request['status'] = 0;
+        }
+
+
         $add = ServiceAndPass::create([
+            'status' => $request['status'],
             'name_project' => $request['name_project'],
             'login' => $request['login'],
             'password' => $request['password'],

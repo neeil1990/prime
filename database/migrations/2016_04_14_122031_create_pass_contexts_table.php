@@ -15,6 +15,7 @@ class CreatePassContextsTable extends Migration
         Schema::create('pass_contexts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('positions');
+            $table->integer('status');
             $table->string('name_project');
             $table->string('id_glavn_user');
             $table->text('loginYandex');

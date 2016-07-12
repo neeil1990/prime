@@ -17,6 +17,7 @@ class CreateProjectContextsTable extends Migration
         Schema::create('project_contexts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('positions');
+            $table->integer('status');
             $table->string('name_project');
             $table->string('ya_direct');
             $table->string('go_advords');

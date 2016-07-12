@@ -10,6 +10,7 @@ class PassDev extends Model
     protected $fillable = [
         'id_glavn_user',
         'name_project',
+        'status',
         'specialist',
         'admin_url',
         'admin_login',
@@ -30,8 +31,13 @@ class PassDev extends Model
             $value_serialize = serialize($data['value_serialize']);
         }
 
+        if(!isset($data['status'])){
+            $data['status'] = 0;
+        }
+
         \DB::table('pass_devs')->where('id', $data['id'])
             ->update(array(
+                'status' => $data['status'],
                 'name_project' => $data['name_project'],
                 'id_glavn_user' => $data['id_user_gl'],
                 'admin_url' => $data['admin_url'],

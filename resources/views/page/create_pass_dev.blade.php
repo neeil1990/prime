@@ -12,6 +12,11 @@
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/create-pass-dev') }}">
                             {!! csrf_field() !!}
 
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Активность</label>
+                                <input type="checkbox" name="status" value="1">
+                            </div>
+
                             <div class="form-group{{ $errors->has('name_project') ? ' has-error' : '' }}">
                                 <label class="col-md-4 control-label">Имя проекта</label>
 
