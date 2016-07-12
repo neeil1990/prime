@@ -1077,11 +1077,16 @@ class HomeController extends Controller
             ->leftJoin('project_seos','sorts.id_table','=','project_seos.id')
             ->where('sorts.id_type','4')->get();
 
+        if(empty(count($countStatus['countArchive']))){
+            $countStatus['countArchive'] = 0;
+        }else{
+            $countStatus['countArchive'] = count($countStatus['countArchive'];
+        }
 
         return view('page.project-seo',[
             'budget_seo_osvoeno' => $arrBudget,
             'count_seo_prodject' => count($countStatus['active']),
-            'count_status' => count($countStatus['countArchive']),
+            'count_status' => $countStatus['countArchive'],
             'users' => $users,
             'name' => $name,
             'archive' => $archive,
