@@ -1080,7 +1080,7 @@ class HomeController extends Controller
         if(empty(count($countStatus['countArchive']))){
             $countStatus['countArchive'] = 0;
         }else{
-            $countStatus['countArchive'] = count($countStatus['countArchive'];
+            $countStatus['countArchive'] = count($countStatus['countArchive']);
         }
 
         return view('page.project-seo',[
