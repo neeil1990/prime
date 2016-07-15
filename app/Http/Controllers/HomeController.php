@@ -1093,9 +1093,15 @@ class HomeController extends Controller
             $countStatus['countArchive'] = count($countStatus['countArchive']);
         }
 
+        if(empty($countStatus['active'])){
+            $countStatus['active'] = 0;
+        }else{
+            $countStatus['active'] = count($countStatus['active']);
+        }
+
         return view('page.project-seo',[
             'budget_seo_osvoeno' => $arrBudget,
-            'count_seo_prodject' => count($countStatus['active']),
+            'count_seo_prodject' => $countStatus['active'],
             'count_status' => $countStatus['countArchive'],
             'users' => $users,
             'name' => $name,
