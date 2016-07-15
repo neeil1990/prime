@@ -31,7 +31,8 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $user = User::where('id', Auth::user()->id)->first();
+
+        $user = User::where('id', $this->user_now()->id)->first();
         if($user->status == 0){
             \Auth::logout();
         }
