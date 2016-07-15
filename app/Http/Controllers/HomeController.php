@@ -31,6 +31,10 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $user = User::where('id', Auth::user()->id)->first();
+        if($user->status == 0){
+            \Auth::logout();
+        }
     }
 
     public function user_now(){
@@ -151,6 +155,11 @@ class HomeController extends Controller
 
     public function index()
     {
+
+
+
+
+
 
 
         return view('index',[
