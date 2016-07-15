@@ -1,8 +1,10 @@
 
-
+<div class="left_menu_palv_settings">
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
+
     <section class="sidebar">
+
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
@@ -47,6 +49,9 @@
             <li class="menu8"><a href="https://docs.google.com/spreadsheets/d/1_OPH74-bEFS50D9tlTjQi69rH__PzIw4JFdzQlXZd3Y/edit"><i class="fa fa-area-chart"></i> <span>График работы</span></a></li>
             @endif
         </ul>
+
     </section>
+
     <!-- /.sidebar -->
 </aside>
+</div>

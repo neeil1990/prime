@@ -365,6 +365,14 @@
                     bottomEnd: 155,
                     noContainer: true
                 });
+
+                $('.left_menu_palv_settings').hcSticky({
+                    top: 0,
+                    bottomEnd: 155,
+                    noContainer: true
+                });
+
+
             });
         </script>
 
