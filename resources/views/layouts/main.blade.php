@@ -379,7 +379,7 @@
                         $('.scroll_right_table').removeAttr('style');
                     }else {
                         $('.scroll_right_table').css({
-                            'right': 40  - $(this).scrollLeft(),
+                            'right': 42  - $(this).scrollLeft(),
                             'background': '#fff',
                             'position': 'relative'
                         });
