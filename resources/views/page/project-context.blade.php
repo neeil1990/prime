@@ -91,11 +91,11 @@
                                         <tr role="row">
 
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">*</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
-                                            @foreach($setting_field as $val)
+                                            <th class="sorting scroll_right_table" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">*</th>
+                                            <th class="sorting scroll_right_table" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
+                                            @foreach($setting_field as $key=>$val)
                                                 @if($val->value == 1 or $admin == 1)
-                                                    <th class="sorting" tabindex="0" @if($val->name == 'Имя проекта') data-type="string" @endif aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"> @if($val->value == 0) <i style="color:red" class="fa fa-close"></i> @endif {{$val->name}}</th>
+                                                    <th class="sorting @if($key == 0) scroll_right_table @endif" tabindex="0" @if($val->name == 'Имя проекта') data-type="string" @endif aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"> @if($val->value == 0) <i style="color:red" class="fa fa-close"></i> @endif {{$val->name}}</th>
                                                 @endif
                                             @endforeach
                                         </thead>
@@ -105,13 +105,13 @@
                                             @if($user->status == $archive)
                                             <tr role="row" class="odd">
                                                 <td class=""><i class="fa fa-arrows" style="color: grey"></i></td>
-                                                <td class="">
+                                                <td class="scroll_right_table">
                                                     <input type="checkbox" class="check" value="{{$user->id}}">
                                                     <input type="hidden" class="positions" name="positions[]" value="{{$user->id}}">
                                                 </td>
-                                                <td class="favicon_view{{$user->id}}"></td>
+                                                <td class="favicon_view{{$user->id}} scroll_right_table"></td>
                                                 @if($setting_field[0]->value == 1 or $admin == 1)
-                                                <td class="favicon_url{{$user->id}}"><textarea class="copytext" rows="1" type="text">{{$user->name_project}}</textarea></td>
+                                                <td class="favicon_url{{$user->id}} scroll_right_table"><textarea class="copytext" rows="1" type="text">{{$user->name_project}}</textarea></td>
                                                 <script>
                                                     var url_fav = '.favicon_url'+'{{$user->id}}';
                                                     var view_fav = '.favicon_view'+'{{$user->id}}';
