@@ -379,8 +379,8 @@
                         $('.scroll_right_table').removeAttr('style');
                     }else {
                         $('.scroll_right_table').css({
-                            'left': 0 + $(this).scrollLeft(),
-                            'background': '#e2dede',
+                            'right': 40  - $(this).scrollLeft(),
+                            'background': '#fff',
                             'position': 'relative'
                         });
                     }
