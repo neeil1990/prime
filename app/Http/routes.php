@@ -14,6 +14,57 @@
 
 //Route::get('/get-balanse-yandex', ['as' => 'getBalanseYandex', 'uses' => 'HomeController@getBalanseYandex']);
 
+Route::get('/get-seranking-sum', function()
+{
+
+
+
+
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=login&login=work-api&pass='.md5('wcKcY2fgay').'');
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+    $out = curl_exec($curl);
+    curl_close($curl);
+    $data_in = json_decode($out);
+
+
+
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=sites&token='.$data_in->token.'');
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+    $out = curl_exec($curl);
+    curl_close($curl);
+    $data = json_decode($out);
+
+    $arrSum = array();
+    foreach($data as $d){
+
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=stat&siteid='.$d->id.'&token='.$data_in->token.'');
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+        $out = curl_exec($curl);
+        curl_close($curl);
+        $data = json_decode($out);
+        foreach($data[0]->keywords as $sum){
+            $arrSum[$d->name][] = $sum->total_sum;
+        }
+    }
+
+    $name = \DB::table('project_seos')->get();
+    foreach($name as $p){
+        if(isset($arrSum[trim($p->name_project)])){
+            $end_sum = array_sum($arrSum[trim($p->name_project)]);
+            $sum_osvoen = ceil($end_sum/7*30);
+            $sum_osvoen_procent = ceil($sum_osvoen/$p->budget*100);
+            \DB::table('project_seos')->where('id', $p->id)
+                ->update(array(
+                    'osvoeno' => $sum_osvoen,
+                    'osvoeno_procent' => $sum_osvoen_procent
+                ));
+        }
+    }
+});
+
 Route::get('/get-balanse-yandex', function()
 {
     $balanse_yandex = \DB::table('token_yandexes')->get();
