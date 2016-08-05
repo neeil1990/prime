@@ -1062,13 +1062,22 @@ class HomeController extends Controller
             $users[$key]->value_serialize = unserialize($u->value_serialize);
 
             if($u->status == $archive) {
-
-                $arrBudget['budget'][] = $u->budget;
-                $arrBudget['osvoeno'][] = $u->osvoeno;
+                if($u->budget <= $u->osvoeno){
+                    $arrBudget['budget'][] = $u->budget;
+                    $arrBudget['osvoeno'][] = $u->budget;
+                }else {
+                    $arrBudget['budget'][] = $u->budget;
+                    $arrBudget['osvoeno'][] = $u->osvoeno;
+                }
             }elseif($u->status == $archive){
 
-                $arrBudget['budget'][] = $u->budget;
-                $arrBudget['osvoeno'][] = $u->osvoeno;
+                if($u->budget <= $u->osvoeno){
+                    $arrBudget['budget'][] = $u->budget;
+                    $arrBudget['osvoeno'][] = $u->budget;
+                }else {
+                    $arrBudget['budget'][] = $u->budget;
+                    $arrBudget['osvoeno'][] = $u->osvoeno;
+                }
             }
 
         }
