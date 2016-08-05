@@ -54,7 +54,7 @@ Route::get('/get-seranking-sum', function()
     foreach($name as $p){
         if(isset($arrSum[trim($p->name_project)])){
             $end_sum = array_sum($arrSum[trim($p->name_project)]);
-            $sum_osvoen = ceil($end_sum/7*30);
+            $sum_osvoen = ceil($end_sum/8*30);
             $sum_osvoen_procent = ceil($sum_osvoen/$p->budget*100);
             \DB::table('project_seos')->where('id', $p->id)
                 ->update(array(
