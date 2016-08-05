@@ -262,6 +262,7 @@
 
             var grid = document.getElementById('example2');
 
+
             grid.onclick = function(e) {
                 if (e.target.tagName != 'TH') return;
 
@@ -272,11 +273,13 @@
             function sortGrid(colNum, type) {
                 var tbody = grid.getElementsByTagName('tbody')[0];
 
+
                 // Составить массив из TR
                 var rowsArray = [].slice.call(tbody.rows);
 
                 // определить функцию сравнения, в зависимости от типа
                 var compare;
+                console.log(type);
 
                 switch (type) {
                     case 'number':
