@@ -253,6 +253,7 @@ class HomeController extends Controller
             ->leftJoin('project_seos','sorts.id_table','=','project_seos.id')
             ->where('sorts.id_user',$id)
             ->where('project_seos.id_glavn_user',$id)
+            ->where('project_seos.status',1)
             ->where('sorts.id_type','4')//ProgectSeo
             ->get();
 
@@ -304,6 +305,7 @@ class HomeController extends Controller
             ->leftJoin('project_contexts','sorts.id_table','=','project_contexts.id')
             ->where('sorts.id_user',$id)
             ->where('project_contexts.id_glavn_user',$id)
+            ->where('project_contexts.status',1)
             ->where('sorts.id_type','5')//ProgectContext
             ->get();
 
@@ -434,8 +436,8 @@ class HomeController extends Controller
             $arrItog[] = $us->sum_many_first+array_sum($arrContextItog);
 
 
-            $project_seos = \DB::table('project_seos')->where('id_glavn_user',$us->id)->count();
-            $project_contexts = \DB::table('project_contexts')->where('id_glavn_user',$us->id)->count();
+            $project_seos = \DB::table('project_seos')->where('id_glavn_user',$us->id)->where('status',1)->count();
+            $project_contexts = \DB::table('project_contexts')->where('id_glavn_user',$us->id)->where('status',1)->count();
 
             $users[$key]->project_seos_count = $project_seos;
             $users[$key]->project_contexts_count = $project_contexts;
