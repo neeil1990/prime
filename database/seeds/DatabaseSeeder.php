@@ -159,6 +159,13 @@ class SettingField extends Seeder
             'table_value' => 'seo'
         ]);
 
+        \App\SettingField::create([
+            'name' => 'Настройка выплат',
+            'field' => 'settings_payout_seo',
+            'value' => '0',
+            'table_value' => 'seo'
+        ]);
+
 
         //context
 

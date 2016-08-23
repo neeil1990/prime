@@ -7,6 +7,7 @@ use App\PassDev;
 use App\ProjectContext;
 use App\ProjectSeo;
 use App\ServiceAndPass;
+use App\SettingPayout;
 use App\Sort;
 use App\TokenYandex;
 use Carbon\Carbon;
@@ -415,7 +416,9 @@ class HomeController extends Controller
         $countArchive = array();
         foreach($users as $key => $us) {
             if($us->status == 0){
-                $countArchive[] = $us->id;
+                $countArchive['archive'][] = $us->id;
+            }else{
+                $countArchive['active'][] = $us->id;
             }
 
 
@@ -433,7 +436,7 @@ class HomeController extends Controller
             $users[$key]->procent_context_itog = array_sum($arrContextItog);
 
             $users[$key]->itog = $us->sum_many_first+array_sum($arrContextItog);
-            $arrItog[] = $us->sum_many_first+array_sum($arrContextItog);
+            $arrItog['zp'][] = $us->sum_many_first+array_sum($arrContextItog);
 
 
             $project_seos = \DB::table('project_seos')->where('id_glavn_user',$us->id)->where('status',1)->count();
@@ -444,11 +447,11 @@ class HomeController extends Controller
         }
         
         return view('page.personal',[
-            'itog_sum' =>  array_sum($arrItog),
-            'count_user' => count($users),
+            'itog_sum' =>  array_sum($arrItog['zp']),
+            'count_user' => count($countArchive['active']),
             'users' => $users,
             'archive' => $archive,
-            'count_archive' => count($countArchive),
+            'count_archive' => count($countArchive['archive']),
             'user_groups' => $user_groups,
             'users_now' => $this->user_now(),
             'admin' => $this->admin()
@@ -1602,6 +1605,23 @@ class HomeController extends Controller
             'settings_sield' => $arrSettingFieldSeo,
             'admin' => $this->admin()
         ]);
+    }
+
+    /////////////////////////
+    ////настройка выплат
+    /////////////////////////
+
+    public function settingPayout(){
+       $alldata = SettingPayout::all();
+        return view('page.setting-payout',[
+            'admin' => $this->admin(),
+            'setting_payout' => $alldata[0]
+        ]);
+    }
+
+    public function saveSettingPayout(Request $request, SettingPayout $settingPayout){
+        $settingPayout->UpdateSettingPayout($request->all());
+        return redirect()->intended('setting-payout');
     }
 
 

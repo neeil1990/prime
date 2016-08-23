@@ -15,6 +15,7 @@ return array(
     'CreateProjectSeosTable' => $baseDir . '/database/migrations/2016_04_22_095531_create_project_seos_table.php',
     'CreateServiceAndPassesTable' => $baseDir . '/database/migrations/2016_05_23_125447_create_service_and_passes_table.php',
     'CreateSettingFieldsTable' => $baseDir . '/database/migrations/2016_05_05_095404_create_setting_fields_table.php',
+    'CreateSettingPayoutsTable' => $baseDir . '/database/migrations/2016_08_22_091620_create_setting_payouts_table.php',
     'CreateSortsTable' => $baseDir . '/database/migrations/2016_04_15_101212_create_sorts_table.php',
     'CreateTokenYandexesTable' => $baseDir . '/database/migrations/2016_06_09_114642_create_token_yandexes_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',

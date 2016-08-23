@@ -212,6 +212,34 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">% Освоено начисление бонуса</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="% Освоено при котором начинается выплачиваться бонус" name="procent_bonus" value="{{$users->procent_bonus}}">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Количество дней штрафа</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="При каком кол-ве дней применяется штраф" name="count_day_fine" value="{{$users->count_day_fine}}">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">% Освоено штрафы</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" placeholder="При каком % Освоено применяется штраф" class="form-control" name="procent_fine" value="{{$users->procent_fine}}">
+
+                                </div>
+                            </div>
+
+
                             <div class="form-group one">
 
                                 @if(!empty($users->value_serialize))

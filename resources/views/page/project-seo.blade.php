@@ -51,6 +51,10 @@
                             <a href="/setting-field-seo" >
                                 <small class="label label-primary">Настройка полей</small>
                             </a>
+
+                            <a href="/setting-payout" >
+                                    <small class="label label-primary">Настройка Выплат</small>
+                            </a>
                             @endif
 
                             <div class="row">
@@ -233,6 +237,15 @@
                                                           </ul>
                                                      @endif
                                                 </td>
+                                                @endif
+                                                @if($setting_field[19]->value == 1 or $admin == 1)
+                                                    <td class="">
+                                                        <ul class="nav nav-stacked" style="width:240px">
+                                                            <li><a href="#">% Освоено бонус <span class="pull-right badge bg-blue">{{$user->procent_bonus}} %</span></a></li>
+                                                            <li><a href="#">Количество дней штрафа <span class="pull-right badge bg-aqua">{{$user->count_day_fine}}</span></a></li>
+                                                            <li><a href="#">% Освоено штрафы <span class="pull-right badge bg-green">{{$user->procent_fine}} %</span></a></li>
+                                                        </ul>
+                                                    </td>
                                                 @endif
 
                                             </tr>

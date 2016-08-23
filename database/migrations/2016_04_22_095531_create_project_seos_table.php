@@ -17,6 +17,9 @@ class CreateProjectSeosTable extends Migration
             $table->increments('id');
             $table->integer('positions');
             $table->integer('status');
+            $table->integer('procent_bonus');
+            $table->integer('count_day_fine');
+            $table->integer('procent_fine');
             $table->string('name_project');
             $table->string('budget');
             $table->string('osvoeno');

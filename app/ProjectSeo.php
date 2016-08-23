@@ -53,6 +53,9 @@ class ProjectSeo extends Model
         \DB::table('project_seos')->where('id', $data['id'])
             ->update(array(
                 'status' => $data['status'],
+                'procent_bonus' => trim($data['procent_bonus']),
+                'count_day_fine' => trim($data['count_day_fine']),
+                'procent_fine' => trim($data['procent_fine']),
                 'name_project' => $data['name_project'],
                 'budget' => $data['budget'],
                 'osvoeno' => $data['osvoeno'],

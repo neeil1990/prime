@@ -17,9 +17,6 @@
 Route::get('/get-seranking-sum', function()
 {
 
-
-
-
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=login&login=work-api&pass='.md5('wcKcY2fgay').'');
     curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
@@ -56,8 +53,46 @@ Route::get('/get-seranking-sum', function()
             $end_sum = array_sum($arrSum[trim($p->name_project)]);
             $sum_osvoen = ceil($end_sum/8*30);
             $sum_osvoen_procent = ceil($sum_osvoen/$p->budget*100);
+
+
+            $setting_payouts = \DB::table('setting_payouts')->where('id',1)->first();
+
+            if($p->procent_bonus == 0){
+                if($sum_osvoen_procent > $setting_payouts->procent_bonus){
+                   $procent_bonus = $p->budget/100*$p->procent_seo;
+                }else{
+                    $procent_bonus = 0;
+                }
+            }else{
+                if($sum_osvoen_procent > $p->procent_bonus){
+                    $procent_bonus = $p->budget/100*$p->procent_seo;
+                }else{
+                    $procent_bonus = 0;
+                }
+            }
+
+            if($p->count_day_fine == 0 and $p->procent_fine == 0){
+                    $enddate = strtotime('+' . $setting_payouts->count_day_fine . ' day', strtotime(preg_replace('~^(\d+)\/(\d+)\/(\d+)$~', '$3/$2/$1', $p->end)));
+                if (strtotime("now") > $enddate and $sum_osvoen_procent < $setting_payouts->procent_fine) {
+                        $procent_bonus = '-' . $p->budget / 100 * $p->procent_seo;
+                    } else {
+                        $procent_bonus = 0;
+                    }
+
+            }else{
+                $enddate = strtotime('+' . $setting_payouts->count_day_fine . ' day', strtotime(preg_replace('~^(\d+)\/(\d+)\/(\d+)$~', '$3/$2/$1', $p->end)));
+                if(strtotime("now") > $enddate and $sum_osvoen_procent < $p->procent_fine){
+                    $procent_bonus = '-'.$p->budget/100*$p->procent_seo;
+                }else{
+                    $procent_bonus = 0;
+                }
+            }
+
+
+
             \DB::table('project_seos')->where('id', $p->id)
                 ->update(array(
+                    'summa_zp' => $procent_bonus,
                     'osvoeno' => $sum_osvoen,
                     'osvoeno_procent' => $sum_osvoen_procent
                 ));
@@ -125,7 +160,7 @@ Route::auth();
 
 Route::get('/', ['as' => 'index', 'uses' => 'HomeController@index']);
 
-//Àðõèâ
+//ÐÑ€Ñ…Ð¸Ð²
 Route::get('/archive-page-project/{name}', ['as' => 'archivePageProject', 'uses' => 'HomeController@archivePageProject']);
 
 Route::get('/personal', ['as' => 'personal', 'uses' => 'HomeController@personal']);
@@ -181,14 +216,14 @@ Route::get('/pass-seo/{id}/edit', ['as' => 'editPassContext', 'uses' => 'HomeCon
 Route::post('/update-create-pass-seo', ['as' => 'updatePassContext', 'uses' => 'HomeController@updatePassSeo']);
 
 
-//òàáëèöà ãðóïïû
+//Ñ‚Ð°Ð±Ð»Ð¸Ñ†Ð° Ð³Ñ€ÑƒÐ¿Ð¿Ñ‹
 Route::get('/groups/create', ['as' => 'createGroupForm', 'uses' => 'HomeController@createGroupForm']);
 Route::post('/create-groups', ['as' => 'createGroups', 'uses' => 'HomeController@createGroups']);
 Route::post('/update-groups', ['as' => 'updateGroups', 'uses' => 'HomeController@updateGroups']);
 Route::get('/groups/{id}/edit', ['as' => 'editGroupForm', 'uses' => 'HomeController@editGroupForm']);
 Route::post('/delite-group', ['as' => 'deliteGroup', 'uses' => 'HomeController@deliteGroup']);
 
-//ïàðîëè êîíòåêñò
+//Ð¿Ð°Ñ€Ð¾Ð»Ð¸ ÐºÐ¾Ð½Ñ‚ÐµÐºÑÑ‚
 Route::get('/pass-context', ['as' => 'pass_context', 'uses' => 'HomeController@passContext']);
 Route::get('/pass-context/create', ['as' => 'passContextCreatForm', 'uses' => 'HomeController@passContextCreatsForm']);
 
@@ -197,7 +232,7 @@ Route::post('/delite-pass-context', ['as' => 'delitePassContext', 'uses' => 'Hom
 Route::get('/pass-context/{id}/edit', ['as' => 'editPassContext', 'uses' => 'HomeController@editPassContext']);
 Route::post('/update-create-pass-context', ['as' => 'updatePassContext', 'uses' => 'HomeController@updatePassContext']);
 
-//ïàðîëè äëÿ ðàçðàáîò÷èêà
+//Ð¿Ð°Ñ€Ð¾Ð»Ð¸ Ð´Ð»Ñ Ñ€Ð°Ð·Ñ€Ð°Ð±Ð¾Ñ‚Ñ‡Ð¸ÐºÐ°
 Route::get('/pass-dev', ['as' => 'passDev', 'uses' => 'HomeController@passDev']);
 Route::get('/pass-dev/create', ['as' => 'passDevCreatForm', 'uses' => 'HomeController@passDevCreatForm']);
 Route::post('/create-pass-dev', ['as' => 'createPassDev', 'uses' => 'HomeController@createPassDev']);
@@ -206,27 +241,31 @@ Route::get('/pass-dev/{id}/edit', ['as' => 'editPassDev', 'uses' => 'HomeControl
 Route::post('/update-create-pass-dev', ['as' => 'updatePassDev', 'uses' => 'HomeController@updatePassDev']);
 
 
-//Ãðàôèê ðàáîòû
+//Ð“Ñ€Ð°Ñ„Ð¸Ðº Ñ€Ð°Ð±Ð¾Ñ‚Ñ‹
 Route::get('/work-graffik', ['as' => 'WorkGraff', 'uses' => 'HomeController@WorkGraff']);
 
-//Ïðîåêòû seo
+//ÐŸÑ€Ð¾ÐµÐºÑ‚Ñ‹ seo
 Route::get('/project-seo', ['as' => 'projectSeo', 'uses' => 'HomeController@projectSeo']);
 Route::get('/project-seo/create', ['as' => 'projectSeoCreateForm', 'uses' => 'HomeController@projectSeoCreateForm']);
 Route::post('/create-project-seo', ['as' => 'createProjectSeo', 'uses' => 'HomeController@createProjectSeo']);
 Route::post('/delite-project-seo', ['as' => 'deliteProjectSeo', 'uses' => 'HomeController@deliteProjectSeo']);
 Route::get('/project-seo/{id}/edit', ['as' => 'editProjectSeo', 'uses' => 'HomeController@editProjectSeo']);
 Route::post('/update-project-seo', ['as' => 'updateProjectSeo', 'uses' => 'HomeController@updateProjectSeo']);
-//Ïðîåêòû context
+//ÐŸÑ€Ð¾ÐµÐºÑ‚Ñ‹ context
 Route::get('/project-context', ['as' => 'projectContext', 'uses' => 'HomeController@projectContext']);
 Route::get('/project-context/create', ['as' => 'projectContextCreateForm', 'uses' => 'HomeController@projectContextCreateForm']);
 Route::post('/create-project-context', ['as' => 'createProjectContext', 'uses' => 'HomeController@createProjectContext']);
 Route::post('/delite-project-context', ['as' => 'deliteProjectContext', 'uses' => 'HomeController@deliteProjectContext']);
 Route::get('/project-context/{id}/edit', ['as' => 'editProjectContext', 'uses' => 'HomeController@editProjectContext']);
 Route::post('/update-project-context', ['as' => 'updateProjectContext', 'uses' => 'HomeController@updateProjectContext']);
-//Ñåðâèñû & Ïàðîëè
+//Ð¡ÐµÑ€Ð²Ð¸ÑÑ‹ & ÐŸÐ°Ñ€Ð¾Ð»Ð¸
 Route::get('/service-and-password', ['as' => 'serviceAndPassword', 'uses' => 'HomeController@serviceAndPassword']);
 Route::get('/service-and-password/create', ['as' => 'serviceAndPasswordCreateForm', 'uses' => 'HomeController@serviceAndPasswordCreateForm']);
 Route::post('/create-service-and-password', ['as' => 'createServiceAndPassword', 'uses' => 'HomeController@createServiceAndPassword']);
 Route::post('/delite-service-and-pass', ['as' => 'deliteServiceAndPass', 'uses' => 'HomeController@deliteServiceAndPass']);
 Route::get('/service-and-password/{id}/edit', ['as' => 'editServiceAndPassword', 'uses' => 'HomeController@editServiceAndPassword']);
 Route::post('/update-service-and-password', ['as' => 'updateServiceAndPassword', 'uses' => 'HomeController@updateServiceAndPassword']);
+
+//ÐÐ°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ° Ð²Ñ‹Ð¿Ð»Ð°Ñ‚
+Route::get('/setting-payout', ['as' => 'settingPayout', 'uses' => 'HomeController@settingPayout']);
+Route::post('/save-setting-payout', ['as' => 'saveSettingPayout', 'uses' => 'HomeController@saveSettingPayout']);
