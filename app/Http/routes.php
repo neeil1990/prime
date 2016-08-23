@@ -69,7 +69,7 @@ Route::get('/get-seranking-sum', function()
                 }else{
                     $procent_bonus = 0;
                 }
-            }
+
 
             if($p->count_day_fine == 0 and $p->procent_fine == 0){
                     $enddate = strtotime('+' . $setting_payouts->count_day_fine . ' day', strtotime(preg_replace('~^(\d+)\/(\d+)\/(\d+)$~', '$3/$2/$1', $p->end)));
@@ -88,6 +88,7 @@ Route::get('/get-seranking-sum', function()
                 }
             }
 
+            }
 
 
             \DB::table('project_seos')->where('id', $p->id)
