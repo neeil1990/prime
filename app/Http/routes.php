@@ -59,17 +59,21 @@ Route::get('/get-seranking-sum', function()
 
             if($p->procent_bonus == 0 and $p->count_day_fine == 0 and $p->procent_fine == 0){
                 $enddate = strtotime('+' . $setting_payouts->count_day_fine . ' day', strtotime(preg_replace('~^(\d+)\/(\d+)\/(\d+)$~', '$3/$2/$1', $p->end)));
-                if($sum_osvoen_procent > $setting_payouts->procent_bonus){
+                if($sum_osvoen_procent >= $setting_payouts->procent_bonus){
                    $procent_bonus = $p->budget/100*$p->procent_seo;
                 }elseif(strtotime("now") > $enddate and $sum_osvoen_procent < $setting_payouts->procent_fine){
                     $procent_bonus = '-' . $p->budget / 100 * $p->procent_seo;
+                }else{
+                    $procent_bonus = 0;
                 }
             }else {
                 $enddate = strtotime('+' . $setting_payouts->count_day_fine . ' day', strtotime(preg_replace('~^(\d+)\/(\d+)\/(\d+)$~', '$3/$2/$1', $p->end)));
-                if ($sum_osvoen_procent > $p->procent_bonus) {
+                if ($sum_osvoen_procent >= $p->procent_bonus) {
                     $procent_bonus = $p->budget / 100 * $p->procent_seo;
                 } elseif (strtotime("now") > $enddate and $sum_osvoen_procent < $p->procent_fine) {
                     $procent_bonus = '-' . $p->budget / 100 * $p->procent_seo;
+                }else{
+                    $procent_bonus = 0;
                 }
             }
 
