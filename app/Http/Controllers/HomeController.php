@@ -436,8 +436,9 @@ class HomeController extends Controller
             $users[$key]->procent_context_itog = array_sum($arrContextItog);
 
             $users[$key]->itog = $us->sum_many_first+array_sum($arrContextItog);
-            $arrItog['zp'][] = $us->sum_many_first+array_sum($arrContextItog);
-
+            if($us->status == 1) {
+                $arrItog['zp'][] = $us->sum_many_first + array_sum($arrContextItog);
+            }
 
             $project_seos = \DB::table('project_seos')->where('id_glavn_user',$us->id)->where('status',1)->count();
             $project_contexts = \DB::table('project_contexts')->where('id_glavn_user',$us->id)->where('status',1)->count();
