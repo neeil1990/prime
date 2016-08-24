@@ -87,7 +87,7 @@
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
                                             @foreach($setting_field as $val)
                                                 @if($val->value == 1 or $admin == 1)
-                                                    <th class="sorting" tabindex="0" @if($val->name == 'Имя проекта') data-type="string" @endif aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"> @if($val->value == 0) <i style="color:red" class="fa fa-close"></i> @endif {{$val->name}}</th>
+                                                    <th class="sorting" tabindex="0" data-type="{{$val->data_type}}" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"> @if($val->value == 0) <i style="color:red" class="fa fa-close"></i> @endif {{$val->name}}</th>
                                                 @endif
                                              @endforeach
                                         </thead>
