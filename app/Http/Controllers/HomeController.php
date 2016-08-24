@@ -424,20 +424,49 @@ class HomeController extends Controller
 
             $project_context_itog = \DB::table('sorts')
                 ->leftJoin('project_contexts','sorts.id_table','=','project_contexts.id')
+                ->where('project_contexts.status',1)
                 ->where('sorts.id_user',$us->id)
                 ->where('sorts.id_type','5')//ProgectContext
                 ->get();
+
+            $project_seo_itog = \DB::table('sorts')
+                ->leftJoin('project_seos','sorts.id_table','=','project_seos.id')
+                ->where('project_seos.status',1)
+                ->where('sorts.id_user',$us->id)
+                ->where('sorts.id_type','4')//ProgectSeo
+                ->get();
+
+            //var_dump($project_seo_itog);
+            $arrSeoPlusItog = array();
+            $arrSeoMinusItog = array();
+            foreach($project_seo_itog as $itog){
+                if(!(preg_match('/\-/',$itog->summa_zp,$preg))){
+                    $arrSeoPlusItog[] = $itog->summa_zp;
+                }else{
+                    $arrSeoMinusItog[] = str_replace('-','',$itog->summa_zp);
+                }
+            }
+
+            //var_dump($arrSeoMinusItog);
 
             $arrContextItog = array();
             foreach($project_context_itog as $itog){
                 $arrContextItog[] = ($itog->ya_direct+$itog->go_advords)*$itog->procent_seo/100;
             }
 
-            $users[$key]->procent_context_itog = array_sum($arrContextItog);
+            //итог зп по seo
+            $users[$key]->procent_seo_itog = array_sum($arrSeoPlusItog)-array_sum($arrSeoMinusItog);
 
-            $users[$key]->itog = $us->sum_many_first+array_sum($arrContextItog);
+            $users[$key]->contecst_procent = array_sum($arrContextItog);
+
+            $users[$key]->procent_context_itog = array_sum($arrContextItog)+array_sum($arrSeoPlusItog)-array_sum($arrSeoMinusItog);
+
+            //итог зп специалиста
+            $users[$key]->itog = $us->sum_many_first+array_sum($arrContextItog)+array_sum($arrSeoPlusItog)-array_sum($arrSeoMinusItog);
+
+            //итоги всех зарплат
             if($us->status == 1) {
-                $arrItog['zp'][] = $us->sum_many_first + array_sum($arrContextItog);
+                $arrItog['zp'][] = $us->sum_many_first + array_sum($arrContextItog)+array_sum($arrSeoPlusItog)-array_sum($arrSeoMinusItog);
             }
 
             $project_seos = \DB::table('project_seos')->where('id_glavn_user',$us->id)->where('status',1)->count();
