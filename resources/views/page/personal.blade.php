@@ -78,7 +78,7 @@
                     <a href="" style="display: none" class="old_check">Снять все |</a>
                     <a href="" class="button">Удалить |</a>
                     <a href="" class="edit">Изменить</a> |
-                    Архив: <a href="/archive-page-project/personal/">{{$count_archive}}</a>
+                    Архив: <a href="/archive-page-project/personal">{{$count_archive}}</a>
                 </div>
                     @endif
             </div>

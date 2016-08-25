@@ -48,7 +48,7 @@
                                     Количество активных проектов: {{$count_context_project}} |
                                     Бюджет активных проектов: {{$budget_context_project}} |
                                     @if($admin == 1)
-                                    Архив: <a href="/archive-page-project/project-context/">{{$count_status}}</a>
+                                    Архив: <a href="/archive-page-project/project-context">{{$count_status}}</a>
                                     @endif
                                 </div>
                             </div>
