@@ -144,13 +144,13 @@
                                                         @if($n->id == $user->id)
                                                             @if($n->id_user == $user->id_glavn_user)
                                                                 <small class="label label-danger">
-                                                                    <i class="fa fa-user"></i>&nbsp;
-                                                                    {{$n->name}}
+                                                                    <i class="fa fa-user"></i>
+                                                                    {{trim($n->name)}}
                                                                 </small><br>
                                                             @else
                                                                 <small class="label label-default">
-                                                                    <i class="fa fa-user"></i>&nbsp;
-                                                                {{$n->name}}
+                                                                    <i class="fa fa-user"></i>
+                                                                {{trim($n->name)}}
                                                                 </small><br>
                                                             @endif
                                                         @endif

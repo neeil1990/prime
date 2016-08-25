@@ -279,7 +279,6 @@
 
                 // определить функцию сравнения, в зависимости от типа
                 var compare;
-                console.log(type);
 
                 switch (type) {
                     case 'number':

@@ -128,7 +128,6 @@
                                                 @if($setting_field[3]->value == 1 or $admin == 1)
                                                 <td class="">
 
-
                                                     <span class="info-box-number">{{$user->ost_bslsnse_ya}}</span>
 
 
@@ -159,13 +158,13 @@
                                                         @if($n->id == $user->id)
                                                             @if($n->id_user == $user->id_glavn_user)
                                                                 <small class="label label-danger">
-                                                                    <i class="fa fa-user"></i>&nbsp;
-                                                                    {{$n->name}}
+                                                                    <i class="fa fa-user"></i>
+                                                                    {{trim($n->name)}}
                                                                 </small><br>
                                                             @else
                                                                 <small class="label label-default">
-                                                                    <i class="fa fa-user"></i>&nbsp;
-                                                                {{$n->name}}
+                                                                    <i class="fa fa-user"></i>
+                                                                {{trim($n->name)}}
                                                                 </small><br>
                                                             @endif
                                                         @endif

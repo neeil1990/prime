@@ -30,58 +30,58 @@
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">*</th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
                                             @if($setting_field_seo[0]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Имя проекта</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" data-type="string" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Имя проекта</th>
                                             @endif
                                             @if($setting_field_seo[1]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Бюджет</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" data-type="number" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Бюджет</th>
                                             @endif
                                             @if($setting_field_seo[2]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Освоено</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" data-type="number" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Освоено</th>
                                             @endif
                                             @if($setting_field_seo[3]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Освоено %</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" data-type="number" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Освоено %</th>
                                             @endif
                                             @if($setting_field_seo[5]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">% от проекта</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" data-type="number" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">% от проекта</th>
                                             @endif
                                             @if($setting_field_seo[6]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Сумма на з.п.</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" data-type="number" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Сумма на з.п.</th>
                                             @endif
                                             @if($setting_field_seo[7]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Стартпоинт</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" data-type="string" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Стартпоинт</th>
                                             @endif
                                             @if($setting_field_seo[8]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">LP</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" data-type="string" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">LP</th>
                                             @endif
                                             @if($setting_field_seo[9]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Старт</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" data-type="number" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Старт</th>
                                             @endif
                                             @if($setting_field_seo[10]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Конец</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" data-type="number" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Конец</th>
                                             @endif
                                             @if($setting_field_seo[11]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Остаток дней</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" data-type="number" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Остаток дней</th>
                                             @endif
                                             @if($setting_field_seo[12]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Цель</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" data-type="string" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Цель</th>
                                             @endif
                                             @if($setting_field_seo[13]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Регион</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" data-type="string" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Регион</th>
                                             @endif
                                             @if($setting_field_seo[14]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Номер договора</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" data-type="number" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Номер договора</th>
                                             @endif
                                             @if($setting_field_seo[15]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Контактное лицо</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" data-type="string" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Контактное лицо</th>
                                             @endif
                                             @if($setting_field_seo[16]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Номер телефона</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" data-type="number" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Номер телефона</th>
                                             @endif
                                             @if($setting_field_seo[17]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">e-mail</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" data-type="string" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">e-mail</th>
                                             @endif
                                             @if($setting_field_seo[18]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Дополнительная информация</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" data-type="string" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Дополнительная информация</th>
                                             @endif
 
                                         </thead>
@@ -241,47 +241,48 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body" style="overflow-y: auto;">
-                        <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row"><div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                        <div id="example2_wrapper" class="dataTables_wrapper form-inline dt-bootstrap"><div class="row"><div class="col-sm-6"></div><div class="col-sm-6"></div></div><div class="row"><div class="col-sm-12">
+                                    <table id="example3" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
                                         <thead>
                                         <tr role="row">
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">*</th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2_wrapper" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2_wrapper" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">*</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2_wrapper" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>
                                             @if($setting_field_context[0]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Имя проекта</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2_wrapper" rowspan="1" data-type="string" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Имя проекта</th>
                                             @endif
                                             @if($setting_field_context[1]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Я.Директ</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2_wrapper" rowspan="1" data-type="number" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Я.Директ</th>
                                             @endif
                                             @if($setting_field_context[2]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Г.Адвордс</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2_wrapper" rowspan="1" data-type="number" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Г.Адвордс</th>
                                             @endif
                                             @if($setting_field_context[3]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Остаток на балансе Яндекса</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2_wrapper" rowspan="1" data-type="number" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Остаток на балансе Яндекса</th>
                                             @endif
                                             @if($setting_field_context[4]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Остаток на балансе Гугл</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2_wrapper" rowspan="1" data-type="number" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Остаток на балансе Гугл</th>
                                             @endif
                                             @if($setting_field_context[6]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">% от проекта</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2_wrapper" rowspan="1" data-type="number" colspan="1" aria-label="Rendering engine: activate to sort column ascending">% от проекта</th>
                                             @endif
                                             @if($setting_field_context[7]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Сумма на з.п.</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2_wrapper" rowspan="1" data-type="number" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Сумма на з.п.</th>
                                             @endif
                                             @if($setting_field_context[8]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Номер договора</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2_wrapper" rowspan="1" data-type="number" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Номер договора</th>
                                             @endif
                                             @if($setting_field_context[9]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Контактное лицо</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2_wrapper" rowspan="1" data-type="string" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Контактное лицо</th>
                                             @endif
                                             @if($setting_field_context[10]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Номер телефона</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2_wrapper" rowspan="1" data-type="number" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Номер телефона</th>
                                             @endif
                                             @if($setting_field_context[11]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">e-mail</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2_wrapper" rowspan="1" data-type="string" colspan="1" aria-label="Rendering engine: activate to sort column ascending">e-mail</th>
                                             @endif
                                             @if($setting_field_context[12]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Дополнительная информация</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2_wrapper" rowspan="1" data-type="string" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Дополнительная информация</th>
                                             @endif
                                         </thead>
                                         <tbody>
@@ -374,6 +375,56 @@
 
 
     </section>
+
+
+    <script>
+
+
+
+
+            $('#example3').click(function(e){
+            var tbody = this.getElementsByTagName('tbody')[0];
+
+            // Составить массив из TR
+            var rowsArray = [].slice.call(tbody.rows);
+
+            // определить функцию сравнения, в зависимости от типа
+            var compare;
+
+
+            switch (e.target.getAttribute('data-type')) {
+                case 'number':
+                    compare = function(rowA, rowB) {
+                        return rowA.cells[e.target.cellIndex].innerHTML - rowB.cells[e.target.cellIndex].innerHTML;
+                    };
+                    break;
+                case 'string':
+                    compare = function(rowA, rowB) {
+                        return rowA.cells[e.target.cellIndex].innerHTML > rowB.cells[e.target.cellIndex].innerHTML ? 1 : -1;
+                    };
+                    break;
+            }
+
+
+            rowsArray.sort(compare);
+
+
+                this.removeChild(tbody);
+
+            for (var i = 0; i < rowsArray.length; i++) {
+                tbody.appendChild(rowsArray[i]);
+            }
+
+                this.appendChild(tbody);
+
+
+
+                });
+
+
+
+
+    </script>
 
     <script>
         $(function(){
