@@ -53,7 +53,7 @@
 
                             <div class="row">
                                 <div class="col-md-9">
-                                    Архив: <a href="/archive-page-project/pass-dev/">{{$count_archive}}</a>
+                                    Архив: <a href="/archive-page-project/pass-dev">{{$count_archive}}</a>
                                 </div>
                             </div>
 
