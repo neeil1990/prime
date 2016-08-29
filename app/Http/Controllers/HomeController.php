@@ -475,13 +475,20 @@ class HomeController extends Controller
             $users[$key]->project_seos_count = $project_seos;
             $users[$key]->project_contexts_count = $project_contexts;
         }
+
+
+        if(isset($countArchive['archive'])){
+           $count_archive = count($countArchive['archive']);
+        }else{
+            $count_archive = 1;
+        }
         
         return view('page.personal',[
             'itog_sum' =>  array_sum($arrItog['zp']),
             'count_user' => count($countArchive['active']),
             'users' => $users,
             'archive' => $archive,
-            'count_archive' => count($countArchive['archive']),
+            'count_archive' => $count_archive,
             'user_groups' => $user_groups,
             'users_now' => $this->user_now(),
             'admin' => $this->admin()
