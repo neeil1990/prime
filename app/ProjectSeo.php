@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Database\Eloquent\Model;
 
 class ProjectSeo extends Model
@@ -40,15 +41,20 @@ class ProjectSeo extends Model
 
     public function UpdateProjectSeoUser($data){
 
+
         if(empty($data['value_serialize'])){
-            $value_serialize = '';
+            $data['value_serialize'] = '';
         }else{
-            $value_serialize = serialize($data['value_serialize']);
+            $data['value_serialize'] = serialize($data['value_serialize']);
         }
+
+        $Controller = new Http\Controllers\Controller();
+        $Controller->redactor_project_seo_logs($data);
 
         if(!isset($data['status'])){
             $data['status'] = 0;
         }
+
 
         \DB::table('project_seos')->where('id', $data['id'])
             ->update(array(
@@ -73,7 +79,7 @@ class ProjectSeo extends Model
                 'contact_person' => $data['contact_person'],
                 'phone_person' => $data['phone_person'],
                 'e_mail' => $data['e_mail'],
-                'value_serialize' => $value_serialize
+                'value_serialize' => $data['value_serialize']
             ));
 
         $create_data = $data;
@@ -82,9 +88,10 @@ class ProjectSeo extends Model
             \DB::table('sorts')->whereRaw('id = ?', [$data])->delete();
         }
 
+        $idAr = array();
         foreach($create_data['id_user'] as $data) {
 
-            \DB::table('sorts')->insert(
+        $idAr[] = \DB::table('sorts')->insertGetId(
                 array(
                     'id_user' => $data,
                     'id_table' => $create_data['id'],
@@ -92,6 +99,9 @@ class ProjectSeo extends Model
                 )
             );
         }
+
+
+
 
     }
 

@@ -83,6 +83,9 @@ Route::get('/get-seranking-sum', function()
                 }
             }
 
+
+
+
             \DB::table('project_seos')->where('id', $p->id)
                 ->update(array(
                     'summa_zp' => $procent_bonus,
@@ -91,6 +94,9 @@ Route::get('/get-seranking-sum', function()
                 ));
         }
     }
+    \DB::table('logs')->insert(
+        array('progect' => 'seranking', 'what_is_done' => 'Обновление скрипта','who_did' => 'API seranking','created_at' => date('Y-m-d H:i:s'))
+    );
 });
 
 Route::get('/get-balanse-yandex', function()
@@ -147,6 +153,9 @@ Route::get('/get-balanse-yandex', function()
         }
 
     }
+    \DB::table('logs')->insert(
+        array('progect' => 'yandex', 'what_is_done' => 'Обновление скрипта direct.yandex','who_did' => 'API direct.yandex','created_at' => date('Y-m-d H:i:s'))
+    );
 });
 
 Route::auth();
@@ -262,3 +271,6 @@ Route::post('/update-service-and-password', ['as' => 'updateServiceAndPassword',
 //Настройка выплат
 Route::get('/setting-payout', ['as' => 'settingPayout', 'uses' => 'HomeController@settingPayout']);
 Route::post('/save-setting-payout', ['as' => 'saveSettingPayout', 'uses' => 'HomeController@saveSettingPayout']);
+
+//Логи
+Route::get('/logs', ['as' => 'viewLogs', 'uses' => 'Controller@viewLogs']);

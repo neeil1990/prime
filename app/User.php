@@ -44,6 +44,8 @@ class User extends Authenticatable
 
     public function UpdateUser($data){
 
+        $Controller = new Http\Controllers\Controller();
+        $Controller->redactor_personal_logs($data);
 
 
         if(!empty($data['password'])){

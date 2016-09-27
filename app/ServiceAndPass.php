@@ -22,6 +22,9 @@ class ServiceAndPass extends Model
             $data['status'] = 0;
         }
 
+        $Controller = new Http\Controllers\Controller();
+        $Controller->redactor_service_and_password_logs($data);
+
         \DB::table('service_and_passes')->where('id', $data['id'])
             ->update(array(
                 'name_project' => $data['name_project'],

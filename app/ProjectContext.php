@@ -33,11 +33,16 @@ class ProjectContext extends Model
 
     public function UpdateProjectContextUser($data){
 
+
+
         if(empty($data['value_serialize'])){
-            $value_serialize = '';
+            $data['value_serialize'] = '';
         }else{
-            $value_serialize = serialize($data['value_serialize']);
+            $data['value_serialize'] = serialize($data['value_serialize']);
         }
+
+        $Controller = new Http\Controllers\Controller();
+        $Controller->redactor_project_context_logs($data);
 
         if(!isset($data['status'])){
             $data['status'] = 0;
@@ -57,7 +62,7 @@ class ProjectContext extends Model
                 'phone_person' => $data['phone_person'],
                 'e_mail' => $data['e_mail'],
                 'procent_seo' => $data['procent_seo'],
-                'value_serialize' => $value_serialize
+                'value_serialize' => $data['value_serialize']
             ));
 
         $create_data = $data;

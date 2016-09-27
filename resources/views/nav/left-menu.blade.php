@@ -46,6 +46,9 @@
             <li class="menu9"><a href="/service-and-password"><i class="fa fa-qrcode"></i> <span>Сервисы & Пароли</span></a></li>
             <li class="menu7"><a href="/personal"><i class="fa fa-child"></i> <span>Сотрудники</span></a></li>
             @if($admin == 1)
+            <li class="menu10"><a href="/logs"><i class="fa fa-dot-circle-o"></i> <span>Логи действий</span></a></li>
+            @endif
+            @if($admin == 1)
             <li class="menu8"><a href="https://docs.google.com/spreadsheets/d/1_OPH74-bEFS50D9tlTjQi69rH__PzIw4JFdzQlXZd3Y/edit"><i class="fa fa-area-chart"></i> <span>График работы</span></a></li>
             @endif
         </ul>

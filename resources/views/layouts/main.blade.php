@@ -602,6 +602,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('/dist/js/demo.js')}}"></script>
 
+<script src="{{ asset('/dist/js/jquery.columnfilters.js')}}"></script>
+
 <script type="text/javascript">
     $.ajaxSetup({
         headers: { 'X-CSRF-Token' : $('meta[name=_token]').attr('content') }

@@ -26,10 +26,13 @@ class PassDev extends Model
     public function UpdatePassDevUser($data){
 
         if(empty($data['value_serialize'])){
-            $value_serialize = '';
+            $data['value_serialize'] = '';
         }else{
-            $value_serialize = serialize($data['value_serialize']);
+            $data['value_serialize'] = serialize($data['value_serialize']);
         }
+
+        $Controller = new Http\Controllers\Controller();
+        $Controller->redactor_pass_dev_logs($data);
 
         if(!isset($data['status'])){
             $data['status'] = 0;
@@ -47,7 +50,7 @@ class PassDev extends Model
                 'ftp' => $data['ftp'],
                 'login' => $data['login'],
                 'password' => $data['password'],
-                'value_serialize' => $value_serialize
+                'value_serialize' => $data['value_serialize']
             ));
 
         $create_data = $data;

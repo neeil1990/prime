@@ -34,10 +34,13 @@ class PassContext extends Model
     public function UpdatePassContextUser($data){
 
         if(empty($data['value_serialize'])){
-            $value_serialize = '';
+            $data['value_serialize'] = '';
         }else{
-            $value_serialize = serialize($data['value_serialize']);
+            $data['value_serialize'] = serialize($data['value_serialize']);
         }
+
+        $Controller = new Http\Controllers\Controller();
+        $Controller->redactor_pass_context_logs($data);
 
         if(!isset($data['status'])){
             $data['status'] = 0;
@@ -52,7 +55,7 @@ class PassContext extends Model
                 'passYandex' => $data['passYandex'],
                 'loginGoogle' => $data['loginGoogle'],
                 'passGoogle' => $data['passGoogle'],
-                'value_serialize' => $value_serialize
+                'value_serialize' => $data['value_serialize']
             ));
 
         $create_data = $data;

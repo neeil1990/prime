@@ -25,10 +25,13 @@ class PassSeo extends Model
     public function UpdatePassSeoUser($data){
 
         if(empty($data['value_serialize'])){
-            $value_serialize = '';
+            $data['value_serialize'] = '';
         }else{
-            $value_serialize = serialize($data['value_serialize']);
+            $data['value_serialize'] = serialize($data['value_serialize']);
         }
+
+        $Controller = new Http\Controllers\Controller();
+        $Controller->redactor_pass_seo_logs($data);
 
         if(!isset($data['status'])){
             $data['status'] = 0;
@@ -46,7 +49,7 @@ class PassSeo extends Model
                 'admin_pass' => $data['admin_pass'],
                 'login' => $data['login'],
                 'password' => $data['password'],
-                'value_serialize' => $value_serialize
+                'value_serialize' => $data['value_serialize']
             ));
 
         $create_data = $data;

@@ -47,10 +47,17 @@ class HomeController extends Controller
         return $users_now;
     }
 
+    public function user_get_id($id){
+        $users_now = User::where('id', $id)->first();
+        return $users_now;
+    }
+
     public function admin(){
         $users = User::whereRaw('id = ? and admin = 1', [$this->user_now()->id])->count();
         return $users;
     }
+
+
 
 
     public function archivePageProject($name){
@@ -517,6 +524,10 @@ class HomeController extends Controller
 
     public function create(Request $request){
 
+        $this->create_logs('Сотрудники',$request['name']);
+
+
+
         $this->validate($request, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
@@ -555,6 +566,7 @@ class HomeController extends Controller
     public function delite(Request $request){
         $delite = explode(',',$request['arr']);
         foreach($delite as $del){
+            $this->delite_personal_logs($this->user_get_id($del)->name);
             User::whereRaw('id = ?', [$del])->delete();
         }
         return $request['arr'];
@@ -563,6 +575,7 @@ class HomeController extends Controller
     public function delitePassSeo(Request $request){
         $delite = explode(',',$request['arr']);
         foreach($delite as $del){
+            $this->delite_logs('pass_seos',$del,'Пароли SEO');
             PassSeo::whereRaw('id = ?', [$del])->delete();
         }
         return $request['arr'];
@@ -685,6 +698,8 @@ class HomeController extends Controller
 
 
     public function createPassSeo(Request $request){
+
+        $this->create_logs('Пароли SEO',$request['name_project']);
 
         $this->validate($request,[
             'name_project' => 'required',
@@ -830,6 +845,8 @@ class HomeController extends Controller
 
     public function createPassContext(Request $request){
 
+        $this->create_logs('пароли Контекст',$request['name_project']);
+
         $this->validate($request,[
             'name_project' => 'required',
             'id_user' => 'required'
@@ -870,6 +887,7 @@ class HomeController extends Controller
     public function delitePassContext(Request $request){
         $delite = explode(',',$request['arr']);
         foreach($delite as $del){
+            $this->delite_logs('pass_contexts',$del,'Пароли контекст');
             PassContext::whereRaw('id = ?', [$del])->delete();
         }
         return $request['arr'];
@@ -972,6 +990,8 @@ class HomeController extends Controller
 
     public function createPassDev(Request $request){
 
+        $this->create_logs('Пароли DEV',$request['name_project']);
+
         $this->validate($request,[
         'name_project' => 'required',
         'id_user' => 'required'
@@ -1048,6 +1068,7 @@ class HomeController extends Controller
     public function delitePassDev(Request $request){
         $delite = explode(',',$request['arr']);
         foreach($delite as $del){
+            $this->delite_logs('pass_devs',$del,'Пароли Develop');
             PassDev::whereRaw('id = ?', [$del])->delete();
         }
         return $request['arr'];
@@ -1186,6 +1207,8 @@ class HomeController extends Controller
 
     public function createProjectSeo(Request $request){
 
+        $this->create_logs('Проекты SEO',$request['name_project']);
+
         $this->validate($request, [
             'name_project' => 'required',
             'id_glavn_user' => 'required',
@@ -1246,6 +1269,7 @@ class HomeController extends Controller
     public function deliteProjectSeo(Request $request){
         $delite = explode(',',$request['arr']);
         foreach($delite as $del){
+            $this->delite_logs('project_seos',$del,'Проекты SEO');
             ProjectSeo::whereRaw('id = ?', [$del])->delete();
         }
         return $request['arr'];
@@ -1283,6 +1307,7 @@ class HomeController extends Controller
         ]);
 
         $users_pass_context = $request->all();
+
         $projectSeo->UpdateProjectSeoUser($users_pass_context);
         return redirect()->intended('project-seo');
     }
@@ -1421,6 +1446,8 @@ class HomeController extends Controller
 
     public function createProjectContext(Request $request){
 
+        $this->create_logs('Проекты Контекст',$request['name_project']);
+
         $this->validate($request, [
             'name_project' => 'required',
             'id_user' => 'required',
@@ -1462,6 +1489,7 @@ class HomeController extends Controller
     public function deliteProjectContext(Request $request){
         $delite = explode(',',$request['arr']);
         foreach($delite as $del){
+            $this->delite_logs('project_contexts',$del,'Проекты контекст');
             ProjectContext::whereRaw('id = ?', [$del])->delete();
         }
         return $request['arr'];
@@ -1569,6 +1597,8 @@ class HomeController extends Controller
 
     public function createServiceAndPassword(Request $request){
 
+        $this->create_logs('Сервисы & Пароли',$request['name_project']);
+
         $this->validate($request, [
             'name_project' => 'required',
             'id_user' => 'required',
@@ -1603,6 +1633,7 @@ class HomeController extends Controller
     public function deliteServiceAndPass(Request $request){
         $delite = explode(',',$request['arr']);
         foreach($delite as $del){
+            $this->delite_logs('service_and_passes',$del,'Сервисы & Пароли');
             ServiceAndPass::whereRaw('id = ?', [$del])->delete();
         }
         return $request['arr'];
