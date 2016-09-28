@@ -23,9 +23,11 @@ class Controller extends BaseController
         $user_now = new HomeController();
         $user_name = $user_now->user_now()->name;
 
-
-        if($showData->status != $create_data['status']){
-            $this->add_logs('Проекты SEO : '.$showData->name_project,'Отправлен в архив',$user_name);
+        if(!isset($create_data['status'])){
+            $create_data['status'] = 0;
+        }
+        if ($showData->status != $create_data['status']) {
+            $this->add_logs('Проекты SEO : ' . $showData->name_project, 'Отправлен в архив', $user_name);
         }
         if($showData->name_project != $create_data['name_project']) {
             $this->add_logs('Проекты SEO : ' . $showData->name_project, 'Замена имени проекта на ' . $create_data['name_project'], $user_name);
@@ -96,6 +98,10 @@ class Controller extends BaseController
         $user_now = new HomeController();
         $user_name = $user_now->user_now()->name;
 
+        if(!isset($data['status'])){
+            $data['status'] = 0;
+        }
+
         if($showData->status != $data['status']){
             $this->add_logs('Проект Контекст : '.$showData->name_project,'Отправлен в архив',$user_name);
         }
@@ -158,6 +164,9 @@ class Controller extends BaseController
         $user_now = new HomeController();
         $user_name = $user_now->user_now()->name;
 
+        if(!isset($data['status'])){
+            $data['status'] = 0;
+        }
 
         if($showData->status != $data['status']){
             $this->add_logs('Пароли SEO : '.$showData->name_project,'Отправлен в архив',$user_name);
@@ -217,6 +226,9 @@ class Controller extends BaseController
         $user_now = new HomeController();
         $user_name = $user_now->user_now()->name;
 
+        if(!isset($data['status'])){
+            $data['status'] = 0;
+        }
 
         if ($showData->status != $data['status']) {
             $this->add_logs('Пароли DEV : ' . $showData->name_project, 'Отправлен в архив', $user_name);
@@ -277,6 +289,9 @@ class Controller extends BaseController
         $user_now = new HomeController();
         $user_name = $user_now->user_now()->name;
 
+        if(!isset($data['status'])){
+            $data['status'] = 0;
+        }
 
         if ($showData->status != $data['status']) {
             $this->add_logs('Пароли Контекст : ' . $showData->name_project, 'Отправлен в архив', $user_name);
@@ -330,6 +345,9 @@ class Controller extends BaseController
         $user_now = new HomeController();
         $user_name = $user_now->user_now()->name;
 
+        if(!isset($data['status'])){
+            $data['status'] = 0;
+        }
 
         if ($showData->status != $data['status']) {
             $this->add_logs('Сервисы & Пароли : ' . $showData->name_project, 'Отправлен в архив', $user_name);
@@ -368,6 +386,10 @@ class Controller extends BaseController
 
         $user_now = new HomeController();
         $user_name = $user_now->user_now()->name;
+
+        if(!isset($data['status'])){
+            $data['status'] = 0;
+        }
 
         if ($showData->name != $data['name']) {
             $this->add_logs('Сотрудники : ' . $showData->name, $p . 'Сотрудник : ' . $data['name'], $user_name);
