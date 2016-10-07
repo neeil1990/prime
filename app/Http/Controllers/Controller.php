@@ -83,8 +83,9 @@ class Controller extends BaseController
         if($showData->e_mail != $create_data['e_mail']){
             $this->add_logs('Проекты SEO : '.$showData->name_project,'Изменен e-mail: '.$create_data['e_mail'],$user_name);
         }
-        if(count($showData->value_serialize) != count($create_data['value_serialize']) and !empty($data['value_serialize'])){
-            $value = implode(",", $create_data['value_serialize']);
+        $value_serialize = unserialize($create_data['value_serialize']);
+        if(count($showData->value_serialize) != count($value_serialize) and !empty($value_serialize)){
+            $value = implode(",", $value_serialize);
             $this->add_logs('Проекты SEO : '.$showData->name_project,'Изменена Дополнительная информация: '.$value,$user_name);
         }
 
@@ -147,8 +148,9 @@ class Controller extends BaseController
         if($showData->e_mail != $data['e_mail']){
             $this->add_logs('Проект Контекст : '.$showData->name_project,'Изменен e-mail: '.$data['e_mail'],$user_name);
         }
-        if(count($showData->value_serialize) != count($data['value_serialize']) and !empty($data['value_serialize'])){
-            $value = implode(",", $data['value_serialize']);
+        $value_serialize = unserialize($data['value_serialize']);
+        if(count($showData->value_serialize) != count($value_serialize) and !empty($value_serialize)){
+            $value = implode(",", $value_serialize);
             $this->add_logs('Проекты SEO : '.$showData->name_project,'Изменена Дополнительная информация: '.$value,$user_name);
         }
 
@@ -207,8 +209,9 @@ class Controller extends BaseController
         if($showData->password != $data['password']){
             $this->add_logs('Пароли SEO : '.$showData->name_project,$p.'Пароль : '.$data['password'],$user_name);
         }
-        if(count($showData->value_serialize) != count($data['value_serialize']) and !empty($data['value_serialize'])){
-            $value = implode(",", $data['value_serialize']);
+        $value_serialize = unserialize($data['value_serialize']);
+        if(count($showData->value_serialize) != count($value_serialize) and !empty($value_serialize)){
+            $value = implode(",", $value_serialize);
             $this->add_logs('Пароли SEO : '.$showData->name_project,'Изменена Дополнительная информация: '.$value,$user_name);
         }
 
@@ -271,8 +274,9 @@ class Controller extends BaseController
         if($showData->password != $data['password']){
             $this->add_logs('Пароли DEV : '.$showData->name_project,$p.'Пароль : '.$data['password'],$user_name);
         }
-        if(count($showData->value_serialize) != count($data['value_serialize']) and !empty($data['value_serialize'])){
-            $value = implode(",", $data['value_serialize']);
+        $value_serialize = unserialize($data['value_serialize']);
+        if(count($showData->value_serialize) != count($value_serialize) and !empty($value_serialize)){
+            $value = implode(",", $value_serialize);
             $this->add_logs('Пароли DEV : '.$showData->name_project,'Изменена Дополнительная информация: '.$value,$user_name);
         }
 
@@ -327,8 +331,9 @@ class Controller extends BaseController
         if ($showData->passGoogle != $data['passGoogle']) {
             $this->add_logs('Пароли Контекст : ' . $showData->name_project, $p . 'Пароль Гугл : ' . $data['passGoogle'], $user_name);
         }
-        if(count($showData->value_serialize) != count($data['value_serialize']) and !empty($data['value_serialize'])){
-            $value = implode(",", $data['value_serialize']);
+        $value_serialize = unserialize($data['value_serialize']);
+        if(count($showData->value_serialize) != count($value_serialize) and !empty($value_serialize)){
+            $value = implode(",", $value_serialize);
             $this->add_logs('Пароли Контекст : '.$showData->name_project,'Изменена Дополнительная информация: '.$value,$user_name);
         }
 
