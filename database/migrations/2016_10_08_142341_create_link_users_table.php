@@ -17,6 +17,8 @@ class CreateLinkUsersTable extends Migration
             $table->string('name');
             $table->string('link');
             $table->integer('position');
+            $table->integer('status_admin');
+            $table->integer('id_user');
             $table->timestamps();
         });
     }

@@ -51,16 +51,29 @@
             @if($admin == 1)
             <li class="menu8"><a href="https://docs.google.com/spreadsheets/d/1_OPH74-bEFS50D9tlTjQi69rH__PzIw4JFdzQlXZd3Y/edit"><i class="fa fa-area-chart"></i> <span>График работы</span></a></li>
             @endif
+            @if(isset($linkUser['all']))
+            <li class="header">Ссылки для всех</li>
+            @foreach($linkUser['all'] as $link)
+                <li>
+                    <a target="_blank" href="{{$link->link}}"> @if($admin == 1) <i class="fa fa-edit"><span style="visibility:hidden;">{{$link->id}}</span></i> @endif <span>{{$link->name}}</span></a>
+                </li>
+            @endforeach
+            @endif
+            @if(isset($linkUser['for_user']))
             <li class="header">Ссылки</li>
-
-            @foreach($linkUser as $link)
+            @foreach($linkUser['for_user'] as $link)
             <li>
                 <a target="_blank" href="{{$link->link}}"><i class="fa fa-edit"><span style="visibility:hidden;">{{$link->id}}</span></i> <span>{{$link->name}}</span></a>
             </li>
             @endforeach
+            @endif
             <li>
             <form action="{{ url('/create-link-user') }}" method="post" class="add_form_link_user" style="margin:15px; display: none">
                 {!! csrf_field() !!}
+                <input type="hidden" name="id_user" value="{{Auth::id()}}"></br>
+                @if($admin == 1)
+                <input type="checkbox" name="status_admin" value="1"><span style="color:#fff"> Для всех</span></br>
+                @endif
                 <input type="text" name="name" style="width: 195px" placeholder="@if($errors->first('name')) {{ $errors->first('name') }} @else Название @endif"></br>
                 <input type="text" style="width: 195px" name="link" placeholder="@if($errors->first('link')) {{ $errors->first('link') }} @else Ссылка @endif"></br>
                 <input type="text" size="15" name="position" placeholder="@if($errors->first('position')) {{ $errors->first('position') }} @else Позиция @endif">

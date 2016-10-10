@@ -1738,11 +1738,16 @@ class HomeController extends Controller
             'link' => 'required',
             'position' => 'integer',
         ]);
+        if(!isset($request->status_admin)){
+            $request->status_admin = 0;
+        }
 
         LinkUser::create([
             'name' => $request->name,
             'link' => $request->link,
-            'position' => $request->position
+            'position' => $request->position,
+            'status_admin' => $request->status_admin,
+            'id_user' => $request->id_user
         ]);
 
         return redirect()->intended($_SERVER['HTTP_REFERER']);
@@ -1750,8 +1755,21 @@ class HomeController extends Controller
     }
 
     public function LinkUser(){
+      // dd($this->user_now()->id);
+
         $results = \DB::table('link_users')->orderBy('position')->get();
-        return $results;
+
+        $resArr = array();
+        foreach($results as $r){
+            if($r->status_admin == 1){
+                $resArr['all'][] = $r;
+            }
+            if($this->user_now()->id == $r->id_user){
+                $resArr['for_user'][] = $r;
+            }
+        }
+
+        return $resArr;
     }
 
     public function editLinkUser($id){
@@ -1765,11 +1783,18 @@ class HomeController extends Controller
     }
 
     public function editAddLinkUser(Request $request){
+
+        if(!isset($request->status_admin)){
+            $request->status_admin = 0;
+        }
+
         \DB::table('link_users')->where('id', $request->id)
             ->update(array(
                 'name' => $request->name,
                 'link' => $request->link,
-                'position' => $request->position
+                'position' => $request->position,
+                'status_admin' => $request->status_admin,
+                'id_user' => $request->id_user
             ));
         return redirect()->intended('/');
     }

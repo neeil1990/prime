@@ -9,6 +9,8 @@ class LinkUser extends Model
     protected $fillable = [
         'name',
         'link',
-        'position'
+        'position',
+        'status_admin',
+        'id_user'
     ];
 }

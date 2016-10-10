@@ -11,6 +11,15 @@
                         <form class="form-horizontal" role="form" method="POST" action="{{ url('/edit-add-link-user') }}">
                             {!! csrf_field() !!}
 
+                            <input type="hidden" name="id_user" value="{{Auth::id()}}">
+                            @if($admin == 1)
+                                <div class="form-group">
+                                 <label class="col-md-4 control-label">Для всех</label>
+                                  <div class="col-md-6">
+                                    <input type="checkbox" name="status_admin" value="1">
+                                  </div>
+                                </div>
+                            @endif
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Название</label>
