@@ -11,7 +11,6 @@
 |
 */
 
-
 //Route::get('/get-balanse-yandex', ['as' => 'getBalanseYandex', 'uses' => 'HomeController@getBalanseYandex']);
 
 Route::get('/get-seranking-sum', function()
@@ -162,6 +161,10 @@ Route::auth();
 
 Route::get('/', ['as' => 'index', 'uses' => 'HomeController@index']);
 
+
+
+
+
 //Архив
 Route::get('/archive-page-project/{name}', ['as' => 'archivePageProject', 'uses' => 'HomeController@archivePageProject']);
 
@@ -274,3 +277,9 @@ Route::post('/save-setting-payout', ['as' => 'saveSettingPayout', 'uses' => 'Hom
 
 //Логи
 Route::get('/logs', ['as' => 'viewLogs', 'uses' => 'Controller@viewLogs']);
+
+//ссылки
+Route::post('/create-link-user', ['as' => 'createLinkUser', 'uses' => 'HomeController@createLinkUser']);
+Route::post('/delite-link-user', ['as' => 'deliteLinkUser', 'uses' => 'HomeController@deliteLinkUser']);
+Route::post('/edit-add-link-user', ['as' => 'editAddLinkUser', 'uses' => 'HomeController@editAddLinkUser']);
+Route::get('edit-link-user/{id}/', ['as' => 'editLinkUser', 'uses' => 'HomeController@editLinkUser']);

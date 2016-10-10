@@ -51,10 +51,45 @@
             @if($admin == 1)
             <li class="menu8"><a href="https://docs.google.com/spreadsheets/d/1_OPH74-bEFS50D9tlTjQi69rH__PzIw4JFdzQlXZd3Y/edit"><i class="fa fa-area-chart"></i> <span>График работы</span></a></li>
             @endif
+            <li class="header">Ссылки</li>
+
+            @foreach($linkUser as $link)
+            <li>
+                <a href="{{$link->link}}"><i class="fa fa-edit"><span style="visibility:hidden;">{{$link->id}}</span></i> <span>{{$link->name}}</span></a>
+            </li>
+            @endforeach
+            <li>
+            <form action="{{ url('/create-link-user') }}" method="post" class="add_form_link_user" style="margin:15px; display: none">
+                {!! csrf_field() !!}
+                <input type="text" name="name" style="width: 195px" placeholder="@if($errors->first('name')) {{ $errors->first('name') }} @else Название @endif"></br>
+                <input type="text" style="width: 195px" name="link" placeholder="@if($errors->first('link')) {{ $errors->first('link') }} @else Ссылка @endif"></br>
+                <input type="text" size="15" name="position" placeholder="@if($errors->first('position')) {{ $errors->first('position') }} @else Позиция @endif">
+                <input type="submit" style="border: 2px solid #367fa9;background: none;background-color: #367fa9;color: #fff;" value="Отправить">
+                </form><br/>
+
+            </li>
+            <li>
+               <a class="add_link_user" href="#">Добавить ссылку</a>
+            </li>
         </ul>
 
     </section>
 
+    <script>
+    $(function(){
+        $('.add_link_user').click(function(){
+            $('.add_form_link_user').toggle('slow');
+            return false;
+        });
+
+        $('.fa-edit').click(function(){
+           var id = $(this).text();
+            window.location.href = '/edit-link-user/' + id + '/';
+            return false;
+        });
+
+    });
+    </script>
     <!-- /.sidebar -->
 </aside>
 </div>

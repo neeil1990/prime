@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Groups;
+use App\LinkUser;
 use App\PassContext;
 use App\PassDev;
 use App\ProjectContext;
@@ -86,7 +87,8 @@ class HomeController extends Controller
         //dd($name);
 
         return view('page.archive-page-project',[
-            'admin' => $this->admin()
+            'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser()
         ]);
     }
 
@@ -168,15 +170,10 @@ class HomeController extends Controller
     public function index()
     {
 
-
-
-
-
-
-
         return view('index',[
             'users_now' => $this->user_now(),
-            'admin' => $this->admin()
+            'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser()
         ]);
     }
 
@@ -187,7 +184,8 @@ class HomeController extends Controller
        $arrSettingFieldSeo = \DB::table('setting_fields')->where('table_value','seo')->get();
         return view('page.setting_field_seo',[
             'settings_sield' => $arrSettingFieldSeo,
-            'admin' => $this->admin()
+            'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser()
         ]);
 
     }
@@ -198,7 +196,8 @@ class HomeController extends Controller
         $arrSettingFieldContext = \DB::table('setting_fields')->where('table_value','context')->get();
         return view('page.setting_field_context',[
             'settings_sield' => $arrSettingFieldContext,
-            'admin' => $this->admin()
+            'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser()
         ]);
 
     }
@@ -209,7 +208,8 @@ class HomeController extends Controller
         $arrSettingFieldContext = \DB::table('setting_fields')->where('table_value','pass_seo')->get();
         return view('page.setting_field_pass_seo',[
             'settings_sield' => $arrSettingFieldContext,
-            'admin' => $this->admin()
+            'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser()
         ]);
     }
 
@@ -219,7 +219,8 @@ class HomeController extends Controller
         $arrSettingFieldContext = \DB::table('setting_fields')->where('table_value','pass_dev')->get();
         return view('page.setting_field_pass_dev',[
             'settings_sield' => $arrSettingFieldContext,
-            'admin' => $this->admin()
+            'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser()
         ]);
     }
 
@@ -229,7 +230,8 @@ class HomeController extends Controller
         $arrSettingFieldContext = \DB::table('setting_fields')->where('table_value','pass_context')->get();
         return view('page.setting_field_pass_context',[
             'settings_sield' => $arrSettingFieldContext,
-            'admin' => $this->admin()
+            'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser()
         ]);
     }
 
@@ -352,6 +354,7 @@ class HomeController extends Controller
             'users' => $project_seo,
             'users_now' => $this->user_now(),
             'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser(),
             'budget_context_project' => array_sum($arrBuget),
             'count_context_project' => count($project_context),
             'setting_field_seo' => $setting_field_seo,
@@ -506,7 +509,8 @@ class HomeController extends Controller
             'count_archive' => $count_archive,
             'user_groups' => $user_groups,
             'users_now' => $this->user_now(),
-            'admin' => $this->admin()
+            'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser()
         ]);
     }
 
@@ -518,7 +522,8 @@ class HomeController extends Controller
         return view('page.create_personal',[
             'users_now' => $this->user_now(),
             'groups' => $group,
-            'admin' => $this->admin()
+            'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser()
         ]);
     }
 
@@ -588,6 +593,7 @@ class HomeController extends Controller
         return view('page.edit_personal',[
             'user' => $user,
             'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser(),
             'users_now' => $this->user_now(),
             'groups' => $group
         ]);
@@ -610,6 +616,7 @@ class HomeController extends Controller
 
         return view('page.edit_pass_seo',[
             'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser(),
             'users' => $pass_seo,
             'user_all' => $user_all,
             'user' => $user,
@@ -682,6 +689,7 @@ class HomeController extends Controller
             'archive' => $archive,
             'users_now' => $this->user_now(),
             'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser(),
             'setting_field' => $setting_field
         ]);
     }
@@ -692,7 +700,8 @@ class HomeController extends Controller
         return view('page.create_pass_seo',[
             'users' => $user ,
             'users_now' => $this->user_now(),
-            'admin' => $this->admin()
+            'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser()
         ]);
     }
 
@@ -741,7 +750,8 @@ class HomeController extends Controller
         return view('page.create_group_form',[
             'users' => $user,
             'users_now' => $this->user_now(),
-            'admin' => $this->admin()
+            'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser()
         ]);
     }
 
@@ -766,6 +776,7 @@ class HomeController extends Controller
         return view('page.edit_groups',[
             'users' => $users,
             'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser(),
             'users_all' => $user_all ,
             'users_now' => $this->user_now()
         ]);
@@ -829,7 +840,8 @@ class HomeController extends Controller
             'archive' => $archive,
             'count_archive' => count($countArchive),
             'users_now' => $this->user_now(),
-            'admin' => $this->admin()
+            'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser()
         ]);
 
     }
@@ -839,7 +851,8 @@ class HomeController extends Controller
         return view('page.create_pass_context',[
             'users' => $user ,
             'users_now' => $this->user_now(),
-            'admin' => $this->admin()
+            'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser()
         ]);
     }
 
@@ -910,6 +923,7 @@ class HomeController extends Controller
         return view('page.edit_pass_context',[
             'user' => $user,
             'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser(),
             'users' => $pass_context,
             'user_all' => $user_all,
             'users_now' => $this->user_now()
@@ -973,7 +987,8 @@ class HomeController extends Controller
             'count_archive' => count($countArchive),
             'archive' => $archive,
             'users_now' => $this->user_now(),
-            'admin' => $this->admin()
+            'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser()
         ]);
     }
 
@@ -983,6 +998,7 @@ class HomeController extends Controller
         return view('page.create_pass_dev',[
             'users' => $user ,
             'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser(),
             'users_now' => $this->user_now()
         ]);
 
@@ -1045,6 +1061,7 @@ class HomeController extends Controller
         return view('page.edit_pass_dev',[
             'users' => $pass_dev,
             'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser(),
             'user_all' => $user_all,
             'user' => $user,
             'users_now' => $this->user_now()
@@ -1193,7 +1210,8 @@ class HomeController extends Controller
             'archive' => $archive,
             'users_now' => $this->user_now(),
             'admin' => $this->admin(),
-            'setting_field' => $setting_field
+            'setting_field' => $setting_field,
+            'linkUser' => $this->LinkUser()
         ]);
     }
 
@@ -1201,7 +1219,8 @@ class HomeController extends Controller
         $user = User::all();
        return view('page.project-seo-crate-form',[
            'users' => $user,
-           'admin' => $this->admin()
+           'admin' => $this->admin(),
+           'linkUser' => $this->LinkUser()
        ]);
     }
 
@@ -1293,6 +1312,7 @@ class HomeController extends Controller
         return view('page.edit_prodject_seo_form',[
             'users' => $project_seos,
             'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser(),
             'user_all' => $user_all,
             'user' => $user,
             'users_now' => $this->user_now()
@@ -1432,6 +1452,7 @@ class HomeController extends Controller
             'archive' => $archive,
             'users_now' => $this->user_now(),
             'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser(),
             'setting_field' => $setting_field
         ]);
     }
@@ -1440,7 +1461,8 @@ class HomeController extends Controller
         $user = User::all();
         return view('page.project_context_create_form',[
             'users' => $user,
-            'admin' => $this->admin()
+            'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser()
         ]);
     }
 
@@ -1523,6 +1545,7 @@ class HomeController extends Controller
         return view('page.edit_prodject_context_form',[
             'users' => $project_contexts,
             'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser(),
             'user_all' => $user_all,
             'user' => $user,
             'users_now' => $this->user_now()
@@ -1578,6 +1601,7 @@ class HomeController extends Controller
 
         return view('page.service-and-password',[
             'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser(),
             'setting_field' => $setting_field,
             'name' => $name,
             'archive' => $archive,
@@ -1591,6 +1615,7 @@ class HomeController extends Controller
         $user = User::all();
         return view('page.service-and-password-create-form',[
             'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser(),
             'users' => $user
         ]);
     }
@@ -1656,6 +1681,7 @@ class HomeController extends Controller
         return view('page.edit_service_and_passes_form',[
             'users' => $project_contexts,
             'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser(),
             'user_all' => $user_all,
             'user' => $user,
             'users_now' => $this->user_now()
@@ -1681,7 +1707,8 @@ class HomeController extends Controller
         $arrSettingFieldSeo = \DB::table('setting_fields')->where('table_value','service_and_pass')->get();
         return view('page.setting-field-service-and-password',[
             'settings_sield' => $arrSettingFieldSeo,
-            'admin' => $this->admin()
+            'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser()
         ]);
     }
 
@@ -1693,6 +1720,7 @@ class HomeController extends Controller
        $alldata = SettingPayout::all();
         return view('page.setting-payout',[
             'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser(),
             'setting_payout' => $alldata[0]
         ]);
     }
@@ -1701,6 +1729,58 @@ class HomeController extends Controller
         $settingPayout->UpdateSettingPayout($request->all());
         return redirect()->intended('setting-payout');
     }
+
+
+    public function createLinkUser(Request $request){
+
+        $this->validate($request, [
+            'name' => 'required',
+            'link' => 'required',
+            'position' => 'integer',
+        ]);
+
+        LinkUser::create([
+            'name' => $request->name,
+            'link' => $request->link,
+            'position' => $request->position
+        ]);
+
+        return redirect()->intended($_SERVER['HTTP_REFERER']);
+
+    }
+
+    public function LinkUser(){
+        $results = \DB::table('link_users')->orderBy('position')->get();
+        return $results;
+    }
+
+    public function editLinkUser($id){
+        $results = \DB::table('link_users')->where('id',$id)->first();
+
+        return view('page.edit-link-user-view',[
+            'data' => $results,
+            'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser()
+        ]);
+    }
+
+    public function editAddLinkUser(Request $request){
+        \DB::table('link_users')->where('id', $request->id)
+            ->update(array(
+                'name' => $request->name,
+                'link' => $request->link,
+                'position' => $request->position
+            ));
+        return redirect()->intended('/');
+    }
+
+    public function deliteLinkUser(Request $request){
+        \DB::table('link_users')->where('id', '=', $request->id)->delete();
+        return redirect()->intended('/');
+    }
+
+
+
 
 
 }
