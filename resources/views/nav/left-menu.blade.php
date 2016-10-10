@@ -55,7 +55,7 @@
 
             @foreach($linkUser as $link)
             <li>
-                <a href="{{$link->link}}"><i class="fa fa-edit"><span style="visibility:hidden;">{{$link->id}}</span></i> <span>{{$link->name}}</span></a>
+                <a target="_blank" href="{{$link->link}}"><i class="fa fa-edit"><span style="visibility:hidden;">{{$link->id}}</span></i> <span>{{$link->name}}</span></a>
             </li>
             @endforeach
             <li>
