@@ -84,7 +84,7 @@
 
         $('.fa-edit').click(function(){
            var id = $(this).text();
-            window.location.href = '/edit-link-user/' + id + '/';
+            window.location.href = 'https://work.prime-ltd.su/edit-link-user/' + id + '/';
             return false;
         });
 
