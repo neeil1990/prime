@@ -282,4 +282,4 @@ Route::get('/logs', ['as' => 'viewLogs', 'uses' => 'Controller@viewLogs']);
 Route::post('/create-link-user', ['as' => 'createLinkUser', 'uses' => 'HomeController@createLinkUser']);
 Route::post('/delite-link-user', ['as' => 'deliteLinkUser', 'uses' => 'HomeController@deliteLinkUser']);
 Route::post('/edit-add-link-user', ['as' => 'editAddLinkUser', 'uses' => 'HomeController@editAddLinkUser']);
-Route::get('edit-link-user/{id}/', ['as' => 'editLinkUser', 'uses' => 'HomeController@editLinkUser']);
+Route::get('/edit-link-user/{id}/', ['as' => 'editLinkUser', 'uses' => 'HomeController@editLinkUser']);
