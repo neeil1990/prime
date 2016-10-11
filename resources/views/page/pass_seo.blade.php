@@ -104,7 +104,7 @@
                                                 <script>
                                                     var url_fav = '.favicon_url'+'{{$user->id}}';
                                                     var view_fav = '.favicon_view'+'{{$user->id}}';
-                                                    var url = 'http://' + $(url_fav).text() + '/favicon.ico';
+                                                    var url = 'https://www.google.com/s2/favicons?domain=' + $(url_fav).text() ;
                                                     $(view_fav).html('<img src='+ url +' style="max-width:30px">');
                                                 </script>
                                                 @if($setting_field[1]->value == 1 or $admin == 1)
