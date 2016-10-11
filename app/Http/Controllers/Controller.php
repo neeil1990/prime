@@ -462,7 +462,7 @@ class Controller extends BaseController
     public function viewLogs(Logs $logs){
        $home = new HomeController();
         if($home->admin() == 1){
-            $all = $logs->all();
+            $all = $logs->all()->sortByDesc('id');
             return view('page.logs',[
                 'all' => $all,
                 'admin' => $home->admin()
