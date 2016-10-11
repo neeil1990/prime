@@ -114,7 +114,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Стартпоинт</label>
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> SP</label>
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="startpoint" value="">

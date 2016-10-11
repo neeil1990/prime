@@ -48,7 +48,7 @@
                                             <th class="sorting" tabindex="0" aria-controls="example2" data-type="number" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Сумма на з.п.</th>
                                             @endif
                                             @if($setting_field_seo[7]->value == 1 or $admin == 1)
-                                            <th class="sorting" tabindex="0" aria-controls="example2" data-type="string" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">Стартпоинт</th>
+                                            <th class="sorting" tabindex="0" aria-controls="example2" data-type="string" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">SP</th>
                                             @endif
                                             @if($setting_field_seo[8]->value == 1 or $admin == 1)
                                             <th class="sorting" tabindex="0" aria-controls="example2" data-type="string" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending">LP</th>

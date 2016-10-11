@@ -123,7 +123,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Стартпоинт</label>
+                                <label class="col-md-4 control-label">SP</label>
 
                                 <div class="col-md-6">
                                     <input type="text" class="form-control" name="startpoint" value="{{$users->startpoint}}">

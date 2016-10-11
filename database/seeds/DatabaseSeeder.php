@@ -75,7 +75,7 @@ class SettingField extends Seeder
         ]);
 
         \App\SettingField::create([
-            'name' => 'Стартпоинт',
+            'name' => 'SP',
             'field' => 'startpoint_seo',
             'value' => '1',
             'table_value' => 'seo'
