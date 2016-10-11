@@ -1122,6 +1122,7 @@ class HomeController extends Controller
                 ->orderBy('project_seos.positions')
                 ->get();
         }
+
         $arrBudget = array();
         $countStatus = array();
         foreach($users as $key=>$u){
@@ -1153,26 +1154,30 @@ class HomeController extends Controller
 
 
 
-            if($u->status == $archive) {
-                if($u->budget <= $u->osvoeno){
-                    $arrBudget['budget'][] = $u->budget;
-                    $arrBudget['osvoeno'][] = $u->budget;
-                }else {
-                    $arrBudget['budget'][] = $u->budget;
-                    $arrBudget['osvoeno'][] = $u->osvoeno;
-                }
-            }elseif($u->status == $archive){
 
-                if($u->budget <= $u->osvoeno){
-                    $arrBudget['budget'][] = $u->budget;
-                    $arrBudget['osvoeno'][] = $u->budget;
-                }else {
-                    $arrBudget['budget'][] = $u->budget;
-                    $arrBudget['osvoeno'][] = $u->osvoeno;
-                }
+            if($u->status == $archive) {
+
+              if($u->id_glavn_user == $this->user_now()->id and $this->admin() == 0) {
+                  if ($u->budget <= $u->osvoeno) {
+                      $arrBudget['budget'][] = $u->budget;
+                      $arrBudget['osvoeno'][] = $u->budget;
+                  } else {
+                      $arrBudget['budget'][] = $u->budget;
+                      $arrBudget['osvoeno'][] = $u->osvoeno;
+                  }
+              }elseif($this->admin() == 1){
+                  if ($u->budget <= $u->osvoeno) {
+                      $arrBudget['budget'][] = $u->budget;
+                      $arrBudget['osvoeno'][] = $u->budget;
+                  } else {
+                      $arrBudget['budget'][] = $u->budget;
+                      $arrBudget['osvoeno'][] = $u->osvoeno;
+                  }
+              }
             }
 
         }
+
         if(!empty($arrBudget['budget'])){
             $arrBudget['budget'] = array_sum($arrBudget['budget']);
         }else{
@@ -1202,6 +1207,7 @@ class HomeController extends Controller
         }else{
             $countStatus['active'] = count($countStatus['active']);
         }
+
 
         return view('page.project-seo',[
             'budget_seo_osvoeno' => $arrBudget,
@@ -1415,12 +1421,13 @@ class HomeController extends Controller
 
 
             if($u->status == $archive){
-                $arrBuget[] = $u->ya_direct;
-                $arrBuget[] = $u->go_advords;
-            }elseif($u->status == $archive){
-
-                $arrBuget[] = $u->ya_direct;
-                $arrBuget[] = $u->go_advords;
+                if($u->id_glavn_user == $this->user_now()->id and $this->admin() == 0) {
+                    $arrBuget[] = $u->ya_direct;
+                    $arrBuget[] = $u->go_advords;
+                }elseif($this->admin() == 1){
+                    $arrBuget[] = $u->ya_direct;
+                    $arrBuget[] = $u->go_advords;
+                }
             }
 
 
