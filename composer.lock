@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4dd8cb02d6ae42a3d0aca3ab699a275e",
-    "content-hash": "09140f9bf72c54631fa85c041bb67d84",
+    "hash": "d9cee29054b5089017323cd24c63b42f",
+    "content-hash": "f4013304049f0307faf7ccf3dd19d5d4",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -322,6 +322,50 @@
                 "tags"
             ],
             "time": "2016-03-30 07:50:16"
+        },
+        {
+            "name": "googleads/googleads-php-lib",
+            "version": "13.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/googleads/googleads-php-lib.git",
+                "reference": "a5bc6ea41585c4b377760ff577828efeee5afa7d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/googleads/googleads-php-lib/zipball/a5bc6ea41585c4b377760ff577828efeee5afa7d",
+                "reference": "a5bc6ea41585c4b377760ff577828efeee5afa7d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-openssl": "*",
+                "ext-soap": "*",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/Google/Api/Ads/AdWords/Lib",
+                    "src/Google/Api/Ads/Dfp/Lib"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                "src/"
+            ],
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Google",
+                    "homepage": "https://github.com/googleads/googleads-php-lib/contributors"
+                }
+            ],
+            "description": "Google Ads APIs Client Library for PHP (AdWords and DFP)",
+            "homepage": "https://github.com/googleads/googleads-php-lib",
+            "time": "2016-10-04 05:19:21"
         },
         {
             "name": "jakub-onderka/php-console-color",

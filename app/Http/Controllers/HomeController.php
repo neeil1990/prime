@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers;
 use App\Groups;
 use App\LinkUser;
@@ -21,8 +22,6 @@ use App\PassSeo;
 
 
 
-
-
 class HomeController extends Controller
 {
     /**
@@ -41,6 +40,70 @@ class HomeController extends Controller
             }
         }
 
+    }
+
+    function DownloadCriteriaReportExample(\AdWordsUser $user, $filePath) {
+        // Load the service, so that the required classes are available.
+        $user->SetClientCustomerId('204-793-5110');
+        $user->LoadService('ReportDefinitionService', 'v201607');
+        // Optional: Set clientCustomerId to get reports of your child accounts
+        // $user->SetClientCustomerId('INSERT_CLIENT_CUSTOMER_ID_HERE');
+
+        // Create selector.
+
+        $selector = new \Selector();
+        $selector->fields = array('Cost');
+
+      //  $selector = new \stdClass();
+      //  $selector->fields = array('Cost');
+
+
+
+        // Optional: use predicate to filter out paused criteria.
+        $selector->predicates[] = new \Predicate('Status', 'NOT_IN', array('PAUSED'));
+
+
+        // Create report definition.
+        $reportDefinition = new \ReportDefinition();
+        $reportDefinition->selector = $selector;
+        $reportDefinition->reportName = 'Criteria performance report #' . uniqid();
+        $reportDefinition->dateRangeType = 'LAST_7_DAYS';
+        $reportDefinition->reportType = 'CRITERIA_PERFORMANCE_REPORT';
+        $reportDefinition->downloadFormat = 'XML';
+
+        // Set additional options.
+        $options = array('version' => 'v201607');
+
+
+
+        $reportUtils = new \ReportUtils();
+        $reportUtils->DownloadReport($reportDefinition, $filePath, $user, $options);
+        printf("Report with name '%s' was downloaded to '%s'.\n",
+            $reportDefinition->reportName, $filePath);
+    }
+
+    public function index()
+    {
+
+
+
+
+      //  $user = new \AdWordsUser();
+
+      //  $filePath = $_SERVER['DOCUMENT_ROOT'] . '/public/report.xml';
+
+      //  $this->DownloadCriteriaReportExample($user,$filePath);
+
+
+
+
+
+
+        return view('index',[
+            'users_now' => $this->user_now(),
+            'admin' => $this->admin(),
+            'linkUser' => $this->LinkUser()
+        ]);
     }
 
     public function user_now(){
@@ -167,15 +230,7 @@ class HomeController extends Controller
     }
 
 
-    public function index()
-    {
 
-        return view('index',[
-            'users_now' => $this->user_now(),
-            'admin' => $this->admin(),
-            'linkUser' => $this->LinkUser()
-        ]);
-    }
 
 
     //Настройка полей для проектов сео

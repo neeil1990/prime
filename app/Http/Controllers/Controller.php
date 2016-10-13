@@ -323,7 +323,7 @@ class Controller extends BaseController
         }
 
         if ($showData->passYandex != $data['passYandex']) {
-            $this->add_logs('Пароли Контекст : ' . $showData->name_project, $p . 'Пароль Яндекс : ' . $data['	passYandex'], $user_name);
+            $this->add_logs('Пароли Контекст : ' . $showData->name_project, $p . 'Пароль Яндекс : ' . $data['passYandex'], $user_name);
         }
         if ($showData->loginGoogle != $data['loginGoogle']) {
             $this->add_logs('Пароли Контекст : ' . $showData->name_project, $p . 'Логин Гугл : ' . $data['loginGoogle'], $user_name);

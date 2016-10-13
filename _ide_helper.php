@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.2.29 on 2016-04-13.
+ * Generated for Laravel 5.2.29 on 2016-10-12.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -11325,6 +11325,116 @@ namespace {
         public static function offsetUnset($key){
             //Method inherited from \DebugBar\DebugBar            
             return \Barryvdh\Debugbar\LaravelDebugbar::offsetUnset($key);
+        }
+        
+    }
+
+
+    class Meta extends \Eusonlito\LaravelMeta\Facade{
+        
+        /**
+         * 
+         *
+         * @param array $config
+         * @return object 
+         * @static 
+         */
+        public static function getInstance($config = array()){
+            return \Eusonlito\LaravelMeta\Meta::getInstance($config);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $title
+         * @return string 
+         * @static 
+         */
+        public static function title($title = null){
+            return \Eusonlito\LaravelMeta\Meta::title($title);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $key
+         * @param string $value
+         * @return string 
+         * @static 
+         */
+        public static function meta($key, $value = null){
+            return \Eusonlito\LaravelMeta\Meta::meta($key, $value);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $key
+         * @return string 
+         * @static 
+         */
+        public static function get($key){
+            return \Eusonlito\LaravelMeta\Meta::get($key);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $key
+         * @param string $value
+         * @return string 
+         * @static 
+         */
+        public static function set($key, $value = null){
+            return \Eusonlito\LaravelMeta\Meta::set($key, $value);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $key
+         * @param string $value
+         * @return string 
+         * @static 
+         */
+        public static function tag($key, $value = null){
+            return \Eusonlito\LaravelMeta\Meta::tag($key, $value);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $key
+         * @param mixed $images
+         * @return string 
+         * @static 
+         */
+        public static function tagImage($images = null){
+            return \Eusonlito\LaravelMeta\Meta::tagImage($images);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $key
+         * @param string $value
+         * @return string 
+         * @static 
+         */
+        public static function tagMetaName($key, $value = null){
+            return \Eusonlito\LaravelMeta\Meta::tagMetaName($key, $value);
+        }
+        
+        /**
+         * 
+         *
+         * @param string $key
+         * @param string $value
+         * @return string 
+         * @static 
+         */
+        public static function tagMetaProperty($key, $value = null){
+            return \Eusonlito\LaravelMeta\Meta::tagMetaProperty($key, $value);
         }
         
     }
