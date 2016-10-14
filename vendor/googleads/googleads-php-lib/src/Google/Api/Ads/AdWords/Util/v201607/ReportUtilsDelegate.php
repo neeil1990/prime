@@ -126,11 +126,15 @@ class ReportUtilsDelegate {
       $curlUtils->SetOpt($ch, CURLOPT_POSTFIELDS, $params);
     }
 
+/*
     if (isset($path)) {
       $file = fopen($path, 'w');
+
       $curlUtils->SetOpt($ch, CURLOPT_RETURNTRANSFER, false);
       $curlUtils->SetOpt($ch, CURLOPT_FILE, $file);
+      $curlUtils->SetOpt($ch, CURLOPT_URL, $url);
     }
+*/
 
     // Set additional cURL options, e.g., CURLOPT_TIMEOUT, if needed.
     if ($customCurlOptions !== null) {
@@ -146,10 +150,13 @@ class ReportUtilsDelegate {
     $request = $curlUtils->GetInfo($ch, CURLINFO_HEADER_OUT);
 
 
+    $response_xml = curl_exec($ch);
+
     $curlUtils->Close($ch);
     if (isset($file)) {
       fclose($file);
     }
+
 
     $exception = null;
     if ($code != 200) {
@@ -185,12 +192,16 @@ class ReportUtilsDelegate {
       }
     }
 
+
+
     self::LogRequest($request, $code, $params, $exception);
 
+
     if (isset($exception)) {
+
       throw $exception;
     } else if (isset($path)) {
-      return $downloadSize;
+      return $response_xml;
     } else {
       return $response;
     }

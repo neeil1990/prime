@@ -3,6 +3,10 @@
 
 @section('content')
 
+    <h1>{{$sum_accaunt}}</h1>
+    <h1>{{$click_accaunt}}</h1>
+    <h1>{{$avgCost}}</h1>
+
 
     <section class="content">
         <div id="topvisor_GPr"></div>

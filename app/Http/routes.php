@@ -157,6 +157,26 @@ Route::get('/get-balanse-yandex', function()
     );
 });
 
+Route::get('/get-balanse-google', function() {
+
+    $results = \DB::table('google_apis')->get();
+    $user = new \AdWordsUser();
+    $filePath = $_SERVER['DOCUMENT_ROOT'] . '/public/report.xml';
+    $home = new \App\Http\Controllers\HomeController();
+
+    foreach($results as $r){
+        $sum_accaunt = $home->DownloadCriteriaReportExample($user,$filePath,$r->google_id_client,'ALL_TIME');
+
+        \DB::table('google_apis')
+            ->where('id', $r->id)
+            ->update(array(
+                'sum' => $sum_accaunt['cost']
+            ));
+    }
+
+});
+
+
 Route::auth();
 
 Route::get('/', ['as' => 'index', 'uses' => 'HomeController@index']);
@@ -171,6 +191,8 @@ Route::get('/archive-page-project/{name}', ['as' => 'archivePageProject', 'uses'
 Route::get('/personal', ['as' => 'personal', 'uses' => 'HomeController@personal']);
 
 Route::post('/update-token-yandex-form', ['as' => 'updateTokenYandexForm', 'uses' => 'HomeController@updateTokenYandexForm']);
+Route::post('/update-id-google-form', ['as' => 'updateIdGoogleForm', 'uses' => 'HomeController@updateIdGoogleForm']);
+Route::post('/update-ost-google-balanse-api', ['as' => 'updateOstGoogleBalanseApi', 'uses' => 'HomeController@updateOstGoogleBalanseApi']);
 
 
 Route::get('/setting-field-seo', ['as' => '/settingFieldSeo', 'uses' => 'HomeController@settingFieldSeo']);

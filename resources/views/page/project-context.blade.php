@@ -150,7 +150,28 @@
                                                 </td>
                                                 @endif
                                                 @if($setting_field[4]->value == 1 or $admin == 1)
-                                                <td class="">{{$user->ost_bslsnse_go}}</td>
+                                                <td class="">
+
+                                                    <span class="info-box-number ost_bslsnse_go" now-bslsnse-go="{{$user->now_bslsnse_go}}" data-id-project="{{$user->id}}" style="cursor: pointer">{{$user->ost_bslsnse_go}}</span>
+
+
+                                                    <div class="update_id_google">
+                                                        <small class="label label-primary obnovit_google" style="cursor: pointer">Обновить/Закрыть</small>
+
+                                                        <form method="POST" action="/update-id-google-form" class="update_google_form" style="display: none;">
+                                                            <div class="input-group input-group-sm">
+                                                                {!! csrf_field() !!}
+                                                                <input type="hidden" class="form-control" name="google_project_id" value="{{$user->id}}">
+                                                                <input type="text" style="width: 150px;" class="form-control" placeholder="введите ID google" name="google_id_client" value="">
+                                                            <span class="input-group-btn">
+                                                              <button type="submit" class="btn btn-info btn-flat">Go!</button>
+                                                            </span>
+
+                                                            </div>
+
+                                                        </form>
+                                                    </div>
+                                                </td>
                                                 @endif
                                                 @if($setting_field[5]->value == 1 or $admin == 1)
                                                 <td class="">
@@ -220,10 +241,29 @@
 
     <script>
         $(function(){
+            $('.ost_bslsnse_go').click(function(){
+                $( "#dialog" ).dialog({
+                    closeText: "X",
+                    minWidth: 500
+                });
+               var ost = $(this).attr('now-bslsnse-go');
+                $('.now_balanse').text('Пополнено: ' + ost);
+               var id = $(this).attr('data-id-project');
+                $('.id_progect_jq').val(id);
+            });
+            $('.btn-default').click(function(){
+            $( "#dialog" ).dialog( "close" );
+                return false;
+            });
 
             $('.obnovit').click(function(){
                var rod = $(this).parent(".update_token_yandex")
                var doch = $(rod).children(".update_token_yandex_form").toggle('slow')
+            });
+
+            $('.obnovit_google').click(function(){
+                var rod = $(this).parent(".update_id_google")
+                var doch = $(rod).children(".update_google_form").toggle('slow')
             });
 
 

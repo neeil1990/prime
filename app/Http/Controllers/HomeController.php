@@ -2,6 +2,7 @@
 
 
 namespace App\Http\Controllers;
+use App\GoogleApi;
 use App\Groups;
 use App\LinkUser;
 use App\PassContext;
@@ -42,9 +43,9 @@ class HomeController extends Controller
 
     }
 
-    function DownloadCriteriaReportExample(\AdWordsUser $user, $filePath) {
+    function DownloadCriteriaReportExample(\AdWordsUser $user, $filePath,$user_id,$time) {
         // Load the service, so that the required classes are available.
-        $user->SetClientCustomerId('204-793-5110');
+        $user->SetClientCustomerId($user_id);
         $user->LoadService('ReportDefinitionService', 'v201607');
         // Optional: Set clientCustomerId to get reports of your child accounts
         // $user->SetClientCustomerId('INSERT_CLIENT_CUSTOMER_ID_HERE');
@@ -52,7 +53,7 @@ class HomeController extends Controller
         // Create selector.
 
         $selector = new \Selector();
-        $selector->fields = array('Cost');
+        $selector->fields = array('Cost','Clicks');
 
       //  $selector = new \stdClass();
       //  $selector->fields = array('Cost');
@@ -67,40 +68,53 @@ class HomeController extends Controller
         $reportDefinition = new \ReportDefinition();
         $reportDefinition->selector = $selector;
         $reportDefinition->reportName = 'Criteria performance report #' . uniqid();
-        $reportDefinition->dateRangeType = 'LAST_7_DAYS';
+        $reportDefinition->dateRangeType = $time; //ALL_TIME //LAST_7_DAYS
         $reportDefinition->reportType = 'CRITERIA_PERFORMANCE_REPORT';
         $reportDefinition->downloadFormat = 'XML';
 
         // Set additional options.
         $options = array('version' => 'v201607');
 
-
-
         $reportUtils = new \ReportUtils();
-        $reportUtils->DownloadReport($reportDefinition, $filePath, $user, $options);
-        printf("Report with name '%s' was downloaded to '%s'.\n",
-            $reportDefinition->reportName, $filePath);
+       $xml = $reportUtils->DownloadReport($reportDefinition, $filePath, $user, $options);
+       $SimpleXML = new \SimpleXMLElement($xml);
+
+        //var_dump($SimpleXML);
+
+        $arCost = array();
+        foreach($SimpleXML->table->row as $key=>$row){
+            if((string)$row['clicks'] != 0){
+                $arCost['clicks'][] = (string)$row['clicks'];
+            }
+            if(!empty((string)$row['cost'])){
+                $arCost['cost'][] = (string)$row['cost'];
+            }
+        }
+        $summ_not_null_and_cent = substr(array_sum($arCost['cost']), 0, -6);
+        $arrResult = array(
+            'cost' => $summ_not_null_and_cent,
+            'clicks' => array_sum($arCost['clicks']),
+            'avgCost' => floor($summ_not_null_and_cent/array_sum($arCost['clicks'])),
+        );
+        return $arrResult;
     }
 
     public function index()
     {
 
+        $user = new \AdWordsUser();
+        $filePath = $_SERVER['DOCUMENT_ROOT'] . '/public/report.xml';
+        //$user_id = '204-793-5110';
+        $user_id = '414-792-5553';
 
-
-
-      //  $user = new \AdWordsUser();
-
-      //  $filePath = $_SERVER['DOCUMENT_ROOT'] . '/public/report.xml';
-
-      //  $this->DownloadCriteriaReportExample($user,$filePath);
-
-
-
-
+        $sum_accaunt = $this->DownloadCriteriaReportExample($user,$filePath,$user_id,'ALL_TIME');
 
 
         return view('index',[
             'users_now' => $this->user_now(),
+            'sum_accaunt' => $sum_accaunt['cost'],
+            'click_accaunt' => $sum_accaunt['clicks'],
+            'avgCost' => $sum_accaunt['avgCost'],
             'admin' => $this->admin(),
             'linkUser' => $this->LinkUser()
         ]);
@@ -192,6 +206,59 @@ class HomeController extends Controller
 
         return redirect()->intended($link);
 
+
+    }
+
+    public function updateIdGoogleForm(Request $request){
+
+        $this->validate($request, [
+            'google_id_client' => 'required',
+        ]);
+
+        $user = new \AdWordsUser();
+        $filePath = $_SERVER['DOCUMENT_ROOT'] . '/public/report.xml';
+
+        $sum_accaunt = $this->DownloadCriteriaReportExample($user,$filePath,$request['google_id_client'],'ALL_TIME');
+
+        $results = \DB::table('google_apis')->where('google_project_id', $request['google_project_id'])->first();
+
+        if(isset($results->id)){
+            \DB::table('google_apis')
+                ->where('id', $results->id)
+                ->update(array(
+                    'google_id_client' => trim($request['google_id_client']),
+                    'sum' => trim($sum_accaunt['cost'])
+                ));
+        }else{
+            GoogleApi::create([
+                'google_project_id' => trim($request['google_project_id']),
+                'google_id_client' => trim($request['google_id_client']),
+                'sum' => trim($sum_accaunt['cost'])
+            ]);
+        }
+
+        return redirect()->intended('/project-context');
+
+    }
+
+    public function updateOstGoogleBalanseApi(Request $request){
+        $this->validate($request, [
+            'ost_bslsnse_go' => 'required|integer',
+        ]);
+        $results = \DB::table('project_contexts')->where('id', $request['id_progect'])->first();
+        if($request->plus_minus == '+'){
+            $end_sum = (int)$results->ost_bslsnse_go+(int)$request->ost_bslsnse_go;
+        }else{
+            $end_sum = (int)$results->ost_bslsnse_go-(int)$request->ost_bslsnse_go;
+        }
+
+        \DB::table('project_contexts')
+            ->where('id', $request['id_progect'])
+            ->update(array(
+                'ost_bslsnse_go' => $end_sum
+            ));
+
+        return redirect()->intended('/project-context');
 
     }
 
@@ -1442,7 +1509,6 @@ class HomeController extends Controller
 
         $setting_field = \DB::table('setting_fields')->where('table_value','context')->get();
 
-
         $users = User::whereRaw('id = ? and admin = 1', [Auth::user()->id])->count();
         if($users == 1){
             $users = \DB::table('project_contexts')->orderBy('positions')->get();
@@ -1463,6 +1529,14 @@ class HomeController extends Controller
 
         $arrBuget = array();
         foreach($users as $key => $u){
+
+            $users[$key]->now_bslsnse_go = $u->ost_bslsnse_go;
+            $results = \DB::table('google_apis')->where('google_project_id', $u->id)->first();
+            if(isset($results->id)){
+                $users[$key]->ost_bslsnse_go = $u->ost_bslsnse_go-$results->sum;
+            }
+
+
             $sum = $u->ya_direct+$u->go_advords;
             $users[$key]->sum_zp = $sum*$u->procent_seo/100;
 

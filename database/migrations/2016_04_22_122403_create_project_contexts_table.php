@@ -22,7 +22,7 @@ class CreateProjectContextsTable extends Migration
             $table->string('ya_direct');
             $table->string('go_advords');
             $table->string('ost_bslsnse_ya');
-            $table->string('ost_bslsnse_go');
+            $table->integer('ost_bslsnse_go');
             $table->string('id_glavn_user');
             $table->string('procent_seo');
             $table->text('dogovor_number');
