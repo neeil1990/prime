@@ -156,7 +156,7 @@
 
 
                                                     <div class="update_id_google">
-                                                        <small class="label label-primary obnovit_google" style="cursor: pointer">Обновить/Закрыть</small>
+                                                        <small class="label label-primary obnovit_google" style="cursor: pointer">ID аккаунта G.A</small>
 
                                                         <form method="POST" action="/update-id-google-form" class="update_google_form" style="display: none;">
                                                             <div class="input-group input-group-sm">
