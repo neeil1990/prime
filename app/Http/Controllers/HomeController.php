@@ -280,7 +280,7 @@ class HomeController extends Controller
 		<td align="center"><h2>По Вашему проекту: '.$request['client_name_project'].'</h2></td>
 		</tr>
 		<tr>
-		<td align="center"><h2>Зачислены денежные средства, на Google Adwords в размере: '.$request['ost_bslsnse_go'].' рублей</h2></td>
+		<td align="center"><h2>Зачислены денежные средства, на Google Adwords в размере: '.$request['ost_bslsnse_go'].' руб.</h2></td>
 		</tr>
 		<tr>
 		<td align="center">По дополнительным вопросам просьба обращаться к своему проект-менеджеру: sv@prime-ltd.su (пока будет жестко вписан мой) или по телефону: +7-473-203-01-24</td>
