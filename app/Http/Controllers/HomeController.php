@@ -246,7 +246,7 @@ class HomeController extends Controller
             'ost_bslsnse_go' => 'required|integer',
         ]);
         if(isset($request['send_client_mail'])){
-            $to = '	neilkvlv@gmail.com';
+            $to = $request['client_email'];
 
 
             $subject = 'PRIME';
