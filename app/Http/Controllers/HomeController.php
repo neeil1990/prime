@@ -269,7 +269,7 @@ class HomeController extends Controller
 
         <table align="center" width="100%">
 		<tr>
-		<td align="center"> <img width="374" height="116" style="margin: 20px 0px;" src="http://wiki.prime-ltd.su/wp-content/uploads/2016/03/logo1-1.png" border="0" alt="" class="image_fix" style="width:374px; height:116px;text-decoration: none;outline: 0;border: 0;display: block;-ms-interpolation-mode: bicubic;" /></td>
+		<td align="center"> <img width="374" height="116" style="margin: 20px 0px;" src="https://work.prime-ltd.su/public/dist/img/logo1-1.png" border="0" alt="" class="image_fix" style="width:374px; height:116px;text-decoration: none;outline: 0;border: 0;display: block;-ms-interpolation-mode: bicubic;" /></td>
 		</tr>
 		<tr>
 		<td align="center"><h1>Доброго времени суток!</h1></td>
@@ -300,8 +300,6 @@ class HomeController extends Controller
 
             mail($to, $subject, $message, $headers);
 
-
-            //dd($request['client_name_project'],$request['client_email']);
         }
 
         $results = \DB::table('project_contexts')->where('id', $request['id_progect'])->first();
