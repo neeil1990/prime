@@ -262,28 +262,26 @@ class HomeController extends Controller
 			font-weight: normal;
 			color: #424242;
 		}
-		img{
-		    margin: 15px 0px;
-		}
+
 		</style>
     </head>
         <body>
 
         <table align="center" width="100%">
 		<tr>
-		<td align="center"> <img width="374" height="116" src="http://wiki.prime-ltd.su/wp-content/uploads/2016/03/logo1-1.png" border="0" alt="" class="image_fix" style="width:374px; height:116px;text-decoration: none;outline: 0;border: 0;display: block;-ms-interpolation-mode: bicubic;" /></td>
+		<td align="center"> <img width="374" height="116" style="margin: 20px 0px;" src="http://wiki.prime-ltd.su/wp-content/uploads/2016/03/logo1-1.png" border="0" alt="" class="image_fix" style="width:374px; height:116px;text-decoration: none;outline: 0;border: 0;display: block;-ms-interpolation-mode: bicubic;" /></td>
 		</tr>
 		<tr>
 		<td align="center"><h1>Доброго времени суток!</h1></td>
 		</tr>
 		<tr>
-		<td align="center"><h2>По Вашему проекту: '.$request['client_name_project'].'</h2></td>
+		<td align="center"><h1>По Вашему проекту: '.$request['client_name_project'].'</h1></td>
 		</tr>
 		<tr>
-		<td align="center"><h2>Зачислены денежные средства, на Google Adwords в размере: '.$request['ost_bslsnse_go'].' руб.</h2></td>
+		<td align="center"><h1>Зачислены денежные средства, на Google Adwords в размере: '.$request['ost_bslsnse_go'].' руб.</h1></td>
 		</tr>
 		<tr>
-		<td align="center">По дополнительным вопросам просьба обращаться к своему проект-менеджеру: sv@prime-ltd.su (пока будет жестко вписан мой) или по телефону: +7-473-203-01-24</td>
+		<td style="color: #424242;font-family:"Arial","Helvetica Neue", Helvetica, sans-serif;font-size: 12px;" align="center">По дополнительным вопросам просьба обращаться к своему проект-менеджеру: sv@prime-ltd.su (пока будет жестко вписан мой) или по телефону: +7-473-203-01-24</td>
 		</tr>
 
 		</table>
