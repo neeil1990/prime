@@ -111,7 +111,7 @@
                                                 </td>
                                                 <td class="favicon_view{{$user->id}} scroll_right_table"></td>
                                                 @if($setting_field[0]->value == 1 or $admin == 1)
-                                                <td class="favicon_url{{$user->id}} scroll_right_table"><textarea class="copytext" rows="1" type="text">{{$user->name_project}}</textarea></td>
+                                                <td class="favicon_url{{$user->id}} scroll_right_table name_project_client_send"><textarea class="copytext" rows="1" type="text">{{$user->name_project}}</textarea></td>
                                                 <script>
                                                     var url_fav = '.favicon_url'+'{{$user->id}}';
                                                     var view_fav = '.favicon_view'+'{{$user->id}}';
@@ -208,7 +208,7 @@
                                                 <td class=""><textarea class="copytext" rows="1" type="text">{{$user->phone_person}}</textarea></td>
                                                 @endif
                                                 @if($setting_field[11]->value == 1 or $admin == 1)
-                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->e_mail}}</textarea></td>
+                                                <td class="email_client_send"><textarea class="copytext" rows="1" type="text">{{$user->e_mail}}</textarea></td>
                                                 @endif
                                                 @if($setting_field[12]->value == 1 or $admin == 1)
                                                 <td class="">
@@ -246,6 +246,12 @@
                     closeText: "X",
                     minWidth: 500
                 });
+
+                var tr = $(this).parent().parent();
+
+                $('.client_name_project').val($('.name_project_client_send',tr).text());
+                $('.client_email').val($('.email_client_send',tr).text());
+
                var ost = $(this).attr('now-bslsnse-go');
                 $('.now_balanse').text('Пополнено: ' + ost);
                var id = $(this).attr('data-id-project');

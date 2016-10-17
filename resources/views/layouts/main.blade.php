@@ -85,6 +85,8 @@
                 <div class="col-sm-10">
                     <input type="text" class="form-control" name="ost_bslsnse_go" placeholder="">
                     <input type="hidden" name="id_progect" class="id_progect_jq">
+                    <input type="hidden" name="client_name_project" class="client_name_project">
+                    <input type="hidden" name="client_email" class="client_email">
                 </div>
             </div>
 
@@ -108,7 +110,7 @@
                 <div class="col-sm-offset-2 col-sm-10">
                     <div class="checkbox">
                         <label>
-                            <input style="top: 0px;" type="checkbox"> Remember me
+                            <input style="top: 0px;" type="checkbox" name="send_client_mail" value="1"> Отправить клиенту
                         </label>
                     </div>
                 </div>

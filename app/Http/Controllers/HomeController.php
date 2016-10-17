@@ -245,6 +245,67 @@ class HomeController extends Controller
         $this->validate($request, [
             'ost_bslsnse_go' => 'required|integer',
         ]);
+        if(isset($request['send_client_mail'])){
+            $to = 'neeil@mail.ru';
+
+
+            $subject = 'PRIME';
+
+            $message = '
+<html>
+
+	<head>
+		<title>PRIME</title>
+		<style>
+		h1,h2{
+		    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+			font-weight: normal;
+			color: #424242;
+		}
+		img{
+		    margin: 15px 0px;
+		}
+		</style>
+    </head>
+        <body>
+
+        <table align="center" width="100%">
+		<tr>
+		<td align="center"> <img width="374" height="116" src="http://wiki.prime-ltd.su/wp-content/uploads/2016/03/logo1-1.png" border="0" alt="" class="image_fix" style="width:374px; height:116px;text-decoration: none;outline: 0;border: 0;display: block;-ms-interpolation-mode: bicubic;" /></td>
+		</tr>
+		<tr>
+		<td align="center"><h1>Доброго времени суток!</h1></td>
+		</tr>
+		<tr>
+		<td align="center"><h2>По Вашему проекту: '.$request['client_name_project'].'</h2></td>
+		</tr>
+		<tr>
+		<td align="center"><h2>Зачислены денежные средства, на Google Adwords в размере: '.$request['ost_bslsnse_go'].' рублей</h2></td>
+		</tr>
+		<tr>
+		<td align="center">По дополнительным вопросам просьба обращаться к своему проект-менеджеру: sv@prime-ltd.su (пока будет жестко вписан мой) или по телефону: +7-473-203-01-24</td>
+		</tr>
+
+		</table>
+
+        </body>
+  </html>';
+
+
+            $headers  = 'MIME-Version: 1.0' . "\r\n";
+            $headers .= 'Content-type: text/html; charset=utf8' . "\r\n";
+
+
+            $headers .= 'To: '.$request['client_email'].'' . "\r\n";
+            $headers .= 'From: PRIME <sv@prime-ltd.su>' . "\r\n";
+
+
+            mail($to, $subject, $message, $headers);
+
+
+            //dd($request['client_name_project'],$request['client_email']);
+        }
+
         $results = \DB::table('project_contexts')->where('id', $request['id_progect'])->first();
         if($request->plus_minus == '+'){
             $end_sum = (int)$results->ost_bslsnse_go+(int)$request->ost_bslsnse_go;
