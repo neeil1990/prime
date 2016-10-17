@@ -174,6 +174,10 @@ Route::get('/get-balanse-google', function() {
             ));
     }
 
+    \DB::table('logs')->insert(
+        array('progect' => 'google', 'what_is_done' => 'Обновление скрипта сумма расходов google.api','who_did' => 'API google.adwords','created_at' => date('Y-m-d H:i:s'))
+    );
+
 });
 
 
