@@ -99,6 +99,8 @@ class HomeController extends Controller
         return $arrResult;
     }
 
+
+
     public function index()
     {
 

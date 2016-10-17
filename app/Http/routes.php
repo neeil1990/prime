@@ -136,6 +136,65 @@ Route::get('/get-balanse-yandex', function()
 
         $ac_ya = json_decode($result);
 
+        if(!empty($ac_ya->data->Accounts[0]->Amount)){
+           $id_com = \DB::table('project_contexts')->where('id',$ya->id_company)->first();
+            $summa = $ac_ya->data->Accounts[0]->Amount-$id_com->ost_bslsnse_ya;
+            if($summa >= 1000){
+
+                $to = $id_com->e_mail;
+
+                $subject = 'PRIME';
+
+                $message = '
+<html>
+
+	<head>
+		<title>PRIME</title>
+		<style>
+		h1,h2{
+		    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+			font-weight: normal;
+			color: #424242;
+		}
+
+		</style>
+    </head>
+        <body>
+
+        <table align="center" width="100%">
+		<tr>
+		<td align="center"> <img width="374" height="116" style="margin: 20px 0px;" src="https://work.prime-ltd.su/public/dist/img/logo1-1.png" border="0" alt="" class="image_fix" style="width:374px; height:116px;text-decoration: none;outline: 0;border: 0;display: block;-ms-interpolation-mode: bicubic;" /></td>
+		</tr>
+		<tr>
+		<td align="center"><h1>Доброго времени суток!</h1></td>
+		</tr>
+		<tr>
+		<td align="center"><h1>По Вашему проекту: '.$id_com->name_project.'</h1></td>
+		</tr>
+		<tr>
+		<td align="center"><h1>Зачислены денежные средства, на Яндекс Директ.</h1></td>
+		</tr>
+		<tr>
+		<td style="color: #424242;font-family:"Arial","Helvetica Neue", Helvetica, sans-serif;font-size: 8px;" align="center">По дополнительным вопросам просьба обращаться к своему проект-менеджеру: sv@prime-ltd.su или по телефону: +7-473-203-01-24</td>
+		</tr>
+
+		</table>
+
+        </body>
+  </html>';
+
+
+                $headers  = 'MIME-Version: 1.0' . "\r\n";
+                $headers .= 'Content-type: text/html; charset=utf8' . "\r\n";
+
+
+                $headers .= 'To: '.$id_com->e_mail.'' . "\r\n";
+                $headers .= 'From: PRIME <sv@prime-ltd.su>' . "\r\n";
+
+
+                mail($to, $subject, $message, $headers);
+            }
+        }
 
         if(empty($ac_ya->data->Accounts[0]->Amount)){
             \DB::table('project_contexts')
