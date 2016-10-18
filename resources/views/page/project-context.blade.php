@@ -251,7 +251,7 @@
                 });
                 return false;
             });
-            $('.btn-default').click(function(){
+            $('.btn-default-notice').click(function(){
                 $( "#dialog2" ).dialog( "close" );
                 return false;
             });

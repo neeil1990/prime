@@ -106,7 +106,7 @@
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
-            <button type="submit" class="btn btn-default">Закрыть</button>
+            <button type="submit" class="btn btn-default btn-default-notice">Закрыть</button>
             <button type="submit" class="btn btn-info pull-right">Отправить</button>
         </div>
         <!-- /.box-footer -->
