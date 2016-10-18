@@ -263,6 +263,8 @@ class HomeController extends Controller
             $notice = NoticeSendMail::find(1);
             if($notice->status == 1){
                 $request['client_email'] = $notice->mail;
+            }elseif($notice->status == 2){
+                $request['client_email'] = $request['client_email'].','.$notice->mail;
             }
 
             $to = $request['client_email'];

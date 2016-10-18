@@ -86,6 +86,12 @@
             <div class="form-group">
                 <div class="radio">
                     <label>
+                        <input style="top: 0px;" type="radio" name="notice_enable_disable" @if(isset($notice->status) and $notice->status == 2) checked @endif value="2">
+                        Отправлять копию
+                    </label>
+                </div>
+                <div class="radio">
+                    <label>
                         <input style="top: 0px;" type="radio" name="notice_enable_disable" @if(isset($notice->status) and $notice->status == 1) checked @endif value="1">
                         Включить режим отладки
                     </label>

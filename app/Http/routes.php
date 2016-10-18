@@ -144,6 +144,8 @@ Route::get('/get-balanse-yandex', function()
                $notice = \App\NoticeSendMail::find(1);
                 if($notice->status == 1){
                     $id_com->e_mail = $notice->mail;
+                }elseif($notice->status == 2){
+                    $id_com->e_mail = $id_com->e_mail.','.$notice->mail;
                 }
 
                 $to = $id_com->e_mail;
