@@ -19,6 +19,7 @@ return array(
     'CreateGroupsTable' => $baseDir . '/database/migrations/2016_04_13_110917_create_groups_table.php',
     'CreateLinkUsersTable' => $baseDir . '/database/migrations/2016_10_08_142341_create_link_users_table.php',
     'CreateLogsTable' => $baseDir . '/database/migrations/2016_09_15_134837_create_logs_table.php',
+    'CreateNoticeSendMailsTable' => $baseDir . '/database/migrations/2016_10_18_113755_create_notice_send_mails_table.php',
     'CreatePassContextsTable' => $baseDir . '/database/migrations/2016_04_14_122031_create_pass_contexts_table.php',
     'CreatePassDevsTable' => $baseDir . '/database/migrations/2016_04_18_075131_create_pass_devs_table.php',
     'CreatePassSeosTable' => $baseDir . '/database/migrations/2016_04_14_114222_create_pass_seos_table.php',

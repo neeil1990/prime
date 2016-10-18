@@ -41,6 +41,9 @@
                             <a href="/setting-field-context" >
                                 <small class="label label-primary">Настройка полей</small>
                             </a>
+                            <a href="#" id="notice_send_mail">
+                                <small class="label label-primary">Настройка уведомлений</small>
+                            </a>
                             @endif
 
                             <div class="row">
@@ -241,6 +244,18 @@
 
     <script>
         $(function(){
+            $('#notice_send_mail').click(function(){
+                $( "#dialog2" ).dialog({
+                    closeText: "X",
+                    minWidth: 500
+                });
+                return false;
+            });
+            $('.btn-default').click(function(){
+                $( "#dialog2" ).dialog( "close" );
+                return false;
+            });
+
             $('.ost_bslsnse_go').click(function(){
                 $( "#dialog" ).dialog({
                     closeText: "X",

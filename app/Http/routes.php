@@ -141,6 +141,11 @@ Route::get('/get-balanse-yandex', function()
             $summa = $ac_ya->data->Accounts[0]->Amount-$id_com->ost_bslsnse_ya;
             if($summa >= 1000){
 
+               $notice = \App\NoticeSendMail::find(1);
+                if($notice->status == 1){
+                    $id_com->e_mail = $notice->mail;
+                }
+
                 $to = $id_com->e_mail;
 
                 $subject = 'PRIME';
@@ -250,7 +255,7 @@ Route::get('/', ['as' => 'index', 'uses' => 'HomeController@index']);
 
 
 
-
+Route::post('/settings-notice-mail-update', ['as' => 'settingsNoticeMailUpdate', 'uses' => 'HomeController@settingsNoticeMailUpdate']);
 
 //Архив
 Route::get('/archive-page-project/{name}', ['as' => 'archivePageProject', 'uses' => 'HomeController@archivePageProject']);

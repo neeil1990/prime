@@ -496,6 +496,11 @@ class SettingField extends Seeder
         ]);
 
 
+        //Настройка уведомлений
+        \App\NoticeSendMail::create([
+            'mail' => 'mail@mail.ru',
+            'status' => 0
+        ]);
 
 
 

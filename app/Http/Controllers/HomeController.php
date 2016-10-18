@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\GoogleApi;
 use App\Groups;
 use App\LinkUser;
+use App\NoticeSendMail;
 use App\PassContext;
 use App\PassDev;
 use App\ProjectContext;
@@ -120,6 +121,16 @@ class HomeController extends Controller
             'admin' => $this->admin(),
             'linkUser' => $this->LinkUser()
         ]);
+    }
+
+    public function settingsNoticeMailUpdate(Request $request){
+
+        $this->validate($request, [
+            'notice_email' => 'required',
+        ]);
+
+        \DB::table('notice_send_mails')->where('id',1)->update(array('mail' => trim($request['notice_email']),'status' => trim($request['notice_enable_disable'])));
+        return redirect()->intended('/project-context');
     }
 
     public function user_now(){
@@ -248,8 +259,13 @@ class HomeController extends Controller
             'ost_bslsnse_go' => 'required|integer',
         ]);
         if(isset($request['send_client_mail'])){
-            $to = $request['client_email'];
 
+            $notice = NoticeSendMail::find(1);
+            if($notice->status == 1){
+                $request['client_email'] = $notice->mail;
+            }
+
+            $to = $request['client_email'];
 
             $subject = 'PRIME';
 
@@ -1642,6 +1658,8 @@ class HomeController extends Controller
             $countStatus['active'] = count($countStatus['active']);
         }
 
+        $notice = NoticeSendMail::find(1);
+
         return view('page.project-context',[
             'budget_context_project' => array_sum($arrBuget),
             'count_context_project' => $countStatus['active'],
@@ -1652,7 +1670,8 @@ class HomeController extends Controller
             'users_now' => $this->user_now(),
             'admin' => $this->admin(),
             'linkUser' => $this->LinkUser(),
-            'setting_field' => $setting_field
+            'setting_field' => $setting_field,
+            'notice' => $notice
         ]);
     }
 
