@@ -87,13 +87,13 @@
                 <div class="radio">
                     <label>
                         <input style="top: 0px;" type="radio" name="notice_enable_disable" @if(isset($notice->status) and $notice->status == 1) checked @endif value="1">
-                        Включить
+                        Включить режим отладки
                     </label>
                 </div>
                 <div class="radio">
                     <label>
                         <input style="top: 0px;" type="radio" name="notice_enable_disable" @if(isset($notice->status) and $notice->status == 0) checked @endif value="0">
-                        Выключить
+                        Выключить режим отладки
                     </label>
                 </div>
             </div>
