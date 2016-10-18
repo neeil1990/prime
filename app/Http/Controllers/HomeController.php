@@ -302,6 +302,8 @@ class HomeController extends Controller
 
             mail($to, $subject, $message, $headers);
 
+            $this->add_logs('Google','Отправлено письмо клиенту о пополнении баланса Email:'.$request['client_email'],'API Google Adwords');
+
         }
 
         $results = \DB::table('project_contexts')->where('id', $request['id_progect'])->first();

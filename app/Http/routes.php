@@ -193,6 +193,10 @@ Route::get('/get-balanse-yandex', function()
 
 
                 mail($to, $subject, $message, $headers);
+
+                \DB::table('logs')->insert(
+                    array('progect' => 'yandex', 'what_is_done' => 'Отправлено письмо клиенту о пополнении баланса. Email:'.$id_com->e_mail,'who_did' => 'API direct.yandex','created_at' => date('Y-m-d H:i:s'))
+                );
             }
         }
 
