@@ -172,7 +172,7 @@ Route::get('/get-balanse-yandex', function()
 		<td align="center"><h1>По Вашему проекту: '.$id_com->name_project.'</h1></td>
 		</tr>
 		<tr>
-		<td align="center"><h1>Зачислены денежные средства, на Яндекс Директ.</h1></td>
+		<td align="center"><h1>Зачислены денежные средства на Яндекс Директ.</h1></td>
 		</tr>
 		<tr>
 		<td style="color: #424242;font-family:"Arial","Helvetica Neue", Helvetica, sans-serif;font-size: 8px;" align="center">По дополнительным вопросам просьба обращаться к своему проект-менеджеру: sv@prime-ltd.su или по телефону: +7-473-203-01-24</td>
