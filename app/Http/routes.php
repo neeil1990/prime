@@ -11,6 +11,124 @@
 |
 */
 
+Route::get('/send-notice-client/{count_day}/days/{id_project}/id_project', function($count_day,$id_project)
+{
+
+
+
+
+
+
+
+    if($id_project == 0){
+
+    }
+
+
+
+    $google_api = \App\GoogleApi::all();
+    $user = new \AdWordsUser();
+    $filePath = $_SERVER['DOCUMENT_ROOT'] . '/public/report.xml';
+    $yandex_api = \App\TokenYandex::all();
+
+    $dataApi = array();
+    foreach($google_api as $key => $g){
+      $context_google = \App\ProjectContext::find($g->google_project_id);
+        if(isset($context_google) and $context_google->status == 1){
+            $home = new \App\Http\Controllers\HomeController();
+            $sum_accaunt = $home->DownloadCriteriaReportExample($user,$filePath,$g->google_id_client,'ALL_TIME');
+            $click_accaunt = $home->DownloadCriteriaReportExample($user,$filePath,$g->google_id_client,'LAST_'.$count_day.'_DAYS');
+
+            $dataApi[$key]['name_progect_google'] = $context_google->name_project;
+            $dataApi[$key]['balanse_google'] = $context_google->ost_bslsnse_go-$sum_accaunt['cost'];
+            $dataApi[$key]['clicks_google'] = $click_accaunt['clicks'];
+            $dataApi[$key]['clicks_price_google'] = floor($click_accaunt['cost']/$click_accaunt['clicks']);
+        }
+    }
+    foreach($yandex_api as $y){
+        $context_yandex = \App\ProjectContext::find($y->id_company);
+        if(isset($context_yandex) and $context_yandex->status == 1){
+
+
+            $getBalanse = '{"method":"get","params":{"SelectionCriteria":{},"FieldNames":["Id","StartDate","Statistics"]}}';
+
+
+
+            $HEADER = array(
+                'Accept-Language: ru',
+                'Authorization: Bearer '.$y->token_yandex,
+                'Content-Type: application/json; charset=utf-8'
+            );
+
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_URL, 'https://api.direct.yandex.com/json/v5/campaigns');
+            curl_setopt($curl, CURLOPT_POST, 1);
+            curl_setopt($curl,CURLOPT_HTTPHEADER, $HEADER);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, $getBalanse);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            $result = curl_exec($curl);
+            curl_close($curl);
+
+            $ac_ya = json_decode($result);
+
+
+            $idsCompany = array();
+            foreach($ac_ya->result->Campaigns as $a){
+
+
+                $params = array(
+                    'token' => $y->token_yandex,
+                    'method' => "GetSummaryStat",
+                    'param' => array(
+                        "CampaignIDS" => array($a->Id),
+                        "StartDate" => (date('Y-m-d', strtotime('-7 days'))),
+                        "EndDate" => (date('Y-m-d')),
+                    ),
+                );
+
+                $getBalanse = json_encode($params);
+
+                $HEADER = array(
+                    'Accept-Language: ru',
+                    'Content-Type: application/json; charset=utf-8'
+                );
+
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_URL, 'https://api.direct.yandex.ru/live/v4/json/');
+                curl_setopt($curl, CURLOPT_POST, 1);
+                curl_setopt($curl,CURLOPT_HTTPHEADER, $HEADER);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $getBalanse);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+                $result = curl_exec($curl);
+                curl_close($curl);
+
+                $clickYandex = json_decode($result);
+
+                if(!empty($clickYandex->data)){
+                    var_dump($clickYandex->data);
+                    die();
+                }
+
+            }
+
+
+
+
+
+
+
+
+        }
+
+    }
+
+
+
+   // dd($dataApi);
+});
+
 //Route::get('/get-balanse-yandex', ['as' => 'getBalanseYandex', 'uses' => 'HomeController@getBalanseYandex']);
 
 Route::get('/get-seranking-sum', function()
@@ -192,7 +310,7 @@ Route::get('/get-balanse-yandex', function()
 
 
                 $headers  = 'MIME-Version: 1.0' . "\r\n";
-                $headers .= 'Content-type: text/html; charset=utf8' . "\r\n";
+                $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
 
                 $headers .= 'To: '.$id_com->e_mail.'' . "\r\n";
