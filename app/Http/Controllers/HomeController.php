@@ -244,20 +244,8 @@ class HomeController extends Controller
 
     public function index()
     {
-
-        $user = new \AdWordsUser();
-        $filePath = $_SERVER['DOCUMENT_ROOT'] . '/public/report.xml';
-        //$user_id = '204-793-5110';
-        $user_id = '414-792-5553';
-
-        $sum_accaunt = $this->DownloadCriteriaReportExample($user,$filePath,$user_id,'ALL_TIME');
-
-
         return view('index',[
             'users_now' => $this->user_now(),
-            'sum_accaunt' => $sum_accaunt['cost'],
-            'click_accaunt' => $sum_accaunt['clicks'],
-            'avgCost' => $sum_accaunt['avgCost'],
             'admin' => $this->admin(),
             'linkUser' => $this->LinkUser()
         ]);
