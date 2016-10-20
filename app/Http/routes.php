@@ -69,7 +69,7 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
                     'param' => array(
                         "CampaignIDS" => array($a->Id),
                         "StartDate" => (date('Y-m-d', strtotime('-'.$count_day.' days'))),//(date('Y-m-d', strtotime('-7 days'))),
-                        "EndDate" => (date('Y-m-d')),
+                        "EndDate" => (date('Y-m-d', strtotime('-1 days'))),
                     ),
                 );
 

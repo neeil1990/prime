@@ -194,7 +194,7 @@ class HomeController extends Controller
             $dateRangeType = 'ALL_TIME';
         }else {
             $dateRangeType = 'CUSTOM_DATE';
-            $selector->dateRange = new \DateRange(date('Y-m-d', strtotime('-' . $time . ' days')), date('Y-m-d'));
+            $selector->dateRange = new \DateRange(date('Y-m-d', strtotime('-' . $time . ' days')), date('Y-m-d', strtotime('-1 days')));
         }
 
         // Create report definition.
