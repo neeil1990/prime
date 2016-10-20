@@ -11,20 +11,11 @@
 |
 */
 
-Route::get('/send-notice-client/{count_day}/days/{id_project}/id_project', function($count_day,$id_project)
+Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', function($count_day,$name_project)
 {
 
 
-
-
-
-
-
-    if($id_project == 0){
-
-    }
-
-
+    $home = new \App\Http\Controllers\HomeController();
 
     $google_api = \App\GoogleApi::all();
     $user = new \AdWordsUser();
@@ -39,94 +30,96 @@ Route::get('/send-notice-client/{count_day}/days/{id_project}/id_project', funct
             $sum_accaunt = $home->DownloadCriteriaReportExample($user,$filePath,$g->google_id_client,'ALL_TIME');
             $click_accaunt = $home->DownloadCriteriaReportExample($user,$filePath,$g->google_id_client,'LAST_'.$count_day.'_DAYS');
 
-            $dataApi[$key]['name_progect_google'] = $context_google->name_project;
-            $dataApi[$key]['balanse_google'] = $context_google->ost_bslsnse_go-$sum_accaunt['cost'];
-            $dataApi[$key]['clicks_google'] = $click_accaunt['clicks'];
-            $dataApi[$key]['clicks_price_google'] = floor($click_accaunt['cost']/$click_accaunt['clicks']);
+            $dataApi[$context_google->name_project]['name_progect_google'] = $context_google->name_project;
+            $dataApi[$context_google->name_project]['email_google'] = $context_google->e_mail;
+            $dataApi[$context_google->name_project]['balanse_google'] = $context_google->ost_bslsnse_go-$sum_accaunt['cost'];
+            $dataApi[$context_google->name_project]['clicks_google'] = $click_accaunt['clicks'];
+            $dataApi[$context_google->name_project]['clicks_price_google'] = floor($click_accaunt['cost']/$click_accaunt['clicks']);
         }
     }
-    foreach($yandex_api as $y){
+
+
+    foreach($yandex_api as $key=>$y){
         $context_yandex = \App\ProjectContext::find($y->id_company);
         if(isset($context_yandex) and $context_yandex->status == 1){
-
-
-            $getBalanse = '{"method":"get","params":{"SelectionCriteria":{},"FieldNames":["Id","StartDate","Statistics"]}}';
-
-
 
             $HEADER = array(
                 'Accept-Language: ru',
                 'Authorization: Bearer '.$y->token_yandex,
                 'Content-Type: application/json; charset=utf-8'
             );
+            $getBalanse = '{"method":"get","params":{"SelectionCriteria":{},"FieldNames":["Id","StartDate","Statistics"]}}';
+            $ac_ya = $home->curl_request($getBalanse,$HEADER,'https://api.direct.yandex.com/json/v5/campaigns');
 
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_URL, 'https://api.direct.yandex.com/json/v5/campaigns');
-            curl_setopt($curl, CURLOPT_POST, 1);
-            curl_setopt($curl,CURLOPT_HTTPHEADER, $HEADER);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $getBalanse);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-            $result = curl_exec($curl);
-            curl_close($curl);
-
-            $ac_ya = json_decode($result);
-
-
-            $idsCompany = array();
+            $ArClicks = array();
+            $ArClicksAll = array();
+            $IDsCompany = array();
             foreach($ac_ya->result->Campaigns as $a){
-
+                $IDsCompany[$context_yandex->name_project][] = $a->Id;
+                $ArClicksAll[$context_yandex->name_project][] = $a->Statistics->Clicks;
 
                 $params = array(
                     'token' => $y->token_yandex,
                     'method' => "GetSummaryStat",
                     'param' => array(
                         "CampaignIDS" => array($a->Id),
-                        "StartDate" => (date('Y-m-d', strtotime('-7 days'))),
+                        "StartDate" => (date('Y-m-d', strtotime('-'.$count_day.' days'))),//(date('Y-m-d', strtotime('-7 days'))),
                         "EndDate" => (date('Y-m-d')),
                     ),
                 );
 
                 $getBalanse = json_encode($params);
-
                 $HEADER = array(
                     'Accept-Language: ru',
                     'Content-Type: application/json; charset=utf-8'
                 );
-
-                $curl = curl_init();
-                curl_setopt($curl, CURLOPT_URL, 'https://api.direct.yandex.ru/live/v4/json/');
-                curl_setopt($curl, CURLOPT_POST, 1);
-                curl_setopt($curl,CURLOPT_HTTPHEADER, $HEADER);
-                curl_setopt($curl, CURLOPT_POSTFIELDS, $getBalanse);
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-                $result = curl_exec($curl);
-                curl_close($curl);
-
-                $clickYandex = json_decode($result);
+                $clickYandex = $home->curl_request($getBalanse,$HEADER,'https://api.direct.yandex.ru/live/v4/json/');
 
                 if(!empty($clickYandex->data)){
-                    var_dump($clickYandex->data);
-                    die();
+                    $sum_clicks = '';
+                    foreach($clickYandex->data as $click){
+                        $sum_clicks += $click->ClicksContext+$click->ClicksSearch;
+                    }
+                    $ArClicks[$context_yandex->name_project][] = $sum_clicks;
                 }
 
             }
 
 
+            $params_cost = array(
+                'token' => $y->token_yandex,
+                'method' => "GetBalance",
+                'param' => $IDsCompany[$context_yandex->name_project],
+            );
+            $HEADER = array(
+                'Accept-Language: ru',
+                'Content-Type: application/json; charset=utf-8'
+            );
+            $sum_costs = $home->curl_request(json_encode($params_cost),$HEADER,'https://api.direct.yandex.ru/live/v4/json/');
+            $costs = '';
+            foreach($sum_costs->data as $s){
+                $costs += $s->Sum;
+            }
 
-
-
-
-
+            $dataApi[$context_yandex->name_project]['name_progect_yandex'] = $context_yandex->name_project;
+            $dataApi[$context_yandex->name_project]['email_yandex'] = $context_yandex->e_mail;
+            $dataApi[$context_yandex->name_project]['balanse_yandex'] = $context_yandex->ost_bslsnse_ya;
+            $dataApi[$context_yandex->name_project]['clicks_yandex'] = array_sum($ArClicks[$context_yandex->name_project]);
+            $dataApi[$context_yandex->name_project]['clicks_price_yandex'] = floor($costs*25.424/array_sum($ArClicksAll[$context_yandex->name_project]));
 
         }
 
     }
 
+    $notice = \App\NoticeSendMail::find(1);
 
-
-   // dd($dataApi);
+    if($name_project == 'all'){
+        foreach($dataApi as $dataAll){
+            $home->template_send_mail_client($dataAll,$notice,$count_day);
+        }
+    }else{
+        $home->template_send_mail_client($dataApi[$name_project],$notice,$count_day);
+    }
 });
 
 //Route::get('/get-balanse-yandex', ['as' => 'getBalanseYandex', 'uses' => 'HomeController@getBalanseYandex']);
