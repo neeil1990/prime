@@ -14,7 +14,7 @@
 Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', function($count_day,$name_project)
 {
     set_time_limit(0);
-    
+
     $home = new \App\Http\Controllers\HomeController();
 
     $google_api = \App\GoogleApi::all();
