@@ -190,13 +190,18 @@ class HomeController extends Controller
 
         // Optional: use predicate to filter out paused criteria.
         $selector->predicates[] = new \Predicate('Status', 'NOT_IN', array('PAUSED'));
-
+        if($time == 'ALL_TIME'){
+            $dateRangeType = 'ALL_TIME';
+        }else {
+            $dateRangeType = 'CUSTOM_DATE';
+            $selector->dateRange = new \DateRange(date('Y-m-d', strtotime('-' . $time . ' days')), date('Y-m-d'));
+        }
 
         // Create report definition.
         $reportDefinition = new \ReportDefinition();
         $reportDefinition->selector = $selector;
         $reportDefinition->reportName = 'Criteria performance report #' . uniqid();
-        $reportDefinition->dateRangeType = $time; //ALL_TIME //LAST_7_DAYS
+        $reportDefinition->dateRangeType = $dateRangeType; //ALL_TIME //LAST_7_DAYS
         $reportDefinition->reportType = 'CRITERIA_PERFORMANCE_REPORT';
         $reportDefinition->downloadFormat = 'XML';
 
@@ -218,11 +223,19 @@ class HomeController extends Controller
                 $arCost['cost'][] = (string)$row['cost'];
             }
         }
-        $summ_not_null_and_cent = substr(array_sum($arCost['cost']), 0, -6);
+        if(isset($arCost['cost'])) {
+            $summ_not_null_and_cent = substr(array_sum($arCost['cost']), 0, -6);
+        }else{
+            $summ_not_null_and_cent = 0;
+        }
+        if(isset($arCost['clicks'])) {
+            $arCost['clicks'] = array_sum($arCost['clicks']);
+        }else{
+            $arCost['clicks'] = 0;
+        }
         $arrResult = array(
             'cost' => $summ_not_null_and_cent,
-            'clicks' => array_sum($arCost['clicks']),
-            'avgCost' => floor($summ_not_null_and_cent/array_sum($arCost['clicks'])),
+            'clicks' => $arCost['clicks']
         );
         return $arrResult;
     }
