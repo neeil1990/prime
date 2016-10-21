@@ -399,7 +399,7 @@ class HomeController extends Controller
 
             $to = $request['client_email'];
 
-            $subject = 'PRIME';
+            $subject = 'PRIME - зачислены денежные средства на Google Adwords по проекту: '.$request['client_name_project'];
 
             $message = '
 <html>

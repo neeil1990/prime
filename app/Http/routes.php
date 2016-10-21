@@ -279,7 +279,7 @@ Route::get('/get-balanse-yandex', function()
 
                 $to = $id_com->e_mail;
 
-                $subject = 'PRIME';
+                $subject = 'PRIME - зачислены денежные средства на Яндекс Директ по проекту: '.$id_com->name_project;
 
                 $message = '
 <html>
