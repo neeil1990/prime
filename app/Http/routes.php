@@ -331,7 +331,7 @@ Route::get('/get-balanse-yandex', function()
                 mail($to, $subject, $message, $headers);
 
                 \DB::table('logs')->insert(
-                    array('progect' => 'yandex', 'what_is_done' => 'Отправлено письмо клиенту о пополнении баланса. Email:'.$id_com->e_mail,'who_did' => 'API direct.yandex','created_at' => date('Y-m-d H:i:s'))
+                    array('progect' => 'yandex', 'what_is_done' => 'Отправлено письмо клиенту о пополнении баланса. Email:'.$id_com->e_mail.' balanse Yandex API:'.$ac_ya->data->Accounts[0]->Amount.' balanse database:'.$id_com->ost_bslsnse_ya,'who_did' => 'API direct.yandex','created_at' => date('Y-m-d H:i:s'))
                 );
             }
         }
