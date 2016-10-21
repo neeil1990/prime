@@ -109,7 +109,7 @@ class HomeController extends Controller
             $message .= '</tr>';
         }
         $message .= '<tr>';
-        $message .= '<td align="center"><h1>Количество переходов за последние '.$count_day.' дней:</h1></td>';
+        $message .= '<td align="center"><h1>Количество переходов за последние '.$count_day.' д.:</h1></td>';
         $message .= '</tr>';
         if(isset($dataAll['clicks_yandex'])) {
             $message .= '<tr>';
@@ -144,12 +144,14 @@ class HomeController extends Controller
         $message .= '</body>';
         $message .= '</html>';
 
-        $subject = 'PRIME - остаток денежных средств и статистика за прошлые '.$count_day.' суток, по проекту: '.$name_project.'';
+        $subject = 'PRIME - остаток денежных средств и статистика за прошлые '.$count_day.' д. по проекту: '.$name_project.'';
         $headers  = 'MIME-Version: 1.0' . "\r\n";
         $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
         $headers .= 'From: PRIME <sv@prime-ltd.su>' . "\r\n";
 
         mail($email, $subject, $message, $headers);
+
+        $this->add_logs('Yandex/Google','Отправлена статистика клиенту по проекту '.$name_project.' за '.$count_day.' д.','API Yandex/Google');
     }
 
 
@@ -442,7 +444,7 @@ class HomeController extends Controller
             $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
 
-            $headers .= 'To: '.$request['client_email'].'' . "\r\n";
+
             $headers .= 'From: PRIME <sv@prime-ltd.su>' . "\r\n";
 
 

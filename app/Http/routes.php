@@ -15,6 +15,16 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
 {
     set_time_limit(0);
 
+    if($count_day == 'month'){
+        $back_month = date('m')-1;
+        if($back_month == 1){
+            $back_month = 12;
+        }else{
+            $back_month = $back_month;
+        }
+        $count_day = cal_days_in_month(CAL_GREGORIAN, $back_month, date('Y'));
+    }
+
     $home = new \App\Http\Controllers\HomeController();
 
     $google_api = \App\GoogleApi::all();
@@ -127,6 +137,7 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
     }else{
         $home->template_send_mail_client($dataApi[$name_project],$notice,$count_day);
     }
+
 });
 
 //Route::get('/get-balanse-yandex', ['as' => 'getBalanseYandex', 'uses' => 'HomeController@getBalanseYandex']);
@@ -313,7 +324,7 @@ Route::get('/get-balanse-yandex', function()
                 $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
 
-                $headers .= 'To: '.$id_com->e_mail.'' . "\r\n";
+
                 $headers .= 'From: PRIME <sv@prime-ltd.su>' . "\r\n";
 
 
