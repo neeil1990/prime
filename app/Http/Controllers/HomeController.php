@@ -223,6 +223,11 @@ class HomeController extends Controller
 
     public function index()
     {
+
+        \Mail::send(['html' => 'email.email'],['data' => '123123'], function ($m){
+            $m->to('neeil@mail.ru','PRIME')->subject('fdsfsddfsdf');
+        });
+
         return view('index',[
             'users_now' => $this->user_now(),
             'admin' => $this->admin(),
