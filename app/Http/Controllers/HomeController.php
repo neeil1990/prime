@@ -225,7 +225,10 @@ class HomeController extends Controller
     {
 
         \Mail::send(['html' => 'email.email'],['data' => '123123'], function ($m){
-            $m->to('neeil@mail.ru','PRIME')->subject('fdsfsddfsdf');
+            $m->to('neeil@mail.ru','PRIME')
+            ->subject('fdsfsddfsdf')
+            ->from('test@mail.ru')
+            ->setBody('text/html');
         });
 
         return view('index',[
