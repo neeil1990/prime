@@ -117,15 +117,14 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
             }
             if(empty($ArClicks[$context_yandex->name_project])){
                 $dataApi[$context_yandex->name_project]['clicks_yandex'] = 0;
+                $dataApi[$context_yandex->name_project]['clicks_price_yandex'] = 0;
             }else{
                 $dataApi[$context_yandex->name_project]['clicks_yandex'] = array_sum($ArClicks[$context_yandex->name_project]);
+                $dataApi[$context_yandex->name_project]['clicks_price_yandex'] = floor($costs*25.424/array_sum($ArClicksAll[$context_yandex->name_project]));
             }
-
             $dataApi[$context_yandex->name_project]['name_progect_yandex'] = $context_yandex->name_project;
             $dataApi[$context_yandex->name_project]['email_yandex'] = $context_yandex->e_mail;
             $dataApi[$context_yandex->name_project]['balanse_yandex'] = $context_yandex->ost_bslsnse_ya;
-            $dataApi[$context_yandex->name_project]['clicks_price_yandex'] = floor($costs*25.424/array_sum($ArClicksAll[$context_yandex->name_project]));
-
         }
 
     }
