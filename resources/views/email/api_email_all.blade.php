@@ -1,9 +1,10 @@
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no"/>
-    <title>PRIME - {{$data['name_project']}}</title>
+    <title>PRIME - {!!$data['name_project']!!}</title>
 
     <style type="text/css">
 
@@ -224,7 +225,7 @@
 
                         <tr>
                             <td align="center" style="font-family: 'Roboto', sans-serif; font-size:15px; color:#ffffff; line-height:24px; font-weight: 300;">
-                                Для сайта <b>{{$data['name_project']}}</b> за {{$data['count_day']}} дн.
+                                Для сайта <b>{!!$data['name_project']!!}</b> за {!!$data['count_day']!!} дн.
                             </td>
                         </tr>
 
@@ -312,7 +313,7 @@
 
 
                                         <tr align="center">
-                                            <td style="font-family: 'Lato', sans-serif; font-size:14px; color:#757575; line-height:24px; font-weight: 300;">{{$data['clicks_yandex']}} переходов</td>
+                                            <td style="font-family: 'Lato', sans-serif; font-size:14px; color:#757575; line-height:24px; font-weight: 300;">{!!$data['clicks_yandex']!!} переходов</td>
                                         </tr>
 
                                     </table>
@@ -368,7 +369,7 @@
 
 
                                         <tr align="center">
-                                            <td style="font-family: 'Lato', sans-serif; font-size:14px; color:#757575; line-height:24px; font-weight: 300;">{{$data['clicks_google']}} переходов</td>
+                                            <td style="font-family: 'Lato', sans-serif; font-size:14px; color:#757575; line-height:24px; font-weight: 300;">{!!$data['clicks_google']!!} переходов</td>
                                         </tr>
                                     </table>
                                 </td>
@@ -421,7 +422,7 @@
 
 
                                         <tr align="center">
-                                            <td style="font-family: 'Lato', sans-serif; font-size:14px; color:#757575; line-height:24px; font-weight: 300;">{{$data['itog']}} чел.</td>
+                                            <td style="font-family: 'Lato', sans-serif; font-size:14px; color:#757575; line-height:24px; font-weight: 300;">{!!$data['itog']!!} чел.</td>
                                         </tr>
 
                                     </table>
@@ -511,7 +512,7 @@
                                         </tr>
 
                                         <tr align="center" style="line-height:0px;">
-                                            <td style="font-family: 'Lato', sans-serif; font-size:35px; color:#2b3c4d; font-weight: bold; line-height: 44px;">{{$data['balanse_yandex']}} руб.</td>
+                                            <td style="font-family: 'Lato', sans-serif; font-size:35px; color:#2b3c4d; font-weight: bold; line-height: 44px;">{!!$data['balanse_yandex']!!} руб.</td>
                                         </tr>
 
 
@@ -561,7 +562,7 @@
                                         </tr>
 
                                         <tr align="center" style="line-height:0px;">
-                                            <td style="font-family: 'Lato', sans-serif; font-size:35px; color:#2b3c4d; font-weight: bold; line-height: 44px;">{{$data['balanse_google']}} руб.</td>
+                                            <td style="font-family: 'Lato', sans-serif; font-size:35px; color:#2b3c4d; font-weight: bold; line-height: 44px;">{!!$data['balanse_google']!!} руб.</td>
                                         </tr>
 
 
@@ -764,6 +765,5 @@
                 </td>
                 </tr>
             </table>
-
 </body>
 </html>
