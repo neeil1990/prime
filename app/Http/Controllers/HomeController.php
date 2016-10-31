@@ -224,7 +224,7 @@ class HomeController extends Controller
     public function index()
     {
 
-        \Mail::send(array('html' => 'email.email'),['data' => '321321321'], function ($m) use ($data) {
+        \Mail::send(array('html' => 'email.email'),['data' => '321321321'], function ($m){
             $m->to('neeil@mail.ru','PRIME')->subject('fdsfsddfsdf');
         });
 
