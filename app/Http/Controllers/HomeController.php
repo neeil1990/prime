@@ -124,7 +124,7 @@ class HomeController extends Controller
             'email' => $email
         );
 
-        \Mail::send('email.api_email_all', ['data' => $data], function ($m) use ($data) {
+        \Mail::send(['html' => 'email.api_email_all'],['data' => $data], function ($m) use ($data) {
             $m->from('sv@prime-ltd.su', 'PRIME');
             $m->to('neeil@mail.ru')->subject('PRIME - остаток денежных средств и статистика за прошлые '.$data['count_day'].' д. по проекту: '.$data['name_project']);
         });
