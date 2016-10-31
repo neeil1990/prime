@@ -125,9 +125,8 @@ class HomeController extends Controller
         );
 
         \Mail::send('email.api_email_all', ['data' => $data], function ($m) use ($data) {
-            $m->from('sv@prime-ltd.su', 'prime-ltd.su');
-            $m->subject('PRIME - остаток денежных средств и статистика за прошлые '.$data['count_day'].' д. по проекту: '.$data['name_project']);
-            $m->to('neeil@mail.ru');
+            $m->from('sv@prime-ltd.su', 'PRIME');
+            $m->to('neeil@mail.ru')->subject('PRIME - остаток денежных средств и статистика за прошлые '.$data['count_day'].' д. по проекту: '.$data['name_project']);
         });
         $this->add_logs('Yandex/Google','Отправлена статистика клиенту по проекту '.$name_project.' за '.$count_day.' д.','API Yandex/Google');
     }
