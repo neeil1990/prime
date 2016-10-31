@@ -80,77 +80,55 @@ class HomeController extends Controller
             $itog_click_go = 0;
         }
         $itog = $itog_click_ya+$itog_click_go;
-
-
-        $message = '<html>';
-        $message .= '<head>';
-        $message .= '<title>PRIME</title>';
-        $message .= '<style>h1,h2{font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;font-weight: normal;color: #424242;}</style>';
-        $message .= '</head>';
-        $message .= '<body>';
-        $message .= '<table align="center" width="100%">';
-        $message .= '<tr>';
-        $message .= '<td align="center"><img width="374" height="116" style="margin: 20px 0px;" src="https://work.prime-ltd.su/public/dist/img/logo1-1.png" border="0" alt="" class="image_fix" style="width:374px; height:116px;text-decoration: none;outline: 0;border: 0;display: block;-ms-interpolation-mode: bicubic;" /></td>';
-        $message .= '</tr>';
-        $message .= '<tr>';
-        $message .= '<td align="center"><h1>Доброго времени суток!</h1></td>';
-        $message .= '</tr>';
-        $message .= '<tr>';
-        $message .= '<td align="center"><h1>По проекту: '.$name_project.'</h1></td>';
-        $message .= '</tr>';
         if(isset($dataAll['balanse_yandex'])) {
-            $message .= '<tr>';
-            $message .= '<td align="center"><h1>Остаток на Яндекс Директе: '.$dataAll['balanse_yandex'].' руб.</h1></td>';
-            $message .= '</tr>';
+            $balanse_yandex = $dataAll['balanse_yandex'];
+        }else{
+            $balanse_yandex = 'NoN';
         }
         if(isset($dataAll['balanse_google'])) {
-            $message .= '<tr>';
-            $message .= '<td align="center"><h1>Остаток на Google Adwords '.$dataAll['balanse_google'].' руб.</h1></td>';
-            $message .= '</tr>';
+            $balanse_google = $dataAll['balanse_google'];
+        }else{
+            $balanse_google = 'NoN';
         }
-        $message .= '<tr>';
-        $message .= '<td align="center"><h1>Количество переходов за последние '.$count_day.' д.:</h1></td>';
-        $message .= '</tr>';
         if(isset($dataAll['clicks_yandex'])) {
-            $message .= '<tr>';
-            $message .= '<td align="center"><h1>Яндекс Директ: '.$dataAll['clicks_yandex'].' переходов</h1></td>';
-            $message .= '</tr>';
+            $clicks_yandex = $dataAll['clicks_yandex'];
+        }else{
+            $clicks_yandex = 'NoN';
         }
         if(isset($dataAll['clicks_google'])) {
-            $message .= '<tr>';
-            $message .= '<td align="center"><h1>Google Adwords: '.$dataAll['clicks_google'].' переходов</h1></td>';
-            $message .= '</tr>';
+            $clicks_google = $dataAll['clicks_google'];
+        }else{
+            $clicks_google = 'NoN';
         }
-        $message .= '<tr>';
-        $message .= '<td align="center"><h1>Итого с систем: '.$itog.' переходов</h1></td>';
-        $message .= '</tr>';
-        $message .= '<tr>';
-        $message .= '<td align="center"><h1>Средняя цена за переход:</h1></td>';
-        $message .= '</tr>';
         if(isset($dataAll['clicks_price_yandex'])) {
-            $message .= '<tr>';
-            $message .= '<td align="center"><h1>Яндекс Директ: '.$dataAll['clicks_price_yandex'].' руб.</h1></td>';
-            $message .= '</tr>';
+            $clicks_price_yandex = $dataAll['clicks_price_yandex'];
+        }else{
+            $clicks_price_yandex = 'NoN';
         }
         if(isset($dataAll['clicks_price_google'])) {
-            $message .= '<tr>';
-            $message .= '<td align="center"><h1>Google Adwords: '.$dataAll['clicks_price_google'].' руб.</h1></td>';
-            $message .= '</tr>';
+            $clicks_price_google = $dataAll['clicks_price_google'];
+        }else{
+            $clicks_price_google = 'NoN';
         }
-        $message .= '<tr>';
-        $message .= '<td style="color: #424242;font-family:"Arial","Helvetica Neue", Helvetica, sans-serif;font-size: 8px;" align="center">По дополнительным вопросам просьба обращаться к своему проект-менеджеру: sv@prime-ltd.su или по телефону: +7-473-203-01-24</td>';
-        $message .= '</tr>';
-        $message .= '</table>';
-        $message .= '</body>';
-        $message .= '</html>';
 
-        $subject = 'PRIME - остаток денежных средств и статистика за прошлые '.$count_day.' д. по проекту: '.$name_project.'';
-        $headers  = 'MIME-Version: 1.0' . "\r\n";
-        $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-        $headers .= 'From: PRIME <sv@prime-ltd.su>' . "\r\n";
+        $data = array(
+            'name_project' => $name_project,
+            'count_day' => $count_day,
+            'balanse_yandex' => $balanse_yandex,
+            'balanse_google' => $balanse_google,
+            'clicks_yandex' => $clicks_yandex,
+            'clicks_google' => $clicks_google,
+            'clicks_price_yandex' => $clicks_price_yandex,
+            'clicks_price_google' => $clicks_price_google,
+            'itog' => $itog,
+            'email' => $email
+        );
 
-        mail($email, $subject, $message, $headers);
-
+        \Mail::send('email.api_email_all', ['data' => $data], function ($m) use ($data) {
+            $m->from('sv@prime-ltd.su', 'prime-ltd.su');
+            $m->subject('PRIME - остаток денежных средств и статистика за прошлые '.$data['count_day'].' д. по проекту: '.$data['name_project']);
+            $m->to($data['email']);
+        });
         $this->add_logs('Yandex/Google','Отправлена статистика клиенту по проекту '.$name_project.' за '.$count_day.' д.','API Yandex/Google');
     }
 
@@ -217,6 +195,7 @@ class HomeController extends Controller
         //var_dump($SimpleXML);
 
         $arCost = array();
+
         foreach($SimpleXML->table->row as $key=>$row){
             if((string)$row['clicks'] != 0){
                 $arCost['clicks'][] = (string)$row['clicks'];
