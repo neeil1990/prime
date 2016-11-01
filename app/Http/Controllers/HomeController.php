@@ -80,7 +80,7 @@ class HomeController extends Controller
             $itog_click_go = 0;
         }
         $itog = $itog_click_ya+$itog_click_go;
-        /*
+
         if(isset($dataAll['balanse_yandex'])) {
             $balanse_yandex = $dataAll['balanse_yandex'];
         }else{
@@ -111,70 +111,415 @@ class HomeController extends Controller
         }else{
             $clicks_price_google = 'NoN';
         }
-        */
-        $message = '<html>';
-        $message .= '<head>';
-        $message .= '<title>PRIME</title>';
-        $message .= '<style>h1,h2{font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;font-weight: normal;color: #424242;}</style>';
-        $message .= '</head>';
-        $message .= '<body>';
-        $message .= '<table align="center" width="100%">';
-        $message .= '<tr>';
-        $message .= '<td align="center"><img width="374" height="116" style="margin: 20px 0px;" src="https://work.prime-ltd.su/public/dist/img/logo1-1.png" border="0" alt="" class="image_fix" style="width:374px; height:116px;text-decoration: none;outline: 0;border: 0;display: block;-ms-interpolation-mode: bicubic;" /></td>';
-        $message .= '</tr>';
-        $message .= '<tr>';
-        $message .= '<td align="center"><h1>Доброго времени суток!</h1></td>';
-        $message .= '</tr>';
-        $message .= '<tr>';
-        $message .= '<td align="center"><h1>По проекту: '.$name_project.'</h1></td>';
-        $message .= '</tr>';
-        if(isset($dataAll['balanse_yandex'])) {
-            $message .= '<tr>';
-            $message .= '<td align="center"><h1>Остаток на Яндекс Директе: '.$dataAll['balanse_yandex'].' руб.</h1></td>';
-            $message .= '</tr>';
-        }
-        if(isset($dataAll['balanse_google'])) {
-            $message .= '<tr>';
-            $message .= '<td align="center"><h1>Остаток на Google Adwords '.$dataAll['balanse_google'].' руб.</h1></td>';
-            $message .= '</tr>';
-        }
-        $message .= '<tr>';
-        $message .= '<td align="center"><h1>Количество переходов за последние '.$count_day.' д.:</h1></td>';
-        $message .= '</tr>';
-        if(isset($dataAll['clicks_yandex'])) {
-            $message .= '<tr>';
-            $message .= '<td align="center"><h1>Яндекс Директ: '.$dataAll['clicks_yandex'].' переходов</h1></td>';
-            $message .= '</tr>';
-        }
-        if(isset($dataAll['clicks_google'])) {
-            $message .= '<tr>';
-            $message .= '<td align="center"><h1>Google Adwords: '.$dataAll['clicks_google'].' переходов</h1></td>';
-            $message .= '</tr>';
-        }
-        $message .= '<tr>';
-        $message .= '<td align="center"><h1>Итого с систем: '.$itog.' переходов</h1></td>';
-        $message .= '</tr>';
-        $message .= '<tr>';
-        $message .= '<td align="center"><h1>Средняя цена за переход:</h1></td>';
-        $message .= '</tr>';
-        if(isset($dataAll['clicks_price_yandex'])) {
-            $message .= '<tr>';
-            $message .= '<td align="center"><h1>Яндекс Директ: '.$dataAll['clicks_price_yandex'].' руб.</h1></td>';
-            $message .= '</tr>';
-        }
-        if(isset($dataAll['clicks_price_google'])) {
-            $message .= '<tr>';
-            $message .= '<td align="center"><h1>Google Adwords: '.$dataAll['clicks_price_google'].' руб.</h1></td>';
-            $message .= '</tr>';
-        }
-        $message .= '<tr>';
-        $message .= '<td style="color: #424242;font-family:"Arial","Helvetica Neue", Helvetica, sans-serif;font-size: 8px;" align="center">По дополнительным вопросам просьба обращаться к своему проект-менеджеру: sv@prime-ltd.su или по телефону: +7-473-203-01-24</td>';
-        $message .= '</tr>';
-        $message .= '</table>';
-        $message .= '</body>';
-        $message .= '</html>';
 
 
+$message = '
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="initial-scale=1.0"/>
+<meta name="format-detection" content="telephone=no"/>
+	<title>PRIME - '.$name_project.'</title>
+<link rel="stylesheet" href="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/css/api-email-all.css">
+<meta name="robots" content="noindex,follow" />
+</head>
+<body>
+	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+		<tr>
+			<td align="center">
+				<table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0">
+					<tr>
+						<td align="center"  valign="top" background="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/header-background.jpg" bgcolor="#66809b" style="background-size:cover; background-position:top;height="400"">
+							<table class="col-600" width="600" height="400" border="0" align="center" cellpadding="0" cellspacing="0">
+								<tr>
+									<td height="40"></td>
+								</tr>
+								<tr>
+									<td align="center" style="line-height: 0px;">
+										<img style="display:block; line-height:0px; font-size:0px; border:0px;" src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/logo.png" width="109" height="103" alt="logo" />
+									</td>
+								</tr>
+								<tr>
+									<td align="center" style="font-family: \'Roboto\', sans-serif; font-size:37px; color:#ffffff; line-height:24px; font-weight: bold;">
+										Отчет <span style="font-family: \'Roboto\', sans-serif; font-size:37px; color:#ffffff; line-height:39px; font-weight: 300;">о работе контекстной рекламы</span>
+									</td>
+								</tr>
+								<tr>
+									<td align="center" style="font-family: \'Roboto\', sans-serif; font-size:15px; color:#ffffff; line-height:24px; font-weight: 300;">
+										Для сайта <b>'.$name_project.'</b> за '.$count_day.' дн.
+									</td>
+								</tr>
+								<tr>
+									<td height="50"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				<table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-left:20px; margin-right:20px; border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9;">
+					<tr>
+						<td height="35"></td>
+					</tr>
+					<tr>
+						<td align="center" style="font-family: \'Raleway\', sans-serif; font-size:22px; font-weight: bold; color:#2a3a4b;">Количество полученных переходов за период</td>
+					</tr>
+					<tr>
+						<td height="10"></td>
+					</tr>
+					<tr>
+						<td align="center" style="font-family: \'Lato\', sans-serif; font-size:14px; color:#757575; line-height:24px; font-weight: 300;">
+							Если стоит значение NoN, значит, реклама в данной системе не ведется.
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				<table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0" style="border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9; ">
+					<tr>
+						<td height="10"></td>
+					</tr>
+					<tr>
+						<td>
+							<table class="col3"  width="183" border="0" align="left" cellpadding="0" cellspacing="0">
+								<tr>
+									<td height="30"></td>
+								</tr>
+								<tr>
+									<td align="center">
+										<table class="insider" width="133" border="0" align="center" cellpadding="0" cellspacing="0">
+
+											<tr align="center" style="line-height:0px;">
+												<td>
+													<img style="display:block; line-height:0px; font-size:0px; border:0px;" src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-about.png" width="69" height="78" alt="icon" />
+												</td>
+											</tr>
+											<tr>
+												<td height="15"></td>
+											</tr>
+											<tr align="center">
+												<td style="font-family: \'Raleway\', Arial, sans-serif; font-size:20px; color:#2b3c4d; line-height:24px; font-weight: bold;">Я.Директ</td>
+											</tr>
+											<tr>
+												<td height="10"></td>
+											</tr>
+											<tr align="center">
+												<td style="font-family: \'Lato\', sans-serif; font-size:14px; color:#757575; line-height:24px; font-weight: 300;">'.$clicks_yandex.' переходов</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<td height="30" ></td>
+								</tr>
+							</table>
+							<table width="1" height="20" border="0" cellpadding="0" cellspacing="0" align="left" >
+								<tr>
+									<td height="20" style="font-size: 0;line-height: 0;border-collapse: collapse;">
+										<p style="padding-left: 24px;">&nbsp;</p>
+									</td>
+								</tr>
+							</table>
+							<table class="col3"  width="183" border="0" align="left" cellpadding="0" cellspacing="0">
+								<tr>
+									<td height="30"></td>
+								</tr>
+								<tr>
+									<td align="center">
+										<table class="insider" width="133" border="0" align="center" cellpadding="0" cellspacing="0">
+
+											<tr align="center" style="line-height:0px;">
+												<td>
+													<img style="display:block; line-height:0px; font-size:0px; border:0px;" src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-team.png" width="69" height="78" alt="icon" />
+												</td>
+											</tr>
+											<tr>
+												<td height="15"></td>
+											</tr>
+											<tr align="center">
+												<td style="font-family: \'Raleway\', sans-serif; font-size:20px; color:#2b3c4d; line-height:24px; font-weight: bold;">G.Adwords</td>
+											</tr>
+											<tr>
+												<td height="10"></td>
+											</tr>
+											<tr align="center">
+													<td style="font-family: \'Lato\', sans-serif; font-size:14px; color:#757575; line-height:24px; font-weight: 300;">'.$clicks_google.' переходов</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<td height="30"></td>
+								</tr>
+							</table>
+							<table width="1" height="20" border="0" cellpadding="0" cellspacing="0" align="left">
+								<tr>
+									<td height="20" style="font-size: 0;line-height: 0;border-collapse: collapse;">
+										<p style="padding-left: 24px;">&nbsp;</p>
+									</td>
+								</tr>
+							</table>
+							<table class="col3" width="183" border="0" align="right" cellpadding="0" cellspacing="0">
+								<tr>
+									<td height="30"></td>
+								</tr>
+								<tr>
+									<td align="center">
+										<table class="insider" width="133" border="0" align="center" cellpadding="0" cellspacing="0">
+
+											<tr align="center" style="line-height:0px;">
+												<td>
+													<img style="display:block; line-height:0px; font-size:0px; border:0px;" src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-portfolio.png" width="69" height="78" alt="icon" />
+												</td>
+											</tr>
+											<tr>
+												<td height="15"></td>
+											</tr>
+											<tr align="center">
+												<td style="font-family: \'Raleway\',  sans-serif; font-size:20px; color:#2b3c4d; line-height:24px; font-weight: bold;">Всего</td>
+											</tr>
+											<tr>
+												<td height="10"></td>
+											</tr>
+											<tr align="center">
+												<td style="font-family: \'Lato\', sans-serif; font-size:14px; color:#757575; line-height:24px; font-weight: 300;">'.$itog.' чел.</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<td height="30"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+			<tr>
+					<td height="5"></td>
+		</tr>
+		<tr>
+			<td align="center">
+				<table align="center" class="col-600" width="600"  border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td align="center" bgcolor="#2a3b4c">
+							<table class="col-600" width="600" align="center" width="600" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+								</tr>
+								<tr>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				<table width="600" class="col-600" align="center" border="0" cellspacing="0" cellpadding="0" style=" border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9;">
+					<tr>
+						<td height="50"></td>
+						<tr>
+						<td align="center" style="font-family: \'Raleway\', sans-serif; font-size:22px; font-weight: bold; color:#2a3a4b;">Остаток на балансах рекламных систем</td>
+
+					</tr>
+					<tr>
+						<td height="10"></td>
+					</tr>
+					<tr>
+						<td align="center" style="font-family: \'Lato\', sans-serif; font-size:14px; color:#757575; line-height:24px; font-weight: 300;">
+							Если стоит значение NoN, значит, реклама в данной системе не ведется.
+						</td>
+					</tr>
+					<tr>
+						<td height="10"></td>
+					</tr>
+					</tr>
+					<tr>
+						<td>
+							<table style="border:1px solid #e2e2e2;" class="col2" width="287" border="0" align="left" cellpadding="0" cellspacing="0">
+								<tr>
+									<td height="40" align="center" bgcolor="#2b3c4d" style="font-family: \'Raleway\', sans-serif; font-size:18px; color:#f1c40f; line-height:30px; font-weight: bold;">Я.Директ</td>
+								</tr>
+								<tr>
+									<td align="center">
+										<table class="insider" width="237" border="0" align="center" cellpadding="0" cellspacing="0">
+											<tr>
+												<td height="20"></td>
+											</tr>
+											<tr align="center" style="line-height:0px;">
+												<td style="font-family: \'Lato\', sans-serif; font-size:35px; color:#2b3c4d; font-weight: bold; line-height: 44px;">'.$balanse_yandex.' руб.</td>
+											</tr>
+											<tr>
+												<td height="15"></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<td height="30"></td>
+								</tr>
+							</table>
+							<table width="1" height="20" border="0" cellpadding="0" cellspacing="0" align="left">
+								<tr>
+									<td height="20" style="font-size: 0;line-height: 0;border-collapse: collapse;">
+										<p style="padding-left: 24px;">&nbsp;</p>
+									</td>
+								</tr>
+							</table>
+							<table style="border:1px solid #e2e2e2;" class="col2" width="287" border="0" align="right" cellpadding="0" cellspacing="0">
+								<tr>
+									<td height="40" align="center" bgcolor="#2b3c4d" style="font-family: \'Raleway\', sans-serif; font-size:18px; color:#f1c40f; line-height:30px; font-weight: bold;">G.Adwords</td>
+								</tr>
+								<tr>
+									<td align="center">
+										<table class="insider" width="237" border="0" align="center" cellpadding="0" cellspacing="0">
+											<tr>
+												<td height="20"></td>
+											</tr>
+											<tr align="center" style="line-height:0px;">
+												<td style="font-family: \'Lato\', sans-serif; font-size:35px; color:#2b3c4d; font-weight: bold; line-height: 44px;">'.$balanse_google.' руб.</td>
+											</tr>
+											<tr>
+												<td height="25"></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<td height="20" ></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				<table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-left:20px; margin-right:20px;">
+		<tr>
+			<td align="center">
+				<table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0" style=" border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9;">
+					<tr>
+						<td height="50"></td>
+					</tr>
+					<tr>
+						<td align="right">
+							<table class="col2" width="287" border="0" align="right" cellpadding="0" cellspacing="0">
+								<tr>
+									<td align="center" style="line-height:0px;">
+										<img style="display:block; line-height:0px; font-size:0px; border:0px;" class="images_style" src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-responsive.png" width="169" height="138" />
+									</td>
+								</tr>
+							</table>
+							<table width="287" border="0" align="left" cellpadding="0" cellspacing="0" class="col2" style="">
+								<tr>
+									<td align="center">
+										<table class="insider" width="237" border="0" align="center" cellpadding="0" cellspacing="0">
+											<tr align="left">
+												<td style="font-family: \'Raleway\', sans-serif; font-size:23px; color:#2a3b4c; line-height:30px; font-weight: bold;">Что это значит?</td>
+											</tr>
+
+											<tr>
+												<td height="5"></td>
+											</tr>
+											<tr>
+												<td style="font-family: \'Lato\', sans-serif; font-size:14px; color:#7f8c8d; line-height:24px; font-weight: 300;">
+													Мы внимательно следим за ходом работы контекстной рекламы вашего сайта и информируем вас о ее ходе. Пожалуйста, вовремя пополняйте баланс систем по счетам, которые мы вам присылаем, чтобы избежать простоя в ротации объявлений.
+												</td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				<table align="center" width="100%" border="0" cellspacing="0" cellpadding="0" style=" border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9;">
+					<tr>
+						<td height="50"></td>
+					</tr>
+					<tr>
+						<td align="center" bgcolor="#34495e">
+							<table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0">
+								<tr>
+									<td height="35"></td>
+								</tr>
+								<tr>
+									<td align="center" style="font-family: \'Raleway\', sans-serif; font-size:20px; color:#f1c40f; line-height:24px; font-weight: bold;">Есть пожелания и вопросы?</td>
+								</tr>
+								<tr>
+									<td height="20"></td>
+								</tr>
+								<tr>
+									<td align="center" style="font-family: \'Lato\', sans-serif; font-size:14px; color:#fff; line-height: 1px; font-weight: 300;">
+										Обратитесь к вашему проект-менеджеру.
+									</td>
+								</tr>
+								<tr>
+									<td height="40"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				<table align="center" width="100%" border="0" cellspacing="0" cellpadding="0" style=" border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9;">
+
+					<tr>
+						<td align="center" bgcolor="#34495e" background="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/footer.jpg" height="185">
+							<table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0">
+								<tr>
+									<td height="25"></td>
+								</tr>
+									<tr>
+									<td align="center" style="font-family: \'Raleway\',  sans-serif; font-size:26px; font-weight: 500; color:#f1c40f;">Вы можете с нами связаться</td>
+									</tr>
+									<tr>
+									<td align="center" style="font-family: \'Roboto\',  sans-serif; font-size:18px; font-weight: 500; color:#f1c40f;">+7(473)-203-01-24</td>
+									</tr>
+								<tr>
+									<td height="25"></td>
+								</tr>
+								<table align="center" width="35%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td align="center"  width="30%"  style="vertical-align: top;">
+											<a href="https://www.facebook.com/designmodo" target="_blank"> <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-fb.png"> </a>
+									</td>
+									<td align="center" class="margin" width="30%" style="vertical-align: top;">
+										 <a href="https://twitter.com/designmodo" target="_blank"> <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-twitter.png"> </a>
+									</td>
+									<td align="center" width="30%" style="vertical-align: top;">
+											<a href="https://plus.google.com/+Designmodo/posts" target="_blank"> <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-googleplus.png"> </a>
+									</td>
+								</tr>
+								</table>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+						</td>
+					</tr>
+				</table>
+</body>
+</html>';
         $subject = 'PRIME - остаток денежных средств и статистика за прошлые '.$count_day.' д. по проекту: '.$name_project.'';
         $headers  = 'MIME-Version: 1.0' . "\r\n";
         $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
@@ -277,6 +622,9 @@ class HomeController extends Controller
 
 
     public function index(){
+
+
+
         return view('index',[
             'users_now' => $this->user_now(),
             'admin' => $this->admin(),
@@ -415,6 +763,340 @@ class HomeController extends Controller
 
     }
 
+    public function message_add_money($client,$balanse,$inc){
+
+        if($inc == "Y"){
+            $icon = 'icon-about';
+            $name_inc = 'Я.Директ';
+        }else{
+            $name_inc = 'G.Adwords';
+            $icon = 'icon-team';
+        }
+
+        $message = '
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="initial-scale=1.0"/>
+<meta name="format-detection" content="telephone=no"/>
+	<title>PRIME - '.$client.'</title>
+
+<link rel="stylesheet" href="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/css/api-email-all.css">
+
+<meta name="robots" content="noindex,follow" />
+</head>
+
+<body>
+	<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+
+
+		<tr>
+			<td align="center">
+				<table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0">
+					<tr>
+						<td align="center"  valign="top" background="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/header-background.jpg" bgcolor="#66809b" style="background-size:cover; background-position:top;height="400"">
+							<table class="col-600" width="600" height="400" border="0" align="center" cellpadding="0" cellspacing="0">
+
+								<tr>
+									<td height="40"></td>
+								</tr>
+
+
+								<tr>
+									<td align="center" style="line-height: 0px;">
+										<img style="display:block; line-height:0px; font-size:0px; border:0px;" src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/logo.png" width="109" height="103" alt="logo" />
+									</td>
+								</tr>
+
+
+
+								<tr>
+									<td align="center" style="font-family: \'Roboto\', sans-serif; font-size:37px; color:#ffffff; line-height:24px; font-weight: bold;">
+										Отчет <span style="font-family: \'Roboto\', sans-serif; font-size:37px; color:#ffffff; line-height:39px; font-weight: 300;">о пополнении баланса РК</span>
+									</td>
+								</tr>
+
+
+
+
+
+								<tr>
+									<td align="center" style="font-family: \'Roboto\', sans-serif; font-size:15px; color:#ffffff; line-height:24px; font-weight: 300;">
+										Для сайта <b>'.$client.'</b>
+									</td>
+								</tr>
+
+
+								<tr>
+									<td height="50"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+
+
+
+
+		<tr>
+			<td align="center">
+				<table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-left:20px; margin-right:20px; border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9;">
+					<tr>
+						<td height="35"></td>
+					</tr>
+
+					<tr>
+						<td align="center" style="font-family: \'Raleway\', sans-serif; font-size:22px; font-weight: bold; color:#2a3a4b;">Зачислены денежные средства на</td>
+					</tr>
+
+					<tr>
+						<td height="10"></td>
+					</tr>
+
+
+					<tr>
+						<td align="center" style="font-family: \'Lato\', sans-serif; font-size:14px; color:#757575; line-height:24px; font-weight: 300;">
+							баланс рекламной системы в следующем размере:
+						</td>
+					</tr>
+
+				</table>
+			</td>
+		</tr>
+
+		<tr>
+			<td align="center">
+				<table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0" style="border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9; ">
+					<tr>
+						<td height="10"></td>
+					</tr>
+					<tr>
+						<td>
+
+
+
+							<table width="1" height="20" border="0" cellpadding="0" cellspacing="0" align="center" >
+								<tr>
+									<td height="20" style="font-size: 0;line-height: 0;border-collapse: collapse;">
+										<p style="padding-left: 24px;">&nbsp;</p>
+									</td>
+								</tr>
+							</table>
+
+
+
+							<table class="col3"  width="183" border="0" align="center" cellpadding="0" cellspacing="0">
+								<tr>
+									<td height="30"></td>
+								</tr>
+								<tr>
+									<td align="center">
+										<table class="insider" width="133" border="0" align="center" cellpadding="0" cellspacing="0">
+
+											<tr align="center" style="line-height:0px;">
+												<td>
+													<img style="display:block; line-height:0px; font-size:0px; border:0px;" src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/'.$icon.'.png" width="69" height="78" alt="icon" />
+												</td>
+											</tr>
+
+
+											<tr>
+												<td height="15"></td>
+											</tr>
+
+
+											<tr align="center">
+												<td style="font-family: \'Raleway\', sans-serif; font-size:20px; color:#2b3c4d; line-height:24px; font-weight: bold;">+'.$balanse.' руб</td>
+											</tr>
+
+
+											<tr>
+												<td height="10"></td>
+											</tr>
+
+
+											<tr align="center">
+													<td style="font-family: \'Lato\', sans-serif; font-size:14px; color:#757575; line-height:24px; font-weight: 300;">'.$name_inc.'</td>
+											</tr>
+
+
+
+										</table>
+									</td>
+								</tr>
+								<tr>
+									<td height="30"></td>
+								</tr>
+							</table>
+
+
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+
+			<tr>
+					<td height="5"></td>
+		</tr>
+
+
+
+
+		<tr>
+			<td align="center">
+				<table align="center" class="col-600" width="600"  border="0" cellspacing="0" cellpadding="0">
+					<tr>
+						<td align="center" bgcolor="#2a3b4c">
+							<table class="col-600" width="600" align="center" width="600" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+
+								</tr>
+								<tr>
+
+								</tr>
+
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+
+
+		<tr>
+			<td align="center">
+				<table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-left:20px; margin-right:20px;">
+
+
+
+		<tr>
+			<td align="center">
+
+
+
+
+							<table width="287" border="0" align="left" cellpadding="0" cellspacing="0" class="col2" style="">
+								<tr>
+									<td align="center">
+
+			</td>
+		</tr>
+
+
+
+
+		<tr>
+			<td align="center">
+				<table align="center" width="100%" border="0" cellspacing="0" cellpadding="0" style=" border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9;">
+					<tr>
+						<td height="50"></td>
+					</tr>
+					<tr>
+
+
+						<td align="center" bgcolor="#34495e">
+							<table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0">
+								<tr>
+									<td height="35"></td>
+								</tr>
+
+
+								<tr>
+									<td align="center" style="font-family: \'Raleway\', sans-serif; font-size:20px; color:#f1c40f; line-height:24px; font-weight: bold;">Есть пожелания и вопросы?</td>
+								</tr>
+
+
+								<tr>
+									<td height="20"></td>
+								</tr>
+
+
+								<tr>
+									<td align="center" style="font-family: \'Lato\', sans-serif; font-size:14px; color:#fff; line-height: 1px; font-weight: 300;">
+										Обратитесь к вашему проект-менеджеру.
+									</td>
+								</tr>
+
+
+								<tr>
+									<td height="40"></td>
+								</tr>
+
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+
+
+
+
+		<tr>
+			<td align="center">
+				<table align="center" width="100%" border="0" cellspacing="0" cellpadding="0" style=" border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9;">
+
+					<tr>
+						<td align="center" bgcolor="#34495e" background="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/footer.jpg" height="185">
+							<table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0">
+								<tr>
+									<td height="25"></td>
+								</tr>
+
+									<tr>
+									<td align="center" style="font-family: \'Raleway\',  sans-serif; font-size:26px; font-weight: 500; color:#f1c40f;">Вы можете с нами связаться</td>
+									</tr>
+									<tr>
+									<td align="center" style="font-family: \'Roboto\',  sans-serif; font-size:18px; font-weight: 500; color:#f1c40f;">+7(473)-203-01-24</td>
+									</tr>
+
+
+								<tr>
+									<td height="25"></td>
+								</tr>
+
+
+
+								<table align="center" width="35%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td align="center"  width="30%"  style="vertical-align: top;">
+											<a href="https://www.facebook.com/designmodo" target="_blank"> <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-fb.png"> </a>
+									</td>
+
+									<td align="center" class="margin" width="30%" style="vertical-align: top;">
+										 <a href="https://twitter.com/designmodo" target="_blank"> <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-twitter.png"> </a>
+									</td>
+
+									<td align="center" width="30%" style="vertical-align: top;">
+											<a href="https://plus.google.com/+Designmodo/posts" target="_blank"> <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-googleplus.png"> </a>
+									</td>
+								</tr>
+								</table>
+
+
+
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+
+
+						</td>
+					</tr>
+				</table>
+</body>
+</html>';
+
+        return $message;
+
+    }
+
     public function updateOstGoogleBalanseApi(Request $request){
         $this->validate($request, [
             'ost_bslsnse_go' => 'required|integer',
@@ -432,49 +1114,9 @@ class HomeController extends Controller
 
             $subject = 'PRIME - зачислены денежные средства на Google Adwords по проекту: '.$request['client_name_project'];
 
-            $message = '
-<html>
-
-	<head>
-		<title>PRIME</title>
-		<style>
-		h1,h2{
-		    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-			font-weight: normal;
-			color: #424242;
-		}
-
-		</style>
-    </head>
-        <body>
-
-        <table align="center" width="100%">
-		<tr>
-		<td align="center"> <img width="374" height="116" style="margin: 20px 0px;" src="https://work.prime-ltd.su/public/dist/img/logo1-1.png" border="0" alt="" class="image_fix" style="width:374px; height:116px;text-decoration: none;outline: 0;border: 0;display: block;-ms-interpolation-mode: bicubic;" /></td>
-		</tr>
-		<tr>
-		<td align="center"><h1>Доброго времени суток!</h1></td>
-		</tr>
-		<tr>
-		<td align="center"><h1>По Вашему проекту: '.$request['client_name_project'].'</h1></td>
-		</tr>
-		<tr>
-		<td align="center"><h1>Зачислены денежные средства, на Google Adwords в размере '.$request['ost_bslsnse_go'].' руб.</h1></td>
-		</tr>
-		<tr>
-		<td style="color: #424242;font-family:"Arial","Helvetica Neue", Helvetica, sans-serif;font-size: 8px;" align="center">По дополнительным вопросам просьба обращаться к своему проект-менеджеру: sv@prime-ltd.su или по телефону: +7-473-203-01-24</td>
-		</tr>
-
-		</table>
-
-        </body>
-  </html>';
-
-
+            $message = $this->message_add_money($request['client_name_project'],$request['ost_bslsnse_go'],'G');
             $headers  = 'MIME-Version: 1.0' . "\r\n";
             $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-
-
 
             $headers .= 'From: PRIME <sv@prime-ltd.su>' . "\r\n";
 
