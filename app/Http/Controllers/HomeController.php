@@ -768,9 +768,11 @@ $message = '
         if($inc == "Y"){
             $icon = 'icon-about';
             $name_inc = 'Я.Директ';
+            $text = '';
         }else{
             $name_inc = 'G.Adwords';
             $icon = 'icon-team';
+            $text = 'в следующем размере';
         }
 
         $message = '
@@ -859,7 +861,7 @@ $message = '
 
 					<tr>
 						<td align="center" style="font-family: \'Lato\', sans-serif; font-size:14px; color:#757575; line-height:24px; font-weight: 300;">
-							баланс рекламной системы в следующем размере:
+							баланс рекламной системы '.$text.':
 						</td>
 					</tr>
 
@@ -870,22 +872,6 @@ $message = '
 		<tr>
 			<td align="center">
 				<table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0" style="border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9; ">
-					<tr>
-						<td height="10"></td>
-					</tr>
-					<tr>
-						<td>
-
-
-
-							<table width="1" height="20" border="0" cellpadding="0" cellspacing="0" align="center" >
-								<tr>
-									<td height="20" style="font-size: 0;line-height: 0;border-collapse: collapse;">
-										<p style="padding-left: 24px;">&nbsp;</p>
-									</td>
-								</tr>
-							</table>
-
 
 
 							<table class="col3"  width="183" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -927,9 +913,7 @@ $message = '
 										</table>
 									</td>
 								</tr>
-								<tr>
-									<td height="30"></td>
-								</tr>
+
 							</table>
 
 

@@ -289,43 +289,9 @@ Route::get('/get-balanse-yandex', function()
 
                 $subject = 'PRIME - зачислены денежные средства на Яндекс Директ по проекту: '.$id_com->name_project;
 
-                $message = '
-<html>
 
-	<head>
-		<title>PRIME</title>
-		<style>
-		h1,h2{
-		    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-			font-weight: normal;
-			color: #424242;
-		}
-
-		</style>
-    </head>
-        <body>
-
-        <table align="center" width="100%">
-		<tr>
-		<td align="center"> <img width="374" height="116" style="margin: 20px 0px;" src="https://work.prime-ltd.su/public/dist/img/logo1-1.png" border="0" alt="" class="image_fix" style="width:374px; height:116px;text-decoration: none;outline: 0;border: 0;display: block;-ms-interpolation-mode: bicubic;" /></td>
-		</tr>
-		<tr>
-		<td align="center"><h1>Доброго времени суток!</h1></td>
-		</tr>
-		<tr>
-		<td align="center"><h1>По Вашему проекту: '.$id_com->name_project.'</h1></td>
-		</tr>
-		<tr>
-		<td align="center"><h1>Зачислены денежные средства на Яндекс Директ.</h1></td>
-		</tr>
-		<tr>
-		<td style="color: #424242;font-family:"Arial","Helvetica Neue", Helvetica, sans-serif;font-size: 8px;" align="center">По дополнительным вопросам просьба обращаться к своему проект-менеджеру: sv@prime-ltd.su или по телефону: +7-473-203-01-24</td>
-		</tr>
-
-		</table>
-
-        </body>
-  </html>';
+                $homecon = new \App\Http\Controllers\HomeController();
+                $message = $homecon->message_add_money($id_com->name_project,'','Y');
 
 
                 $headers  = 'MIME-Version: 1.0' . "\r\n";
