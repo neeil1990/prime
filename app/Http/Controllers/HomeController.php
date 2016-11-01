@@ -581,13 +581,13 @@ class HomeController extends Controller
 								<table align="center" width="35%" border="0" cellspacing="0" cellpadding="0">
 								<tr>
 									<td align="center"  width="30%"  style="vertical-align: top;">
-											<a href="https://www.facebook.com/designmodo" target="_blank"> <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-fb.png"> </a>
+											<a href="https://vk.com/primeltd" target="_blank"> <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-fb.png"> </a>
 									</td>
 									<td align="center" class="margin" width="30%" style="vertical-align: top;">
-										 <a href="https://twitter.com/designmodo" target="_blank"> <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-twitter.png"> </a>
+										 <a href="https://prime-ltd.su/" target="_blank"> <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-twitter.png"> </a>
 									</td>
 									<td align="center" width="30%" style="vertical-align: top;">
-											<a href="https://plus.google.com/+Designmodo/posts" target="_blank"> <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-googleplus.png"> </a>
+											<a href="mailto:info@prime-ltd.su" target="_blank"> <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-googleplus.png"> </a>
 									</td>
 								</tr>
 								</table>
@@ -602,7 +602,7 @@ class HomeController extends Controller
 				</table>
 </body>
 </html>';
-        
+
 
         $subject = 'PRIME - остаток денежных средств и статистика за прошлые '.$count_day.' д. по проекту: '.$name_project.'';
         $headers  = 'MIME-Version: 1.0' . "\r\n";
@@ -1126,15 +1126,15 @@ class HomeController extends Controller
 								<table align="center" width="35%" border="0" cellspacing="0" cellpadding="0">
 								<tr>
 									<td align="center"  width="30%"  style="vertical-align: top;">
-											<a href="https://www.facebook.com/designmodo" target="_blank"> <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-fb.png"> </a>
+											<a href="https://vk.com/primeltd" target="_blank"> <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-fb.png"> </a>
 									</td>
 
 									<td align="center" class="margin" width="30%" style="vertical-align: top;">
-										 <a href="https://twitter.com/designmodo" target="_blank"> <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-twitter.png"> </a>
+										 <a href="https://prime-ltd.su/" target="_blank"> <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-twitter.png"> </a>
 									</td>
 
 									<td align="center" width="30%" style="vertical-align: top;">
-											<a href="https://plus.google.com/+Designmodo/posts" target="_blank"> <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-googleplus.png"> </a>
+											<a href="mailto:info@prime-ltd.su" target="_blank"> <img src="'.$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/public/dist/img/email/icon-googleplus.png"> </a>
 									</td>
 								</tr>
 								</table>
