@@ -876,7 +876,7 @@ $message = '
 
 							<table class="col3"  width="183" border="0" align="center" cellpadding="0" cellspacing="0">
 								<tr>
-									<td height="30"></td>
+									<td height="20"></td>
 								</tr>
 								<tr>
 									<td align="center">
