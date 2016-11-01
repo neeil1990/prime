@@ -828,11 +828,6 @@ $message = '
 										Для сайта <b>'.$client.'</b>
 									</td>
 								</tr>
-
-
-								<tr>
-									<td height="50"></td>
-								</tr>
 							</table>
 						</td>
 					</tr>
@@ -847,7 +842,7 @@ $message = '
 			<td align="center">
 				<table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0" style="margin-left:20px; margin-right:20px; border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9;">
 					<tr>
-						<td height="35"></td>
+						<td height="20"></td>
 					</tr>
 
 					<tr>
@@ -872,6 +867,19 @@ $message = '
 		<tr>
 			<td align="center">
 				<table class="col-600" width="600" border="0" align="center" cellpadding="0" cellspacing="0" style="border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9; ">
+					<tr>
+						<td height="10"></td>
+					</tr>
+					<tr>
+						<td>
+							<table width="1" height="20" border="0" cellpadding="0" cellspacing="0" align="center" >
+								<tr>
+									<td height="20" style="font-size: 0;line-height: 0;border-collapse: collapse;">
+										<p style="padding-left: 24px;">&nbsp;</p>
+									</td>
+								</tr>
+							</table>
+
 
 
 							<table class="col3"  width="183" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -913,7 +921,9 @@ $message = '
 										</table>
 									</td>
 								</tr>
-
+								<tr>
+									<td height="30"></td>
+								</tr>
 							</table>
 
 
@@ -922,14 +932,6 @@ $message = '
 				</table>
 			</td>
 		</tr>
-
-			<tr>
-					<td height="5"></td>
-		</tr>
-
-
-
-
 		<tr>
 			<td align="center">
 				<table align="center" class="col-600" width="600"  border="0" cellspacing="0" cellpadding="0">
@@ -976,9 +978,8 @@ $message = '
 		<tr>
 			<td align="center">
 				<table align="center" width="100%" border="0" cellspacing="0" cellpadding="0" style=" border-left: 1px solid #dbd9d9; border-right: 1px solid #dbd9d9;">
-					<tr>
-						<td height="50"></td>
-					</tr>
+
+
 					<tr>
 
 
