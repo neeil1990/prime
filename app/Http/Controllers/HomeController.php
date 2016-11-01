@@ -767,7 +767,8 @@ $message = '
 
         if($inc == "Y"){
             $icon = 'icon-about';
-            $name_inc = 'Я.Директ';
+            $name_inc = '';
+            $balanse = 'Я.Директ';
             $text = '';
         }else{
             $name_inc = 'G.Adwords';
@@ -895,7 +896,7 @@ $message = '
 
 
 											<tr align="center">
-												<td style="font-family: \'Raleway\', sans-serif; font-size:20px; color:#2b3c4d; line-height:24px; font-weight: bold;">+'.$balanse.' руб</td>
+												<td style="font-family: \'Raleway\', sans-serif; font-size:20px; color:#2b3c4d; line-height:24px; font-weight: bold;">'.$balanse.'</td>
 											</tr>
 
 
@@ -1069,7 +1070,7 @@ $message = '
 				</table>
 </body>
 </html>';
-        
+
 
         return $message;
 
@@ -1092,7 +1093,7 @@ $message = '
 
             $subject = 'PRIME - зачислены денежные средства на Google Adwords по проекту: '.$request['client_name_project'];
 
-            $message = $this->message_add_money($request['client_name_project'],$request['ost_bslsnse_go'],'G');
+            $message = $this->message_add_money($request['client_name_project'],'+'.$request['ost_bslsnse_go'].' руб.','G');
             $headers  = 'MIME-Version: 1.0' . "\r\n";
             $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
 
