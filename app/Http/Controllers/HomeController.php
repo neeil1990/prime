@@ -1507,21 +1507,17 @@ class HomeController extends Controller
             }
 
 
-            $project_context_itog = \DB::table('sorts')
-                ->leftJoin('project_contexts','sorts.id_table','=','project_contexts.id')
+            $project_context_itog = \DB::table('project_contexts')
                 ->where('project_contexts.status',1)
-                ->where('sorts.id_user',$us->id)
-                ->where('sorts.id_type','5')//ProgectContext
+                ->where('project_contexts.id_glavn_user',$us->id)
                 ->get();
 
-            $project_seo_itog = \DB::table('sorts')
-                ->leftJoin('project_seos','sorts.id_table','=','project_seos.id')
+            $project_seo_itog = \DB::table('project_seos')
                 ->where('project_seos.status',1)
-                ->where('sorts.id_user',$us->id)
-                ->where('sorts.id_type','4')//ProgectSeo
+                ->where('project_seos.id_glavn_user',$us->id)
                 ->get();
 
-            //var_dump($project_seo_itog);
+            //var_dump($project_context_itog);
             $arrSeoPlusItog = array();
             $arrSeoMinusItog = array();
             foreach($project_seo_itog as $itog){
@@ -1538,6 +1534,7 @@ class HomeController extends Controller
             foreach($project_context_itog as $itog){
                 $arrContextItog[] = ($itog->ya_direct+$itog->go_advords)*$itog->procent_seo/100;
             }
+
 
             //итог зп по seo
             $users[$key]->procent_seo_itog = array_sum($arrSeoPlusItog)-array_sum($arrSeoMinusItog);
