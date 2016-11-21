@@ -99,9 +99,8 @@
                                                 @if($setting_field_seo[0]->value == 1 or $admin == 1)
                                                 <td class="favicon_url{{$user->id}}"><textarea class="copytext" rows="1" type="text">{{$user->name_project}}</textarea></td>
                                                 <script>
-                                                    var url_fav = '.favicon_url'+'{{$user->id}}';
                                                     var view_fav = '.favicon_view'+'{{$user->id}}';
-                                                    var url = 'https://www.google.com/s2/favicons?domain=' + $(url_fav).text() ;
+                                                    var url = 'https://www.google.com/s2/favicons?domain=' + '{{$user->name_project}}' ;
                                                     $(view_fav).html('<img src='+ url +' style="max-width:30px">');
                                                 </script>
                                                 @endif
@@ -298,9 +297,8 @@
                                                 @if($setting_field_context[0]->value == 1 or $admin == 1)
                                                 <td class="favicon_url{{$user->id}}_2"><textarea class="copytext" rows="1" type="text">{{$user->name_project}}</textarea></td>
                                                 <script>
-                                                    var url_fav = '.favicon_url'+'{{$user->id}}';
                                                     var view_fav = '.favicon_view'+'{{$user->id}}';
-                                                    var url = 'https://www.google.com/s2/favicons?domain=' + $(url_fav).text() ;
+                                                    var url = 'https://www.google.com/s2/favicons?domain=' + '{{$user->name_project}}' ;
                                                     $(view_fav).html('<img src='+ url +' style="max-width:30px">');
                                                 </script>
                                                 @endif
