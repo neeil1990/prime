@@ -17,6 +17,7 @@ class CreateSettingPayoutsTable extends Migration
             $table->integer('procent_bonus');
             $table->integer('count_day_fine');
             $table->integer('procent_fine');
+            $table->integer('bonus_add');
             $table->timestamps();
         });
     }

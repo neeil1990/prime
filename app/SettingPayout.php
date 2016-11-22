@@ -10,6 +10,7 @@ class SettingPayout extends Model
         'procent_bonus',
         'count_day_fine',
         'procent_fine',
+        'bonus_add',
     ];
 
     public function UpdateSettingPayout($data){
@@ -18,7 +19,8 @@ class SettingPayout extends Model
             ->update(array(
                 'procent_bonus' => trim($data['procent_bonus']),
                 'count_day_fine' => trim($data['count_day_fine']),
-                'procent_fine' => trim($data['procent_fine'])
+                'procent_fine' => trim($data['procent_fine']),
+                'bonus_add' => trim($data['bonus_add'])
             ));
     }
 

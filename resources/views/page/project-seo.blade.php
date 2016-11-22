@@ -85,7 +85,7 @@
                 <div class="box">
                     <div class="box-header">
                         @if($admin == 1)
-                            <h3 class="box-title"> <a href="/project-seo/create">Добавить</a></h3>
+                            <h3 class="box-title"> <a class="btn btn-block btn-default btn-sm" href="/project-seo/create">Добавить</a></h3>
                         @endif
                     </div>
                     <!-- /.box-header -->
@@ -238,6 +238,7 @@
                                                             <li><a href="#">% Освоено бонус <span class="pull-right badge bg-blue">{{$user->procent_bonus}} %</span></a></li>
                                                             <li><a href="#">Количество дней штрафа <span class="pull-right badge bg-aqua">{{$user->count_day_fine}}</span></a></li>
                                                             <li><a href="#">% Освоено штрафы <span class="pull-right badge bg-green">{{$user->procent_fine}} %</span></a></li>
+                                                            <li><a href="#">% Начисление бонуса <span class="pull-right badge bg-red">{{$user->bonus_add}} %</span></a></li>
                                                         </ul>
                                                     </td>
                                                 @endif

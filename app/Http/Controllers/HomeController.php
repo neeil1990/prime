@@ -2156,16 +2156,10 @@ class HomeController extends Controller
     }
 
 
-
-
-
     //График работы
     public function WorkGraff(){
         return view('page.work-grafik');
     }
-
-
-
 
     //Проекты сео
 

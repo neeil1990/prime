@@ -199,23 +199,42 @@ Route::get('/get-seranking-sum', function()
                 $budget = $p->osvoeno;
             }
 
+            if(!empty($p->end)) {
+                $end = explode('/', $p->end);
+            }else{
+                $end = array('00','00','0000');
+            }
+            $data_now = date('m/d/Y');
+            if(strtotime($data_now) < strtotime($end[1].'/'.$end[0].'/'.$end[2])) {
+                $interval_date = true;
+            }else{$interval_date = false;}
+
             if($p->procent_bonus == 0 and $p->count_day_fine == 0 and $p->procent_fine == 0){
-                $enddate = strtotime('+' . $setting_payouts->count_day_fine . ' day', strtotime(preg_replace('~^(\d+)\/(\d+)\/(\d+)$~', '$3/$2/$1', $p->end)));
-                if($sum_osvoen_procent >= $setting_payouts->procent_bonus){
-                   $procent_bonus = $budget/100*$p->procent_seo;
-                }elseif(strtotime("now") > $enddate and $sum_osvoen_procent < $setting_payouts->procent_fine){
-                    $procent_bonus = '-' . $budget / 100 * $p->procent_seo;
-                }else{
-                    $procent_bonus = 0;
+                if($interval_date == true){
+                    $procent_bonus = $budget / 100 * $setting_payouts->bonus_add;
+
+                }else {
+                    $enddate = strtotime('+' . $setting_payouts->count_day_fine . ' day', strtotime(preg_replace('~^(\d+)\/(\d+)\/(\d+)$~', '$3/$2/$1', $p->end)));
+                    if ($sum_osvoen_procent >= $setting_payouts->procent_bonus) {
+                        $procent_bonus = $budget / 100 * $p->procent_seo;
+                    } elseif (strtotime("now") > $enddate and $sum_osvoen_procent < $setting_payouts->procent_fine) {
+                        $procent_bonus = '-' . $budget / 100 * $p->procent_seo;
+                    } else {
+                        $procent_bonus = 0;
+                    }
                 }
             }else {
-                $enddate = strtotime('+' . $setting_payouts->count_day_fine . ' day', strtotime(preg_replace('~^(\d+)\/(\d+)\/(\d+)$~', '$3/$2/$1', $p->end)));
-                if ($sum_osvoen_procent >= $p->procent_bonus) {
-                    $procent_bonus = $budget / 100 * $p->procent_seo;
-                } elseif (strtotime("now") > $enddate and $sum_osvoen_procent < $p->procent_fine) {
-                    $procent_bonus = '-' . $budget / 100 * $p->procent_seo;
-                }else{
-                    $procent_bonus = 0;
+                if($interval_date == true){
+                    $procent_bonus = $budget / 100 * $p->bonus_add;
+                }else {
+                    $enddate = strtotime('+' . $p->count_day_fine . ' day', strtotime(preg_replace('~^(\d+)\/(\d+)\/(\d+)$~', '$3/$2/$1', $p->end)));
+                    if ($sum_osvoen_procent >= $p->procent_bonus) {
+                        $procent_bonus = $budget / 100 * $p->procent_seo;
+                    } elseif (strtotime("now") > $enddate and $sum_osvoen_procent < $p->procent_fine) {
+                        $procent_bonus = '-' . $budget / 100 * $p->procent_seo;
+                    } else {
+                        $procent_bonus = 0;
+                    }
                 }
             }
 

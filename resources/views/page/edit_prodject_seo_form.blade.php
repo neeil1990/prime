@@ -239,6 +239,15 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">% начисление бонуса для нового проекта</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" placeholder="пока проект находиться на этапе вывода" class="form-control" name="bonus_add" value="{{$users->bonus_add}}">
+
+                                </div>
+                            </div>
+
 
                             <div class="form-group one">
 
