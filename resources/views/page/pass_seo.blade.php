@@ -97,16 +97,10 @@
                                                     <input type="checkbox" class="check" value="{{$user->id}}">
                                                     <input type="hidden" class="positions" name="positions[]" value="{{$user->id}}">
                                                 </td>
-                                                <td class="favicon_view{{$user->id}}"></td>
+                                                <td class="scroll_right_table"><img src="https://www.google.com/s2/favicons?domain={{$user->name_project}}" style="max-width:30px"></td>
                                                 @if($setting_field[0]->value == 1 or $admin == 1)
-                                                <td class="favicon_url{{$user->id}}"><textarea class="copytext" rows="1" type="text">{{$user->name_project}}</textarea></td>
+                                                <td class=""><textarea class="copytext" rows="1" type="text">{{$user->name_project}}</textarea></td>
                                                 @endif
-                                                <script>
-                                                    var url_fav = '.favicon_url'+'{{$user->id}}';
-                                                    var view_fav = '.favicon_view'+'{{$user->id}}';
-                                                    var url = 'https://www.google.com/s2/favicons?domain=' + $(url_fav).text() ;
-                                                    $(view_fav).html('<img src='+ url +' style="max-width:30px">');
-                                                </script>
                                                 @if($setting_field[1]->value == 1 or $admin == 1)
                                                 <td class="">@foreach($name as $n)
                                                         @if($n->id == $user->id)
