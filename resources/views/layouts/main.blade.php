@@ -46,7 +46,7 @@
     <script src="{{ asset('/dist/js/jquery.form.js') }}"></script>
 
     <!-- jQuery UI 1.11.4 -->
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script src="{{ asset('/dist/js/jquery-ui.min.js') }}"></script>
 
     <script src="{{ asset('/dist/js/jquery-zclip-master/jquery.zclip.js') }}"></script>
 
@@ -671,6 +671,7 @@
 <script src="{{ asset('/bootstrap/js/bootstrap.min.js')}}"></script>
 <!-- Morris.js charts -->
 
+<script src="{{ asset('/dist/js/raphael-min.js')}}"></script>
 <script src="{{ asset('/plugins/morris/morris.min.js')}}"></script>
 <!-- Sparkline -->
 <script src="{{ asset('/plugins/sparkline/jquery.sparkline.min.js')}}"></script>

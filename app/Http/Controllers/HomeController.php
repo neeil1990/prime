@@ -707,9 +707,12 @@ class HomeController extends Controller
 
     public function index(){
 
-
+	$progect_seo = ProjectSeo::all();
+	$progect_context = ProjectContext::all();
 
         return view('index',[
+			'progect_context' => $progect_context,
+			'progect_seo' => $progect_seo,
             'users_now' => $this->user_now(),
             'admin' => $this->admin(),
             'linkUser' => $this->LinkUser()
