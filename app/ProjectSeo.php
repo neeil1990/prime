@@ -63,6 +63,7 @@ class ProjectSeo extends Model
                 'count_day_fine' => trim($data['count_day_fine']),
                 'procent_fine' => trim($data['procent_fine']),
                 'bonus_add' => trim($data['bonus_add']),
+                'bonus_enable' => trim($data['bonus_enable']),
                 'name_project' => $data['name_project'],
                 'budget' => $data['budget'],
                 'osvoeno' => $data['osvoeno'],
