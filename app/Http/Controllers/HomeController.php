@@ -707,10 +707,44 @@ class HomeController extends Controller
 
     public function index(){
 
-	$progect_seo = ProjectSeo::all();
-	$progect_context = ProjectContext::all();
+	$progect_seo = \DB::table('project_seos')->where('status','1')->get();
+	$progect_context = \DB::table('project_contexts')->where('status','1')->get();
+	$osvoeno_all = \DB::table('stats')
+		->where('project','seo')
+		->where('data',date('Y-m-d'))
+		->first();
+
+	$context_ya_go = \DB::table('stats')
+		->where('project','context')
+		->where('data',date('Y-m-d'))
+		->first();
+
+	$all_user = \DB::table('stats')
+		->where('project','all')
+		->where('data',date('Y-m-d'))
+		->first();
+
+
+
+		$arMaxBudjet = array();
+		foreach($progect_seo as $s){
+			$arMaxBudjet['seo'][] = $s->budget;
+		}
+
+		foreach($progect_context as $c){
+			if($c->ya_direct != 0 and !empty($c->ya_direct))
+			$arMaxBudjet['context']['ya_direct'][] = $c->ya_direct;
+			if($c->go_advords != 0 and !empty($c->go_advords))
+			$arMaxBudjet['context']['go_advords'][] = $c->go_advords;
+		}
 
         return view('index',[
+			'all_user' => unserialize($all_user->summa),
+			'context_ya_go' => $context_ya_go->summa,
+			'osvoeno_all' => $osvoeno_all->summa,
+			'max_budjet_seo' => array_sum($arMaxBudjet['seo']),
+			'ya_direct' => array_sum($arMaxBudjet['context']['ya_direct']),
+			'go_advords' => array_sum($arMaxBudjet['context']['go_advords']),
 			'progect_context' => $progect_context,
 			'progect_seo' => $progect_seo,
             'users_now' => $this->user_now(),
@@ -718,6 +752,11 @@ class HomeController extends Controller
             'linkUser' => $this->LinkUser()
         ]);
     }
+
+	public function getAjaxStat(Request $request){
+		 print $request->date;
+		 print $request->type;
+	}
 
     public function settingsNoticeMailUpdate(Request $request){
 

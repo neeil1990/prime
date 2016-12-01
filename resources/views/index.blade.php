@@ -16,12 +16,20 @@
                     <tbody>
                     <tr>
                         <td>Всего максимальный бюджет</td>
-                        <td>Update software</td>
+                        <td>{{$max_budjet_seo}}</td>
+                        <td></td>
                     </tr>
 
                     <tr>
                         <td>Всего освоенный бюджет</td>
-                        <td>Update software</td>
+                        <td>{{$osvoeno_all}}</td>
+                        <td>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" type-input="seo" size="1" class="form-control datepicker">
+                                <span class="input-group-btn"><button type="button" class="btn btn-info btn-flat">Go!</button></span>
+                            </div>
+                        </td>
                     </tr>
 
                     </tbody>
@@ -42,18 +50,28 @@
 
                     <tr>
                         <td>- Директ</td>
+                        <td>{{$ya_direct}}</td>
                         <td></td>
                     </tr>
 
                     <tr>
                         <td>- Adwords</td>
-                        <td>Update software</td>
+                        <td>{{$go_advords}}</td>
+                        <td></td>
                     </tr>
 
                     <tr>
                         <td>Всего оплата по контексту</td>
-                        <td>Update software</td>
+                        <td>{{$context_ya_go}}</td>
+                        <td>
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text" type-input="context" size="1" class="form-control datepicker">
+                                <span class="input-group-btn"><button type="button" class="btn btn-info btn-flat">Go!</button></span>
+                            </div>
+                        </td>
                     </tr>
+
 
                     </tbody>
                 </table>
@@ -86,6 +104,52 @@
 
         </div>
 
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Всего проектов контекст: {{count($progect_context)}}</h3>
+                    <div class="col-xs-2 pull-right">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            <input type="text" type-input="all" size="1" class="form-control datepicker">
+                            <span class="input-group-btn"><button type="button" class="btn btn-info btn-flat">Go!</button></span>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                    <table class="table table-striped">
+                        <tbody>
+                        <tr>
+                            <th>№</th>
+                            <th>Имя</th>
+                            <th>Количество проектов SEO</th>
+                            <th>Бюджет SEO</th>
+                            <th>Бюджет освоенный SEO</th>
+                            <th>Контекст <br> Директ/Adwords</th>
+                            <th>Оплата по контексту</th>
+                        </tr>
+
+                        @foreach($all_user as $k => $u)
+                        <tr>
+                            <td>1</td>
+                            <td>{{$k}}</td>
+                            <td>@if(isset($u['count_project'])) {{$u['count_project']}} @endif</td>
+                            <td>@if(isset($u['budjet'])) {{$u['budjet']}} @endif</td>
+                            <td>@if(isset($u['osvoeno'])) {{$u['osvoeno']}} @endif</td>
+                            <td>@if(isset($u['context_ya_direct_count'])) {{$u['context_ya_direct_count']}} @endif / @if(isset($u['context_go_advords_count'])) {{$u['context_go_advords_count']}} @endif</td>
+                            <td>@if(isset($u['context_ya_direct_go_advords'])) {{$u['context_ya_direct_go_advords']}} @endif</td>
+                        </tr>
+                        @endforeach
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+
 
     <div class="col-md-6">
         <div id="topvisor_GPr"></div>
@@ -104,6 +168,27 @@
 
     <script>
         $(function () {
+
+            $('.btn').click(function(){
+                var input = $(this).parent().parent().find('input');
+
+                    $.ajax({
+                        url: '/get-ajax-stat', //Адрес подгружаемой страницы
+                        type: "POST", //Тип запроса
+                        dataType: "html", //Тип данных
+                        data: 'date=' + input.val() + '&type=' + input.attr('type-input') + '',
+                        success: function (response) {
+                            console.log(response);
+                        }
+                    });
+                return false;
+            });
+
+            $('.datepicker').datepicker({
+                autoclose: true,
+                format: "yyyy-mm-dd",
+                language: "ru"
+            });
 
 
             //DONUT CHART

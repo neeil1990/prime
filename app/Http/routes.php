@@ -10,6 +10,157 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::post('/get-ajax-stat', ['as' => 'getAjaxStat', 'uses' => 'HomeController@getAjaxStat']);
+Route::get('/stat', function()
+{
+    $arMaxBudjet = array();
+    $progect_seo = \DB::table('project_seos')->where('status','1')->get();
+    $progect_context = \DB::table('project_contexts')->where('status','1')->get();
+
+    $arUserSeo = array();
+    $users = \App\User::all();
+    foreach($users as $u){
+        $progect_spec_seo = \DB::table('project_seos')
+            ->where('status','1')
+            ->where('id_glavn_user',$u->id)
+            ->get();
+        foreach($progect_spec_seo as $s){
+            $arUserSeo[$u->name]['budjet'][] = $s->budget;
+            $arUserSeo[$u->name]['osvoeno'][] = $s->osvoeno;
+            $arUserSeo[$u->name]['count_project'][] = $s->id;
+        }
+
+        $progect_spec_context = \DB::table('project_contexts')
+            ->where('status','1')
+            ->where('id_glavn_user',$u->id)
+            ->get();
+        foreach($progect_spec_context as $c){
+            $arUserSeo[$u->name]['context_ya_direct_go_advords'][] = $c->ya_direct + $c->go_advords;
+            if($c->ya_direct != 0 and !empty($c->ya_direct))
+            $arUserSeo[$u->name]['context_ya_direct_count'][] = $c->ya_direct;
+            if($c->go_advords != 0 and !empty($c->go_advords))
+            $arUserSeo[$u->name]['context_go_advords_count'][] = $c->go_advords;
+        }
+        if(!empty($progect_spec_context)) {
+            $arUserSeo[$u->name]['context_ya_direct_go_advords'] = array_sum($arUserSeo[$u->name]['context_ya_direct_go_advords']);
+            $arUserSeo[$u->name]['context_ya_direct_count'] = count($arUserSeo[$u->name]['context_ya_direct_count']);
+            $arUserSeo[$u->name]['context_go_advords_count'] = count($arUserSeo[$u->name]['context_go_advords_count']);
+        }
+
+        if(!empty($progect_spec_seo)) {
+            $arUserSeo[$u->name]['budjet'] = array_sum($arUserSeo[$u->name]['budjet']);
+            $arUserSeo[$u->name]['osvoeno'] = array_sum($arUserSeo[$u->name]['osvoeno']);
+            $arUserSeo[$u->name]['count_project'] = count($arUserSeo[$u->name]['count_project']);
+        }
+
+    }
+
+    $stats_user = \DB::table('stats')
+        ->where('project','all')
+        ->where('type','user')
+        ->where('spec','all')
+        ->where('data',date('Y-m-d'))
+        ->first();
+
+    if($stats_user){
+        \DB::table('stats')->where('id', $stats_user->id)
+            ->update( array(
+                'summa' => serialize($arUserSeo),
+                'project' => 'all',
+                'type' => 'user',
+                'spec' => 'all',
+                'data' => date('Y-m-d'),
+                'created_at' => date('Y-m-d H:i:s')
+            ));
+    }else {
+        \DB::table('stats')->insert(
+            array(
+                'summa' => serialize($arUserSeo),
+                'project' => 'all',
+                'type' => 'user',
+                'spec' => 'all',
+                'data' => date('Y-m-d'),
+                'created_at' => date('Y-m-d H:i:s')
+            )
+        );
+    }
+
+
+    foreach($progect_context as $c){
+        if($c->ya_direct != 0 and !empty($c->ya_direct))
+            $arMaxBudjet['context']['ya_direct'][] = $c->ya_direct;
+        if($c->go_advords != 0 and !empty($c->go_advords))
+            $arMaxBudjet['context']['go_advords'][] = $c->go_advords;
+    }
+
+    $stats_context = \DB::table('stats')
+        ->where('project','context')
+        ->where('type','context_ya_go')
+        ->where('spec','all')
+        ->where('data',date('Y-m-d'))
+        ->first();
+
+    if($stats_context){
+        \DB::table('stats')->where('id', $stats_context->id)
+            ->update( array(
+                'summa' => array_sum(array_merge($arMaxBudjet['context']['ya_direct'], $arMaxBudjet['context']['go_advords'])),
+                'project' => 'context',
+                'type' => 'context_ya_go',
+                'spec' => 'all',
+                'data' => date('Y-m-d'),
+                'created_at' => date('Y-m-d H:i:s')
+            ));
+    }else {
+        \DB::table('stats')->insert(
+            array(
+                'summa' => array_sum(array_merge($arMaxBudjet['context']['ya_direct'], $arMaxBudjet['context']['go_advords'])),
+                'project' => 'context',
+                'type' => 'context_ya_go',
+                'spec' => 'all',
+                'data' => date('Y-m-d'),
+                'created_at' => date('Y-m-d H:i:s')
+            )
+        );
+    }
+
+
+    foreach($progect_seo as $s){
+        $arMaxBudjet['seo_osvoeno'][] = $s->osvoeno;
+    }
+
+    $stats_seo = \DB::table('stats')
+        ->where('project','seo')
+        ->where('type','osvoeno')
+        ->where('spec','all')
+        ->where('data',date('Y-m-d'))
+        ->first();
+
+    if($stats_seo){
+        \DB::table('stats')->where('id', $stats_seo->id)
+            ->update( array(
+                'summa' => array_sum($arMaxBudjet['seo_osvoeno']),
+                'project' => 'seo',
+                'type' => 'osvoeno',
+                'spec' => 'all',
+                'data' => date('Y-m-d'),
+                'created_at' => date('Y-m-d H:i:s')
+            ));
+    }else {
+        \DB::table('stats')->insert(
+            array(
+                'summa' => array_sum($arMaxBudjet['seo_osvoeno']),
+                'project' => 'seo',
+                'type' => 'osvoeno',
+                'spec' => 'all',
+                'data' => date('Y-m-d'),
+                'created_at' => date('Y-m-d H:i:s')
+            )
+        );
+    }
+
+
+});
+
 
 Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', function($count_day,$name_project)
 {
