@@ -738,19 +738,28 @@ class HomeController extends Controller
 			$arMaxBudjet['context']['go_advords'][] = $c->go_advords;
 		}
 
-        return view('index',[
-			'all_user' => unserialize($all_user->summa),
-			'context_ya_go' => $context_ya_go->summa,
-			'osvoeno_all' => $osvoeno_all->summa,
-			'max_budjet_seo' => array_sum($arMaxBudjet['seo']),
-			'ya_direct' => array_sum($arMaxBudjet['context']['ya_direct']),
-			'go_advords' => array_sum($arMaxBudjet['context']['go_advords']),
-			'progect_context' => $progect_context,
-			'progect_seo' => $progect_seo,
-            'users_now' => $this->user_now(),
-            'admin' => $this->admin(),
-            'linkUser' => $this->LinkUser()
-        ]);
+		if($this->admin() == 1) {
+
+			return view('index', [
+				'all_user' => unserialize($all_user->summa),
+				'context_ya_go' => $context_ya_go->summa,
+				'osvoeno_all' => $osvoeno_all->summa,
+				'max_budjet_seo' => array_sum($arMaxBudjet['seo']),
+				'ya_direct' => array_sum($arMaxBudjet['context']['ya_direct']),
+				'go_advords' => array_sum($arMaxBudjet['context']['go_advords']),
+				'progect_context' => $progect_context,
+				'progect_seo' => $progect_seo,
+				'users_now' => $this->user_now(),
+				'admin' => $this->admin(),
+				'linkUser' => $this->LinkUser()
+			]);
+		}else{
+			return view('index_user', [
+				'users_now' => $this->user_now(),
+				'admin' => $this->admin(),
+				'linkUser' => $this->LinkUser()
+			]);
+		}
     }
 
 	public function getAjaxStat(Request $request){
