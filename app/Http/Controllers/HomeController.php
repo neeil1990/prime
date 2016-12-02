@@ -763,8 +763,79 @@ class HomeController extends Controller
     }
 
 	public function getAjaxStat(Request $request){
-		 print $request->date;
-		 print $request->type;
+		if($request->type == 'seo'){
+			$result = \DB::table('stats')
+				->where('project','seo')
+				->where('data',$request->date)
+				->first();
+		}
+		if($request->type == 'context'){
+			$result = \DB::table('stats')
+				->where('project','context')
+				->where('data',$request->date)
+				->first();
+		}
+
+		if($request->type == 'all') {
+			$result = new \stdClass();
+			$all_user = \DB::table('stats')
+				->where('project', 'all')
+				->where('data', $request->date)
+				->first();
+
+			if(isset($all_user->summa)) {
+
+				ob_start();
+				?>
+				<tr>
+					<th>№</th>
+					<th>Имя</th>
+					<th>Количество проектов SEO</th>
+					<th>Бюджет SEO</th>
+					<th>Бюджет освоенный SEO</th>
+					<th>Контекст <br> Директ/Adwords</th>
+					<th>Оплата по контексту</th>
+				</tr>
+				<? foreach (unserialize($all_user->summa) as $k => $u) { ?>
+					<tr>
+						<td>1</td>
+						<td><?= $k ?></td>
+						<td><? if (isset($u['count_project'])) {
+								print $u['count_project'];
+							} ?></td>
+						<td><? if (isset($u['budjet'])) {
+								print $u['budjet'];
+							} ?></td>
+						<td><? if (isset($u['osvoeno'])) {
+								print $u['osvoeno'];
+							} ?></td>
+						<td><? if (isset($u['context_ya_direct_count'])) {
+								print $u['context_ya_direct_count'];
+							} ?> / <? if (isset($u['context_go_advords_count'])) {
+								print $u['context_go_advords_count'];
+							} ?></td>
+						<td><? if (isset($u['context_ya_direct_go_advords'])) {
+								print $u['context_ya_direct_go_advords'];
+							} ?></td>
+					</tr>
+					<?
+				}
+				$out1 = ob_get_contents();
+
+				ob_end_clean();
+				$result->summa = $out1;
+
+			}
+		}
+
+
+		if(isset($result->summa)){
+			return $result->summa;
+		}else{
+			return 'Нет данных';
+		}
+
+
 	}
 
     public function settingsNoticeMailUpdate(Request $request){

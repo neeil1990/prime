@@ -4,6 +4,75 @@
 @section('content')
     <section class="content">
 
+        <div class="row">
+
+            <div class="col-lg-3 col-xs-6">
+                <style>
+                    #topvisor_apometr .topvisor-footer {
+                        background: transparent!important;
+                        line-height: 35px!important;
+                    }
+                    #topvisor_apometr .topvisor-middle {
+                        height: 65px!important;
+                    }
+                    #topvisor_apometr .topvisor-header {
+                        height: 30px!important;
+                    }
+                    #topvisor_apometr {
+                        width: 388px!important;
+                        height: 128px!important;
+                    }
+                </style>
+                    <div id="topvisor_GPr"></div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-green">
+                    <div class="inner">
+                        <h3>{{count($progect_seo)}}</h3>
+
+                        <p>Всего проектов SEO</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-stats-bars"></i>
+                    </div>
+                    <a href="/project-seo" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-red">
+                    <div class="inner">
+                        <h3>{{count($progect_context)}}</h3>
+
+                        <p>Всего проектов контекст</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-pie-graph"></i>
+                    </div>
+                    <a href="/project-context" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3>{{count($all_user)}}</h3>
+
+                        <p>Специалисты</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-person-add"></i>
+                    </div>
+                    <a href="/personal" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
+
     <div class="col-md-6">
 
         <div class="box">
@@ -22,7 +91,7 @@
 
                     <tr>
                         <td>Всего освоенный бюджет</td>
-                        <td>{{$osvoeno_all}}</td>
+                        <td class="seo">{{$osvoeno_all}}</td>
                         <td>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -62,7 +131,7 @@
 
                     <tr>
                         <td>Всего оплата по контексту</td>
-                        <td>{{$context_ya_go}}</td>
+                        <td class="context">{{$context_ya_go}}</td>
                         <td>
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -70,6 +139,12 @@
                                 <span class="input-group-btn"><button type="button" class="btn btn-info btn-flat">Go!</button></span>
                             </div>
                         </td>
+                    </tr>
+
+                    <tr>
+                        <td>Итог Seo + Context</td>
+                        <td class="itog">{{$go_advords+$ya_direct+$osvoeno_all}}</td>
+                        <td></td>
                     </tr>
 
 
@@ -107,7 +182,7 @@
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Всего проектов контекст: {{count($progect_context)}}</h3>
+                    <h3 class="box-title">Специалисты: {{count($all_user)}}</h3>
                     <div class="col-xs-2 pull-right">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
@@ -119,9 +194,9 @@
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
                     <table class="table table-striped">
-                        <tbody>
+                        <tbody class="all">
                         <tr>
-                            <th>№</th>
+                            <th></th>
                             <th>Имя</th>
                             <th>Количество проектов SEO</th>
                             <th>Бюджет SEO</th>
@@ -132,7 +207,7 @@
 
                         @foreach($all_user as $k => $u)
                         <tr>
-                            <td>1</td>
+                            <td><i class="fa fa-user"></i></td>
                             <td>{{$k}}</td>
                             <td>@if(isset($u['count_project'])) {{$u['count_project']}} @endif</td>
                             <td>@if(isset($u['budjet'])) {{$u['budjet']}} @endif</td>
@@ -149,13 +224,6 @@
             </div>
             <!-- /.box -->
         </div>
-
-
-    <div class="col-md-6">
-        <div id="topvisor_GPr"></div>
-   </div>
-
-
 
         <script type="text/javascript" src="https://topvisor.ru/js/widget/apometr/apometr.php?region_action=1&searcher=0&region_key=213&div_id=topvisor_GPr&charset=utf-8&lang=ru"></script>
 
@@ -178,7 +246,16 @@
                         dataType: "html", //Тип данных
                         data: 'date=' + input.val() + '&type=' + input.attr('type-input') + '',
                         success: function (response) {
-                            console.log(response);
+                            if(input.attr('type-input') == 'seo'){
+                                $('.seo').html(response);
+                            }
+                            if(input.attr('type-input') == 'context'){
+                                $('.context').html(response);
+                            }
+                            if(input.attr('type-input') == 'all'){
+                                $('.all').html(response);
+                            }
+
                         }
                     });
                 return false;
