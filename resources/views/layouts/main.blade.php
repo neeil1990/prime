@@ -672,6 +672,7 @@
 <!-- Morris.js charts -->
 
 <script src="{{ asset('/dist/js/raphael-min.js')}}"></script>
+<script src="{{ asset('/dist/js/Chart.min.js')}}"></script>
 <script src="{{ asset('/plugins/morris/morris.min.js')}}"></script>
 <!-- Sparkline -->
 <script src="{{ asset('/plugins/sparkline/jquery.sparkline.min.js')}}"></script>
