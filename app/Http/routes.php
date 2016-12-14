@@ -485,13 +485,7 @@ Route::get('/get-balanse-yandex', function()
             }
         }
 
-        if(empty($ac_ya->data->Accounts[0]->Amount)){
-            \DB::table('project_contexts')
-                ->where('id', $ya->id_company)
-                ->update(array(
-                    'ost_bslsnse_ya' => 0
-                ));
-        }else{
+        if(!empty($ac_ya->data->Accounts[0]->Amount)){
             \DB::table('project_contexts')
                 ->where('id', $ya->id_company)
                 ->update(array(
