@@ -178,31 +178,35 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
 
     $home = new \App\Http\Controllers\HomeController();
 
+
     $google_api = \App\GoogleApi::all();
     $user = new \AdWordsUser();
     $filePath = $_SERVER['DOCUMENT_ROOT'] . '/public/report.xml';
     $yandex_api = \App\TokenYandex::all();
 
     $dataApi = array();
-    foreach($google_api as $key => $g){
-      $context_google = \App\ProjectContext::find($g->google_project_id);
-        if(isset($context_google) and $context_google->status == 1){
-            $home = new \App\Http\Controllers\HomeController();
-            $sum_accaunt = $home->DownloadCriteriaReportExample($user,$filePath,$g->google_id_client,'ALL_TIME');
-            $click_accaunt = $home->DownloadCriteriaReportExample($user,$filePath,$g->google_id_client,$count_day);
-            if($click_accaunt['clicks'] == 0){
-                $clicks_price_google = 0;
-            }else{
-                $clicks_price_google = floor($click_accaunt['cost']/$click_accaunt['clicks']);
-            }
-            $dataApi[$context_google->name_project]['name_progect_google'] = $context_google->name_project;
-            $dataApi[$context_google->name_project]['email_google'] = $context_google->e_mail;
-            $dataApi[$context_google->name_project]['balanse_google'] = $context_google->ost_bslsnse_go-$sum_accaunt['cost'];
-            $dataApi[$context_google->name_project]['clicks_google'] = $click_accaunt['clicks'];
-            $dataApi[$context_google->name_project]['clicks_price_google'] = $clicks_price_google;
-        }
-    }
+    /*
+   foreach($google_api as $key => $g){
+     $context_google = \App\ProjectContext::find($g->google_project_id);
+       if(isset($context_google) and $context_google->status == 1){
+           $home = new \App\Http\Controllers\HomeController();
+           $sum_accaunt = $home->DownloadCriteriaReportExample($user,$filePath,$g->google_id_client,'ALL_TIME');
+           $click_accaunt = $home->DownloadCriteriaReportExample($user,$filePath,$g->google_id_client,$count_day);
+           if($click_accaunt['clicks'] == 0){
+               $clicks_price_google = 0;
+           }else{
+               $clicks_price_google = floor($click_accaunt['cost']/$click_accaunt['clicks']);
+           }
+           $dataApi[$context_google->name_project]['name_progect_google'] = $context_google->name_project;
+           $dataApi[$context_google->name_project]['email_google'] = $context_google->e_mail;
+           $dataApi[$context_google->name_project]['balanse_google'] = $context_google->ost_bslsnse_go-$sum_accaunt['cost'];
+           $dataApi[$context_google->name_project]['clicks_google'] = $click_accaunt['clicks'];
+           $dataApi[$context_google->name_project]['clicks_price_google'] = $clicks_price_google;
+       }
+   }
 
+   */
+    
 
 
     foreach($yandex_api as $key=>$y){
