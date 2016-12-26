@@ -206,7 +206,20 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
    }
 
    */
-    
+
+    foreach($google_api as $key => $g){
+        $context_google = \App\ProjectContext::find($g->google_project_id);
+        if(isset($context_google) and $context_google->status == 1){
+            $home = new \App\Http\Controllers\HomeController();
+
+            $dataApi[$context_google->name_project]['name_progect_google'] = $context_google->name_project;
+            $dataApi[$context_google->name_project]['email_google'] = $context_google->e_mail;
+            $dataApi[$context_google->name_project]['balanse_google'] = 'Нет данных обновление сервиса';
+            $dataApi[$context_google->name_project]['clicks_google'] = 'Нет данных обновление сервиса';
+            $dataApi[$context_google->name_project]['clicks_price_google'] = 'Нет данных обновление сервиса';
+        }
+    }
+
 
 
     foreach($yandex_api as $key=>$y){
