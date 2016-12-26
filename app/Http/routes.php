@@ -214,7 +214,7 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
 
             $dataApi[$context_google->name_project]['name_progect_google'] = $context_google->name_project;
             $dataApi[$context_google->name_project]['email_google'] = $context_google->e_mail;
-            $dataApi[$context_google->name_project]['balanse_google'] = 'Нет данных обновление сервиса';
+            $dataApi[$context_google->name_project]['balanse_google'] = $context_google->ost_bslsnse_go.'(Данные от 23.11.2016) Нет данных обновление сервиса';
             $dataApi[$context_google->name_project]['clicks_google'] = 'Нет данных обновление сервиса';
             $dataApi[$context_google->name_project]['clicks_price_google'] = 'Нет данных обновление сервиса';
         }
