@@ -185,7 +185,7 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
     $yandex_api = \App\TokenYandex::all();
 
     $dataApi = array();
-    /*
+
    foreach($google_api as $key => $g){
      $context_google = \App\ProjectContext::find($g->google_project_id);
        if(isset($context_google) and $context_google->status == 1){
@@ -205,20 +205,20 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
        }
    }
 
-   */
 
-    foreach($google_api as $key => $g){
-        $context_google = \App\ProjectContext::find($g->google_project_id);
-        if(isset($context_google) and $context_google->status == 1){
-            $home = new \App\Http\Controllers\HomeController();
 
-            $dataApi[$context_google->name_project]['name_progect_google'] = $context_google->name_project;
-            $dataApi[$context_google->name_project]['email_google'] = $context_google->e_mail;
-            $dataApi[$context_google->name_project]['balanse_google'] = $context_google->ost_bslsnse_go.'(Данные от 23.11.2016) Нет данных обновление сервиса';
-            $dataApi[$context_google->name_project]['clicks_google'] = 'Нет данных обновление сервиса';
-            $dataApi[$context_google->name_project]['clicks_price_google'] = 'Нет данных обновление сервиса';
-        }
-    }
+//    foreach($google_api as $key => $g){
+//        $context_google = \App\ProjectContext::find($g->google_project_id);
+//        if(isset($context_google) and $context_google->status == 1){
+//            $home = new \App\Http\Controllers\HomeController();
+//
+//            $dataApi[$context_google->name_project]['name_progect_google'] = $context_google->name_project;
+//            $dataApi[$context_google->name_project]['email_google'] = $context_google->e_mail;
+//            $dataApi[$context_google->name_project]['balanse_google'] = $context_google->ost_bslsnse_go.'(Данные от 23.11.2016) Нет данных обновление сервиса';
+//            $dataApi[$context_google->name_project]['clicks_google'] = 'Нет данных обновление сервиса';
+//            $dataApi[$context_google->name_project]['clicks_price_google'] = 'Нет данных обновление сервиса';
+//        }
+//    }
 
 
 
