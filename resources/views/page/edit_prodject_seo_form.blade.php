@@ -249,7 +249,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="col-md-4 control-label">Включить начисление бонуса</label>
+                                <label class="col-md-4 control-label">Включить бонус проекта</label>
                                Вкл. <input type="radio" name="bonus_enable" value="1" @if($users->bonus_enable == 1) checked="checked" @endif >
                                Выкл. <input type="radio" name="bonus_enable" value="0" @if($users->bonus_enable == 0) checked="checked" @endif >
                             </div>
