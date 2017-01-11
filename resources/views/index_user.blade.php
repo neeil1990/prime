@@ -30,7 +30,7 @@
                 <!-- small box -->
                 <div class="small-box bg-green">
                     <div class="inner">
-                        <h3>0</h3>
+                        <h3>{{$seo_progect_all}}</h3>
 
                         <p>Всего проектов SEO</p>
                     </div>
@@ -45,7 +45,7 @@
                 <!-- small box -->
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h3>0</h3>
+                        <h3>{{$project_contexts_user}}</h3>
 
                         <p>Всего проектов контекст</p>
                     </div>
@@ -60,7 +60,7 @@
                 <!-- small box -->
                 <div class="small-box bg-yellow">
                     <div class="inner">
-                        <h3>0</h3>
+                        <h3>1</h3>
 
                         <p>Специалисты</p>
                     </div>
@@ -88,13 +88,9 @@
                     </div>
                     <div class="box-footer no-padding">
                         <ul class="nav nav-stacked">
-                            <li><a href="#">Projects <span class="pull-right badge bg-blue">31</span></a></li>
-                            <li><a href="#">Tasks <span class="pull-right badge bg-aqua">5</span></a></li>
-                            <li><a href="#">Completed Projects <span class="pull-right badge bg-green">12</span></a></li>
-                            <li><a href="#">Followers <span class="pull-right badge bg-red">842</span></a></li>
-                            <li><a href="#">Followers <span class="pull-right badge bg-red">842</span></a></li>
-                            <li><a href="#">Followers <span class="pull-right badge bg-red">842</span></a></li>
-                            <li><a href="#">Followers <span class="pull-right badge bg-red">842</span></a></li>
+                            @foreach($SeeForProject as $k => $p)
+                            <li><a href="#">{{$p}} <span class="pull-right badge bg-blue">{{$k}}</span></a></li>
+                            @endforeach
                         </ul>
                     </div>
                 </div>
@@ -157,24 +153,81 @@
                         <table class="table table-striped">
                             <tbody class="all">
                             <tr>
-                                <th></th>
+                                <th>№</th>
                                 <th>Проект</th>
                                 <th>Макс.Бюджет</th>
+                                <th>Освоенно сейчас</th>
                                 <th>Освоенный % сейчас</th>
-                                <th>1</th>
-                                <th>2</th>
-                                <th>3</th>
+                                <th>День 1</th>
+                                <th>День 2</th>
+                                <th>День 3</th>
+                                <th>День 4</th>
+                                <th>День 5</th>
+                                <th>День 6</th>
+                                <th>День 7</th>
                             </tr>
 
+
+                            @foreach($users_table_stat as $k => $s)
                                 <tr>
-                                    <td><i class="fa fa-user"></i></td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                    <td>6</td>
+                                    <td>{{$k}}</td>
+                                    <td>{{$s['name_project']}}</td>
+                                    <td>{{$s['budget']}}</td>
+                                    <td>{{$s['osvoeno']}}</td>
+                                    <td>{{$s['osvoeno_procent']}}</td>
+                                    <td>
+                                        @if(isset($s['day_proc_1']))
+                                        {{$s['day_proc_1']}}
+                                        @else
+                                        Нет данных
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if(isset($s['day_proc_2']))
+                                            {{$s['day_proc_2']}}
+                                        @else
+                                            Нет данных
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if(isset($s['day_proc_3']))
+                                            {{$s['day_proc_3']}}
+                                        @else
+                                            Нет данных
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if(isset($s['day_proc_4']))
+                                            {{$s['day_proc_4']}}
+                                        @else
+                                            Нет данных
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if(isset($s['day_proc_5']))
+                                            {{$s['day_proc_5']}}
+                                        @else
+                                            Нет данных
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if(isset($s['day_proc_6']))
+                                            {{$s['day_proc_6']}}
+                                        @else
+                                            Нет данных
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if(isset($s['day_proc_7']))
+                                            {{$s['day_proc_7']}}
+                                        @else
+                                            Нет данных
+                                        @endif
+                                    </td>
+
                                 </tr>
+                            @endforeach
+
 
 
                             </tbody>
