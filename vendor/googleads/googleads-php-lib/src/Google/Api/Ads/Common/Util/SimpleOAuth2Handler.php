@@ -110,7 +110,6 @@ class SimpleOAuth2Handler extends OAuth2Handler {
     $error = $this->curlUtils->Error($ch);
     $httpCode = $this->curlUtils->GetInfo($ch, CURLINFO_HTTP_CODE);
     $this->curlUtils->Close($ch);
-
     if (!empty($error)) {
       throw new OAuth2Exception($error, $httpCode);
     }
