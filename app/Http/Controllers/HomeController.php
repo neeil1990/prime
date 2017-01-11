@@ -707,35 +707,79 @@ class HomeController extends Controller
 
     public function index(){
 
-	$progect_seo = \DB::table('project_seos')->where('status','1')->get();
-	$progect_context = \DB::table('project_contexts')->where('status','1')->get();
-	$osvoeno_all = \DB::table('stats')
-		->where('project','seo')
-		->where('data',date('Y-m-d'))
-		->first();
-
-	$context_ya_go = \DB::table('stats')
-		->where('project','context')
-		->where('data',date('Y-m-d'))
-		->first();
-
-	$all_user = \DB::table('stats')
-		->where('project','all')
-		->where('data',date('Y-m-d'))
-		->first();
+		if($this->admin() == 1) {
 
 
+			$progect_seo = \DB::table('project_seos')->where('status', '1')->get();
+			$progect_context = \DB::table('project_contexts')->where('status', '1')->get();
+			$osvoeno_all = \DB::table('stats')
+				->where('project', 'seo')
+				->where('data', date('Y-m-d'))
+				->first();
 
-		$arMaxBudjet = array();
-		foreach($progect_seo as $s){
-			$arMaxBudjet['seo'][] = $s->budget;
-		}
+			$context_ya_go = \DB::table('stats')
+				->where('project', 'context')
+				->where('data', date('Y-m-d'))
+				->first();
 
-		foreach($progect_context as $c){
-			if($c->ya_direct != 0 and !empty($c->ya_direct))
-			$arMaxBudjet['context']['ya_direct'][] = $c->ya_direct;
-			if($c->go_advords != 0 and !empty($c->go_advords))
-			$arMaxBudjet['context']['go_advords'][] = $c->go_advords;
+			$all_user = \DB::table('stats')
+				->where('project', 'all')
+				->where('data', date('Y-m-d'))
+				->first();
+
+
+			$arMaxBudjet = array();
+			foreach ($progect_seo as $s) {
+				$arMaxBudjet['seo'][] = $s->budget;
+			}
+
+
+			foreach ($progect_context as $c) {
+				if ($c->ya_direct != 0 and !empty($c->ya_direct))
+					$arMaxBudjet['context']['ya_direct'][] = $c->ya_direct;
+				if ($c->go_advords != 0 and !empty($c->go_advords))
+					$arMaxBudjet['context']['go_advords'][] = $c->go_advords;
+			}
+		}else{
+			//для пользователя
+			$progect_seo_user = \DB::table('project_seos')->where('id_glavn_user',$this->user_now()->id)->get();
+			$project_contexts_user = \DB::table('project_contexts')->where('id_glavn_user',$this->user_now()->id)->get();
+
+			$stat_users = \DB::table('stat_users')
+				->where('date_day','>',date('Y-m-d', strtotime('-7 days')))
+				->where('id_user',$this->user_now()->id)
+				->orderBy('date_day', 'asc')
+				->get();
+
+			$arSeeForProject = array();
+			$arStatUser = array();
+			foreach($progect_seo_user as $k => $p){
+				$arStatUser[$k]['name_project'] = $p->name_project;
+				$arStatUser[$k]['budget'] = $p->budget;
+				$arStatUser[$k]['osvoeno'] = $p->osvoeno;
+				$arStatUser[$k]['osvoeno_procent'] = $p->osvoeno_procent;
+				$i = 1;
+				foreach($stat_users as $key => $s){
+					if($s->id_project == $p->id){
+						$arStatUser[$k]['day_proc_'.$i] = $s->osvoeno_procent;
+						$i++;
+					}
+				}
+
+				$arSeeForProject[$p->osvoeno_procent] = $p->name_project;
+			}
+			ksort($arSeeForProject);
+			$i = 1;
+			foreach($arSeeForProject as $k => $a){
+				if($i > 3){
+					unset($arSeeForProject[$k]);
+				}else {
+					$arSeeForProject[$k] = $a;
+				}
+				$i++;
+			}
+			//dd($arSeeForProject);
+
 		}
 
 		if($this->admin() == 1) {
@@ -755,6 +799,10 @@ class HomeController extends Controller
 			]);
 		}else{
 			return view('index_user', [
+				'users_table_stat' => $arStatUser,
+				'seo_progect_all' => count($progect_seo_user),
+				'project_contexts_user' => count($project_contexts_user),
+				'SeeForProject' => $arSeeForProject,
 				'users_now' => $this->user_now(),
 				'admin' => $this->admin(),
 				'linkUser' => $this->LinkUser()

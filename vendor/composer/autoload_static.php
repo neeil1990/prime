@@ -309,6 +309,7 @@ class ComposerStaticInite3849607e2f80cd658d63b35b7ffe144
         'CreateSettingFieldsTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_05_095404_create_setting_fields_table.php',
         'CreateSettingPayoutsTable' => __DIR__ . '/../..' . '/database/migrations/2016_08_22_091620_create_setting_payouts_table.php',
         'CreateSortsTable' => __DIR__ . '/../..' . '/database/migrations/2016_04_15_101212_create_sorts_table.php',
+        'CreateStatUsersTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_11_114342_create_stat_users_table.php',
         'CreateStatsTable' => __DIR__ . '/../..' . '/database/migrations/2016_12_01_142424_create_stats_table.php',
         'CreateTokenYandexesTable' => __DIR__ . '/../..' . '/database/migrations/2016_06_09_114642_create_token_yandexes_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',

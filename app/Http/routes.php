@@ -158,6 +158,22 @@ Route::get('/stat', function()
         );
     }
 
+    //Statistic for users home page
+    $progect_seo_user_all = \DB::table('project_seos')->get();
+    $stat_users_date = \DB::table('stat_users')->where('date_day',date('Y-m-d'))->first();
+    if(empty($stat_users_date)) {
+        foreach ($progect_seo_user_all as $p) {
+            \DB::table('stat_users')->insert(
+                array(
+                    'id_user' => $p->id_glavn_user,
+                    'id_project' => $p->id,
+                    'osvoeno_procent' => $p->osvoeno_procent,
+                    'date_day' => date('Y-m-d'),
+                    'created_at' => date('Y-m-d H:i:s')
+                )
+            );
+        }
+    }
 
 });
 
