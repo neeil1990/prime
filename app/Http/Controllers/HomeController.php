@@ -716,18 +716,32 @@ class HomeController extends Controller
 				->where('project', 'seo')
 				->where('data', date('Y-m-d'))
 				->first();
+			if(!empty($osvoeno_all->summa)) {
+				$osvoeno_all = $osvoeno_all->summa;
+			}else{
+				$osvoeno_all = '';
+			}
 
 			$context_ya_go = \DB::table('stats')
 				->where('project', 'context')
 				->where('data', date('Y-m-d'))
 				->first();
+			if(!empty($context_ya_go->summa)) {
+				$context_ya_go = $context_ya_go->summa;
+			}else {
+				$context_ya_go = '';
+			}
 
 			$all_user = \DB::table('stats')
 				->where('project', 'all')
 				->where('data', date('Y-m-d'))
 				->first();
 
-
+			if(!empty($all_user->summa)) {
+				$all_user_summa = unserialize($all_user->summa);
+			}else{
+				$all_user_summa = '';
+			}
 			$arMaxBudjet = array();
 			foreach ($progect_seo as $s) {
 				$arMaxBudjet['seo'][] = $s->budget;
@@ -785,9 +799,9 @@ class HomeController extends Controller
 		if($this->admin() == 1) {
 
 			return view('index', [
-				'all_user' => unserialize($all_user->summa),
-				'context_ya_go' => $context_ya_go->summa,
-				'osvoeno_all' => $osvoeno_all->summa,
+				'all_user' => $all_user_summa,
+				'context_ya_go' => $context_ya_go,
+				'osvoeno_all' => $osvoeno_all,
 				'max_budjet_seo' => array_sum($arMaxBudjet['seo']),
 				'ya_direct' => array_sum($arMaxBudjet['context']['ya_direct']),
 				'go_advords' => array_sum($arMaxBudjet['context']['go_advords']),
