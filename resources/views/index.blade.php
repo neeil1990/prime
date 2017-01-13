@@ -205,6 +205,7 @@
                             <th>Оплата по контексту</th>
                         </tr>
 
+                        @if(is_array($all_user))
                         @foreach($all_user as $k => $u)
                         <tr>
                             <td><i class="fa fa-user"></i></td>
@@ -216,6 +217,7 @@
                             <td>@if(isset($u['context_ya_direct_go_advords'])) {{$u['context_ya_direct_go_advords']}} @endif</td>
                         </tr>
                         @endforeach
+                        @endif
 
                         </tbody>
                     </table>
