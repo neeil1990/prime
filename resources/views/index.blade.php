@@ -227,6 +227,95 @@
             <!-- /.box -->
         </div>
 
+
+        <div class="col-xs-12">
+            <!-- Widget: user widget style 1 -->
+            <div class="box box-widget widget-user-2">
+                <!-- Add the bg color to the header using any of the bg-* classes -->
+                <div class="widget-user-header bg-yellow">
+                    <!-- /.widget-user-image -->
+                    <h3 class="widget-user-username">Внимание на проекты</h3>
+                </div>
+                <div class="box-footer no-padding">
+                    <ul class="nav nav-stacked">
+                        @foreach($arSeeForProjectUserAdmin as $key => $val)
+                            @if($key < 40)
+                        <li><a href="#">{{$val['name']}} - {{$val['name_project']}} <span class="pull-right badge bg-blue">{{$key}} %</span></a></li>
+                            @endif
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            <!-- /.widget-user -->
+        </div>
+
+
+    <div class="row">
+
+
+        <div class="col-xs-12">
+
+            <div id="accordion">
+                @foreach($arStatForAdminUser as $key => $stat)
+                <h3>{{$key}}</h3>
+                <div>
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <!-- /.box-header -->
+                            <div class="box-body no-padding">
+                                <table id="example-{{str_slug($key)}}" class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th data-type="string">Проект</th>
+                                        <th data-type="number">Макс.Бюджет</th>
+                                        <th data-type="number">Освоенно сейчас</th>
+                                        <th data-type="number">Освоенный % сейчас</th>
+                                        <th data-type="number">День 1</th>
+                                        <th data-type="number">День 2</th>
+                                        <th data-type="number">День 3</th>
+                                        <th data-type="number">День 4</th>
+                                        <th data-type="number">День 5</th>
+                                        <th data-type="number">День 6</th>
+                                        <th data-type="number">День 7</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="all">
+                                    @foreach($stat as $key => $stat)
+                                    <tr>
+                                        <td>{{$key}}</td>
+                                        <td> {{$stat['budget']}} </td>
+                                        <td> {{$stat['osvoeno']}} </td>
+                                        <td> {{$stat['osvoeno_procent']}} </td>
+                                        <td>@if(isset($stat['osvoeno_procent_day'][0])) {{$stat['osvoeno_procent_day'][0]}} @endif</td>
+                                        <td>@if(isset($stat['osvoeno_procent_day'][1])) {{$stat['osvoeno_procent_day'][1]}} @endif</td>
+                                        <td>@if(isset($stat['osvoeno_procent_day'][2])) {{$stat['osvoeno_procent_day'][2]}} @endif</td>
+                                        <td>@if(isset($stat['osvoeno_procent_day'][3])) {{$stat['osvoeno_procent_day'][3]}} @endif</td>
+                                        <td>@if(isset($stat['osvoeno_procent_day'][4])) {{$stat['osvoeno_procent_day'][4]}} @endif</td>
+                                        <td>@if(isset($stat['osvoeno_procent_day'][5])) {{$stat['osvoeno_procent_day'][5]}} @endif</td>
+                                        <td>@if(isset($stat['osvoeno_procent_day'][6])) {{$stat['osvoeno_procent_day'][6]}} @endif</td>
+
+                                    </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
+                @endforeach
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
         <script type="text/javascript" src="https://topvisor.ru/js/widget/apometr/apometr.php?region_action=1&searcher=0&region_key=213&div_id=topvisor_GPr&charset=utf-8&lang=ru"></script>
 
 
@@ -237,7 +326,16 @@
    </section>
 
     <script>
+
         $(function () {
+
+
+
+            $( "#accordion" ).accordion({
+                collapsible : true,
+                active: false,
+                heightStyle: "content"
+            });
 
             $('.btn').click(function(){
                 var input = $(this).parent().parent().find('input');

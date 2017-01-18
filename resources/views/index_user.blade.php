@@ -80,16 +80,16 @@
                 <div class="box box-widget widget-user-2">
                     <!-- Add the bg color to the header using any of the bg-* classes -->
                     <div class="widget-user-header bg-yellow">
-                        <div class="widget-user-image">
-                            <img class="img-circle" src="/dist/img/user2-160x160.jpg" alt="User Avatar">
-                        </div>
+                        {{--<div class="widget-user-image">--}}
+                            {{--<img class="img-circle" src="/dist/img/user2-160x160.jpg" alt="User Avatar">--}}
+                        {{--</div>--}}
                         <!-- /.widget-user-image -->
                         <h3 class="widget-user-username">Внимание на проекты</h3>
                     </div>
                     <div class="box-footer no-padding">
                         <ul class="nav nav-stacked">
                             @foreach($SeeForProject as $k => $p)
-                            <li><a href="#">{{$p}} <span class="pull-right badge bg-blue">{{$k}}</span></a></li>
+                            <li><a href="#">{{$p}} <span class="pull-right badge bg-blue">{{$k}} %</span></a></li>
                             @endforeach
                         </ul>
                     </div>
@@ -146,12 +146,12 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">0</h3>
+                        <h3 class="box-title"></h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body no-padding">
                         <table class="table table-striped">
-                            <tbody class="all">
+                            <thead>
                             <tr>
                                 <th>№</th>
                                 <th>Проект</th>
@@ -166,7 +166,8 @@
                                 <th>День 6</th>
                                 <th>День 7</th>
                             </tr>
-
+                            </thead>
+                            <tbody class="all">
 
                             @foreach($users_table_stat as $k => $s)
                                 <tr>
