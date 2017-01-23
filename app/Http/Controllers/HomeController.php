@@ -728,8 +728,11 @@ class HomeController extends Controller
 								$arStatForAdminUser[$user->name][$p->name_project]['osvoeno_procent_day'][] = $su->osvoeno_procent;
 								$arStatForAdminUser[$user->name][$p->name_project]['budget'] = $p->budget;
 								$arStatForAdminUser[$user->name][$p->name_project]['osvoeno'] = $p->osvoeno;
-								$arStatForAdminUser[$user->name][$p->name_project]['osvoeno_procent'] = $p->osvoeno_procent;
-
+								if($p->osvoeno_procent > 100) {
+									$arStatForAdminUser[$user->name][$p->name_project]['osvoeno_procent'] = 100;
+								}else{
+									$arStatForAdminUser[$user->name][$p->name_project]['osvoeno_procent'] = $p->osvoeno_procent;
+								}
 								$arSeeForProjectUserAdmin[$p->osvoeno_procent]['name'] = $user->name;
 								$arSeeForProjectUserAdmin[$p->osvoeno_procent]['name_project'] = $p->name_project;
 							}

@@ -280,6 +280,8 @@
                                     </tr>
                                     </thead>
                                     <tbody class="all">
+                                    {{ ($count = 0) ? '' : '' }}
+                                    {{ ($sum = '') ? '' : '' }}
                                     @foreach($stat as $key => $stat)
                                     <tr>
                                         <td>{{$key}}</td>
@@ -295,10 +297,15 @@
                                         <td>@if(isset($stat['osvoeno_procent_day'][6])) {{$stat['osvoeno_procent_day'][6]}} @endif</td>
 
                                     </tr>
+                                    {{ ($count++) ? '' : '' }}
+                                    {{ ($sum += $stat['osvoeno_procent']) ? '' : '' }}
                                     @endforeach
                                     </tbody>
                                 </table>
+
                             </div>
+                            <p style="text-align: center;font-size: 22px;font-weight: bold">Среднии освоенный процент: {{round($sum/$count,2)}} %</p>
+                            
                             <!-- /.box-body -->
                         </div>
                         <!-- /.box -->
