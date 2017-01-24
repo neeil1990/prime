@@ -94,7 +94,7 @@
                             <div class="row"><div class="col-sm-6"></div>
                                 <div class="col-sm-6"></div>
                             </div><div class="row"><div class="col-sm-12">
-                                    <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+                                    <table id="example2" class="tablesorter table table-bordered table-hover dataTable zebra" role="grid" aria-describedby="example2_info">
                                         <thead>
                                         <tr role="row">
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"></th>

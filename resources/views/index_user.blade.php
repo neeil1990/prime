@@ -150,7 +150,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body no-padding">
-                        <table class="table table-striped">
+                        <table class="tablesorter table table-striped zebra">
                             <thead>
                             <tr>
                                 <th>№</th>
