@@ -717,6 +717,14 @@ class HomeController extends Controller
 			$progect_seo = \DB::table('project_seos')->where('status', '1')->get();
 			$progect_context = \DB::table('project_contexts')->where('status', '1')->get();
 
+			$all_osv_procent_admin = '';
+			foreach($progect_seo as $osv){
+				if($osv->osvoeno_procent > 100){
+					$osv->osvoeno_procent = 100;
+				}
+				$all_osv_procent_admin += $osv->osvoeno_procent;
+			}
+
 			$arStatForAdminUser = array();
 			$arSeeForProjectUserAdmin = array();
 			foreach($users_all as $k => $user){
@@ -785,9 +793,18 @@ class HomeController extends Controller
 			}
 		}else{
 			//для пользователя
-			$progect_seo_user = \DB::table('project_seos')->where('id_glavn_user',$this->user_now()->id)->get();
-			$project_contexts_user = \DB::table('project_contexts')->where('id_glavn_user',$this->user_now()->id)->get();
+			$progect_seo_user = \DB::table('project_seos')->where('status', '1')->where('id_glavn_user',$this->user_now()->id)->get();
+			$project_contexts_user = \DB::table('project_contexts')->where('status', '1')->where('id_glavn_user',$this->user_now()->id)->get();
 
+			$all_osv_progect_seo_user = '';
+			foreach($progect_seo_user as $osv){
+				if($osv->osvoeno_procent > 100){
+					$osv->osvoeno_procent = 100;
+				}
+				$all_osv_progect_seo_user += $osv->osvoeno_procent;
+			}
+
+			//dd($progect_seo_user);
 			$stat_users = \DB::table('stat_users')
 				->where('date_day','>',date('Y-m-d', strtotime('-7 days')))
 				->where('id_user',$this->user_now()->id)
@@ -828,6 +845,8 @@ class HomeController extends Controller
 		if($this->admin() == 1) {
 
 			return view('index', [
+				'all_osv_procent_admin' => round($all_osv_procent_admin/count($progect_seo),2),
+				'all_not_osv_procent_admin' => 100 - round($all_osv_procent_admin/count($progect_seo),2),
 				'arStatForAdminUser' => $arStatForAdminUser,
 				'arSeeForProjectUserAdmin' => $arSeeForProjectUserAdmin,
 				'all_user' => $all_user_summa,
@@ -844,6 +863,8 @@ class HomeController extends Controller
 			]);
 		}else{
 			return view('index_user', [
+				'all_osv_progect_seo_user' => round($all_osv_progect_seo_user/count($progect_seo_user),2),
+				'all_not_osv_progect_seo_user' => 100 - round($all_osv_progect_seo_user/count($progect_seo_user),2),
 				'users_table_stat' => $arStatUser,
 				'seo_progect_all' => count($progect_seo_user),
 				'project_contexts_user' => count($project_contexts_user),
