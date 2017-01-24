@@ -17,6 +17,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('/dist/css/AdminLTE.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/dist/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('/dist/css/table.css') }}">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{ asset('/dist/css/skins/_all-skins.min.css') }}">
@@ -355,64 +356,8 @@
     <footer class="main-footer">
 
         <script>
-
-
-            tableGrid(document.getElementById('example2'));
-
-            function tableGrid(grid) {
-
-               // var grid = document.getElementById('example2');
-
-                grid.onclick = function (e) {
-                    if (e.target.tagName != 'TH') return;
-
-                    // Если TH -- сортируем
-                    sortGrid(e.target.cellIndex, e.target.getAttribute('data-type'));
-                };
-
-                function sortGrid(colNum, type) {
-                    var tbody = grid.getElementsByTagName('tbody')[0];
-
-
-                    // Составить массив из TR
-                    var rowsArray = [].slice.call(tbody.rows);
-
-                    // определить функцию сравнения, в зависимости от типа
-                    var compare;
-
-                    switch (type) {
-                        case 'number':
-                            compare = function (rowA, rowB) {
-                                return rowA.cells[colNum].innerHTML - rowB.cells[colNum].innerHTML;
-                            };
-                            break;
-                        case 'string':
-                            compare = function (rowA, rowB) {
-                                return rowA.cells[colNum].innerHTML > rowB.cells[colNum].innerHTML ? 1 : -1;
-                            };
-                            break;
-                    }
-
-
-                    rowsArray.sort(compare);
-
-
-                    grid.removeChild(tbody);
-
-                    for (var i = 0; i < rowsArray.length; i++) {
-                        tbody.appendChild(rowsArray[i]);
-                    }
-
-                    grid.appendChild(tbody);
-
-                }
-
-            }
-
-        </script>
-
-        <script>
             $(function(){
+                $("table").tablesorter({widthFixed: true, widgets: ['zebra']});
 
                 function explode( delimiter, string ) {	// Split a string by string
                     //
@@ -708,6 +653,9 @@
 <script src="{{ asset('/dist/js/demo.js')}}"></script>
 
 <script src="{{ asset('/dist/js/jquery.columnfilters.js')}}"></script>
+
+{{--<script src="{{ asset('/dist/js/tablesorter/jquery-latest.js')}}"></script>--}}
+<script src="{{ asset('/dist/js/tablesorter/jquery.tablesorter.js')}}"></script>
 
 <script type="text/javascript">
     $.ajaxSetup({

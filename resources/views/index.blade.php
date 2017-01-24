@@ -263,7 +263,7 @@
                         <div class="box">
                             <!-- /.box-header -->
                             <div class="box-body no-padding">
-                                <table id="example-{{str_slug($key)}}" class="table table-striped">
+                                <table id="example-{{str_slug($key)}}" class="tablesorter table table-striped zebra">
                                     <thead>
                                     <tr>
                                         <th data-type="string">Проект</th>
@@ -305,7 +305,7 @@
 
                             </div>
                             <p style="text-align: center;font-size: 22px;font-weight: bold">Среднии освоенный процент: {{round($sum/$count,2)}} %</p>
-                            
+
                             <!-- /.box-body -->
                         </div>
                         <!-- /.box -->
@@ -335,8 +335,6 @@
     <script>
 
         $(function () {
-
-
 
             $( "#accordion" ).accordion({
                 collapsible : true,
