@@ -30,9 +30,12 @@
     <!-- Date Picker -->
     <link rel="stylesheet" href="{{ asset('/plugins/datepicker/datepicker3.css') }}">
     <!-- Daterange picker -->
-    <link rel="stylesheet" href="{{ asset('/plugins/daterangepicker/daterangepicker-bs3.css') }}">
+
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="{{ asset('/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('/dist/css/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('/dist/css/datepicker3.css') }}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

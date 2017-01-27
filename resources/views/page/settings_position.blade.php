@@ -9,7 +9,7 @@
         <div class="col-md-6">
             <div class="box box-warning">
                 <div class="box-header with-border">
-                    <h3 class="box-title">General Elements</h3>
+                    <h3 class="box-title">Выбрать проект</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
@@ -79,10 +79,34 @@
             </div>
 
         </div>
+        <div class="col-md-6">
+
+            <div class="box box-danger">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Откатить позиции</h3>
+                </div>
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                            @foreach($back_up_se_ran_pos as $b)
+                            <tr>
+                                <th style="width:50%"><a href="/back-up-se-ran-pos-get/{{$b->id}}">{{$b->name_project}}</a></th>
+                                <td>{{$b->created_at}}</td>
+                            </tr>
+                            @endforeach
+                            </tbody></table>
+                    </div>
+                </div>
+
+                <!-- /.box-body -->
+            </div>
+
+        </div>
         <div class="col-md-12">
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">Striped Full Width Table</h3>
+                    <h3 class="box-title"></h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body no-padding">

@@ -893,16 +893,7 @@ class HomeController extends Controller
 		curl_close($curl);
 		$token = json_decode($out);
 
-		//dd('http://online.seranking.com/structure/clientapi/v2.php?method=setPosition&keyword_id=5604354&date=2017-01-16&position=17&token='.$token->token.'');
-		/*
-		$curl = curl_init();
-		curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=setPosition&keyword_id=5604354&date=2017-01-17&position=17&search_engine_uid=411~193&token='.$token->token.'');
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
-		$out = curl_exec($curl);
-		curl_close($curl);
-		$d = json_decode($out);
-		dd($d);
-		*/
+
 
 		$ArTotalSum = array(
 			'name' => '',
@@ -920,14 +911,17 @@ class HomeController extends Controller
 				curl_close($curl);
 				$data_pos = json_decode($out);
 
+
 			if($request->start_pos and $request->end_pos and $request->col_pos) {
 
 				$arSendPos = array();
 				$inc = 0;
 				foreach($data_pos[0]->keywords as $pos){ //цыкл колличество фраз
-					//dd($pos->id);
+					//dd($pos);
 					foreach($pos->positions as $k => $p){ // колл дней
-						if($p->pos > 10 and $p->pos < 20){
+						if($p->pos > $request->start_pos and $p->pos < $request->end_pos){
+							$arSendPos[$inc]['seID'] = $data_pos[0]->seID;
+							$arSendPos[$inc]['regionID'] = $data_pos[0]->regionID;
 							$arSendPos[$inc]['id'] = $pos->id;
 							$arSendPos[$inc]['pos'] = $p->pos;
 							$arSendPos[$inc]['date'] = $p->date;
@@ -936,7 +930,30 @@ class HomeController extends Controller
 					}
 				}
 
-			//	dd($arSendPos);
+				//dd($arSendPos);
+				if($arSendPos) {
+					\DB::table('back_up_se_ran_pos')->insert(
+						array(
+							'name_project' => $id_project[1],
+							'ar_position' => serialize($arSendPos),
+							'created_at' => date('Y-m-d H:i:s')
+						)
+					);
+
+					foreach ($arSendPos as $editpos) {
+						if ($request->plus_pos == '+') {
+							$editpos['pos'] += $request->col_pos;
+						} else {
+							$editpos['pos'] -= $request->col_pos;
+						}
+						$curl = curl_init();
+						curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=setPosition&keyword_id=' . $editpos['id'] . '&date=' . $editpos['date'] . '&position=' . $editpos['pos'] . '&search_engine_uid=' . $editpos['seID'] . '~' . $editpos['regionID'] . '&token=' . $token->token . '');
+						curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+						$out = curl_exec($curl);
+						curl_close($curl);
+
+					}
+				}
 			}
 
 			foreach($data_pos[0]->keywords as $pos){
@@ -947,6 +964,10 @@ class HomeController extends Controller
 			$ArTotalSum['name'] = $id_project[1];
 			$ArTotalSum['max_budjet'] = $project_seos->budget;
 			unset($ArTotalSum['sum']);
+		}
+		$back_up_se_ran_pos = \DB::table('back_up_se_ran_pos')->get();
+		if(!isset($back_up_se_ran_pos[0]->id)){
+			$back_up_se_ran_pos = array();
 		}
 
 
@@ -959,11 +980,33 @@ class HomeController extends Controller
 
 
 		return view('page.settings_position',[
+			'back_up_se_ran_pos' => $back_up_se_ran_pos,
 			'ArTotalSum' => $ArTotalSum,
 			'project' => $project,
 			'admin' => $this->admin(),
 			'linkUser' => $this->LinkUser()
 		]);
+	}
+
+	public function backUpSeRanPosGet($id){
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=login&login=bzik&pass='.md5('uFUOVs3i6SVg').'');
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+		$out = curl_exec($curl);
+		curl_close($curl);
+		$token = json_decode($out);
+
+		$back_up = \DB::table('back_up_se_ran_pos')->where('id',$id)->first();
+
+		foreach(unserialize($back_up->ar_position) as $editpos){
+			$curl = curl_init();
+			curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=setPosition&keyword_id=' . $editpos['id'] . '&date=' . $editpos['date'] . '&position=' . $editpos['pos'] . '&search_engine_uid=' . $editpos['seID'] . '~' . $editpos['regionID'] . '&token=' . $token->token . '');
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+			$out = curl_exec($curl);
+			curl_close($curl);
+		}
+		\DB::table('back_up_se_ran_pos')->where('id',$id)->delete();
+		return redirect()->intended('/settings-position');
 	}
 
 	public function getAjaxStat(Request $request){

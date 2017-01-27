@@ -294,6 +294,7 @@ class ComposerStaticInite3849607e2f80cd658d63b35b7ffe144
         'BatchJobOpsMutateResponse' => __DIR__ . '/..' . '/googleads/googleads-php-lib/src/Google/Api/Ads/AdWords/Util/v201607/BatchJobClasses.php',
         'BatchJobUtils' => __DIR__ . '/..' . '/googleads/googleads-php-lib/src/Google/Api/Ads/AdWords/Util/v201607/BatchJobUtils.php',
         'BatchJobUtilsDelegate' => __DIR__ . '/..' . '/googleads/googleads-php-lib/src/Google/Api/Ads/AdWords/Util/v201607/BatchJobUtilsDelegate.php',
+        'CreateBackUpSeRanPosTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_27_141326_create_back_up_se_ran_pos_table.php',
         'CreateGoogleApisTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_14_105805_create_google_apis_table.php',
         'CreateGroupsTable' => __DIR__ . '/../..' . '/database/migrations/2016_04_13_110917_create_groups_table.php',
         'CreateLinkUsersTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_08_142341_create_link_users_table.php',
