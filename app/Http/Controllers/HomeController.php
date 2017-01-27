@@ -804,6 +804,13 @@ class HomeController extends Controller
 				$all_osv_progect_seo_user += $osv->osvoeno_procent;
 			}
 
+			if(!empty($all_osv_progect_seo_user)){
+				$all_osv_progect_seo_user = round($all_osv_progect_seo_user/count($progect_seo_user),2);
+			}else{
+				$all_osv_progect_seo_user = 100;
+			}
+
+
 			//dd($progect_seo_user);
 			$stat_users = \DB::table('stat_users')
 				->where('date_day','>',date('Y-m-d', strtotime('-7 days')))
@@ -863,8 +870,8 @@ class HomeController extends Controller
 			]);
 		}else{
 			return view('index_user', [
-				'all_osv_progect_seo_user' => round($all_osv_progect_seo_user/count($progect_seo_user),2),
-				'all_not_osv_progect_seo_user' => 100 - round($all_osv_progect_seo_user/count($progect_seo_user),2),
+				'all_osv_progect_seo_user' => $all_osv_progect_seo_user,
+				'all_not_osv_progect_seo_user' => 100 - $all_osv_progect_seo_user,
 				'users_table_stat' => $arStatUser,
 				'seo_progect_all' => count($progect_seo_user),
 				'project_contexts_user' => count($project_contexts_user),
@@ -875,6 +882,89 @@ class HomeController extends Controller
 			]);
 		}
     }
+
+
+	public function settingsPosition(Request $request){
+
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=login&login=bzik&pass='.md5('uFUOVs3i6SVg').'');
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+		$out = curl_exec($curl);
+		curl_close($curl);
+		$token = json_decode($out);
+
+		//dd('http://online.seranking.com/structure/clientapi/v2.php?method=setPosition&keyword_id=5604354&date=2017-01-16&position=17&token='.$token->token.'');
+		/*
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=setPosition&keyword_id=5604354&date=2017-01-17&position=17&search_engine_uid=411~193&token='.$token->token.'');
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+		$out = curl_exec($curl);
+		curl_close($curl);
+		$d = json_decode($out);
+		dd($d);
+		*/
+
+		$ArTotalSum = array(
+			'name' => '',
+			'max_budjet' => '',
+			'total_sum' => ''
+		);
+		if($request->id_project and $request->date_stat){
+			$data = explode(' - ',$request->date_stat);
+			$id_project = explode('_',$request->id_project);
+
+				$curl = curl_init();
+				curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=stat&siteid='.$id_project[0].'&dateStart='.$data[0].'&dateEnd='.$data[1].'&token='.$token->token.'');
+				curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+				$out = curl_exec($curl);
+				curl_close($curl);
+				$data_pos = json_decode($out);
+
+			if($request->start_pos and $request->end_pos and $request->col_pos) {
+
+				$arSendPos = array();
+				$inc = 0;
+				foreach($data_pos[0]->keywords as $pos){ //цыкл колличество фраз
+					//dd($pos->id);
+					foreach($pos->positions as $k => $p){ // колл дней
+						if($p->pos > 10 and $p->pos < 20){
+							$arSendPos[$inc]['id'] = $pos->id;
+							$arSendPos[$inc]['pos'] = $p->pos;
+							$arSendPos[$inc]['date'] = $p->date;
+							$inc++;
+						}
+					}
+				}
+
+			//	dd($arSendPos);
+			}
+
+			foreach($data_pos[0]->keywords as $pos){
+				$ArTotalSum['sum'][] = $pos->total_sum;
+			}
+			$project_seos = \DB::table('project_seos')->where('name_project',$id_project[1])->first();
+			$ArTotalSum['total_sum'] = array_sum($ArTotalSum['sum']);
+			$ArTotalSum['name'] = $id_project[1];
+			$ArTotalSum['max_budjet'] = $project_seos->budget;
+			unset($ArTotalSum['sum']);
+		}
+
+
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=sites&token='.$token->token.'');
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+		$out = curl_exec($curl);
+		curl_close($curl);
+		$project = json_decode($out);
+
+
+		return view('page.settings_position',[
+			'ArTotalSum' => $ArTotalSum,
+			'project' => $project,
+			'admin' => $this->admin(),
+			'linkUser' => $this->LinkUser()
+		]);
+	}
 
 	public function getAjaxStat(Request $request){
 		if($request->type == 'seo'){

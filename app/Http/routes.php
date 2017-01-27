@@ -159,7 +159,7 @@ Route::get('/stat', function()
     }
 
     //Statistic for users home page
-    $progect_seo_user_all = \DB::table('project_seos')->get();
+    $progect_seo_user_all = \DB::table('project_seos')->where('status', '1')->get();
     $stat_users_date = \DB::table('stat_users')->where('date_day',date('Y-m-d'))->first();
     if(empty($stat_users_date)) {
         foreach ($progect_seo_user_all as $p) {
@@ -561,6 +561,8 @@ Route::auth();
 Route::get('/', ['as' => 'index', 'uses' => 'HomeController@index']);
 
 
+
+Route::get('/settings-position', ['as' => 'settingsPosition', 'uses' => 'HomeController@settingsPosition']);
 
 Route::post('/settings-notice-mail-update', ['as' => 'settingsNoticeMailUpdate', 'uses' => 'HomeController@settingsNoticeMailUpdate']);
 
