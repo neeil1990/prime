@@ -886,6 +886,10 @@ class HomeController extends Controller
 
 	public function settingsPosition(Request $request){
 
+		if($this->admin() == 0){
+			return die('Nooo!');
+		}
+
 		$curl = curl_init();
 		curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=login&login=bzik&pass='.md5('uFUOVs3i6SVg').'');
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
