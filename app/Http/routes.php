@@ -563,6 +563,7 @@ Route::get('/', ['as' => 'index', 'uses' => 'HomeController@index']);
 
 
 Route::get('/settings-position', ['as' => 'settingsPosition', 'uses' => 'HomeController@settingsPosition']);
+Route::get('/back-up-se-ran-pos-get/{id}', ['as' => 'backUpSeRanPosGet', 'uses' => 'HomeController@backUpSeRanPosGet']);
 
 Route::post('/settings-notice-mail-update', ['as' => 'settingsNoticeMailUpdate', 'uses' => 'HomeController@settingsNoticeMailUpdate']);
 

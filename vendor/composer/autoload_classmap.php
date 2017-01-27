@@ -15,6 +15,7 @@ return array(
     'BatchJobOpsMutateResponse' => $vendorDir . '/googleads/googleads-php-lib/src/Google/Api/Ads/AdWords/Util/v201607/BatchJobClasses.php',
     'BatchJobUtils' => $vendorDir . '/googleads/googleads-php-lib/src/Google/Api/Ads/AdWords/Util/v201607/BatchJobUtils.php',
     'BatchJobUtilsDelegate' => $vendorDir . '/googleads/googleads-php-lib/src/Google/Api/Ads/AdWords/Util/v201607/BatchJobUtilsDelegate.php',
+    'CreateBackUpSeRanPosTable' => $baseDir . '/database/migrations/2017_01_27_141326_create_back_up_se_ran_pos_table.php',
     'CreateGoogleApisTable' => $baseDir . '/database/migrations/2016_10_14_105805_create_google_apis_table.php',
     'CreateGroupsTable' => $baseDir . '/database/migrations/2016_04_13_110917_create_groups_table.php',
     'CreateLinkUsersTable' => $baseDir . '/database/migrations/2016_10_08_142341_create_link_users_table.php',
