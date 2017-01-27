@@ -44,7 +44,9 @@
             </li>
 
             <li class="menu9"><a href="/service-and-password"><i class="fa fa-qrcode"></i> <span>Сервисы & Пароли</span></a></li>
+            @if($admin == 1)
             <li class="menu11"><a href="/settings-position"><i class="fa fa-dot-circle-o"></i> <span>Настройка позиций</span></a></li>
+            @endif
             <li class="menu7"><a href="/personal"><i class="fa fa-child"></i> <span>Сотрудники</span></a></li>
             @if($admin == 1)
             <li class="menu10"><a href="/logs"><i class="fa fa-dot-circle-o"></i> <span>Логи действий</span></a></li>
