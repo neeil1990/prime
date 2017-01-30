@@ -59,7 +59,7 @@
                             <input name="start_pos" type="text" class="form-control" placeholder="С">
                         </div>
                         <div class="col-xs-3">
-                            <input name="end_pos" type="text" class="form-control" placeholder="По">
+                            <input name="end_pos" type="text" class="form-control" placeholder="До">
                         </div>
                         <div class="col-xs-3">
                             <select name="plus_pos" class="form-control">
