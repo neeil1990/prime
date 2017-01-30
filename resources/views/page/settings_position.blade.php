@@ -48,6 +48,7 @@
         </div>
         <div class="col-md-6">
 
+
             <div class="box box-danger">
                 <div class="box-header with-border">
                     <h3 class="box-title">Корректировать позиции</h3>
@@ -81,26 +82,31 @@
         </div>
         <div class="col-md-6">
 
-            <div class="box box-danger">
+            <div class="box box-default collapsed-box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Откатить позиции</h3>
+
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                    <!-- /.box-tools -->
                 </div>
-                <div class="box-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <tbody>
-                            @foreach($back_up_se_ran_pos as $b)
+                <!-- /.box-header -->
+                <div class="box-body" style="display: none;">
+                    <table class="table">
+                        <tbody>
+                        @foreach($back_up_se_ran_pos as $b)
                             <tr>
                                 <th style="width:50%"><a href="/back-up-se-ran-pos-get/{{$b->id}}">{{$b->name_project}}</a></th>
                                 <td>{{$b->created_at}}</td>
                             </tr>
-                            @endforeach
-                            </tbody></table>
-                    </div>
+                        @endforeach
+                        </tbody></table>
                 </div>
-
                 <!-- /.box-body -->
             </div>
+
 
         </div>
         <div class="col-md-12">
