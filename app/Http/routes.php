@@ -125,7 +125,11 @@ Route::get('/stat', function()
 
 
     foreach($progect_seo as $s){
-        $arMaxBudjet['seo_osvoeno'][] = $s->osvoeno;
+        if($s->osvoeno > $s->budget){
+            $arMaxBudjet['seo_osvoeno'][] = $s->budget;
+        }else {
+            $arMaxBudjet['seo_osvoeno'][] = $s->osvoeno;
+        }
     }
 
     $stats_seo = \DB::table('stats')
