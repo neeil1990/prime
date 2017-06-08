@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2015, Google Inc. All Rights Reserved.
  *
@@ -30,86 +31,86 @@ require_once 'Google/Api/Ads/Common/Util/AdsUtilityRegistry.php';
  */
 class ReportUtils {
 
-  private $adsUtilityRegistry;
+    private $adsUtilityRegistry;
 
-  /**
-   * Create an instance of ReportUtils with the specified ads utility registry.
-   *
-   * @param AdsUtilityRegistry $adsUtilityRegistry the ads utility registry
-   */
-  public function __construct(AdsUtilityRegistry $adsUtilityRegistry = null) {
-    $this->adsUtilityRegistry = ($adsUtilityRegistry === null)
-        ? AdsUtilityRegistry::getInstance()
-        : $adsUtilityRegistry;
-  }
-
-  /**
-   * Downloads a new instance of an existing report definition. If the path
-   * parameter is specified it will be downloaded to the file at that path,
-   * otherwise it will be downloaded to memory and be returned as a string.
-   * @param mixed $reportDefinition the ReportDefinition to download or the id
-   *     of a stored report definition
-   * @param string $path an optional path of the file to download the report to
-   * @param AdWordsUser $user the user that created the ReportDefinition
-   * @param array $options the option to use when downloading the report:
-   *     {boolean} skipReportHeader: if report responses should skip the header
-   *         row containing the report name and date range
-   *     {boolean} skipColumnHeader: if report responses should skip the header
-   *         row containing column names
-   *     {boolean} skipReportSummary: if report responses should skip the
-   *         summary row containing totals
-   *     {boolean} includeZeroImpressions: if report responses should include
-   *         zero impression rows
-   *     {boolean} useRawEnumValues: if report responses should return enum
-   *         values instead of enum display values
-   *     {string} server: the server to make the request to. If <var>null</var>,
-   *         then the default server will be used
-   *     {string} version: the version to make the request against. If
-   *         <var>null</var>, then the default version will be used
-   * @param array $customCurlOptions the custom curl options for downloading
-   *     reports
-   * @return mixed if path isn't specified the contents of the report,
-   *     otherwise the size in bytes of the downloaded report
-   */
-  public function DownloadReport($reportDefinition, $path = null,
-      AdWordsUser $user, array $options = null,
-      array $customCurlOptions = null) {
-    if ($path === null || $path === '') {
-      $this->adsUtilityRegistry->addUtility(AdsUtility::REPORT_UTILS_STRING);
-    } else {
-      $this->adsUtilityRegistry->addUtility(AdsUtility::REPORT_UTILS_FILE);
+    /**
+     * Create an instance of ReportUtils with the specified ads utility registry.
+     *
+     * @param AdsUtilityRegistry $adsUtilityRegistry the ads utility registry
+     */
+    public function __construct(AdsUtilityRegistry $adsUtilityRegistry = null) {
+        $this->adsUtilityRegistry = ($adsUtilityRegistry === null)
+            ? AdsUtilityRegistry::getInstance()
+            : $adsUtilityRegistry;
     }
-    return ReportUtilsDelegate::DownloadReport($reportDefinition, $path, $user,
-        $options, $customCurlOptions);
-  }
 
-  /**
-   * Downloads a report with AWQL. If the path parameter is specified it will be
-   * downloaded to the file at that path, otherwise it will be downloaded to
-   * memory and be returned as a string.
-   * @param string $reportQuery the query to use for the report
-   * @param string $path an optional path of the file to download the report to
-   * @param AdWordsUser $user the user to retrieve report with
-   * @param string $reportFormat: the report format to request
-   * @param array $options the option to use when downloading the report:
-   *     {string} server: the server to make the request to. If <var>null</var>,
-   *         then the default server will be used
-   *     {string} version: the version to make the request against. If
-   *         <var>null</var>, then the default version will be used
-   * @param array $customCurlOptions the custom curl options for downloading
-   *     reports
-   * @return mixed if path isn't specified the contents of the report,
-   *     otherwise the size in bytes of the downloaded report
-   */
-  public function DownloadReportWithAwql($reportQuery, $path = null,
-      AdWordsUser $user, $reportFormat, array $options = null,
-      array $customCurlOptions = null) {
-    if ($path === null || $path === '') {
-      $this->adsUtilityRegistry->addUtility(AdsUtility::REPORT_UTILS_STRING);
-    } else {
-      $this->adsUtilityRegistry->addUtility(AdsUtility::REPORT_UTILS_FILE);
+    /**
+     * Downloads a new instance of an existing report definition. If the path
+     * parameter is specified it will be downloaded to the file at that path,
+     * otherwise it will be downloaded to memory and be returned as a string.
+     * @param mixed $reportDefinition the ReportDefinition to download or the id
+     *     of a stored report definition
+     * @param string $path an optional path of the file to download the report to
+     * @param AdWordsUser $user the user that created the ReportDefinition
+     * @param array $options the option to use when downloading the report:
+     *     {boolean} skipReportHeader: if report responses should skip the header
+     *         row containing the report name and date range
+     *     {boolean} skipColumnHeader: if report responses should skip the header
+     *         row containing column names
+     *     {boolean} skipReportSummary: if report responses should skip the
+     *         summary row containing totals
+     *     {boolean} includeZeroImpressions: if report responses should include
+     *         zero impression rows
+     *     {boolean} useRawEnumValues: if report responses should return enum
+     *         values instead of enum display values
+     *     {string} server: the server to make the request to. If <var>null</var>,
+     *         then the default server will be used
+     *     {string} version: the version to make the request against. If
+     *         <var>null</var>, then the default version will be used
+     * @param array $customCurlOptions the custom curl options for downloading
+     *     reports
+     * @return mixed if path isn't specified the contents of the report,
+     *     otherwise the size in bytes of the downloaded report
+     */
+    public function DownloadReport($reportDefinition, $path = null,
+                                   AdWordsUser $user, array $options = null,
+                                   array $customCurlOptions = null) {
+        if ($path === null || $path === '') {
+            $this->adsUtilityRegistry->addUtility(AdsUtility::REPORT_UTILS_STRING);
+        } else {
+            $this->adsUtilityRegistry->addUtility(AdsUtility::REPORT_UTILS_FILE);
+        }
+        return ReportUtilsDelegate::DownloadReport($reportDefinition, $path, $user,
+            $options, $customCurlOptions);
     }
-    return ReportUtilsDelegate::DownloadReportWithAwql($reportQuery, $path,
-        $user, $reportFormat, $options, $customCurlOptions);
-  }
+
+    /**
+     * Downloads a report with AWQL. If the path parameter is specified it will be
+     * downloaded to the file at that path, otherwise it will be downloaded to
+     * memory and be returned as a string.
+     * @param string $reportQuery the query to use for the report
+     * @param string $path an optional path of the file to download the report to
+     * @param AdWordsUser $user the user to retrieve report with
+     * @param string $reportFormat: the report format to request
+     * @param array $options the option to use when downloading the report:
+     *     {string} server: the server to make the request to. If <var>null</var>,
+     *         then the default server will be used
+     *     {string} version: the version to make the request against. If
+     *         <var>null</var>, then the default version will be used
+     * @param array $customCurlOptions the custom curl options for downloading
+     *     reports
+     * @return mixed if path isn't specified the contents of the report,
+     *     otherwise the size in bytes of the downloaded report
+     */
+    public function DownloadReportWithAwql($reportQuery, $path = null,
+                                           AdWordsUser $user, $reportFormat, array $options = null,
+                                           array $customCurlOptions = null) {
+        if ($path === null || $path === '') {
+            $this->adsUtilityRegistry->addUtility(AdsUtility::REPORT_UTILS_STRING);
+        } else {
+            $this->adsUtilityRegistry->addUtility(AdsUtility::REPORT_UTILS_FILE);
+        }
+        return ReportUtilsDelegate::DownloadReportWithAwql($reportQuery, $path,
+            $user, $reportFormat, $options, $customCurlOptions);
+    }
 }

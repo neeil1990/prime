@@ -633,75 +633,82 @@ class HomeController extends Controller
     }
 
 
-    function DownloadCriteriaReportExample(\AdWordsUser $user, $filePath,$user_id,$time) {
-        // Load the service, so that the required classes are available.
-        $user->SetClientCustomerId($user_id);
-        $user->LoadService('ReportDefinitionService', 'v201607');
-        // Optional: Set clientCustomerId to get reports of your child accounts
-        // $user->SetClientCustomerId('INSERT_CLIENT_CUSTOMER_ID_HERE');
-
-        // Create selector.
-
-        $selector = new \Selector();
-        $selector->fields = array('Cost','Clicks');
-
-      //  $selector = new \stdClass();
-      //  $selector->fields = array('Cost');
 
 
 
-        // Optional: use predicate to filter out paused criteria.
-        $selector->predicates[] = new \Predicate('Status', 'NOT_IN', array('PAUSED'));
-        if($time == 'ALL_TIME'){
-            $dateRangeType = 'ALL_TIME';
-        }else {
-            $dateRangeType = 'CUSTOM_DATE';
-            $selector->dateRange = new \DateRange(date('Y-m-d', strtotime('-' . $time . ' days')), date('Y-m-d', strtotime('-1 days')));
-        }
+	function DownloadCriteriaReportExample(\AdWordsUser $user, $filePath,$user_id,$time) {
+		// Load the service, so that the required classes are available.
+		$user->SetClientCustomerId($user_id);
+		$user->LoadService('ReportDefinitionService', 'v201609');
+		// Optional: Set clientCustomerId to get reports of your child accounts
+		// $user->SetClientCustomerId('INSERT_CLIENT_CUSTOMER_ID_HERE');
 
-        // Create report definition.
-        $reportDefinition = new \ReportDefinition();
-        $reportDefinition->selector = $selector;
-        $reportDefinition->reportName = 'Criteria performance report #' . uniqid();
-        $reportDefinition->dateRangeType = $dateRangeType; //ALL_TIME //LAST_7_DAYS
-        $reportDefinition->reportType = 'CRITERIA_PERFORMANCE_REPORT';
-        $reportDefinition->downloadFormat = 'XML';
+		// Create selector.
 
-        // Set additional options.
-        $options = array('version' => 'v201607');
+		$selector = new \Selector();
+		$selector->fields = array('Cost','Clicks');
 
-        $reportUtils = new \ReportUtils();
-       $xml = $reportUtils->DownloadReport($reportDefinition, $filePath, $user, $options);
-       $SimpleXML = new \SimpleXMLElement($xml);
+		//  $selector = new \stdClass();
+		//  $selector->fields = array('Cost');
 
-        //var_dump($SimpleXML);
 
-        $arCost = array();
 
-        foreach($SimpleXML->table->row as $key=>$row){
-            if((string)$row['clicks'] != 0){
-                $arCost['clicks'][] = (string)$row['clicks'];
-            }
-            if(!empty((string)$row['cost'])){
-                $arCost['cost'][] = (string)$row['cost'];
-            }
-        }
-        if(isset($arCost['cost'])) {
-            $summ_not_null_and_cent = substr(array_sum($arCost['cost']), 0, -6);
-        }else{
-            $summ_not_null_and_cent = 0;
-        }
-        if(isset($arCost['clicks'])) {
-            $arCost['clicks'] = array_sum($arCost['clicks']);
-        }else{
-            $arCost['clicks'] = 0;
-        }
-        $arrResult = array(
-            'cost' => $summ_not_null_and_cent,
-            'clicks' => $arCost['clicks']
-        );
-        return $arrResult;
-    }
+		// Optional: use predicate to filter out paused criteria.
+		$selector->predicates[] = new \Predicate('Status', 'NOT_IN', array('PAUSED'));
+		if($time == 'ALL_TIME'){
+			$dateRangeType = 'ALL_TIME';
+		}else {
+			$dateRangeType = 'CUSTOM_DATE';
+			$selector->dateRange = new \DateRange(date('Y-m-d', strtotime('-' . $time . ' days')), date('Y-m-d', strtotime('-1 days')));
+		}
+
+		// Create report definition.
+		$reportDefinition = new \ReportDefinition();
+		$reportDefinition->selector = $selector;
+		$reportDefinition->reportName = 'Criteria performance report #' . uniqid();
+		$reportDefinition->dateRangeType = $dateRangeType; //ALL_TIME //LAST_7_DAYS
+		$reportDefinition->reportType = 'CRITERIA_PERFORMANCE_REPORT';
+		$reportDefinition->downloadFormat = 'XML';
+
+		// Set additional options.
+		$options = array('version' => 'v201609');
+
+		$reportUtils = new \ReportUtils();
+		$xml = $reportUtils->DownloadReport($reportDefinition, $filePath, $user, $options);
+		$SimpleXML = new \SimpleXMLElement($xml);
+
+		//var_dump($SimpleXML);
+
+		$arCost = array();
+
+		foreach($SimpleXML->table->row as $key=>$row){
+			if((string)$row['clicks'] != 0){
+				$arCost['clicks'][] = (string)$row['clicks'];
+			}
+			if(!empty((string)$row['cost'])){
+				$arCost['cost'][] = (string)$row['cost'];
+			}
+		}
+		if(isset($arCost['cost'])) {
+			$summ_not_null_and_cent = substr(array_sum($arCost['cost']), 0, -6);
+		}else{
+			$summ_not_null_and_cent = 0;
+		}
+		if(isset($arCost['clicks'])) {
+			$arCost['clicks'] = array_sum($arCost['clicks']);
+		}else{
+			$arCost['clicks'] = 0;
+		}
+		$arrResult = array(
+			'cost' => $summ_not_null_and_cent,
+			'clicks' => $arCost['clicks']
+		);
+		//var_dump($arrResult);
+		return $arrResult;
+	}
+
+
+
 
 
 
