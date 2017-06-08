@@ -134,6 +134,34 @@
                                 </div>
                             </div>
 
+                            <div class="form-group{{ $errors->has('loginMyTarget') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Логин MyTarget</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="loginMyTarget" value="{{$users->loginMyTarget}}">
+
+                                    @if ($errors->has('loginMyTarget'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('loginMyTarget') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-group{{ $errors->has('passMyTarget') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">Пароль MyTarget</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="passMyTarget" value="{{$users->passMyTarget}}">
+
+                                    @if ($errors->has('passMyTarget'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('passMyTarget') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group one">
 
                                 @if(!empty($users->value_serialize))

@@ -7,3 +7,6 @@
 public/.htaccess
 database/migrations/2016_04_27_085106_reset.php
 public/sxd/
+access/
+
+

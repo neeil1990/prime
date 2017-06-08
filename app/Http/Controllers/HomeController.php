@@ -2323,6 +2323,8 @@ class HomeController extends Controller
             'passYandex' => $request['passYandex'],
             'loginGoogle' => $request['loginGoogle'],
             'passGoogle' => $request['passGoogle'],
+            'loginMyTarget' => $request['loginMyTarget'],
+            'passMyTarget' => $request['passMyTarget'],
             'value_serialize' => serialize($request['value_serialize'])
         ]);
 

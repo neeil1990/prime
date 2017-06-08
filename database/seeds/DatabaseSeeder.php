@@ -451,6 +451,20 @@ class SettingField extends Seeder
         ]);
 
         \App\SettingField::create([
+            'name' => 'Логин MyTarget',
+            'field' => 'loginMyTarget',
+            'value' => '1',
+            'table_value' => 'pass_context'
+        ]);
+
+        \App\SettingField::create([
+            'name' => 'Пароль MyTarget',
+            'field' => 'passMyTarget',
+            'value' => '1',
+            'table_value' => 'pass_context'
+        ]);
+
+        \App\SettingField::create([
             'name' => 'Дополнительная информация',
             'field' => 'dop_infa_pass_context',
             'value' => '1',

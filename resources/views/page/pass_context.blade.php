@@ -148,6 +148,12 @@
                                                     @endif
                                                 </td>
                                                 @endif
+                                                @if($setting_field[0]->value == 1 or $admin == 1)
+                                                    <td class=""><textarea class="copytext" rows="1" type="text">{{$user->loginMyTarget}}</textarea></td>
+                                                @endif
+                                                @if($setting_field[0]->value == 1 or $admin == 1)
+                                                    <td class=""><textarea class="copytext" rows="1" type="text">{{$user->passMyTarget}}</textarea></td>
+                                                @endif
                                             </tr>
                                             @endif
                                         @endforeach
