@@ -16,6 +16,8 @@ class PassContext extends Model
         'passYandex',
         'loginGoogle',
         'passGoogle',
+        'loginMyTarget',
+        'passMyTarget',
         'value_serialize',
     ];
 
@@ -55,6 +57,8 @@ class PassContext extends Model
                 'passYandex' => $data['passYandex'],
                 'loginGoogle' => $data['loginGoogle'],
                 'passGoogle' => $data['passGoogle'],
+                'loginMyTarget' => $data['loginMyTarget'],
+                'passMyTarget' => $data['passMyTarget'],
                 'value_serialize' => $data['value_serialize']
             ));
 
