@@ -138,21 +138,21 @@
                                                 <td class=""><textarea class="copytext" rows="1" type="text">{{$user->passGoogle}}</textarea></td>
                                                 @endif
                                                 @if($setting_field[0]->value == 1 or $admin == 1)
-                                                <td class="">
-                                                    @if(!empty($user->value_serialize))
-                                                        <ul style="    margin: 0px 0px 0px -43px;min-width: 200px;">
-                                                            @foreach($user->value_serialize as $val)
-                                                                <li style="border-bottom: 1px solid grey;list-style: none"> <textarea class="copytext" rows="1" type="text">{{$val}}</textarea></li>
-                                                            @endforeach
-                                                        </ul>
-                                                    @endif
-                                                </td>
-                                                @endif
-                                                @if($setting_field[0]->value == 1 or $admin == 1)
                                                     <td class=""><textarea class="copytext" rows="1" type="text">{{$user->loginMyTarget}}</textarea></td>
                                                 @endif
                                                 @if($setting_field[0]->value == 1 or $admin == 1)
                                                     <td class=""><textarea class="copytext" rows="1" type="text">{{$user->passMyTarget}}</textarea></td>
+                                                @endif
+                                                @if($setting_field[0]->value == 1 or $admin == 1)
+                                                    <td class="">
+                                                        @if(!empty($user->value_serialize))
+                                                            <ul style="    margin: 0px 0px 0px -43px;min-width: 200px;">
+                                                                @foreach($user->value_serialize as $val)
+                                                                    <li style="border-bottom: 1px solid grey;list-style: none"> <textarea class="copytext" rows="1" type="text">{{$val}}</textarea></li>
+                                                                @endforeach
+                                                            </ul>
+                                                        @endif
+                                                    </td>
                                                 @endif
                                             </tr>
                                             @endif
