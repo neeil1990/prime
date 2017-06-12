@@ -122,6 +122,9 @@
                                                 @if($setting_field[2]->value == 1 or $admin == 1)
                                                 <td class="">{{$user->go_advords}}</td>
                                                 @endif
+                                                @if($setting_field[2]->value == 1 or $admin == 1)
+                                                    <td class="">{{$user->MyTarget}}</td>
+                                                @endif
                                                 @if($setting_field[3]->value == 1 or $admin == 1)
                                                 <td class="">
 
