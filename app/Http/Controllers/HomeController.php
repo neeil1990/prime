@@ -2855,10 +2855,11 @@ class HomeController extends Controller
             }
 
 
-            $sum = $u->ya_direct+$u->go_advords;
+
+            $sum = $u->ya_direct+$u->go_advords+$u->MyTarget;
             $users[$key]->sum_zp = $sum*$u->procent_seo/100;
 
-
+			
             if($u->status == 0){
                 $countStatus['countArchive'][] = $u->status;
             }
@@ -2945,6 +2946,7 @@ class HomeController extends Controller
             'name_project' => $request['name_project'],
             'ya_direct' => $request['ya_direct'],
             'go_advords' => $request['go_advords'],
+            'MyTarget' => $request['MyTarget'],
             'ost_bslsnse_ya' => $request['ost_bslsnse_ya'],
             'ost_bslsnse_go' => $request['ost_bslsnse_go'],
             'procent_seo' => $request['procent_seo'],

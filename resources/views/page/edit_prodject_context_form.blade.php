@@ -53,6 +53,15 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="col-md-4 control-label">MyTarget</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="MyTarget" value="{{$users->MyTarget}}">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-md-4 control-label">Остаток на балансе Яндекса</label>
 
                                 <div class="col-md-6">

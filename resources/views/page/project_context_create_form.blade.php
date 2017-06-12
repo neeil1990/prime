@@ -48,6 +48,15 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> MyTarget</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" name="MyTarget" value="">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Остаток на балансе Яндекса</label>
 
                                 <div class="col-md-6">
