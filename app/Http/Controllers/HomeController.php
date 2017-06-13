@@ -1912,7 +1912,7 @@ class HomeController extends Controller
 
             $arrContextItog = array();
             foreach($project_context_itog as $itog){
-                $arrContextItog[] = ($itog->ya_direct+$itog->go_advords)*$itog->procent_seo/100;
+                $arrContextItog[] = ($itog->ya_direct+$itog->go_advords+$itog->MyTarget)*$itog->procent_seo/100;
             }
 
 
@@ -2859,7 +2859,7 @@ class HomeController extends Controller
             $sum = $u->ya_direct+$u->go_advords+$u->MyTarget;
             $users[$key]->sum_zp = $sum*$u->procent_seo/100;
 
-			
+
             if($u->status == 0){
                 $countStatus['countArchive'][] = $u->status;
             }
