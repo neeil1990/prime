@@ -42,7 +42,7 @@ Route::get('/stat', function()
             $arUserSeo[$u->name]['context_go_advords_count'][] = $c->go_advords;
         }
 
-       // dd($progect_spec_context);
+        dd($arUserSeo[$u->name]['context_ya_direct_count']);
         if(!empty($progect_spec_context)) {
             $arUserSeo[$u->name]['context_ya_direct_go_advords'] = array_sum($arUserSeo[$u->name]['context_ya_direct_go_advords']);
             $arUserSeo[$u->name]['context_ya_direct_count'] = count($arUserSeo[$u->name]['context_ya_direct_count']);
