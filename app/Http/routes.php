@@ -37,16 +37,21 @@ Route::get('/stat', function()
 
         foreach($progect_spec_context as $c){
             $arUserSeo[$u->name]['context_ya_direct_go_advords'][] = $c->ya_direct + $c->go_advords;
-            if($c->ya_direct != 0 and !empty($c->ya_direct))
-            $arUserSeo[$u->name]['context_ya_direct_count'][] = $c->ya_direct;
-            if($c->go_advords != 0 and !empty($c->go_advords))
-            $arUserSeo[$u->name]['context_go_advords_count'][] = $c->go_advords;
+            if($c->ya_direct != 0 and !empty($c->ya_direct)) {
+                $arUserSeo[$u->name]['context_ya_direct_count'][] = $c->ya_direct;
+            }else{
+                $arUserSeo[$u->name]['context_ya_direct_count'][] = 0;
+            }
+            if($c->go_advords != 0 and !empty($c->go_advords)){
+                $arUserSeo[$u->name]['context_go_advords_count'][] = $c->go_advords;
+            }else{
+                $arUserSeo[$u->name]['context_go_advords_count'][] = 0;
+            }
+
         }
 
 
         if(!empty($progect_spec_context)) {
-            dd($u->name);
-            dd($arUserSeo[$u->id]);
             $arUserSeo[$u->name]['context_ya_direct_go_advords'] = array_sum($arUserSeo[$u->name]['context_ya_direct_go_advords']);
             $arUserSeo[$u->name]['context_ya_direct_count'] = count($arUserSeo[$u->name]['context_ya_direct_count']);
             $arUserSeo[$u->name]['context_go_advords_count'] = count($arUserSeo[$u->name]['context_go_advords_count']);
