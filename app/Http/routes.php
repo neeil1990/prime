@@ -34,7 +34,7 @@ Route::get('/stat', function()
             ->where('status','1')
             ->where('id_glavn_user',$u->id)
             ->get();
-        dd($u->id);
+
         foreach($progect_spec_context as $c){
             $arUserSeo[$u->name]['context_ya_direct_go_advords'][] = $c->ya_direct + $c->go_advords;
             if($c->ya_direct != 0 and !empty($c->ya_direct))
@@ -45,6 +45,7 @@ Route::get('/stat', function()
 
 
         if(!empty($progect_spec_context)) {
+            dd($u->id);
             $arUserSeo[$u->name]['context_ya_direct_go_advords'] = array_sum($arUserSeo[$u->name]['context_ya_direct_go_advords']);
             $arUserSeo[$u->name]['context_ya_direct_count'] = count($arUserSeo[$u->name]['context_ya_direct_count']);
             $arUserSeo[$u->name]['context_go_advords_count'] = count($arUserSeo[$u->name]['context_go_advords_count']);
