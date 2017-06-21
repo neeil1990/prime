@@ -118,6 +118,12 @@
                     <tbody>
 
                     <tr>
+                        <td>- MyTarget</td>
+                        <td>{{$MyTarget}}</td>
+                        <td></td>
+                    </tr>
+
+                    <tr>
                         <td>- Директ</td>
                         <td>{{$ya_direct}}</td>
                         <td></td>
@@ -143,7 +149,7 @@
 
                     <tr>
                         <td>Итог Seo + Context</td>
-                        <td class="itog">{{$go_advords+$ya_direct+$osvoeno_all}}</td>
+                        <td class="itog">{{$MyTarget+$go_advords+$ya_direct+$osvoeno_all}}</td>
                         <td></td>
                     </tr>
 
