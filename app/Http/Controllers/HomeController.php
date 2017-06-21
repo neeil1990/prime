@@ -797,6 +797,8 @@ class HomeController extends Controller
 					$arMaxBudjet['context']['ya_direct'][] = $c->ya_direct;
 				if ($c->go_advords != 0 and !empty($c->go_advords))
 					$arMaxBudjet['context']['go_advords'][] = $c->go_advords;
+				if ($c->MyTarget != 0 and !empty($c->MyTarget))
+					$arMaxBudjet['context']['MyTarget'][] = $c->MyTarget;
 			}
 		}else{
 			//для пользователя
@@ -869,6 +871,7 @@ class HomeController extends Controller
 				'max_budjet_seo' => array_sum($arMaxBudjet['seo']),
 				'ya_direct' => array_sum($arMaxBudjet['context']['ya_direct']),
 				'go_advords' => array_sum($arMaxBudjet['context']['go_advords']),
+				'MyTarget' => array_sum($arMaxBudjet['context']['MyTarget']),
 				'progect_context' => $progect_context,
 				'progect_seo' => $progect_seo,
 				'users_now' => $this->user_now(),
@@ -2872,9 +2875,11 @@ class HomeController extends Controller
                 if($u->id_glavn_user == $this->user_now()->id and $this->admin() == 0) {
                     $arrBuget[] = $u->ya_direct;
                     $arrBuget[] = $u->go_advords;
+                    $arrBuget[] = $u->MyTarget;
                 }elseif($this->admin() == 1){
                     $arrBuget[] = $u->ya_direct;
                     $arrBuget[] = $u->go_advords;
+                    $arrBuget[] = $u->MyTarget;
                 }
             }
 
