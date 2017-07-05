@@ -546,6 +546,43 @@ Route::get('/get-balanse-yandex', function()
     );
 });
 
+Route::get('/testing', function()
+{
+    $params = array(
+        'token'  => 'AQAAAAAenkluAAM6hf8_UPpjwUZklh-m80g__00',
+        'method' => "GetCampaignsTags",
+        'param' => array(
+            "CampaignIDS" => array(28708575,28708580)
+           // array('elama-16133049')
+//            'Action' => 'Get',
+//            'locale' => 'ru',
+//            'SelectionCriteria' => array(
+//                'Logins' => array('elama-16133049')
+//            ),
+        )
+    );
+
+    $getBalanse = json_encode($params);
+
+    $HEADER = array(
+        'Accept-Language: ru',
+        'Content-Type: application/json; charset=utf-8'
+    );
+
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, 'https://api.direct.yandex.ru/live/v4/json/');
+    curl_setopt($curl, CURLOPT_POST, 1);
+    curl_setopt($curl,CURLOPT_HTTPHEADER, $HEADER);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $getBalanse);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+    $result = curl_exec($curl);
+    curl_close($curl);
+
+    var_dump($result);
+
+});
+
 Route::get('/get-balanse-google', function() {
 
     $results = \DB::table('google_apis')->get();
