@@ -462,7 +462,7 @@ Route::get('/get-balanse-yandex', function()
     $balanse_yandex = \DB::table('token_yandexes')->get();
 
     $arrBalanseYa = array();
-    foreach($balanse_yandex as $ya){
+    foreach($balanse_yandex as $k=>$ya){
 
         $params = array(
             'token'  => $ya->token_yandex,
@@ -495,9 +495,18 @@ Route::get('/get-balanse-yandex', function()
 
         $ac_ya = json_decode($result);
 
-        if(!empty($ac_ya->data->Accounts[0]->Amount)){
+
+        if(empty($ac_ya->data->Accounts) and !empty($ya->token_yandex)){
+            $home = new \App\Http\Controllers\HomeController();
+            $ostatok_balanse_yandex = $home->get_price_auto_direct($ya->login);
+        }else{
+            $ostatok_balanse_yandex = $ac_ya->data->Accounts[0]->Amount;
+        }
+
+
+        if(!empty($ostatok_balanse_yandex)){
            $id_com = \DB::table('project_contexts')->where('id',$ya->id_company)->first();
-            $summa = $ac_ya->data->Accounts[0]->Amount-$id_com->ost_bslsnse_ya;
+            $summa = $ostatok_balanse_yandex-$id_com->ost_bslsnse_ya;
             if($summa >= 1000){
 
                $notice = \App\NoticeSendMail::find(1);
@@ -527,16 +536,16 @@ Route::get('/get-balanse-yandex', function()
                 mail($to, $subject, $message, $headers);
 
                 \DB::table('logs')->insert(
-                    array('progect' => 'yandex', 'what_is_done' => 'Отправлено письмо клиенту о пополнении баланса. Email:'.$id_com->e_mail.' balanse Yandex API:'.$ac_ya->data->Accounts[0]->Amount.' balanse database:'.$id_com->ost_bslsnse_ya,'who_did' => 'API direct.yandex','created_at' => date('Y-m-d H:i:s'))
+                    array('progect' => 'yandex', 'what_is_done' => 'Отправлено письмо клиенту о пополнении баланса. Email:'.$id_com->e_mail.' balanse Yandex API:'.$ostatok_balanse_yandex.' balanse database:'.$id_com->ost_bslsnse_ya,'who_did' => 'API direct.yandex','created_at' => date('Y-m-d H:i:s'))
                 );
             }
         }
 
-        if(!empty($ac_ya->data->Accounts[0]->Amount)){
+        if(!empty($ostatok_balanse_yandex)){
             \DB::table('project_contexts')
                 ->where('id', $ya->id_company)
                 ->update(array(
-                    'ost_bslsnse_ya' => $ac_ya->data->Accounts[0]->Amount
+                    'ost_bslsnse_ya' => $ostatok_balanse_yandex
                 ));
         }
 
@@ -546,8 +555,14 @@ Route::get('/get-balanse-yandex', function()
     );
 });
 
+////TEST/////
 Route::get('/testing', function()
 {
+   // $home = new \App\Http\Controllers\HomeController();
+
+   // var_dump($home->get_price_auto_direct("elama-16133335"));
+
+    /*
     $params = array(
         'token'  => 'AQAAAAAenkluAAM6hf8_UPpjwUZklh-m80g__00',
         'method' => "GetCampaignsTags",
@@ -581,7 +596,11 @@ Route::get('/testing', function()
 
     var_dump($result);
 
+    */
+
 });
+
+////TEST/////
 
 Route::get('/get-balanse-google', function() {
 
@@ -591,6 +610,7 @@ Route::get('/get-balanse-google', function() {
     $home = new \App\Http\Controllers\HomeController();
 
     foreach($results as $r){
+
         $sum_accaunt = $home->DownloadCriteriaReportExample($user,$filePath,$r->google_id_client,'ALL_TIME');
 
         \DB::table('google_apis')

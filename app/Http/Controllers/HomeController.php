@@ -708,6 +708,24 @@ class HomeController extends Controller
 	}
 
 
+	public function get_price_auto_direct($login){
+		if(empty($login)){
+			return;
+		}
+		$hostdb = "94.250.252.214";
+		$userdb = "prime_direct";
+		$passdb = "FdfqmqlSv0";
+		$db = "prime_direct";
+
+		$mysqli = new \mysqli($hostdb, $userdb, $passdb, $db);
+		$result = $mysqli->query("SELECT u.id,u.login,c.price FROM direct_direct_company AS c LEFT JOIN direct_user AS u ON u.id=c.user WHERE u.login='$login' LIMIT 1");
+		$row = $result->fetch_assoc();
+		if($row){
+			return $row['price'];
+		}
+	}
+
+
 
 
 
