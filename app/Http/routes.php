@@ -227,6 +227,9 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
            }else{
                $clicks_price_google = floor($click_accaunt['cost']/$click_accaunt['clicks']);
            }
+
+
+
            $dataApi[$context_google->name_project]['name_progect_google'] = $context_google->name_project;
            $dataApi[$context_google->name_project]['email_google'] = $context_google->e_mail;
            $dataApi[$context_google->name_project]['balanse_google'] = $context_google->ost_bslsnse_go-$sum_accaunt['cost'];

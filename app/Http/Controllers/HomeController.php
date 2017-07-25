@@ -646,7 +646,7 @@ class HomeController extends Controller
 		// Create selector.
 
 		$selector = new \Selector();
-		$selector->fields = array('Cost','Clicks');
+		$selector->fields = array('Cost','Clicks','AccountCurrencyCode');
 
 		//  $selector = new \stdClass();
 		//  $selector->fields = array('Cost');
@@ -677,9 +677,9 @@ class HomeController extends Controller
 		$xml = $reportUtils->DownloadReport($reportDefinition, $filePath, $user, $options);
 		$SimpleXML = new \SimpleXMLElement($xml);
 
-		//var_dump($SimpleXML);
-
 		$arCost = array();
+
+
 
 		foreach($SimpleXML->table->row as $key=>$row){
 			if((string)$row['clicks'] != 0){
@@ -688,6 +688,7 @@ class HomeController extends Controller
 			if(!empty((string)$row['cost'])){
 				$arCost['cost'][] = (string)$row['cost'];
 			}
+			$AccountCurrencyCode = (string)$row['currency'];
 		}
 		if(isset($arCost['cost'])) {
 			$summ_not_null_and_cent = substr(array_sum($arCost['cost']), 0, -6);
@@ -699,10 +700,17 @@ class HomeController extends Controller
 		}else{
 			$arCost['clicks'] = 0;
 		}
+
+		if($AccountCurrencyCode == "USD"){
+			$currency = file_get_contents("https://www.cbr-xml-daily.ru/daily_json.js");
+			$now_carrency = round(json_decode($currency)->Valute->$AccountCurrencyCode->Value);
+			$summ_not_null_and_cent = $summ_not_null_and_cent*$now_carrency;
+		}
 		$arrResult = array(
 			'cost' => $summ_not_null_and_cent,
 			'clicks' => $arCost['clicks']
 		);
+
 		//var_dump($arrResult);
 		return $arrResult;
 	}
