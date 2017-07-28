@@ -701,11 +701,14 @@ class HomeController extends Controller
 			$arCost['clicks'] = 0;
 		}
 
-		if($AccountCurrencyCode == "USD"){
-			$currency = file_get_contents("https://www.cbr-xml-daily.ru/daily_json.js");
-			$now_carrency = round(json_decode($currency)->Valute->$AccountCurrencyCode->Value);
-			$summ_not_null_and_cent = $summ_not_null_and_cent*$now_carrency;
+		if(!empty($AccountCurrencyCode)){
+			if($AccountCurrencyCode == "USD"){
+				$currency = file_get_contents("https://www.cbr-xml-daily.ru/daily_json.js");
+				$now_carrency = round(json_decode($currency)->Valute->$AccountCurrencyCode->Value);
+				$summ_not_null_and_cent = $summ_not_null_and_cent*$now_carrency;
+			}
 		}
+
 		$arrResult = array(
 			'cost' => $summ_not_null_and_cent,
 			'clicks' => $arCost['clicks']
