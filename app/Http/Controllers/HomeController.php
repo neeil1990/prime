@@ -674,7 +674,9 @@ class HomeController extends Controller
 		$options = array('version' => 'v201609');
 
 		$reportUtils = new \ReportUtils();
+		$filePath = $_SERVER['DOCUMENT_ROOT'].'/report.xml';
 		$xml = $reportUtils->DownloadReport($reportDefinition, $filePath, $user, $options);
+
 		$SimpleXML = new \SimpleXMLElement($xml);
 
 		$arCost = array();
