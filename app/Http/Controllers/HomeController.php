@@ -677,12 +677,12 @@ class HomeController extends Controller
 		$filePath = $_SERVER['DOCUMENT_ROOT'].'/report.xml';
 		$xml = $reportUtils->DownloadReport($reportDefinition, $filePath, $user, $options);
 
+		//dd($xml);
+
 		$SimpleXML = new \SimpleXMLElement($xml);
 
+
 		$arCost = array();
-
-
-
 		foreach($SimpleXML->table->row as $key=>$row){
 			if((string)$row['clicks'] != 0){
 				$arCost['clicks'][] = (string)$row['clicks'];
