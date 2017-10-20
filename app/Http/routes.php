@@ -498,7 +498,7 @@ Route::get('/get-balanse-yandex', function()
 
         $ac_ya = json_decode($result);
 
-
+		
         if(empty($ac_ya->data->Accounts) and !empty($ya->token_yandex)){
             $home = new \App\Http\Controllers\HomeController();
             $ostatok_balanse_yandex = $home->get_price_auto_direct($ya->login);
