@@ -217,6 +217,7 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
     $dataApi = array();
 
    foreach($google_api as $key => $g){
+      // dd($g);
      $context_google = \App\ProjectContext::find($g->google_project_id);
        if(isset($context_google) and $context_google->status == 1){
            $home = new \App\Http\Controllers\HomeController();
@@ -236,6 +237,8 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
            $dataApi[$context_google->name_project]['clicks_google'] = $click_accaunt['clicks'];
            $dataApi[$context_google->name_project]['clicks_price_google'] = $clicks_price_google;
        }
+       //dd($g);
+
    }
 
 

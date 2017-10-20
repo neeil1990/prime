@@ -183,8 +183,7 @@ class ReportUtilsDelegate {
       } else if (!empty($error)) {
         $exception = new ReportDownloadException($error);
       } else if (isset($code)) {
-        $exception =
-            new ReportDownloadException('Report download failed.', $code);
+      //  $exception = new ReportDownloadException('Report download failed.', $code);
       }
     }
 
