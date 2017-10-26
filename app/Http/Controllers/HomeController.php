@@ -44,6 +44,21 @@ class HomeController extends Controller
 
     }
 
+	public function error_yandex_mail($message){
+
+		$notice = \App\NoticeSendMail::find(1);
+
+		$subject = 'PRIME - Не прошла авторизация по токенам';
+		$headers  = 'MIME-Version: 1.0' . "\r\n";
+		$headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+		$headers .= 'From: PRIME ERROR' . "\r\n";
+
+		$message = 'Логин<br>'.$message;
+
+		mail($notice->mail, $subject, $message, $headers);
+
+	}
+
 
     public function template_send_mail_client($dataAll,$notice,$count_day){
 

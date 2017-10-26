@@ -216,7 +216,8 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
     $yandex_api = \App\TokenYandex::all();
 
     $dataApi = array();
-    
+
+
    foreach($google_api as $key => $g){
       // dd($g);
      $context_google = \App\ProjectContext::find($g->google_project_id);
@@ -259,7 +260,7 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
 //    }
 
 
-
+    $error_yandex = array();
     foreach($yandex_api as $key=>$y){
         $context_yandex = \App\ProjectContext::find($y->id_company);
         if(isset($context_yandex) and $context_yandex->status == 1){
@@ -277,6 +278,7 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
             $IDsCompany = array();
 
             if(isset($ac_ya->result->Campaigns)):
+
 
             foreach($ac_ya->result->Campaigns as $a){
 
@@ -342,12 +344,17 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
             $dataApi[$context_yandex->name_project]['email_yandex'] = $context_yandex->e_mail;
             $dataApi[$context_yandex->name_project]['balanse_yandex'] = $context_yandex->ost_bslsnse_ya;
 
+
+            else:
+                $error_yandex[] = $y->login;
             endif;
         }
 
     }
 
-
+    if(!empty($error_yandex)){
+        $home->error_yandex_mail(implode("<br>", $error_yandex));
+    }
 
     $notice = \App\NoticeSendMail::find(1);
 
