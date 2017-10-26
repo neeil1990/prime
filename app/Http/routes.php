@@ -206,6 +206,7 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
         $count_day = cal_days_in_month(CAL_GREGORIAN, $back_month, date('Y'));
     }
 
+
     $home = new \App\Http\Controllers\HomeController();
 
 
@@ -215,7 +216,7 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
     $yandex_api = \App\TokenYandex::all();
 
     $dataApi = array();
-
+    
    foreach($google_api as $key => $g){
       // dd($g);
      $context_google = \App\ProjectContext::find($g->google_project_id);
@@ -240,6 +241,7 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
        //dd($g);
 
    }
+
 
 
 
@@ -273,7 +275,11 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
             $ArClicks = array();
             $ArClicksAll = array();
             $IDsCompany = array();
+
+            if(isset($ac_ya->result->Campaigns)):
+
             foreach($ac_ya->result->Campaigns as $a){
+
                 $IDsCompany[$context_yandex->name_project][] = $a->Id;
                 $ArClicksAll[$context_yandex->name_project][] = $a->Statistics->Clicks;
 
@@ -305,6 +311,7 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
             }
 
 
+
             $params_cost = array(
                 'token' => $y->token_yandex,
                 'method' => "GetBalance",
@@ -334,6 +341,8 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
             $dataApi[$context_yandex->name_project]['name_progect_yandex'] = $context_yandex->name_project;
             $dataApi[$context_yandex->name_project]['email_yandex'] = $context_yandex->e_mail;
             $dataApi[$context_yandex->name_project]['balanse_yandex'] = $context_yandex->ost_bslsnse_ya;
+
+            endif;
         }
 
     }
