@@ -264,7 +264,8 @@ class HomeController extends Controller
 												<td height="10"></td>
 											</tr>
 											<tr align="center">
-													<td style="font-family: \'Lato\', sans-serif; font-size:14px; color:#757575; line-height:24px; font-weight: 300;">'.$clicks_google.' переходов</td>
+													<td style="font-family: \'Lato\', sans-serif; font-size:14px; color:#757575; line-height:24px; font-weight: 300;">Обновление API у G.Adwords</td>
+													<!-- <td style="font-family: \'Lato\', sans-serif; font-size:14px; color:#757575; line-height:24px; font-weight: 300;">'.$clicks_google.' переходов</td> -->
 											</tr>
 										</table>
 									</td>
@@ -400,7 +401,8 @@ class HomeController extends Controller
 												<td height="20"></td>
 											</tr>
 											<tr align="center" style="line-height:0px;">
-												<td style="font-family: \'Lato\', sans-serif; font-size:35px; color:#2b3c4d; font-weight: bold; line-height: 44px;">'.$balanse_google.' руб.</td>
+												<td style="font-family: \'Lato\', sans-serif; font-size:35px; color:#2b3c4d; font-weight: bold; line-height: 44px;">Обвновление API у G.Adwords</td>
+											<!-- <td style="font-family: \'Lato\', sans-serif; font-size:35px; color:#2b3c4d; font-weight: bold; line-height: 44px;">'.$balanse_google.' руб.</td> -->
 											</tr>
 											<tr>
 												<td height="25"></td>
@@ -481,7 +483,8 @@ class HomeController extends Controller
 												<td height="20"></td>
 											</tr>
 											<tr align="center" style="line-height:0px;">
-												<td style="font-family: \'Lato\', sans-serif; font-size:35px; color:#2b3c4d; font-weight: bold; line-height: 44px;">'.$clicks_price_google.' руб.</td>
+												<td style="font-family: \'Lato\', sans-serif; font-size:35px; color:#2b3c4d; font-weight: bold; line-height: 44px;">Обновление API у G.Adwords</td>
+										<!--	<td style="font-family: \'Lato\', sans-serif; font-size:35px; color:#2b3c4d; font-weight: bold; line-height: 44px;">'.$clicks_price_google.' руб.</td> -->
 											</tr>
 											<tr>
 												<td height="25"></td>
