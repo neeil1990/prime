@@ -211,8 +211,6 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
 
 
     $google_api = \App\GoogleApi::all();
-    $user = new \AdWordsUser();
-    $filePath = $_SERVER['DOCUMENT_ROOT'] . '/public/report.xml';
     $yandex_api = \App\TokenYandex::all();
 
     $dataApi = array();
@@ -223,8 +221,9 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
      $context_google = \App\ProjectContext::find($g->google_project_id);
        if(isset($context_google) and $context_google->status == 1){
            $home = new \App\Http\Controllers\HomeController();
-           $sum_accaunt = $home->DownloadCriteriaReportExample($user,$filePath,$g->google_id_client,'ALL_TIME');
-           $click_accaunt = $home->DownloadCriteriaReportExample($user,$filePath,$g->google_id_client,$count_day);
+           $sum_accaunt = \App\Http\Controllers\AdWordsController::main($g->google_id_client,"ALL_TIME");
+           $click_accaunt = \App\Http\Controllers\AdWordsController::main($g->google_id_client,$count_day);
+
            if($click_accaunt['clicks'] == 0){
                $clicks_price_google = 0;
            }else{
@@ -627,13 +626,9 @@ Route::get('/testing', function()
 Route::get('/get-balanse-google', function() {
 
     $results = \DB::table('google_apis')->get();
-    $user = new \AdWordsUser();
-    $filePath = $_SERVER['DOCUMENT_ROOT'] . '/public/report.xml';
-    $home = new \App\Http\Controllers\HomeController();
-
     foreach($results as $r){
 
-        $sum_accaunt = $home->DownloadCriteriaReportExample($user,$filePath,$r->google_id_client,'ALL_TIME');
+        $sum_accaunt = \App\Http\Controllers\AdWordsController::main($r->google_id_client,"ALL_TIME");
 
         \DB::table('google_apis')
             ->where('id', $r->id)

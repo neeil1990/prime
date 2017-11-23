@@ -651,94 +651,6 @@ class HomeController extends Controller
     }
 
 
-
-
-
-	function DownloadCriteriaReportExample(\AdWordsUser $user, $filePath,$user_id,$time) {
-		// Load the service, so that the required classes are available.
-		$user->SetClientCustomerId($user_id);
-		$user->LoadService('ReportDefinitionService', 'v201609');
-		// Optional: Set clientCustomerId to get reports of your child accounts
-		// $user->SetClientCustomerId('INSERT_CLIENT_CUSTOMER_ID_HERE');
-
-		// Create selector.
-
-		$selector = new \Selector();
-		$selector->fields = array('Cost','Clicks','AccountCurrencyCode');
-
-		//  $selector = new \stdClass();
-		//  $selector->fields = array('Cost');
-
-
-
-		// Optional: use predicate to filter out paused criteria.
-		$selector->predicates[] = new \Predicate('Status', 'NOT_IN', array('PAUSED'));
-		if($time == 'ALL_TIME'){
-			$dateRangeType = 'ALL_TIME';
-		}else {
-			$dateRangeType = 'CUSTOM_DATE';
-			$selector->dateRange = new \DateRange(date('Y-m-d', strtotime('-' . $time . ' days')), date('Y-m-d', strtotime('-1 days')));
-		}
-
-		// Create report definition.
-		$reportDefinition = new \ReportDefinition();
-		$reportDefinition->selector = $selector;
-		$reportDefinition->reportName = 'Criteria performance report #' . uniqid();
-		$reportDefinition->dateRangeType = $dateRangeType; //ALL_TIME //LAST_7_DAYS
-		$reportDefinition->reportType = 'CRITERIA_PERFORMANCE_REPORT';
-		$reportDefinition->downloadFormat = 'XML';
-
-		// Set additional options.
-		$options = array('version' => 'v201609');
-
-		$reportUtils = new \ReportUtils();
-		$filePath = $_SERVER['DOCUMENT_ROOT'].'/report.xml';
-		$xml = $reportUtils->DownloadReport($reportDefinition, $filePath, $user, $options);
-
-		//dd($xml);
-
-		$SimpleXML = new \SimpleXMLElement($xml);
-
-
-		$arCost = array();
-		foreach($SimpleXML->table->row as $key=>$row){
-			if((string)$row['clicks'] != 0){
-				$arCost['clicks'][] = (string)$row['clicks'];
-			}
-			if(!empty((string)$row['cost'])){
-				$arCost['cost'][] = (string)$row['cost'];
-			}
-			$AccountCurrencyCode = (string)$row['currency'];
-		}
-		if(isset($arCost['cost'])) {
-			$summ_not_null_and_cent = substr(array_sum($arCost['cost']), 0, -6);
-		}else{
-			$summ_not_null_and_cent = 0;
-		}
-		if(isset($arCost['clicks'])) {
-			$arCost['clicks'] = array_sum($arCost['clicks']);
-		}else{
-			$arCost['clicks'] = 0;
-		}
-
-		if(!empty($AccountCurrencyCode)){
-			if($AccountCurrencyCode == "USD"){
-				$currency = file_get_contents("https://www.cbr-xml-daily.ru/daily_json.js");
-				$now_carrency = round(json_decode($currency)->Valute->$AccountCurrencyCode->Value);
-				$summ_not_null_and_cent = $summ_not_null_and_cent*$now_carrency;
-			}
-		}
-
-		$arrResult = array(
-			'cost' => $summ_not_null_and_cent,
-			'clicks' => $arCost['clicks']
-		);
-
-		//var_dump($arrResult);
-		return $arrResult;
-	}
-
-
 	public function get_price_auto_direct($login){
 		if(empty($login)){
 			return;
@@ -1253,10 +1165,7 @@ class HomeController extends Controller
             'google_id_client' => 'required',
         ]);
 
-        $user = new \AdWordsUser();
-        $filePath = $_SERVER['DOCUMENT_ROOT'] . '/public/report.xml';
-
-        $sum_accaunt = $this->DownloadCriteriaReportExample($user,$filePath,$request['google_id_client'],'ALL_TIME');
+		$sum_accaunt = \App\Http\Controllers\AdWordsController::main($request['google_id_client'],"ALL_TIME");
 
         $results = \DB::table('google_apis')->where('google_project_id', $request['google_project_id'])->first();
 
