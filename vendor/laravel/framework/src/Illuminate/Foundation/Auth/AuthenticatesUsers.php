@@ -93,19 +93,9 @@ trait AuthenticatesUsers
      */
     protected function validateLogin(Request $request)
     {
-
-        $user = User::where('email', $request['email'])->first();
-        if($user->status == 1){
         $this->validate($request, [
-            $this->loginUsername() => 'required',
-            'password' => 'required',
+            $this->loginUsername() => 'required', 'password' => 'required',
         ]);
-        }else{
-            $this->validate($request, [
-                $this->loginUsername() => 'required',
-                'status' => 'required',
-            ]);
-        }
     }
 
     /**

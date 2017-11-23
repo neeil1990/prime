@@ -5,7 +5,6 @@ namespace Illuminate\Foundation\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
 trait RegistersUsers
 {
     use RedirectsUsers;
@@ -53,14 +52,12 @@ trait RegistersUsers
      */
     public function register(Request $request)
     {
-
         $validator = $this->validator($request->all());
 
         if ($validator->fails()) {
-           $this->throwValidationException(
+            $this->throwValidationException(
                 $request, $validator
             );
-
         }
 
         Auth::guard($this->getGuard())->login($this->create($request->all()));
