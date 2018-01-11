@@ -101,7 +101,7 @@
 
                 <div class="box box-danger">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Освоенно</h3>
+                        <h3 class="box-title">Освоено</h3>
 
                         <div class="box-tools pull-right">
                             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -156,7 +156,7 @@
                                 <th>№</th>
                                 <th>Проект</th>
                                 <th>Макс.Бюджет</th>
-                                <th>Освоенно сейчас</th>
+                                <th>Освоено сейчас</th>
                                 <th>Освоенный % сейчас</th>
                                 <th>День 1</th>
                                 <th>День 2</th>
@@ -275,8 +275,8 @@
                 element: 'sales-chart',
                 colors: ["#3c8dbc", "#f56954"],
                 data: [
-                    {label: "Освоенно %", value: "{{$all_osv_progect_seo_user}}"},
-                    {label: "Не освоенно %", value: "{{$all_not_osv_progect_seo_user}}"}
+                    {label: "Освоено %", value: "{{$all_osv_progect_seo_user}}"},
+                    {label: "Не освоено %", value: "{{$all_not_osv_progect_seo_user}}"}
                 ],
                 hideHover: 'auto'
             });
