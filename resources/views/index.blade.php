@@ -276,13 +276,13 @@
                                         <th data-type="number">Макс.Бюджет</th>
                                         <th data-type="number">Освоено сейчас</th>
                                         <th data-type="number">Освоенный % сейчас</th>
-                                        <th data-type="number">День 1</th>
-                                        <th data-type="number">День 2</th>
-                                        <th data-type="number">День 3</th>
-                                        <th data-type="number">День 4</th>
-                                        <th data-type="number">День 5</th>
-                                        <th data-type="number">День 6</th>
-                                        <th data-type="number">День 7</th>
+                                        <th data-type="number">Неделя 1</th>
+                                        <th data-type="number">Неделя 2</th>
+                                        <th data-type="number">Неделя 3</th>
+                                        <th data-type="number">Неделя 4</th>
+                                        <th data-type="number">Неделя 5</th>
+                                        <th data-type="number">Неделя 6</th>
+                                        <th data-type="number">Неделя 7</th>
                                     </tr>
                                     </thead>
                                     <tbody class="all">
