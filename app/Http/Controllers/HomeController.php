@@ -674,13 +674,24 @@ class HomeController extends Controller
 
 		if($this->admin() == 1) {
 
+			$arDate = array(
+				date('Y-m-d', strtotime('-7 days')),
+				date('Y-m-d', strtotime('-14 days')),
+				date('Y-m-d', strtotime('-21 days')),
+				date('Y-m-d', strtotime('-28 days')),
+				date('Y-m-d', strtotime('-35 days')),
+				date('Y-m-d', strtotime('-42 days')),
+				date('Y-m-d', strtotime('-49 days')),
+			);
+
 			$stat_users = \DB::table('stat_users')
-				->where('date_day','>',date('Y-m-d', strtotime('-7 days')))
-				->orderBy('date_day', 'asc')
+				->whereIn('date_day',$arDate)
+				->orderBy('date_day', 'desc')
 				->get();
 			$users_all = User::all();
 			$progect_seo = \DB::table('project_seos')->where('status', '1')->get();
 			$progect_context = \DB::table('project_contexts')->where('status', '1')->get();
+
 
 			$all_osv_procent_admin = '';
 			foreach($progect_seo as $osv){
@@ -698,7 +709,7 @@ class HomeController extends Controller
 					if($user->id == $su->id_user){
 						foreach($progect_seo as $p){
 							if($p->id == $su->id_project){
-								$arStatForAdminUser[$user->name][$p->name_project]['osvoeno_procent_day'][] = $su->osvoeno_procent;
+								$arStatForAdminUser[$user->name][$p->name_project]['osvoeno_procent_day'][$su->date_day] = $su->osvoeno_procent;
 								$arStatForAdminUser[$user->name][$p->name_project]['budget'] = $p->budget;
 								$arStatForAdminUser[$user->name][$p->name_project]['osvoeno'] = $p->osvoeno;
 								if($p->osvoeno_procent > 100) {
@@ -713,6 +724,7 @@ class HomeController extends Controller
 					}
 				}
 			}
+
 
 			$osvoeno_all = \DB::table('stats')
 				->where('project', 'seo')

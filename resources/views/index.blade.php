@@ -294,13 +294,9 @@
                                         <td> {{$stat['budget']}} </td>
                                         <td> {{$stat['osvoeno']}} </td>
                                         <td> {{$stat['osvoeno_procent']}} </td>
-                                        <td>@if(isset($stat['osvoeno_procent_day'][0])) {{$stat['osvoeno_procent_day'][0]}} @endif</td>
-                                        <td>@if(isset($stat['osvoeno_procent_day'][1])) {{$stat['osvoeno_procent_day'][1]}} @endif</td>
-                                        <td>@if(isset($stat['osvoeno_procent_day'][2])) {{$stat['osvoeno_procent_day'][2]}} @endif</td>
-                                        <td>@if(isset($stat['osvoeno_procent_day'][3])) {{$stat['osvoeno_procent_day'][3]}} @endif</td>
-                                        <td>@if(isset($stat['osvoeno_procent_day'][4])) {{$stat['osvoeno_procent_day'][4]}} @endif</td>
-                                        <td>@if(isset($stat['osvoeno_procent_day'][5])) {{$stat['osvoeno_procent_day'][5]}} @endif</td>
-                                        <td>@if(isset($stat['osvoeno_procent_day'][6])) {{$stat['osvoeno_procent_day'][6]}} @endif</td>
+                                        @foreach($stat['osvoeno_procent_day'] as $date => $stat_procent)
+                                        <td style="text-align: center">@if(isset($stat_procent)) {{$stat_procent}}<br> <span style="font-size: 10px;color: blue;">{{$date}}</span>@endif</td>
+                                        @endforeach
 
                                     </tr>
                                     {{ ($count++) ? '' : '' }}
