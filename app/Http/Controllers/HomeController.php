@@ -790,11 +790,21 @@ class HomeController extends Controller
 			}
 
 
+			$arDate = array(
+				date('Y-m-d', strtotime('-7 days')),
+				date('Y-m-d', strtotime('-14 days')),
+				date('Y-m-d', strtotime('-21 days')),
+				date('Y-m-d', strtotime('-28 days')),
+				date('Y-m-d', strtotime('-35 days')),
+				date('Y-m-d', strtotime('-42 days')),
+				date('Y-m-d', strtotime('-49 days')),
+			);
+
 			//dd($progect_seo_user);
 			$stat_users = \DB::table('stat_users')
-				->where('date_day','>',date('Y-m-d', strtotime('-7 days')))
+				->whereIn('date_day',$arDate)
 				->where('id_user',$this->user_now()->id)
-				->orderBy('date_day', 'asc')
+				->orderBy('date_day', 'desc')
 				->get();
 
 			$arSeeForProject = array();
@@ -804,11 +814,9 @@ class HomeController extends Controller
 				$arStatUser[$k]['budget'] = $p->budget;
 				$arStatUser[$k]['osvoeno'] = $p->osvoeno;
 				$arStatUser[$k]['osvoeno_procent'] = $p->osvoeno_procent;
-				$i = 1;
 				foreach($stat_users as $key => $s){
 					if($s->id_project == $p->id){
-						$arStatUser[$k]['day_proc_'.$i] = $s->osvoeno_procent;
-						$i++;
+						$arStatUser[$k]['osvoeno_procent_day'][$s->date_day] = $s->osvoeno_procent;
 					}
 				}
 

@@ -428,6 +428,8 @@ Route::get('/get-seranking-sum', function()
                 $interval_date = true;
             }else{$interval_date = false;}
 
+
+
             if($interval_date == true){
                 if($p->bonus_enable == 1){
                     $procent_bonus = $p->budget / 100 * $p->bonus_add;
@@ -439,11 +441,12 @@ Route::get('/get-seranking-sum', function()
 
                 if ($p->procent_bonus == 0 and $p->count_day_fine == 0 and $p->procent_fine == 0) {
 
+
                     $enddate = strtotime('+' . $setting_payouts->count_day_fine . ' day', strtotime(preg_replace('~^(\d+)\/(\d+)\/(\d+)$~', '$3/$2/$1', $p->end)));
                     if ($sum_osvoen_procent >= $setting_payouts->procent_bonus) {
                         $procent_bonus = $budget / 100 * $p->procent_seo;
                     } elseif (strtotime("now") > $enddate and $sum_osvoen_procent < $setting_payouts->procent_fine) {
-                        $procent_bonus = '-' . $budget / 100 * $p->procent_seo;
+                        $procent_bonus = '-' . ($p->budget - $p->osvoeno) / 100 * $setting_payouts->procent_for_fine;
                     } else {
                         $procent_bonus = 0;
                     }
@@ -453,7 +456,7 @@ Route::get('/get-seranking-sum', function()
                     if ($sum_osvoen_procent >= $p->procent_bonus) {
                         $procent_bonus = $budget / 100 * $p->procent_seo;
                     } elseif (strtotime("now") > $enddate and $sum_osvoen_procent < $p->procent_fine) {
-                        $procent_bonus = '-' . $budget / 100 * $p->procent_seo;
+                        $procent_bonus = '-' . ($p->budget - $p->osvoeno) / 100 * $p->procent_for_fine;
                     } else {
                         $procent_bonus = 0;
                     }
@@ -461,8 +464,6 @@ Route::get('/get-seranking-sum', function()
                 }
 
             }
-
-
 
 
             \DB::table('project_seos')->where('id', $p->id)

@@ -158,13 +158,13 @@
                                 <th>Макс.Бюджет</th>
                                 <th>Освоено сейчас</th>
                                 <th>Освоенный % сейчас</th>
-                                <th>День 1</th>
-                                <th>День 2</th>
-                                <th>День 3</th>
-                                <th>День 4</th>
-                                <th>День 5</th>
-                                <th>День 6</th>
-                                <th>День 7</th>
+                                <th>Неделя 1</th>
+                                <th>Неделя 2</th>
+                                <th>Неделя 3</th>
+                                <th>Неделя 4</th>
+                                <th>Неделя 5</th>
+                                <th>Неделя 6</th>
+                                <th>Неделя 7</th>
                             </tr>
                             </thead>
                             <tbody class="all">
@@ -176,55 +176,9 @@
                                     <td>{{$s['budget']}}</td>
                                     <td>{{$s['osvoeno']}}</td>
                                     <td>{{$s['osvoeno_procent']}}</td>
-                                    <td>
-                                        @if(isset($s['day_proc_1']))
-                                        {{$s['day_proc_1']}}
-                                        @else
-                                        Нет данных
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if(isset($s['day_proc_2']))
-                                            {{$s['day_proc_2']}}
-                                        @else
-                                            Нет данных
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if(isset($s['day_proc_3']))
-                                            {{$s['day_proc_3']}}
-                                        @else
-                                            Нет данных
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if(isset($s['day_proc_4']))
-                                            {{$s['day_proc_4']}}
-                                        @else
-                                            Нет данных
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if(isset($s['day_proc_5']))
-                                            {{$s['day_proc_5']}}
-                                        @else
-                                            Нет данных
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if(isset($s['day_proc_6']))
-                                            {{$s['day_proc_6']}}
-                                        @else
-                                            Нет данных
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if(isset($s['day_proc_7']))
-                                            {{$s['day_proc_7']}}
-                                        @else
-                                            Нет данных
-                                        @endif
-                                    </td>
+                                    @foreach($s['osvoeno_procent_day'] as $date => $stat_procent)
+                                        <td style="text-align: center">@if(isset($stat_procent)) {{$stat_procent}}<br> <span style="font-size: 10px;color: blue;">{{$date}}</span>@endif</td>
+                                    @endforeach
 
                                 </tr>
                             @endforeach

@@ -240,6 +240,15 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="col-md-4 control-label">% Для штрафа</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" placeholder="% бюджет - освоенно * % для штрафа" class="form-control" name="procent_for_fine" value="{{$users->procent_for_fine}}">
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-md-4 control-label">% начисление бонуса для нового проекта</label>
 
                                 <div class="col-md-6">
