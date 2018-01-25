@@ -176,9 +176,11 @@
                                     <td>{{$s['budget']}}</td>
                                     <td>{{$s['osvoeno']}}</td>
                                     <td>{{$s['osvoeno_procent']}}</td>
-                                    @foreach($s['osvoeno_procent_day'] as $date => $stat_procent)
-                                        <td style="text-align: center">@if(isset($stat_procent)) {{$stat_procent}}<br> <span style="font-size: 10px;color: blue;">{{$date}}</span>@endif</td>
-                                    @endforeach
+                                    @if(isset($s['osvoeno_procent_day']))
+                                        @foreach($s['osvoeno_procent_day'] as $date => $stat_procent)
+                                            <td style="text-align: center">@if(isset($stat_procent)) {{$stat_procent}}<br> <span style="font-size: 10px;color: blue;">{{$date}}</span>@endif</td>
+                                        @endforeach
+                                    @endif
 
                                 </tr>
                             @endforeach
