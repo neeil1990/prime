@@ -465,12 +465,18 @@ Route::get('/get-seranking-sum', function()
 
             }
 
+            if(empty($p->procent_seo)){
+                $procent_seo = $setting_payouts->procent_seo;
+            }else{
+                $procent_seo = $p->procent_seo;
+            }
 
             \DB::table('project_seos')->where('id', $p->id)
                 ->update(array(
                     'summa_zp' => $procent_bonus,
                     'osvoeno' => $sum_osvoen,
-                    'osvoeno_procent' => $sum_osvoen_procent
+                    'osvoeno_procent' => $sum_osvoen_procent,
+                    'procent_seo' => $procent_seo
                 ));
         }
     }

@@ -58,6 +58,15 @@
                                 </div>
                             </div>
 
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">  % от проекта</label>
+
+                                <div class="col-md-6">
+                                    <input type="text" placeholder="" class="form-control" name="procent_seo" value="{{$setting_payout->procent_seo}}">
+
+                                </div>
+                            </div>
+
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
