@@ -423,13 +423,14 @@ Route::get('/get-seranking-sum', function()
     foreach($name as $p){
         $setting_payouts = \DB::table('setting_payouts')->where('id',1)->first();
 
-        if(empty($p->procent_seo)){
-            $p->procent_seo = $setting_payouts->procent_seo;
-        }else{
-            $p->procent_seo = $p->procent_seo;
-        }
-
         if(isset($arrSum[trim($p->name_project)])){
+
+            if(empty($p->procent_seo)){
+                $p->procent_seo = $setting_payouts->procent_seo;
+            }else{
+                $p->procent_seo = $p->procent_seo;
+            }
+
             $end_sum = array_sum($arrSum[trim($p->name_project)]);
             $sum_osvoen = ceil($end_sum/8*30);
             $sum_osvoen_procent = ceil($sum_osvoen/$p->budget*100);
@@ -497,6 +498,7 @@ Route::get('/get-seranking-sum', function()
                     'summa_zp' => $procent_bonus,
                     'osvoeno' => $sum_osvoen,
                     'osvoeno_procent' => $sum_osvoen_procent,
+                    'procent_seo' => $p->procent_seo,
                 ));
         }
     }
