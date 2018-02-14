@@ -402,6 +402,23 @@ Route::get('/get-seranking-sum', function()
         }
     }
 
+    $project_contexts = \DB::table('project_contexts')->get();
+    foreach($project_contexts as $c){
+        $setting_payout_contexts = \DB::table('setting_payout_contexts')->where('id',1)->first();
+        if(empty($c->procent_seo)){
+            $context_procent = $setting_payout_contexts->procent_seo;
+        }else{
+            $context_procent = $c->procent_seo;
+        }
+        if($context_procent){
+            \DB::table('project_contexts')->where('id', $c->id)
+                ->update(array(
+                    'procent_seo' => $context_procent
+                ));
+        }
+    }
+
+
     $name = \DB::table('project_seos')->get();
     foreach($name as $p){
         if(isset($arrSum[trim($p->name_project)])){
@@ -773,6 +790,10 @@ Route::post('/update-service-and-password', ['as' => 'updateServiceAndPassword',
 //Настройка выплат
 Route::get('/setting-payout', ['as' => 'settingPayout', 'uses' => 'HomeController@settingPayout']);
 Route::post('/save-setting-payout', ['as' => 'saveSettingPayout', 'uses' => 'HomeController@saveSettingPayout']);
+
+//Настройка выплат КОНТЕКСТ
+Route::get('/setting-payout-context', ['as' => 'settingPayoutContext', 'uses' => 'HomeController@settingPayoutContext']);
+Route::post('/save-setting-payout-context', ['as' => 'saveSettingPayout', 'uses' => 'HomeController@saveSettingPayoutContext']);
 
 //Логи
 Route::get('/logs', ['as' => 'viewLogs', 'uses' => 'Controller@viewLogs']);

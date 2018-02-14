@@ -44,6 +44,9 @@
                             <a href="#" id="notice_send_mail">
                                 <small class="label label-primary">Настройка уведомлений</small>
                             </a>
+                            <a href="/setting-payout-context" id="notice_send_mail">
+                                <small class="label label-primary">Настройка Выплат</small>
+                            </a>
                             @endif
 
                             <div class="row">

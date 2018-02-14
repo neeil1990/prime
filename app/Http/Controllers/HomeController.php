@@ -12,6 +12,7 @@ use App\ProjectContext;
 use App\ProjectSeo;
 use App\ServiceAndPass;
 use App\SettingPayout;
+use App\SettingPayoutContext;
 use App\Sort;
 use App\TokenYandex;
 use Carbon\Carbon;
@@ -3170,6 +3171,25 @@ class HomeController extends Controller
         $settingPayout->UpdateSettingPayout($request->all());
         return redirect()->intended('setting-payout');
     }
+
+	/////////////////////////
+	////настройка выплат контекст
+	/////////////////////////
+
+	public function settingPayoutContext(){
+
+		$alldata = SettingPayoutContext::all();
+		return view('page.setting-payout-context',[
+			'admin' => $this->admin(),
+			'linkUser' => $this->LinkUser(),
+			'setting_payout' => $alldata[0]
+		]);
+	}
+
+	public function saveSettingPayoutContext(Request $request, SettingPayoutContext $settingPayout){
+		$settingPayout->UpdateSettingPayout($request->all());
+		return redirect()->intended('setting-payout-context');
+	}
 
 
     public function createLinkUser(Request $request){
