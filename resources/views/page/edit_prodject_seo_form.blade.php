@@ -112,6 +112,11 @@
                                     <input type="text" class="form-control" name="procent_seo" value="{{$users->procent_seo}}">
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label class="col-md-4 control-label">Включить глобальный % от проекта</label>
+                                Вкл. <input type="radio" name="enable_procent_seo" value="1" @if($users->enable_procent_seo == 1) checked="checked" @endif >
+                                Выкл. <input type="radio" name="enable_procent_seo" value="0" @if($users->enable_procent_seo == 0) checked="checked" @endif >
+                            </div>
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label">Сумма на з.п.</label>

@@ -405,7 +405,8 @@ Route::get('/get-seranking-sum', function()
     $project_contexts = \DB::table('project_contexts')->get();
     foreach($project_contexts as $c){
         $setting_payout_contexts = \DB::table('setting_payout_contexts')->where('id',1)->first();
-        if(empty($c->procent_seo)){
+
+        if(empty($c->procent_seo) or $c->enable_procent_seo == 1){
             $context_procent = $setting_payout_contexts->procent_seo;
         }else{
             $context_procent = $c->procent_seo;
@@ -425,7 +426,7 @@ Route::get('/get-seranking-sum', function()
 
         if(isset($arrSum[trim($p->name_project)])){
 
-            if(empty($p->procent_seo)){
+            if(empty($p->procent_seo) or $p->enable_procent_seo == 1){
                 $p->procent_seo = $setting_payouts->procent_seo;
             }else{
                 $p->procent_seo = $p->procent_seo;

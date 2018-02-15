@@ -18,6 +18,7 @@ class ProjectContext extends Model
         'ost_bslsnse_go',
         'id_glavn_user',
         'procent_seo',
+        'enable_procent_seo',
         'value_serialize',
         'dogovor_number',
         'contact_person',
@@ -64,6 +65,7 @@ class ProjectContext extends Model
                 'phone_person' => $data['phone_person'],
                 'e_mail' => $data['e_mail'],
                 'procent_seo' => $data['procent_seo'],
+                'enable_procent_seo' => $data['enable_procent_seo'],
                 'value_serialize' => $data['value_serialize']
             ));
 
