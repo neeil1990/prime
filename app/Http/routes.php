@@ -809,3 +809,9 @@ Route::post('/create-link-user', ['as' => 'createLinkUser', 'uses' => 'HomeContr
 Route::post('/delite-link-user', ['as' => 'deliteLinkUser', 'uses' => 'HomeController@deliteLinkUser']);
 Route::post('/edit-add-link-user', ['as' => 'editAddLinkUser', 'uses' => 'HomeController@editAddLinkUser']);
 Route::get('/edit-link-user/{id}/edit', ['as' => 'editLinkUser', 'uses' => 'HomeController@editLinkUser']);
+
+Route::get('/phpinfo', function() {
+
+    return phpinfo();
+
+});
