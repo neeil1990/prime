@@ -21,7 +21,7 @@
 #RewriteCond %{HTTPS} =on 
 #RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [QSA,L]
 ############
-RewriteEngine On
-RewriteCond %{SERVER_PORT} !^443$
-RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
+#RewriteEngine On
+#RewriteCond %{SERVER_PORT} !^443$
+#RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R,L]
 </IfModule>
