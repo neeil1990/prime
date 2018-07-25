@@ -7,17 +7,17 @@ use App\Http\Requests;
 
 use Google\AdsApi\AdWords\AdWordsSession;
 use Google\AdsApi\AdWords\AdWordsSessionBuilder;
-use Google\AdsApi\AdWords\Reporting\v201710\DownloadFormat;
-use Google\AdsApi\AdWords\Reporting\v201710\ReportDefinition;
-use Google\AdsApi\AdWords\Reporting\v201710\ReportDefinitionDateRangeType;
-use Google\AdsApi\AdWords\Reporting\v201710\ReportDownloader;
+use Google\AdsApi\AdWords\Reporting\v201806\DownloadFormat;
+use Google\AdsApi\AdWords\Reporting\v201806\ReportDefinition;
+use Google\AdsApi\AdWords\Reporting\v201806\ReportDefinitionDateRangeType;
+use Google\AdsApi\AdWords\Reporting\v201806\ReportDownloader;
 use Google\AdsApi\AdWords\ReportSettingsBuilder;
-use Google\AdsApi\AdWords\v201710\cm\Predicate;
-use Google\AdsApi\AdWords\v201710\cm\PredicateOperator;
-use Google\AdsApi\AdWords\v201710\cm\ReportDefinitionReportType;
-use Google\AdsApi\AdWords\v201710\cm\Selector;
+use Google\AdsApi\AdWords\v201806\cm\Predicate;
+use Google\AdsApi\AdWords\v201806\cm\PredicateOperator;
+use Google\AdsApi\AdWords\v201806\cm\ReportDefinitionReportType;
+use Google\AdsApi\AdWords\v201806\cm\Selector;
 use Google\AdsApi\Common\OAuth2TokenBuilder;
-use Google\AdsApi\AdWords\v201710\cm\DateRange;
+use Google\AdsApi\AdWords\v201806\cm\DateRange;
 use Mockery\CountValidator\Exception;
 
 class AdWordsController extends Controller {
