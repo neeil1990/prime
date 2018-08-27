@@ -80,6 +80,7 @@ class AdWordsController extends Controller {
 
             mail($notice->mail, $subject, $message, $headers);
             print $subject;
+            return false;
         }
 
         $xml = $reportDownloadResult->getAsString($filePath);
