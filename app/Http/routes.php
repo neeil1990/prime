@@ -546,8 +546,7 @@ Route::get('/get-balanse-yandex', function()
 
         $ac_ya = json_decode($result);
 
-		
-        if(empty($ac_ya->data->Accounts) and !empty($ya->token_yandex)){
+        if(empty($ac_ya->data->Accounts) or empty($ya->token_yandex)){
             $home = new \App\Http\Controllers\HomeController();
             $ostatok_balanse_yandex = $home->get_price_auto_direct($ya->login);
         }else{
@@ -557,6 +556,9 @@ Route::get('/get-balanse-yandex', function()
 
         if(!empty($ostatok_balanse_yandex)){
            $id_com = \DB::table('project_contexts')->where('id',$ya->id_company)->first();
+		   if(empty($id_com))
+			   continue;
+		   
             $summa = $ostatok_balanse_yandex-$id_com->ost_bslsnse_ya;
             if($summa >= 1000){
 
