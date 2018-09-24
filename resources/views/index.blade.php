@@ -149,7 +149,7 @@
 
                     <tr>
                         <td>Итог Seo + Context</td>
-                        <td class="itog">{{$MyTarget+$go_advords+$ya_direct+$osvoeno_all}}</td>
+                        <td class="itog">{{(float)$MyTarget+(float)$go_advords+(float)$ya_direct+(float)$osvoeno_all}}</td>
                         <td></td>
                     </tr>
 

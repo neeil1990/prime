@@ -694,12 +694,12 @@ class HomeController extends Controller
 			$progect_context = \DB::table('project_contexts')->where('status', '1')->get();
 
 
-			$all_osv_procent_admin = '';
+			$all_osv_procent_admin = 0;
 			foreach($progect_seo as $osv){
-				if($osv->osvoeno_procent > 100){
+				if((int)$osv->osvoeno_procent > 100){
 					$osv->osvoeno_procent = 100;
 				}
-				$all_osv_procent_admin += $osv->osvoeno_procent;
+				$all_osv_procent_admin += (int)$osv->osvoeno_procent;
 			}
 
 			$arStatForAdminUser = array();
@@ -761,7 +761,6 @@ class HomeController extends Controller
 			foreach ($progect_seo as $s) {
 				$arMaxBudjet['seo'][] = $s->budget;
 			}
-
 
 			foreach ($progect_context as $c) {
 				if ($c->ya_direct != 0 and !empty($c->ya_direct))
@@ -880,7 +879,7 @@ class HomeController extends Controller
 		}
 
 		$curl = curl_init();
-		curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=login&login=bzik&pass='.md5('uFUOVs3i6SVg').'');
+		curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=login&login=work-api&pass='.md5('wcKcY2fgay').'');
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
 		$out = curl_exec($curl);
 		curl_close($curl);
@@ -972,6 +971,7 @@ class HomeController extends Controller
 		$project = json_decode($out);
 
 
+
 		return view('page.settings_position',[
 			'back_up_se_ran_pos' => $back_up_se_ran_pos,
 			'ArTotalSum' => $ArTotalSum,
@@ -983,7 +983,7 @@ class HomeController extends Controller
 
 	public function backUpSeRanPosGet($id){
 		$curl = curl_init();
-		curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=login&login=bzik&pass='.md5('uFUOVs3i6SVg').'');
+		curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=login&login=work-api&pass='.md5('wcKcY2fgay').'');
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
 		$out = curl_exec($curl);
 		curl_close($curl);
