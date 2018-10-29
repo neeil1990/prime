@@ -660,6 +660,11 @@ Route::get('/get-balanse-google', function() {
     $results = \DB::table('google_apis')->get();
     foreach($results as $r){
 
+        $status = \DB::table('project_contexts')->where('id', $r->google_project_id)->first();
+        if(!$status->status)
+            continue;
+
+
         $sum_accaunt = \App\Http\Controllers\AdWordsController::main($r->google_id_client,"ALL_TIME");
 
         \DB::table('google_apis')
