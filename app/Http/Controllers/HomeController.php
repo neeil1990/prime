@@ -2831,11 +2831,15 @@ class HomeController extends Controller
             $results = \DB::table('google_apis')->where('google_project_id', $u->id)->first();
             if(isset($results->id)){
                 $users[$key]->ost_bslsnse_go = $u->ost_bslsnse_go-$results->sum;
+                $users[$key]->google_id_client = $results->google_id_client;
             }
 
+			$results_ya = \DB::table('token_yandexes')->where('id_company', $u->id)->first();
+			if(isset($results_ya->id)){
+				$users[$key]->yandex_login_client = $results_ya->login;
+			}
 
-
-            $sum = $u->ya_direct+$u->go_advords+$u->MyTarget;
+            $sum = (float)$u->ya_direct+(float)$u->go_advords+(float)$u->MyTarget;
             $users[$key]->sum_zp = $sum*$u->procent_seo/100;
 
 

@@ -135,7 +135,7 @@
 
 
                                                     <div class="update_token_yandex">
-                                                        <small class="label label-primary obnovit" style="cursor: pointer">Обновить/Закрыть</small>
+                                                        <small class="label label-primary obnovit" style="cursor: pointer">Обновить/Закрыть @if(isset($user->yandex_login_client))| login: {{$user->yandex_login_client}}@endif</small>
 
                                                         <form method="POST" action="/update-token-yandex-form" class="update_token_yandex_form" style="display: none;">
                                                         <div class="input-group input-group-sm">
@@ -159,7 +159,7 @@
 
 
                                                     <div class="update_id_google">
-                                                        <small class="label label-primary obnovit_google" style="cursor: pointer">ID аккаунта G.A</small>
+                                                        <small class="label label-primary obnovit_google" style="cursor: pointer">ID аккаунта G.A @if(isset($user->google_id_client))| id: {{$user->google_id_client}}@endif</small>
 
                                                         <form method="POST" action="/update-id-google-form" class="update_google_form" style="display: none;">
                                                             <div class="input-group input-group-sm">
