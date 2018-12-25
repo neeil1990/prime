@@ -269,20 +269,21 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
                 'Authorization: Bearer '.$y->token_yandex,
                 'Content-Type: application/json; charset=utf-8'
             );
-            $getBalanse = '{"method":"get","params":{"SelectionCriteria":{},"FieldNames":["Id","StartDate","Statistics"]}}';
+            $getBalanse = '{"method":"get","params":{"SelectionCriteria":{},"FieldNames":["Id","StartDate","Statistics","Funds"]}}';
             $ac_ya = $home->curl_request($getBalanse,$HEADER,'https://api.direct.yandex.com/json/v5/campaigns');
 
             $ArClicks = array();
             $ArClicksAll = array();
             $IDsCompany = array();
+            $ArFundsAll = array();
 
             if(isset($ac_ya->result->Campaigns)):
-
 
             foreach($ac_ya->result->Campaigns as $a){
 
                 $IDsCompany[$context_yandex->name_project][] = $a->Id;
                 $ArClicksAll[$context_yandex->name_project][] = $a->Statistics->Clicks;
+                $ArFundsAll[$context_yandex->name_project][] = ($a->Funds->Mode == "SHARED_ACCOUNT_FUNDS") ? $a->Funds->SharedAccountFunds->Spend : 0;
 
                 $params = array(
                     'token' => $y->token_yandex,
@@ -310,22 +311,9 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
                 }
 
             }
-
-
-
-            $params_cost = array(
-                'token' => $y->token_yandex,
-                'method' => "GetBalance",
-                'param' => $IDsCompany[$context_yandex->name_project],
-            );
-            $HEADER = array(
-                'Accept-Language: ru',
-                'Content-Type: application/json; charset=utf-8'
-            );
-            $sum_costs = $home->curl_request(json_encode($params_cost),$HEADER,'https://api.direct.yandex.ru/live/v4/json/');
-            $costs = '';
-            foreach($sum_costs->data as $s){
-                $costs += $s->Sum;
+            $costs = 0;
+            foreach($ArFundsAll[$context_yandex->name_project] as $s){
+                $costs += $s;
             }
             if(empty($ArClicks[$context_yandex->name_project])){
                 $dataApi[$context_yandex->name_project]['clicks_yandex'] = 0;
