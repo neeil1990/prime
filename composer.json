@@ -10,7 +10,8 @@
         "laravel/framework": "5.2.*",
         "barryvdh/laravel-debugbar": "^2.2",
         "barryvdh/laravel-ide-helper": "^2.1",
-        "googleads/googleads-php-lib": "^32.0"
+        "googleads/googleads-php-lib": "^32.0",
+        "parsecsv/php-parsecsv": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

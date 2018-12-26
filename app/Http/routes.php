@@ -264,79 +264,76 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
         $context_yandex = \App\ProjectContext::find($y->id_company);
         if(isset($context_yandex) and $context_yandex->status == 1){
 
-            $HEADER = array(
+            /*$HEADER = array(
                 'Accept-Language: ru',
                 'Authorization: Bearer '.$y->token_yandex,
                 'Content-Type: application/json; charset=utf-8'
             );
             $getBalanse = '{"method":"get","params":{"SelectionCriteria":{},"FieldNames":["Id","StartDate","Statistics","Funds"]}}';
-            $ac_ya = $home->curl_request($getBalanse,$HEADER,'https://api.direct.yandex.com/json/v5/campaigns');
+            $ac_ya = $home->curl_request($getBalanse,$HEADER,'https://api.direct.yandex.com/json/v5/campaigns');*/
 
-            $ArClicks = array();
-            $ArClicksAll = array();
-            $IDsCompany = array();
-            $ArFundsAll = array();
 
-            if(isset($ac_ya->result->Campaigns)):
 
-            foreach($ac_ya->result->Campaigns as $a){
+            $csv = new ParseCsv\Csv();
+            $url = 'https://api.direct.yandex.com/json/v5/reports';
+            $token = $y->token_yandex;
+            $clientLogin = $y->login;
 
-                $IDsCompany[$context_yandex->name_project][] = $a->Id;
-                $ArClicksAll[$context_yandex->name_project][] = $a->Statistics->Clicks;
-                $ArFundsAll[$context_yandex->name_project][] = ($a->Funds->Mode == "SHARED_ACCOUNT_FUNDS") ? $a->Funds->SharedAccountFunds->Spend : 0;
+            $params = [
+                "params" => [
+                    "SelectionCriteria" => [
+                        "DateFrom" => (date('Y-m-d', strtotime('-'.$count_day.' days'))),
+                        "DateTo" => (date('Y-m-d', strtotime('-1 days'))),
+                    ],
+                    "FieldNames" => ["CampaignId", "Clicks", "Cost"],
+                    "ReportName" => time(),
+                    "ReportType" => "CAMPAIGN_PERFORMANCE_REPORT",
+                    "DateRangeType" => "CUSTOM_DATE",
+                    "Format" => "TSV",
+                    "IncludeVAT" => "NO",
+                    "IncludeDiscount" => "NO"
+                ]
+            ];
+            $body = json_encode($params);
+            $headers = array(
+                "Authorization: Bearer $token",
+                "Client-Login: $clientLogin",
+                "Accept-Language: ru",
+                "processingMode: online",
+                "returnMoneyInMicros: false",
+                "skipReportHeader: true",
+                "skipReportSummary: true"
+            );
+            $clickYandex = $home->curl_request($body,$headers,$url,"TSV");
 
-                $params = array(
-                    'token' => $y->token_yandex,
-                    'method' => "GetSummaryStat",
-                    'param' => array(
-                        "CampaignIDS" => array($a->Id),
-                        "StartDate" => (date('Y-m-d', strtotime('-'.$count_day.' days'))),//(date('Y-m-d', strtotime('-7 days'))),
-                        "EndDate" => (date('Y-m-d', strtotime('-1 days'))),
-                    ),
-                );
+            if($clickYandex):
 
-                $getBalanse = json_encode($params);
-                $HEADER = array(
-                    'Accept-Language: ru',
-                    'Content-Type: application/json; charset=utf-8'
-                );
-                $clickYandex = $home->curl_request($getBalanse,$HEADER,'https://api.direct.yandex.ru/live/v4/json/');
+                $csv->delimiter = "\t";
+                $csv->parse($clickYandex);
+                $Cost = 0;
+                $Clicks = 0;
+                if(is_array($csv->data)){
+                    foreach($csv->data as $clicks){
 
-                if(!empty($clickYandex->data)){
-                    $sum_clicks = '';
-                    foreach($clickYandex->data as $click){
-                        $sum_clicks += $click->ClicksContext+$click->ClicksSearch;
+                        $Clicks += $clicks['Clicks'];
+                        $Cost += $clicks['Cost'];
                     }
-                    $ArClicks[$context_yandex->name_project][] = $sum_clicks;
+                    if($Clicks)
+                    $Cost = round(round($Cost)/$Clicks);
                 }
 
-            }
-            $costs = 0;
-            foreach($ArFundsAll[$context_yandex->name_project] as $s){
-                $costs += $s;
-            }
-            if(empty($ArClicks[$context_yandex->name_project])){
-                $dataApi[$context_yandex->name_project]['clicks_yandex'] = 0;
-                $dataApi[$context_yandex->name_project]['clicks_price_yandex'] = 0;
-            }else{
-                if(array_sum($ArClicks[$context_yandex->name_project]) != 0){
-                    $dataApi[$context_yandex->name_project]['clicks_yandex'] = array_sum($ArClicks[$context_yandex->name_project]);
-                    $dataApi[$context_yandex->name_project]['clicks_price_yandex'] = floor($costs*25.424/array_sum($ArClicksAll[$context_yandex->name_project]));
-                }else {
-                    $dataApi[$context_yandex->name_project]['clicks_yandex'] = 0;
-                    $dataApi[$context_yandex->name_project]['clicks_price_yandex'] = 0;
-                }
-            }
+
+            $dataApi[$context_yandex->name_project]['clicks_yandex'] = $Clicks;
+            $dataApi[$context_yandex->name_project]['clicks_price_yandex'] = $Cost;
+
             $dataApi[$context_yandex->name_project]['name_progect_yandex'] = $context_yandex->name_project;
             $dataApi[$context_yandex->name_project]['email_yandex'] = $context_yandex->e_mail;
             $dataApi[$context_yandex->name_project]['balanse_yandex'] = $context_yandex->ost_bslsnse_ya;
-
 
             else:
                 $error_yandex[] = $y->login;
             endif;
         }
-
     }
 
     if(!empty($error_yandex)){
@@ -599,45 +596,7 @@ Route::get('/get-balanse-yandex', function()
 ////TEST/////
 Route::get('/testing', function()
 {
-   // $home = new \App\Http\Controllers\HomeController();
 
-   // var_dump($home->get_price_auto_direct("elama-16133335"));
-
-    /*
-    $params = array(
-        'token'  => 'AQAAAAAenkluAAM6hf8_UPpjwUZklh-m80g__00',
-        'method' => "GetCampaignsTags",
-        'param' => array(
-            "CampaignIDS" => array(28708575,28708580)
-           // array('elama-16133049')
-//            'Action' => 'Get',
-//            'locale' => 'ru',
-//            'SelectionCriteria' => array(
-//                'Logins' => array('elama-16133049')
-//            ),
-        )
-    );
-
-    $getBalanse = json_encode($params);
-
-    $HEADER = array(
-        'Accept-Language: ru',
-        'Content-Type: application/json; charset=utf-8'
-    );
-
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, 'https://api.direct.yandex.ru/live/v4/json/');
-    curl_setopt($curl, CURLOPT_POST, 1);
-    curl_setopt($curl,CURLOPT_HTTPHEADER, $HEADER);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, $getBalanse);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-    $result = curl_exec($curl);
-    curl_close($curl);
-
-    var_dump($result);
-
-    */
 
 });
 

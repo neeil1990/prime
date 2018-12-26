@@ -631,21 +631,21 @@ class HomeController extends Controller
     }
 
 
-    public function curl_request($params,$HEADER,$url_api){
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, $url_api);
-        curl_setopt($curl, CURLOPT_POST, 1);
-        curl_setopt($curl,CURLOPT_HTTPHEADER, $HEADER);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $params);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        $result = curl_exec($curl);
-        curl_close($curl);
+    public function curl_request($body,$headers,$url,$Format = "JSON"){
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, $url);
+		curl_setopt($curl, CURLOPT_POST, true);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, $body);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_HEADER, false);
+		curl_setopt($curl, CURLINFO_HEADER_OUT, true);
+		curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+		$result = curl_exec($curl);
+		curl_close($curl);
 
-        $clickYandex = json_decode($result);
+        $clickYandex = ($Format == "JSON") ? json_decode($result) : $result;
 
         return $clickYandex;
-
     }
 
 
