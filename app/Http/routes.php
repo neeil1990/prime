@@ -538,13 +538,12 @@ Route::get('/get-balanse-yandex', function()
             $ostatok_balanse_yandex = $ac_ya->data->Accounts[0]->Amount;
         }
 
-
         if(!empty($ostatok_balanse_yandex)){
            $id_com = \DB::table('project_contexts')->where('id',$ya->id_company)->first();
 		   if(empty($id_com))
 			   continue;
 		   
-            $summa = $ostatok_balanse_yandex-$id_com->ost_bslsnse_ya;
+            $summa = (float)$ostatok_balanse_yandex-(float)$id_com->ost_bslsnse_ya;
             if($summa >= 1000){
 
                $notice = \App\NoticeSendMail::find(1);
