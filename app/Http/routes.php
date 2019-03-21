@@ -382,9 +382,12 @@ Route::get('/get-seranking-sum', function()
         $out = curl_exec($curl);
         curl_close($curl);
         $data = json_decode($out);
-        foreach($data[0]->keywords as $sum){
-            $arrSum[$d->name][] = $sum->total_sum;
+        if(isset($data[0]->keywords) && count($data[0]->keywords) > 0){
+            foreach($data[0]->keywords as $sum){
+                $arrSum[$d->name][] = $sum->total_sum;
+            }
         }
+
     }
 
     $project_contexts = \DB::table('project_contexts')->get();
@@ -429,6 +432,9 @@ Route::get('/get-seranking-sum', function()
             }else{
                 $budget = $p->osvoeno;
             }
+
+            if(empty($budget))
+                $budget = 0;
 
             if(!empty($p->end)) {
                 $end = explode('/', $p->end);
