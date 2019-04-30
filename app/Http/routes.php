@@ -238,8 +238,6 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
            $dataApi[$context_google->name_project]['clicks_google'] = $click_accaunt['clicks'];
            $dataApi[$context_google->name_project]['clicks_price_google'] = $clicks_price_google;
        }
-       //dd($g);
-
    }
 
 

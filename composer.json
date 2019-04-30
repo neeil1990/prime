@@ -10,7 +10,7 @@
         "laravel/framework": "5.2.*",
         "barryvdh/laravel-debugbar": "^2.2",
         "barryvdh/laravel-ide-helper": "^2.1",
-        "googleads/googleads-php-lib": "^32.0",
+        "googleads/googleads-php-lib": "*",
         "parsecsv/php-parsecsv": "^1.1"
     },
     "require-dev": {
@@ -23,7 +23,7 @@
     "autoload": {
         "classmap": [
             "database",
-            "vendor/googleads/googleads-php-lib/src/Google/AdsApi/AdWords/v201806/",
+            "vendor/googleads/googleads-php-lib/src/Google/AdsApi/AdWords/v201809/",
             "vendor/googleads/googleads-php-lib/src/Google/AdsApi/AdWords/"
         ],
         "psr-4": {

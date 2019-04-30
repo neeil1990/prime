@@ -1,6 +1,201 @@
+### 41.0.0
+
+##### AdWords
+
+*   Removed support and examples for v201806. See deprecation
+    schedule at: https://developers.google.com/adwords/api/docs/sunset-dates
+
+##### Ad Manager
+
+*   Fixed [issue #538](https://github.com/googleads/googleads-php-lib/issues/538).
+
+##### Common
+
+*   Updated `composer.json` to require the minimum PHP version of 7.1.
+
+### 40.0.0
+
+##### AdWords
+
+*   No changes.
+
+##### Ad Manager
+
+*   Added support for v201902.
+*   Updated RunInventoryReport example to replace deprecated metrics.
+*   Added examples for AdjustmentService and CmsMetadataService.
+*   Removed support for v201802.
+*   Removed examples for v201805.
+
+##### Common
+
+*   Refactored `GuzzleLogMessageHandler` and `GuzzleLogMessageFormatter` so
+    tests can be added to cover the cases when a response body is logged.
+
+### 39.0.0
+
+##### AdWords
+
+*   Removed support and examples for v201802. See deprecation
+    schedule at: https://developers.google.com/adwords/api/docs/sunset-dates
+
+##### Ad Manager
+
+*   Added CreateVideoLineItems example for v201811.
+*   Fixed null pointer exception when the `getAllNetworks` function returns
+    null in the `GetAllNetworks` examples for v201811, v201808 and v201805.
+
+##### Common
+
+*   Updated GuzzleLogMessageHandler to support both logging response body.
+*   Updated `composer.json` to require the minimum PHP version of 5.6.
+
+### 38.0.0
+
+##### AdWords
+
+*   Added Smart Shopping ad example (v201809).
+*   Fixed [issue #541](https://github.com/googleads/googleads-php-lib/issues/541).
+
+##### Ad Manager
+
+*   Added support for v201811.
+*   Removed support for v201711.
+*   Removed examples for v201802.
+*   Updated the `Util/v201811/AdManagerDateTimes.php` class for renaming the
+function `setTimeZoneID` to `setTimeZoneId`.
+*   Discontinue the `GetAllContentMetadataKeyHierarchies.php` example.
+
+### 37.1.0
+
+##### AdWords
+
+*   Added support and examples for v201809.
+*   Fixed [issue #527](https://github.com/googleads/googleads-php-lib/issues/527).
+
+### 37.0.0
+
+##### AdWords
+
+*   Added a sample application to demonstrate how to use the AdWords API with
+    the Laravel framework. The location of the sample application is
+    [`examples/AdWords/LaravelSampleApp/`](https://github.com/googleads/googleads-php-lib/tree/master/examples/AdWords/LaravelSampleApp).
+
+##### Ad Manager
+
+*   Rename files, classes and variables to replace DFP with Ad Manager. For detailed changes, please refer to the [migration guide](https://github.com/googleads/googleads-php-lib/wiki/AdManager-migration).
+*   Added support and examples for v201808.
+*   Removed examples for v201711.
+*   Removed support for v201708.
+
+##### Common
+
+*   No changes.
+
+### 36.0.0
+
+##### AdWords
+
+*   Removed support and examples for v201710. See deprecation
+    schedule at: https://developers.google.com/adwords/api/docs/sunset-dates
+
+##### DFP (currently Ad Manager)
+
+*   Added `ServiceFactory` classes for v201708, v201711, v201802 and v201805.
+*   Updated examples to use the new `ServiceFactory` classes.
+
+### 35.2.0
+
+##### AdWords
+
+*   Added support and examples for v201806.
+
+### 35.1.0
+
+##### DFP (currently Ad Manager)
+
+*   Added `ContentFilterError`, `ContentFilterErrorReason` for all versions.
+    These classes are for deserializing server errors.
+*   Added `UserConsentEligibility` and updated `LineItem`, `LineItemSummary`
+    for v201805 to make line items ineligible for non-personalized ad requests.
+
+### 35.0.0
+
+##### AdWords
+
+*   Added `QueryValidator` for v201802 to validate parts of an AWQL string.
+*   Added unit tests for `ServiceQueryBuilder`, `ReportQueryBuilder` and
+    supporting classes for v201802.
+*   Fixed
+    [issue #473](https://github.com/googleads/googleads-php-lib/issues/473).
+
+##### DFP (currently Ad Manager)
+
+*   Added `DaiAuthenticationKeyService` for creating, updating and retrieving
+    `DaiAuthenticationKey` objects.
+*   Added support and examples for v201805.
+*   Removed support for v201705.
+*   Removed examples for v201708.
+
+### 34.0.0
+
+##### AdWords
+
+*   Removed support and examples for v201705 and v201708. See deprecation
+    schedule at: https://developers.google.com/adwords/api/docs/sunset-dates
+*   Added `ServiceQueryBuilder` for v201802 to support
+    building AWQL strings for querying AdWords API services.
+*   Added `ReportQueryBuilder` for v201802 to support
+    building AWQL strings for downloading AdWords API reports.
+
+##### DFP (currently Ad Manager)
+
+*   Added new examples for managing user-team associations:
+    `CreateUserTeamAssociations`, `UpdateUserTeamAssociations`
+    and `DeleteUserTeamAssociations`.
+
+### 33.1.0
+
+##### AdWords
+
+*   Added support and examples for v201802.
+
+### 33.0.1
+
+##### Common
+
+*   Fixed
+    [issue #447](https://github.com/googleads/googleads-php-lib/issues/447).
+
+### 33.0.0
+
+##### AdWords
+
+*   Accepted [PR #429](https://github.com/googleads/googleads-php-lib/pull/429).
+*   Removed support and examples for v201702. See deprecation schedule at:
+    https://developers.google.com/adwords/api/docs/sunset-dates
+
+##### DFP (currently Ad Manager)
+
+*   Accepted [PR #438](https://github.com/googleads/googleads-php-lib/pull/438).
+*   Added support and examples for v201802.
+*   Removed support for v201702.
+*   Removed examples for v201705.
+
+##### Common
+
+*   Fixed [issue
+    #194](https://github.com/googleads/googleads-php-lib/issues/194).
+*   Accepted [PR #396](https://github.com/googleads/googleads-php-lib/pull/396).
+*   Accepted [PR #415](https://github.com/googleads/googleads-php-lib/pull/415).
+*   Accepted [PR #421](https://github.com/googleads/googleads-php-lib/pull/421).
+*   Accepted [PR #422](https://github.com/googleads/googleads-php-lib/pull/422).
+*   Fixed
+    [issue #426](https://github.com/googleads/googleads-php-lib/issues/426).
+
 ### 32.1.0
 
-##### DFP
+##### DFP (currently Ad Manager)
 
 *   Added examples for v201711:
     *   InventoryService\GetAdUnitHierarchy
@@ -34,7 +229,7 @@
 *   Fixed
     [issue #378](https://github.com/googleads/googleads-php-lib/issues/378).
 
-##### DFP
+##### DFP (currently Ad Manager)
 
 *   Added support and examples for v201711.
 *   Added CdnConfigurationService and examples.
@@ -56,7 +251,7 @@
 *   Added an option for setting transparent HTTP gzip compression for reporting
     in `adsapi_php.ini`.
 
-##### DFP
+##### DFP (currently Ad Manager)
 
 *   Added UpdateLineItems and UpdateOrders examples.
 
@@ -78,7 +273,7 @@
 
 ### 29.0.0
 
-##### DFP
+##### DFP (currently Ad Manager)
 
 *   Added support and examples for v201708.
 *   Removed examples for v201611.
@@ -140,7 +335,7 @@
 
 ### 27.0.0
 
-##### DFP
+##### DFP (currently Ad Manager)
 
 *   Added support and examples for v201705.
 
@@ -169,7 +364,7 @@
 
 ### 25.4.0
 
-##### DFP
+##### DFP (currently Ad Manager)
 
 *   Added `perform action` examples for core services.
 *   Added `CreateNativeCreatives` example.
@@ -185,7 +380,7 @@
     [issue #236](https://github.com/googleads/googleads-php-lib/issues/236).
 *   Accepted [PR #196](https://github.com/googleads/googleads-php-lib/pull/196).
 
-##### DFP
+##### DFP (currently Ad Manager)
 
 *   Fixed [issue #238]
     (https://github.com/googleads/googleads-php-lib/issues/238).
@@ -198,7 +393,7 @@
 
 ### 25.2.0
 
-##### DFP
+##### DFP (currently Ad Manager)
 
 *   Added support and examples for v201702.
 
@@ -217,7 +412,7 @@
     [issue #206](https://github.com/googleads/googleads-php-lib/issues/206).
 *   Fixed some examples that had issues with printing results.
 
-##### DFP
+##### DFP (currently Ad Manager)
 
 *   Accepted [PR #195](https://github.com/googleads/googleads-php-lib/pull/195).
 *   Added RunSavedQuery.php reporting example.
@@ -245,7 +440,7 @@
     `ReportDownloader` by introducing `ReportDownloadResult`.
 *   Added support for including utility usage in the user agent header.
 
-##### DFP
+##### DFP (currently Ad Manager)
 
 *   Added support and examples for v201611.
 *   Removed support and examples for v201608.
@@ -286,14 +481,14 @@
     ([issue #145](https://github.com/googleads/googleads-php-lib/issues/145)).
 *   Added some examples for v201607.
 
-##### DFP
+##### DFP (currently Ad Manager)
 
 *   Added support and examples for v201608.
 *   Removed support and examples for v201602.
 
 ### 1.3.1-beta
 
-##### DFP
+##### DFP (currently Ad Manager)
 
 *   Added v201602 retrieval examples.
 
@@ -327,7 +522,7 @@
 *   Added support for v201603.
 *   Removed support for v201601.
 
-##### DFP
+##### DFP (currently Ad Manager)
 
 *   Added support for v201602.
 *   Removed support for v201511.

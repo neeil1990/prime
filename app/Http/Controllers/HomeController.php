@@ -1891,7 +1891,13 @@ class HomeController extends Controller
 
             $arrContextItog = array();
             foreach($project_context_itog as $itog){
-                $arrContextItog[] = ($itog->ya_direct+$itog->go_advords+$itog->MyTarget)*$itog->procent_seo/100;
+
+                $ya_direct = (is_numeric($itog->ya_direct)) ? (int)$itog->ya_direct : 0;
+                $go_advords = (is_numeric($itog->go_advords)) ? (int)$itog->go_advords : 0;
+                $MyTarget = (is_numeric($itog->MyTarget)) ? (int)$itog->MyTarget : 0;
+                $procent_seo = (is_numeric($itog->procent_seo)) ? (int)$itog->procent_seo : 0;
+
+                $arrContextItog[] = ($ya_direct+$go_advords+$MyTarget)*$procent_seo/100;
             }
 
 
@@ -1903,11 +1909,11 @@ class HomeController extends Controller
             $users[$key]->procent_context_itog = array_sum($arrContextItog)+array_sum($arrSeoPlusItog)-array_sum($arrSeoMinusItog);
 
             //итог зп специалиста
-            $users[$key]->itog = $us->sum_many_first+array_sum($arrContextItog)+array_sum($arrSeoPlusItog)-array_sum($arrSeoMinusItog);
+            $users[$key]->itog = (int)$us->sum_many_first+array_sum($arrContextItog)+array_sum($arrSeoPlusItog)-array_sum($arrSeoMinusItog);
 
             //итоги всех зарплат
             if($us->status == 1) {
-                $arrItog['zp'][] = $us->sum_many_first + array_sum($arrContextItog)+array_sum($arrSeoPlusItog)-array_sum($arrSeoMinusItog);
+                $arrItog['zp'][] = (int)$us->sum_many_first + array_sum($arrContextItog)+array_sum($arrSeoPlusItog)-array_sum($arrSeoMinusItog);
             }
 
             $project_seos = \DB::table('project_seos')->where('id_glavn_user',$us->id)->where('status',1)->count();
