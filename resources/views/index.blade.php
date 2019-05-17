@@ -287,7 +287,7 @@
                                     </thead>
                                     <tbody class="all">
                                     {{ ($count = 0) ? '' : '' }}
-                                    {{ ($sum = '') ? '' : '' }}
+                                    {{ ($sum = 0) ? '' : '' }}
                                     @foreach($stat as $key => $stat)
                                     <tr>
                                         <td>{{$key}}</td>
@@ -300,7 +300,7 @@
 
                                     </tr>
                                     {{ ($count++) ? '' : '' }}
-                                    {{ ($sum += $stat['osvoeno_procent']) ? '' : '' }}
+                                    {{ ($sum += (int)$stat['osvoeno_procent']) ? '' : '' }}
                                     @endforeach
                                     </tbody>
                                 </table>
