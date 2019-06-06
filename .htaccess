@@ -1,7 +1,6 @@
 RewriteEngine On
 
 RewriteRule ^(.*)$ public/$1 [L]
-# Beget FileManager Auth rules
 #AuthName "Vnimanije, dopolnitelnaja avtorizacija"
 #AuthType Basic
 #AuthUserFile /home/b/bziksv/work.prime-ltd.su/public_html/.htpasswd
@@ -12,3 +11,8 @@ Allow from 5.101.152.112
 Allow from 194.154.75.198
 Allow from 87.236.16.4
 satisfy any
+# Beget FileManager Auth rules
+AuthName "Protected area, need authorization"
+AuthType Basic
+AuthUserFile /home/b/bziksv/work.prime-ltd.su/public_html/.htpasswd
+require valid-user

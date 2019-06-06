@@ -884,6 +884,8 @@ class HomeController extends Controller
 		$out = curl_exec($curl);
 		curl_close($curl);
 		$token = json_decode($out);
+		
+		//dd($token,'http://online.seranking.com/structure/clientapi/v2.php?method=login&login=work-api&pass='.md5('wcKcY2fgay'));
 
 
 
@@ -962,6 +964,8 @@ class HomeController extends Controller
 			$back_up_se_ran_pos = array();
 		}
 
+		
+		
 
 		$curl = curl_init();
 		curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=sites&token='.$token->token.'');
@@ -969,6 +973,8 @@ class HomeController extends Controller
 		$out = curl_exec($curl);
 		curl_close($curl);
 		$project = json_decode($out);
+		
+		
 
 
 
@@ -1757,7 +1763,7 @@ class HomeController extends Controller
 
         $arrBuget = array();
         foreach($project_context as $key => $u){
-            $sum = $u->ya_direct+$u->go_advords;
+            $sum = (int)$u->ya_direct+(int)$u->go_advords;
             $project_context[$key]->sum_zp = $sum*$u->procent_seo/100;
 
             $arrBuget[] = $u->ya_direct;
