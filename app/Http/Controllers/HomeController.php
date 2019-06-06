@@ -935,20 +935,25 @@ class HomeController extends Controller
 							$editpos['position'] -= $request->col_pos;
 						}
 
-
-                        $curl = curl_init();
-                        curl_setopt($curl, CURLOPT_HTTPHEADER , ['Authorization: Token '.$token]);
-                        curl_setopt($curl, CURLOPT_URL, 'https://api4.seranking.com/sites/'.$id_project[0].'/position/');
-                        curl_setopt($curl, CURLOPT_PUT, true);
-                        curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
-                        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode([
-                            'keyword_id' => $editpos['keyword_id'],
-                            'date' => $editpos['date'],
-                            'position' => $editpos['position'],
-                            'site_engine_id' => $editpos['site_engine_id']
-                        ]));
-                        $out = curl_exec($curl);
-                        curl_close($curl);
+                        $apiKey = '6f54eccb8d9a79daedf23a8e325be7ad3238967e';
+                        $url = 'https://api4.seranking.com/sites/'.$id_project[0].'/position/';
+                        $context = stream_context_create([
+                            'http' => [
+                                'method' => 'PUT',
+                                'ignore_errors' => true,
+                                'header' => [
+                                    "Authorization: Token $apiKey",
+                                    "Content-Type: application/json; charset=utf-8"
+                                ],
+                                'content' => json_encode([
+                                    'keyword_id' => $editpos['keyword_id'],
+                                    'date' => $editpos['date'],
+                                    'position' => $editpos['position'],
+                                    'site_engine_id' => $editpos['site_engine_id']
+                                ])
+                            ]
+                        ]);
+                        file_get_contents($url, 0, $context);
 
 					}
 				}
@@ -997,18 +1002,26 @@ class HomeController extends Controller
 		$back_up = \DB::table('back_up_se_ran_pos')->where('id',$id)->first();
 
 		foreach(unserialize($back_up->ar_position) as $editpos){
-            $curl = curl_init();
-            curl_setopt($curl, CURLOPT_HTTPHEADER , ['Authorization: Token '.$token]);
-            curl_setopt($curl, CURLOPT_URL, 'https://api4.seranking.com/sites/'.$back_up->name_project.'/position/');
-            curl_setopt($curl, CURLOPT_PUT, true);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode([
-                'keyword_id' => $editpos['keyword_id'],
-                'date' => $editpos['date'],
-                'position' => $editpos['position'],
-                'site_engine_id' => $editpos['site_engine_id']
-            ]));
-            curl_close($curl);
+
+            $apiKey = '6f54eccb8d9a79daedf23a8e325be7ad3238967e';
+            $url = 'https://api4.seranking.com/sites/'.$back_up->name_project.'/position/';
+            $context = stream_context_create([
+                'http' => [
+                    'method' => 'PUT',
+                    'ignore_errors' => true,
+                    'header' => [
+                        "Authorization: Token $apiKey",
+                        "Content-Type: application/json; charset=utf-8"
+                    ],
+                    'content' => json_encode([
+                        'keyword_id' => $editpos['keyword_id'],
+                        'date' => $editpos['date'],
+                        'position' => $editpos['position'],
+                        'site_engine_id' => $editpos['site_engine_id']
+                    ])
+                ]
+            ]);
+            file_get_contents($url, 0, $context);
 		}
 		\DB::table('back_up_se_ran_pos')->where('id',$id)->delete();
 		return redirect()->intended('/settings-position');

@@ -355,17 +355,11 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
 Route::get('/get-seranking-sum', function()
 {
 
-    $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=login&login=work-api&pass='.md5('wcKcY2fgay').'');
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
-    $out = curl_exec($curl);
-    curl_close($curl);
-    $data_in = json_decode($out);
-
-
+    $token = "6f54eccb8d9a79daedf23a8e325be7ad3238967e";
 
     $curl = curl_init();
-    curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=sites&token='.$data_in->token.'');
+    curl_setopt($curl, CURLOPT_HTTPHEADER , ['Authorization: Token '.$token]);
+    curl_setopt($curl, CURLOPT_URL, 'https://api4.seranking.com/sites');
     curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
     $out = curl_exec($curl);
     curl_close($curl);
@@ -375,11 +369,15 @@ Route::get('/get-seranking-sum', function()
     foreach($data as $d){
 
         $curl = curl_init();
-        curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=stat&siteid='.$d->id.'&token='.$data_in->token.'');
+        curl_setopt($curl, CURLOPT_HTTPHEADER , ['Authorization: Token '.$token]);
+        curl_setopt($curl, CURLOPT_URL, 'https://api4.seranking.com/sites/'.$d->id.'/positions');
         curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
         $out = curl_exec($curl);
         curl_close($curl);
         $data = json_decode($out);
+
+
+
         if(isset($data[0]->keywords) && count($data[0]->keywords) > 0){
             foreach($data[0]->keywords as $sum){
                 $arrSum[$d->name][] = $sum->total_sum;
@@ -599,6 +597,9 @@ Route::get('/get-balanse-yandex', function()
 ////TEST/////
 Route::get('/testing', function()
 {
+
+
+
 
 
 });
