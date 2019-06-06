@@ -944,15 +944,17 @@ class HomeController extends Controller
 			}
 
 
-			foreach($data_pos[0]->keywords as $pos){
-				$ArTotalSum['sum'][] = $pos->total_sum;
-			}
+            if(!empty($data_pos[0]->keywords)){
+                foreach($data_pos[0]->keywords as $pos){
+                    $ArTotalSum['sum'][] = $pos->total_sum;
+                }
 
-			$project_seos = \DB::table('project_seos')->where('name_project',$id_project[1])->first();
-			$ArTotalSum['total_sum'] = array_sum($ArTotalSum['sum']);
-			$ArTotalSum['name'] = $id_project[1];
-			$ArTotalSum['max_budjet'] = $project_seos->budget;
-			unset($ArTotalSum['sum']);
+                $project_seos = \DB::table('project_seos')->where('name_project',$id_project[1])->first();
+                $ArTotalSum['total_sum'] = array_sum($ArTotalSum['sum']);
+                $ArTotalSum['name'] = $id_project[1];
+                $ArTotalSum['max_budjet'] = $project_seos->budget;
+                unset($ArTotalSum['sum']);
+            }
 		}
 		$back_up_se_ran_pos = \DB::table('back_up_se_ran_pos')->get();
 		if(!isset($back_up_se_ran_pos[0]->id)){
