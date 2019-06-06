@@ -878,32 +878,26 @@ class HomeController extends Controller
 			return die('Nooo!');
 		}
 
-		$curl = curl_init();
-		curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=login&login=work-api&pass='.md5('wcKcY2fgay').'');
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
-		$out = curl_exec($curl);
-		curl_close($curl);
-		$token = json_decode($out);
-		
-		//dd($token,'http://online.seranking.com/structure/clientapi/v2.php?method=login&login=work-api&pass='.md5('wcKcY2fgay'));
-
-
+        $token = "6f54eccb8d9a79daedf23a8e325be7ad3238967e";
 
 		$ArTotalSum = array(
 			'name' => '',
 			'max_budjet' => '',
 			'total_sum' => ''
 		);
+
 		if($request->id_project and $request->date_stat){
 			$data = explode(' - ',$request->date_stat);
 			$id_project = explode('_',$request->id_project);
 
-				$curl = curl_init();
-				curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=stat&siteid='.$id_project[0].'&dateStart='.$data[0].'&dateEnd='.$data[1].'&token='.$token->token.'');
-				curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
-				$out = curl_exec($curl);
-				curl_close($curl);
-				$data_pos = json_decode($out);
+
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_HTTPHEADER , ['Authorization: Token '.$token]);
+            curl_setopt($curl, CURLOPT_URL, 'https://api4.seranking.com/sites/'.$id_project[0].'/positions?date_from='.$data[0].'&date_to='.$data[1]);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+            $out = curl_exec($curl);
+            curl_close($curl);
+            $data_pos = json_decode($out);
 
 
 			if($request->start_pos and $request->end_pos and $request->col_pos) {
@@ -924,7 +918,6 @@ class HomeController extends Controller
 					}
 				}
 
-				//dd($arSendPos);
 				if($arSendPos) {
 					\DB::table('back_up_se_ran_pos')->insert(
 						array(
@@ -950,9 +943,11 @@ class HomeController extends Controller
 				}
 			}
 
+
 			foreach($data_pos[0]->keywords as $pos){
 				$ArTotalSum['sum'][] = $pos->total_sum;
 			}
+
 			$project_seos = \DB::table('project_seos')->where('name_project',$id_project[1])->first();
 			$ArTotalSum['total_sum'] = array_sum($ArTotalSum['sum']);
 			$ArTotalSum['name'] = $id_project[1];
@@ -964,19 +959,14 @@ class HomeController extends Controller
 			$back_up_se_ran_pos = array();
 		}
 
-		
-		
 
-		$curl = curl_init();
-		curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=sites&token='.$token->token.'');
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
-		$out = curl_exec($curl);
-		curl_close($curl);
-		$project = json_decode($out);
-		
-		
-
-
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_HTTPHEADER , ['Authorization: Token '.$token]);
+        curl_setopt($curl, CURLOPT_URL, 'https://api4.seranking.com/sites');
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+        $out = curl_exec($curl);
+        curl_close($curl);
+        $project = json_decode($out);
 
 		return view('page.settings_position',[
 			'back_up_se_ran_pos' => $back_up_se_ran_pos,
