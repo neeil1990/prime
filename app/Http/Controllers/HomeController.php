@@ -900,6 +900,8 @@ class HomeController extends Controller
             $data_pos = json_decode($out);
 
 
+
+
 			if($request->start_pos and $request->end_pos and $request->col_pos) {
 
 				$arSendPos = array();
@@ -908,11 +910,10 @@ class HomeController extends Controller
 					//dd($pos);
 					foreach($pos->positions as $k => $p){ // колл дней
 						if($p->pos > $request->start_pos and $p->pos < $request->end_pos){
-							$arSendPos[$inc]['seID'] = $data_pos[0]->seID;
-							$arSendPos[$inc]['regionID'] = $data_pos[0]->regionID;
-							$arSendPos[$inc]['id'] = $pos->id;
-							$arSendPos[$inc]['pos'] = $p->pos;
+							$arSendPos[$inc]['keyword_id'] = $pos->id;
 							$arSendPos[$inc]['date'] = $p->date;
+							$arSendPos[$inc]['position'] = $p->pos;
+							$arSendPos[$inc]['site_engine_id'] = $data_pos[0]->site_engine_id;
 							$inc++;
 						}
 					}
@@ -929,15 +930,25 @@ class HomeController extends Controller
 
 					foreach ($arSendPos as $editpos) {
 						if ($request->plus_pos == '+') {
-							$editpos['pos'] += $request->col_pos;
+							$editpos['position'] += $request->col_pos;
 						} else {
-							$editpos['pos'] -= $request->col_pos;
+							$editpos['position'] -= $request->col_pos;
 						}
-						$curl = curl_init();
-						curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=setPosition&keyword_id=' . $editpos['id'] . '&date=' . $editpos['date'] . '&position=' . $editpos['pos'] . '&search_engine_uid=' . $editpos['seID'] . '~' . $editpos['regionID'] . '&token=' . $token->token . '');
-						curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-						$out = curl_exec($curl);
-						curl_close($curl);
+
+
+                        $curl = curl_init();
+                        curl_setopt($curl, CURLOPT_HTTPHEADER , ['Authorization: Token '.$token]);
+                        curl_setopt($curl, CURLOPT_URL, 'https://api4.seranking.com/sites/'.$id_project[0].'/position/');
+                        curl_setopt($curl, CURLOPT_PUT, true);
+                        curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+                        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode([
+                            'keyword_id' => $editpos['keyword_id'],
+                            'date' => $editpos['date'],
+                            'position' => $editpos['position'],
+                            'site_engine_id' => $editpos['site_engine_id']
+                        ]));
+                        $out = curl_exec($curl);
+                        curl_close($curl);
 
 					}
 				}
@@ -980,21 +991,24 @@ class HomeController extends Controller
 	}
 
 	public function backUpSeRanPosGet($id){
-		$curl = curl_init();
-		curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=login&login=work-api&pass='.md5('wcKcY2fgay').'');
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
-		$out = curl_exec($curl);
-		curl_close($curl);
-		$token = json_decode($out);
+
+        $token = "6f54eccb8d9a79daedf23a8e325be7ad3238967e";
 
 		$back_up = \DB::table('back_up_se_ran_pos')->where('id',$id)->first();
 
 		foreach(unserialize($back_up->ar_position) as $editpos){
-			$curl = curl_init();
-			curl_setopt($curl, CURLOPT_URL, 'http://online.seranking.com/structure/clientapi/v2.php?method=setPosition&keyword_id=' . $editpos['id'] . '&date=' . $editpos['date'] . '&position=' . $editpos['pos'] . '&search_engine_uid=' . $editpos['seID'] . '~' . $editpos['regionID'] . '&token=' . $token->token . '');
-			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-			$out = curl_exec($curl);
-			curl_close($curl);
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_HTTPHEADER , ['Authorization: Token '.$token]);
+            curl_setopt($curl, CURLOPT_URL, 'https://api4.seranking.com/sites/'.$back_up->name_project.'/position/');
+            curl_setopt($curl, CURLOPT_PUT, true);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode([
+                'keyword_id' => $editpos['keyword_id'],
+                'date' => $editpos['date'],
+                'position' => $editpos['position'],
+                'site_engine_id' => $editpos['site_engine_id']
+            ]));
+            curl_close($curl);
 		}
 		\DB::table('back_up_se_ran_pos')->where('id',$id)->delete();
 		return redirect()->intended('/settings-position');
