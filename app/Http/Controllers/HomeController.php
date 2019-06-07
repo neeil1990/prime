@@ -914,6 +914,7 @@ class HomeController extends Controller
 							$arSendPos[$inc]['date'] = $p->date;
 							$arSendPos[$inc]['position'] = $p->pos;
 							$arSendPos[$inc]['site_engine_id'] = $data_pos[0]->site_engine_id;
+							$arSendPos[$inc]['id'] = $id_project[0];
 							$inc++;
 						}
 					}
@@ -997,14 +998,12 @@ class HomeController extends Controller
 
 	public function backUpSeRanPosGet($id){
 
-        $token = "6f54eccb8d9a79daedf23a8e325be7ad3238967e";
-
 		$back_up = \DB::table('back_up_se_ran_pos')->where('id',$id)->first();
 
 		foreach(unserialize($back_up->ar_position) as $editpos){
 
             $apiKey = '6f54eccb8d9a79daedf23a8e325be7ad3238967e';
-            $url = 'https://api4.seranking.com/sites/'.$back_up->name_project.'/position/';
+            $url = 'https://api4.seranking.com/sites/'.$editpos['id'].'/position/';
             $context = stream_context_create([
                 'http' => [
                     'method' => 'PUT',
