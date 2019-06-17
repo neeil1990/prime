@@ -775,12 +775,12 @@ class HomeController extends Controller
 			$progect_seo_user = \DB::table('project_seos')->where('status', '1')->where('id_glavn_user',$this->user_now()->id)->get();
 			$project_contexts_user = \DB::table('project_contexts')->where('status', '1')->where('id_glavn_user',$this->user_now()->id)->get();
 
-			$all_osv_progect_seo_user = '';
+			$all_osv_progect_seo_user = 0;
 			foreach($progect_seo_user as $osv){
 				if($osv->osvoeno_procent > 100){
 					$osv->osvoeno_procent = 100;
 				}
-				$all_osv_progect_seo_user += $osv->osvoeno_procent;
+				$all_osv_progect_seo_user += (int)$osv->osvoeno_procent;
 			}
 
 			if(!empty($all_osv_progect_seo_user)){
