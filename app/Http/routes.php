@@ -35,7 +35,14 @@ Route::get('/stat', function()
             ->where('id_glavn_user',$u->id)
             ->get();
 
-        foreach($progect_spec_context as $c){
+        foreach($progect_spec_context as $key => $c){
+
+            if (!is_numeric($c->ya_direct))
+                $c->ya_direct = 0;
+
+            if(!is_numeric($c->go_advords))
+                $c->go_advords = 0;
+
             $arUserSeo[$u->name]['context_ya_direct_go_advords'][] = $c->ya_direct + $c->go_advords;
             if($c->ya_direct != 0 and !empty($c->ya_direct)) {
                 $arUserSeo[$u->name]['context_ya_direct_count'][] = $c->ya_direct;
@@ -49,7 +56,6 @@ Route::get('/stat', function()
             }
 
         }
-
 
         if(!empty($progect_spec_context)) {
             $arUserSeo[$u->name]['context_ya_direct_go_advords'] = array_sum($arUserSeo[$u->name]['context_ya_direct_go_advords']);
@@ -603,7 +609,6 @@ Route::get('/testing', function()
 
 
 });
-
 ////TEST/////
 
 Route::get('/get-balanse-google', function() {

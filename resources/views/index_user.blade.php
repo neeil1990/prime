@@ -23,7 +23,7 @@
                         height: 128px!important;
                     }
                 </style>
-                <div id="topvisor_GPr"></div>
+                <div id="topvisor_4Kr"></div>
             </div>
             <!-- ./col -->
             <div class="col-lg-3 col-xs-6">
@@ -204,7 +204,7 @@
 
 
 
-        <script type="text/javascript" src="https://topvisor.ru/js/widget/apometr/apometr.php?region_action=1&searcher=0&region_key=213&div_id=topvisor_GPr&charset=utf-8&lang=ru"></script>
+        <script type="text/javascript" src="https://topvisor.ru/js/widget/apometr/apometr.php?region_action=0&region_index=1&div_id=topvisor_4Kr&charset=utf-8&lang=ru"></script>
 
 
 
