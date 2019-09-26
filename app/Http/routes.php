@@ -603,11 +603,7 @@ Route::get('/get-balanse-yandex', function()
 ////TEST/////
 Route::get('/testing', function()
 {
-
-
-
-
-
+    var_dump("test");
 });
 ////TEST/////
 
