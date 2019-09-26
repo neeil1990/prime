@@ -2870,7 +2870,7 @@ class HomeController extends Controller
 			}
 
             $sum = (float)$u->ya_direct+(float)$u->go_advords+(float)$u->MyTarget;
-            $users[$key]->sum_zp = $sum*$u->procent_seo/100;
+            $users[$key]->sum_zp = $sum*(int)$u->procent_seo/100;
 
 
             if($u->status == 0){
