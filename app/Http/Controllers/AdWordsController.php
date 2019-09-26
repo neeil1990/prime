@@ -114,7 +114,7 @@ class AdWordsController extends Controller {
             if($AccountCurrencyCode == "USD"){
                 $currency = file_get_contents("https://www.cbr-xml-daily.ru/daily_json.js");
                 $now_carrency = round(json_decode($currency)->Valute->$AccountCurrencyCode->Value);
-                $summ_not_null_and_cent = $summ_not_null_and_cent*$now_carrency;
+                $summ_not_null_and_cent = (int)$summ_not_null_and_cent*$now_carrency;
             }
         }
 
