@@ -30,9 +30,9 @@
                 <!-- small box -->
                 <div class="small-box bg-green">
                     <div class="inner">
-                        <h3>{{count($progect_seo)}}</h3>
+                        <h3>{{count($progect_seo)}} | {{$count_seo_client}} | {{$count_seo_our}}</h3>
 
-                        <p>Всего проектов SEO</p>
+                        <p>SEO: Всего | Клиентские | Наши</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
@@ -45,9 +45,8 @@
                 <!-- small box -->
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h3>{{count($progect_context)}}</h3>
-
-                        <p>Всего проектов контекст</p>
+                        <h3>{{count($progect_context)}} | {{$count_context_client}} | {{$count_context_our}}</h3>
+                        <p>Контекст: Всего | Клиентские | Наши</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
@@ -90,7 +89,7 @@
                     </tr>
 
                     <tr>
-                        <td>Всего освоенный бюджет</td>
+                        <td>Всего освоенный бюджет клиентские</td>
                         <td class="seo">{{$osvoeno_all}}</td>
                         <td>
                             <div class="input-group">
@@ -110,7 +109,7 @@
 
         <div class="box">
             <div class="box-header">
-                <h3 class="box-title">Всего проектов контекст: {{count($progect_context)}}</h3>
+                <h3 class="box-title">Всего клиентских проектов контекст: {{$count_context_client}}</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body no-padding">
@@ -204,7 +203,9 @@
                         <tr>
                             <th></th>
                             <th>Имя</th>
-                            <th>Количество проектов SEO</th>
+                            <th>Всего проектов SEO</th>
+                            <th>Клиентские SEO</th>
+                            <th>Наши SEO</th>
                             <th>Бюджет SEO</th>
                             <th>Бюджет освоенный SEO</th>
                             <th>Контекст <br> Директ/Adwords</th>
@@ -217,6 +218,8 @@
                             <td><i class="fa fa-user"></i></td>
                             <td>{{$k}}</td>
                             <td>@if(isset($u['count_project'])) {{$u['count_project']}} @endif</td>
+                            <td>@if(isset($u['count_project_client'])) {{$u['count_project_client']}} @endif</td>
+                            <td>@if(isset($u['count_project_our'])) {{$u['count_project_our']}} @endif</td>
                             <td>@if(isset($u['budjet'])) {{$u['budjet']}} @endif</td>
                             <td>@if(isset($u['osvoeno'])) {{$u['osvoeno']}} @endif</td>
                             <td>@if(isset($u['context_ya_direct_count'])) {{$u['context_ya_direct_count']}} @endif / @if(isset($u['context_go_advords_count'])) {{$u['context_go_advords_count']}} @endif</td>

@@ -15,7 +15,10 @@ Route::get('/stat', function()
 {
     $arMaxBudjet = array();
     $progect_seo = \DB::table('project_seos')->where('status','1')->get();
-    $progect_context = \DB::table('project_contexts')->where('status','1')->get();
+    $progect_context = \DB::table('project_contexts')
+        ->where('status','1')
+        ->where('our_project','0')
+        ->get();
 
     $arUserSeo = array();
     $users = \App\User::all();
@@ -25,9 +28,15 @@ Route::get('/stat', function()
             ->where('id_glavn_user',$u->id)
             ->get();
         foreach($progect_spec_seo as $s){
+
             $arUserSeo[$u->name]['budjet'][] = $s->budget;
             $arUserSeo[$u->name]['osvoeno'][] = $s->osvoeno;
             $arUserSeo[$u->name]['count_project'][] = $s->id;
+            if($s->our_project == 1){
+                $arUserSeo[$u->name]['count_project_our'][] = $s->id;
+            }else{
+                $arUserSeo[$u->name]['count_project_client'][] = $s->id;
+            }
         }
 
         $progect_spec_context = \DB::table('project_contexts')
@@ -66,7 +75,12 @@ Route::get('/stat', function()
         if(!empty($progect_spec_seo)) {
             $arUserSeo[$u->name]['budjet'] = array_sum($arUserSeo[$u->name]['budjet']);
             $arUserSeo[$u->name]['osvoeno'] = array_sum($arUserSeo[$u->name]['osvoeno']);
+            if(isset($arUserSeo[$u->name]['count_project']))
             $arUserSeo[$u->name]['count_project'] = count($arUserSeo[$u->name]['count_project']);
+            if(isset($arUserSeo[$u->name]['count_project_our']))
+            $arUserSeo[$u->name]['count_project_our'] = count($arUserSeo[$u->name]['count_project_our']);
+            if(isset($arUserSeo[$u->name]['count_project_client']))
+            $arUserSeo[$u->name]['count_project_client'] = count($arUserSeo[$u->name]['count_project_client']);
         }
 
     }

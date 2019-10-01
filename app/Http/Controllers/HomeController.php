@@ -691,7 +691,32 @@ class HomeController extends Controller
 				->get();
 			$users_all = User::all();
 			$progect_seo = \DB::table('project_seos')->where('status', '1')->get();
-			$progect_context = \DB::table('project_contexts')->where('status', '1')->get();
+			$progect_context = \DB::table('project_contexts')
+                ->where('status', '1')
+                ->where('our_project','0')
+                ->get();
+
+			$count_seo_client = \DB::table('project_seos')->where([
+			        ['status', '1'],
+			        ['our_project', '0'],
+            ])->count();
+
+            $count_seo_our = \DB::table('project_seos')->where([
+                ['status', '1'],
+                ['our_project', '1'],
+            ])->count();
+
+            $count_context_client = \DB::table('project_contexts')->where([
+                ['status', '1'],
+                ['our_project', '0'],
+            ])->count();
+
+            $count_context_our = \DB::table('project_contexts')->where([
+                ['status', '1'],
+                ['our_project', '1'],
+            ])->count();
+
+
 
 
 			$all_osv_procent_admin = 0;
@@ -836,6 +861,7 @@ class HomeController extends Controller
 
 		}
 
+
 		if($this->admin() == 1) {
 
 			return view('index', [
@@ -846,6 +872,10 @@ class HomeController extends Controller
 				'all_user' => $all_user_summa,
 				'context_ya_go' => $context_ya_go,
 				'osvoeno_all' => $osvoeno_all,
+				'count_seo_client' => $count_seo_client,
+				'count_seo_our' => $count_seo_our,
+				'count_context_client' => $count_context_client,
+				'count_context_our' => $count_context_our,
 				'max_budjet_seo' => array_sum($arMaxBudjet['seo']),
 				'ya_direct' => array_sum($arMaxBudjet['context']['ya_direct']),
 				'go_advords' => array_sum($arMaxBudjet['context']['go_advords']),
@@ -2582,6 +2612,12 @@ class HomeController extends Controller
             if($u->status == 1){
                 $countStatus['active'][] = $u->id;
             }
+            if($u->our_project == 0 && $u->status == 1){
+                $countStatus['count_client_project'][] = $u->id;
+            }
+            if($u->our_project == 1 && $u->status == 1){
+                $countStatus['count_our_project'][] = $u->id;
+            }
 
             if(!empty($u->end)) {
                 $end = explode('/', $u->end);
@@ -2608,23 +2644,60 @@ class HomeController extends Controller
 
               if($u->id_glavn_user == $this->user_now()->id and $this->admin() == 0) {
                   if ($u->budget <= $u->osvoeno) {
+
                       $arrBudget['budget'][] = $u->budget;
                       $arrBudget['osvoeno'][] = $u->budget;
+
+                      if($u->our_project == 0){
+                          $arrBudget['budget_client'][] = $u->budget;
+                          $arrBudget['osvoeno_client'][] = $u->budget;
+                      }
+                      if($u->our_project == 1){
+                          $arrBudget['budget_our'][] = $u->budget;
+                          $arrBudget['osvoeno_our'][] = $u->budget;
+                      }
+
                   } else {
                       $arrBudget['budget'][] = $u->budget;
                       $arrBudget['osvoeno'][] = $u->osvoeno;
+
+                      if($u->our_project == 0){
+                          $arrBudget['budget_client'][] = $u->budget;
+                          $arrBudget['osvoeno_client'][] = $u->osvoeno;
+                      }
+                      if($u->our_project == 1){
+                          $arrBudget['budget_our'][] = $u->budget;
+                          $arrBudget['osvoeno_our'][] = $u->osvoeno;
+                      }
                   }
               }elseif($this->admin() == 1){
                   if ($u->budget <= $u->osvoeno) {
                       $arrBudget['budget'][] = $u->budget;
                       $arrBudget['osvoeno'][] = $u->budget;
+
+                      if($u->our_project == 0){
+                          $arrBudget['budget_client'][] = $u->budget;
+                          $arrBudget['osvoeno_client'][] = $u->budget;
+                      }
+                      if($u->our_project == 1){
+                          $arrBudget['budget_our'][] = $u->budget;
+                          $arrBudget['osvoeno_our'][] = $u->budget;
+                      }
                   } else {
                       $arrBudget['budget'][] = $u->budget;
                       $arrBudget['osvoeno'][] = $u->osvoeno;
+
+                      if($u->our_project == 0){
+                          $arrBudget['budget_client'][] = $u->budget;
+                          $arrBudget['osvoeno_client'][] = $u->osvoeno;
+                      }
+                      if($u->our_project == 1){
+                          $arrBudget['budget_our'][] = $u->budget;
+                          $arrBudget['osvoeno_our'][] = $u->osvoeno;
+                      }
                   }
               }
             }
-
         }
 
         if(!empty($arrBudget['budget'])){
@@ -2636,6 +2709,28 @@ class HomeController extends Controller
             $arrBudget['osvoeno'] = array_sum($arrBudget['osvoeno']);
         }else{
             $arrBudget['osvoeno'] = 0;
+        }
+
+        if(!empty($arrBudget['budget_client'])){
+            $arrBudget['budget_client'] = array_sum($arrBudget['budget_client']);
+        }else{
+            $arrBudget['budget_client'] = 0;
+        }
+        if(!empty($arrBudget['osvoeno_client'])){
+            $arrBudget['osvoeno_client'] = array_sum($arrBudget['osvoeno_client']);
+        }else{
+            $arrBudget['osvoeno_client'] = 0;
+        }
+
+        if(!empty($arrBudget['budget_our'])){
+            $arrBudget['budget_our'] = array_sum($arrBudget['budget_our']);
+        }else{
+            $arrBudget['budget_our'] = 0;
+        }
+        if(!empty($arrBudget['osvoeno_our'])){
+            $arrBudget['osvoeno_our'] = array_sum($arrBudget['osvoeno_our']);
+        }else{
+            $arrBudget['osvoeno_our'] = 0;
         }
 
        // dd($users);
@@ -2650,17 +2745,27 @@ class HomeController extends Controller
         }else{
             $countStatus['countArchive'] = count($countStatus['countArchive']);
         }
-
         if(empty($countStatus['active'])){
             $countStatus['active'] = 0;
         }else{
             $countStatus['active'] = count($countStatus['active']);
         }
-
+        if(empty($countStatus['count_client_project'])){
+            $countStatus['count_client_project'] = 0;
+        }else{
+            $countStatus['count_client_project'] = count($countStatus['count_client_project']);
+        }
+        if(empty($countStatus['count_our_project'])){
+            $countStatus['count_our_project'] = 0;
+        }else{
+            $countStatus['count_our_project'] = count($countStatus['count_our_project']);
+        }
 
         return view('page.project-seo',[
             'budget_seo_osvoeno' => $arrBudget,
             'count_seo_prodject' => $countStatus['active'],
+            'count_client_project' => $countStatus['count_client_project'],
+            'count_our_project' => $countStatus['count_our_project'],
             'count_status' => $countStatus['countArchive'],
             'users' => $users,
             'name' => $name,
@@ -2694,11 +2799,15 @@ class HomeController extends Controller
         if(!isset($request['status'])){
             $request['status'] = 0;
         }
+        if(!isset($request['our_project'])){
+            $request['our_project'] = 0;
+        }
 
 
         $add = ProjectSeo::create([
             'name_project' => $request['name_project'],
             'status' => $request['status'],
+            'our_project' => $request['our_project'],
             'budget' => $request['budget'],
             'osvoeno' => $request['osvoeno'],
             'osvoeno_procent' => $request['osvoeno_procent'],
@@ -2879,47 +2988,107 @@ class HomeController extends Controller
             if($u->status == 1){
                 $countStatus['active'][] = $u->id;
             }
+            if($u->our_project == 0 && $u->status == 1){
+                $countStatus['count_client_project'][] = $u->id;
+            }
+            if($u->our_project == 1 && $u->status == 1){
+                $countStatus['count_our_project'][] = $u->id;
+            }
 
 
             if($u->status == $archive){
                 if($u->id_glavn_user == $this->user_now()->id and $this->admin() == 0) {
-                    $arrBuget[] = $u->ya_direct;
-                    $arrBuget[] = $u->go_advords;
-                    $arrBuget[] = $u->MyTarget;
+                    $arrBuget['budget'][] = $u->ya_direct;
+                    $arrBuget['budget'][] = $u->go_advords;
+                    $arrBuget['budget'][] = $u->MyTarget;
+
+                    if($u->our_project == 0){
+                        $arrBuget['budget_client'][] = $u->ya_direct;
+                        $arrBuget['budget_client'][] = $u->go_advords;
+                        $arrBuget['budget_client'][] = $u->MyTarget;
+                    }
+                    if($u->our_project == 1){
+                        $arrBuget['budget_our'][] = $u->ya_direct;
+                        $arrBuget['budget_our'][] = $u->go_advords;
+                        $arrBuget['budget_our'][] = $u->MyTarget;
+                    }
+
                 }elseif($this->admin() == 1){
-                    $arrBuget[] = $u->ya_direct;
-                    $arrBuget[] = $u->go_advords;
-                    $arrBuget[] = $u->MyTarget;
+                    $arrBuget['budget'][] = $u->ya_direct;
+                    $arrBuget['budget'][] = $u->go_advords;
+                    $arrBuget['budget'][] = $u->MyTarget;
+
+                    if($u->our_project == 0){
+                        $arrBuget['budget_client'][] = $u->ya_direct;
+                        $arrBuget['budget_client'][] = $u->go_advords;
+                        $arrBuget['budget_client'][] = $u->MyTarget;
+                    }
+                    if($u->our_project == 1){
+                        $arrBuget['budget_our'][] = $u->ya_direct;
+                        $arrBuget['budget_our'][] = $u->go_advords;
+                        $arrBuget['budget_our'][] = $u->MyTarget;
+                    }
                 }
             }
-
-
             $users[$key]->value_serialize = unserialize($u->value_serialize);
         }
+
+        if(!empty($arrBuget['budget'])){
+            $arrBuget['budget'] = array_sum($arrBuget['budget']);
+        }else{
+            $arrBuget['budget'] = 0;
+        }
+
+        if(!empty($arrBuget['budget_client'])){
+            $arrBuget['budget_client'] = array_sum($arrBuget['budget_client']);
+        }else{
+            $arrBuget['budget_client'] = 0;
+        }
+
+        if(!empty($arrBuget['budget_our'])){
+            $arrBuget['budget_our'] = array_sum($arrBuget['budget_our']);
+        }else{
+            $arrBuget['budget_our'] = 0;
+        }
+
+
+
         $name = \DB::table('sorts')
             ->leftJoin('users','sorts.id_user','=','users.id')
             ->leftJoin('project_contexts','sorts.id_table','=','project_contexts.id')
             ->where('sorts.id_type','5')->get();
 
-        //dd();
+
 
         if(empty($countStatus['countArchive'])){
             $countStatus['countArchive'] = 0;
         }else{
             $countStatus['countArchive'] = count($countStatus['countArchive']);
         }
-
         if(empty($countStatus['active'])){
             $countStatus['active'] = 0;
         }else{
             $countStatus['active'] = count($countStatus['active']);
         }
+        if(empty($countStatus['count_client_project'])){
+            $countStatus['count_client_project'] = 0;
+        }else{
+            $countStatus['count_client_project'] = count($countStatus['count_client_project']);
+        }
+        if(empty($countStatus['count_our_project'])){
+            $countStatus['count_our_project'] = 0;
+        }else{
+            $countStatus['count_our_project'] = count($countStatus['count_our_project']);
+        }
+
 
         $notice = NoticeSendMail::find(1);
 
         return view('page.project-context',[
-            'budget_context_project' => array_sum($arrBuget),
+            'budget_context_project' => $arrBuget,
             'count_context_project' => $countStatus['active'],
+            'count_client_project' => $countStatus['count_client_project'],
+            'count_our_project' => $countStatus['count_our_project'],
             'users' => $users,
             'name' => $name,
             'count_status' => $countStatus['countArchive'],
@@ -2954,9 +3123,14 @@ class HomeController extends Controller
             $request['status'] = 0;
         }
 
+        if(!isset($request['our_project'])){
+            $request['our_project'] = 0;
+        }
+
 
         $add = ProjectContext::create([
             'status' => $request['status'],
+            'our_project' => $request['our_project'],
             'id_glavn_user' => $request['id_glavn_user'],
             'name_project' => $request['name_project'],
             'ya_direct' => $request['ya_direct'],

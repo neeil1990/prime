@@ -10,6 +10,7 @@ class ProjectContext extends Model
 
     protected $fillable = [
         'status',
+        'our_project',
         'name_project',
         'ya_direct',
         'go_advords',
@@ -50,9 +51,14 @@ class ProjectContext extends Model
             $data['status'] = 0;
         }
 
+        if(!isset($data['our_project'])){
+            $data['our_project'] = 0;
+        }
+
         \DB::table('project_contexts')->where('id', $data['id'])
             ->update(array(
                 'status' => $data['status'],
+                'our_project' => $data['our_project'],
                 'name_project' => $data['name_project'],
                 'ya_direct' => $data['ya_direct'],
                 'go_advords' => $data['go_advords'],

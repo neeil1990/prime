@@ -19,6 +19,11 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="col-md-4 control-label">Наши проекты</label>
+                                <input type="checkbox" name="our_project" value="1">
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Имя проекта</label>
 
                                 <div class="col-md-6">

@@ -60,9 +60,15 @@
                             <div class="row">
                                 <div class="col-md-9">
 
-                                    Количество активных проектов: {{$count_seo_prodject}} |
-                                    Бюджет активных проектов: {{$budget_seo_osvoeno['budget']}} |
+                                    Всего активных: {{$count_seo_prodject}} |
+                                    Бюджет активных: {{$budget_seo_osvoeno['budget']}} |
                                     Освоенный бюджет: {{$budget_seo_osvoeno['osvoeno']}} |
+                                    Клиентские кол-во: {{$count_client_project}} |
+                                    Бюджет клиентские: {{$budget_seo_osvoeno['budget_client']}} |
+                                    Освоенный бюджет клиентские: {{$budget_seo_osvoeno['osvoeno_client']}} |
+                                    Наши проекты кол-во: {{$count_our_project}} |
+                                    Бюджет наши проекты: {{$budget_seo_osvoeno['budget_our']}} |
+                                    Освоенный бюджет наши проекты: {{$budget_seo_osvoeno['osvoeno_our']}} |
                                     @if($admin == 1)
                                     Архив: <a href="/archive-page-project/project-seo">{{$count_status}}</a>
                                     @endif

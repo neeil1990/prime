@@ -18,6 +18,11 @@
                             </div>
 
                             <div class="form-group">
+                                <label class="col-md-4 control-label">Наши проекты</label>
+                                <input type="checkbox" name="our_project" value="1" @if($users->our_project == 1) checked="checked" @endif >
+                            </div>
+
+                            <div class="form-group">
                                 <label class="col-md-4 control-label">Имя проекта</label>
 
                                 <div class="col-md-6">

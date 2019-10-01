@@ -9,6 +9,7 @@ class ProjectSeo extends Model
 {
     protected $fillable = [
         'status',
+        'our_project',
         'name_project',
         'budget',
         'osvoeno',
@@ -55,11 +56,15 @@ class ProjectSeo extends Model
         if(!isset($data['status'])){
             $data['status'] = 0;
         }
+        if(!isset($data['our_project'])){
+            $data['our_project'] = 0;
+        }
 
 
         \DB::table('project_seos')->where('id', $data['id'])
             ->update(array(
                 'status' => $data['status'],
+                'our_project' => $data['our_project'],
                 'procent_bonus' => trim($data['procent_bonus']),
                 'count_day_fine' => trim($data['count_day_fine']),
                 'procent_fine' => trim($data['procent_fine']),
