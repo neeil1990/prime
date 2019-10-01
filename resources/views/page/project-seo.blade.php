@@ -62,13 +62,13 @@
 
                                     Всего активных: {{$count_seo_prodject}} |
                                     Бюджет активных: {{$budget_seo_osvoeno['budget']}} |
-                                    Освоенный бюджет: {{$budget_seo_osvoeno['osvoeno']}} |
+                                    Освоенный бюджет: {{$budget_seo_osvoeno['osvoeno']}} <br/>
                                     Клиентские кол-во: {{$count_client_project}} |
                                     Бюджет клиентские: {{$budget_seo_osvoeno['budget_client']}} |
-                                    Освоенный бюджет клиентские: {{$budget_seo_osvoeno['osvoeno_client']}} |
+                                    Освоенный бюджет клиентские: {{$budget_seo_osvoeno['osvoeno_client']}}<br/>
                                     Наши проекты кол-во: {{$count_our_project}} |
                                     Бюджет наши проекты: {{$budget_seo_osvoeno['budget_our']}} |
-                                    Освоенный бюджет наши проекты: {{$budget_seo_osvoeno['osvoeno_our']}} |
+                                    Освоенный бюджет наши проекты: {{$budget_seo_osvoeno['osvoeno_our']}} <br/>
                                     @if($admin == 1)
                                     Архив: <a href="/archive-page-project/project-seo">{{$count_status}}</a>
                                     @endif

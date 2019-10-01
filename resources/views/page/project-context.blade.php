@@ -52,11 +52,11 @@
                             <div class="row">
                                 <div class="col-md-9">
                                     Всего активных: {{$count_context_project}} |
-                                    Бюджет активных: {{$budget_context_project['budget']}} |
+                                    Бюджет активных: {{$budget_context_project['budget']}} <br/>
                                     Клиентские кол-во: {{$count_client_project}} |
-                                    Бюджет клиентские: {{$budget_context_project['budget_client']}} |
+                                    Бюджет клиентские: {{$budget_context_project['budget_client']}} <br/>
                                     Наши проекты кол-во: {{$count_our_project}} |
-                                    Бюджет наши проекты: {{$budget_context_project['budget_our']}} |
+                                    Бюджет наши проекты: {{$budget_context_project['budget_our']}} <br/>
                                     @if($admin == 1)
                                     Архив: <a href="/archive-page-project/project-context">{{$count_status}}</a>
                                     @endif
