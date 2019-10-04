@@ -52,7 +52,7 @@
                                 <small class="label label-primary">Настройка полей</small>
                             </a>
 
-                            <a href="/setting-payout" >
+                            <a href="/setting-payout">
                                     <small class="label label-primary">Настройка Выплат</small>
                             </a>
                             @endif
@@ -109,7 +109,15 @@
 
                                             @foreach($setting_field as $key=>$val)
                                                 @if($val->value == 1 or $admin == 1)
-                                                    <th class="sorting @if($key == 0) scroll_right_table @endif" tabindex="0" data-type="{{$val->data_type}}" aria-controls="example2" rowspan="1" colspan="1" aria-label="Rendering engine: activate to sort column ascending"> @if($val->value == 0) <i style="color:red" class="fa fa-close"></i> @endif {{$val->name}}</th>
+                                                    <th class="sorting @if($key == 0) scroll_right_table @endif"
+                                                        @if($val->field == "osvoeno_seo") data-toggle="tooltip" data-placement="top" title="Сумма полученная за 8 дней включая текущий. Sum / 8*30 = Освоено" @endif
+                                                        @if($val->field == "osvoeno_procent_seo") data-toggle="tooltip" data-placement="top" title="Процент высчитанный из сумы Освоено" @endif
+                                                        tabindex="0"
+                                                        data-type="{{$val->data_type}}"
+                                                        aria-controls="example2"
+                                                        rowspan="1"
+                                                        colspan="1"
+                                                        aria-label="Rendering engine: activate to sort column ascending"> @if($val->value == 0) <i style="color:red" class="fa fa-close"></i> @endif {{$val->name}}</th>
                                                 @endif
                                             @endforeach
 
@@ -271,6 +279,10 @@
 
     <script>
         $(function(){
+
+            $('th[data-toggle="tooltip"]').tooltip({
+                container: 'body'
+            });
 
             $("tbody").sortable({
                 items:             "tr",
