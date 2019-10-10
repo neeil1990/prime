@@ -695,6 +695,8 @@ class HomeController extends Controller
                 ->where('status', '1')
                 ->where('our_project','0')
                 ->get();
+				
+				
 
 			$count_seo_client = \DB::table('project_seos')->where([
 			        ['status', '1'],
@@ -860,8 +862,12 @@ class HomeController extends Controller
 			//dd($arSeeForProject);
 
 		}
-
-
+		
+		
+		if(!isset($arMaxBudjet['context']['MyTarget']))
+			$arMaxBudjet['context']['MyTarget'] = [];
+		
+		
 		if($this->admin() == 1) {
 
 			return view('index', [
