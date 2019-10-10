@@ -385,16 +385,20 @@ Route::get('/get-seranking-sum', function()
     curl_close($curl);
     $data = json_decode($out);
 
+    $date_from = \DB::table('setting_serankings')->select('date_from')->where('id', 1)->first();
+    $date_from = date('Y-m-d', strtotime("-$date_from->date_from days"));
     $arrSum = array();
     foreach($data as $d){
 
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_HTTPHEADER , ['Authorization: Token '.$token]);
-        curl_setopt($curl, CURLOPT_URL, 'https://api4.seranking.com/sites/'.$d->id.'/positions');
+        curl_setopt($curl, CURLOPT_URL, 'https://api4.seranking.com/sites/'.$d->id.'/positions?date_from='.$date_from);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
         $out = curl_exec($curl);
         curl_close($curl);
         $data = json_decode($out);
+
+        dd($data);
 
 
 
@@ -769,6 +773,10 @@ Route::post('/update-service-and-password', ['as' => 'updateServiceAndPassword',
 //Настройка выплат
 Route::get('/setting-payout', ['as' => 'settingPayout', 'uses' => 'HomeController@settingPayout']);
 Route::post('/save-setting-payout', ['as' => 'saveSettingPayout', 'uses' => 'HomeController@saveSettingPayout']);
+
+//Настройка об-ки периода
+Route::get('/setting-seranking', ['as' => 'settingSeranking', 'uses' => 'HomeController@settingSeranking']);
+Route::post('/save-setting-seranking', ['as' => 'saveSettingSeranking', 'uses' => 'HomeController@saveSettingSeranking']);
 
 //Настройка выплат КОНТЕКСТ
 Route::get('/setting-payout-context', ['as' => 'settingPayoutContext', 'uses' => 'HomeController@settingPayoutContext']);

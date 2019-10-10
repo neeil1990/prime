@@ -55,6 +55,9 @@
                             <a href="/setting-payout">
                                     <small class="label label-primary">Настройка Выплат</small>
                             </a>
+                            <a href="/setting-seranking">
+                                <small class="label label-primary">Настройка об-ки периода</small>
+                            </a>
                             @endif
 
                             <div class="row">

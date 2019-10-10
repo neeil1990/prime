@@ -13,6 +13,7 @@ use App\ProjectSeo;
 use App\ServiceAndPass;
 use App\SettingPayout;
 use App\SettingPayoutContext;
+use App\SettingSeranking;
 use App\Sort;
 use App\TokenYandex;
 use Carbon\Carbon;
@@ -3366,6 +3367,19 @@ class HomeController extends Controller
             'admin' => $this->admin(),
             'linkUser' => $this->LinkUser()
         ]);
+    }
+
+    public function settingSeranking(){
+        $alldata = SettingSeranking::all();
+        return view('page.setting-seranking',[
+            'admin' => $this->admin(),
+            'setting' => $alldata[0]
+        ]);
+    }
+
+    public function saveSettingSeranking(Request $request, SettingSeranking $settingSeranking){
+        $settingSeranking->UpdateSettingSeranking($request->all());
+        return redirect()->intended('setting-seranking');
     }
 
     /////////////////////////

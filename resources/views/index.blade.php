@@ -302,14 +302,16 @@
                                         @endforeach
 
                                     </tr>
-                                    {{ ($count++) ? '' : '' }}
+                                    @if(strlen(trim($stat['osvoeno_procent'])) > 0)
+                                        {{ ($count++) ? '' : '' }}
+                                    @endif
                                     {{ ($sum += (int)$stat['osvoeno_procent']) ? '' : '' }}
                                     @endforeach
                                     </tbody>
                                 </table>
 
                             </div>
-                            <p style="text-align: center;font-size: 22px;font-weight: bold">Среднии освоенный процент: {{round($sum/$count,2)}} %</p>
+                            <p style="text-align: center;font-size: 22px;font-weight: bold">Среднии освоенный процент: {{round($sum/$count,2)}} % <span data-toggle="tooltip" title="" class="badge bg-red" data-original-title="В расчете участвует столбец <Освоено % сейчас> если там есть хоть какое то значение, даже 0.">?</span></p>
 
                             <!-- /.box-body -->
                         </div>
