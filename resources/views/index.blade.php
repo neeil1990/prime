@@ -279,13 +279,9 @@
                                         <th data-type="number">Макс.Бюджет</th>
                                         <th data-type="number">Освоено сейчас</th>
                                         <th data-type="number">Освоенный % сейчас</th>
-                                        <th data-type="number">Неделя 1</th>
-                                        <th data-type="number">Неделя 2</th>
-                                        <th data-type="number">Неделя 3</th>
-                                        <th data-type="number">Неделя 4</th>
-                                        <th data-type="number">Неделя 5</th>
-                                        <th data-type="number">Неделя 6</th>
-                                        <th data-type="number">Неделя 7</th>
+                                        @for($i = 1; $i <= 16; $i++ )
+                                        <th data-type="number">Н {{$i}}</th>
+                                        @endfor
                                     </tr>
                                     </thead>
                                     <tbody class="all">
@@ -298,7 +294,7 @@
                                         <td> {{$stat['osvoeno']}} </td>
                                         <td> {{$stat['osvoeno_procent']}} </td>
                                         @foreach($stat['osvoeno_procent_day'] as $date => $stat_procent)
-                                        <td style="text-align: center">@if(isset($stat_procent)) {{$stat_procent}}<br> <span style="font-size: 10px;color: blue;">{{$date}}</span>@endif</td>
+                                        <td style="text-align: center;min-width:70px;">@if(isset($stat_procent)) {{$stat_procent}}<br> <span style="font-size: 10px;color: blue;">{{$date}}</span>@endif</td>
                                         @endforeach
 
                                     </tr>

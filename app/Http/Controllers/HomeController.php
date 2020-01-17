@@ -684,6 +684,15 @@ class HomeController extends Controller
 				date('Y-m-d', strtotime('-35 days')),
 				date('Y-m-d', strtotime('-42 days')),
 				date('Y-m-d', strtotime('-49 days')),
+				date('Y-m-d', strtotime('-56 days')),
+				date('Y-m-d', strtotime('-63 days')),
+				date('Y-m-d', strtotime('-70 days')),
+				date('Y-m-d', strtotime('-77 days')),
+				date('Y-m-d', strtotime('-84 days')),
+				date('Y-m-d', strtotime('-91 days')),
+				date('Y-m-d', strtotime('-98 days')),
+				date('Y-m-d', strtotime('-105 days')),
+				date('Y-m-d', strtotime('-112 days')),
 			);
 
 			$stat_users = \DB::table('stat_users')
