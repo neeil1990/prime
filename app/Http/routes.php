@@ -386,10 +386,12 @@ Route::get('/get-seranking-sum', function()
     $data = json_decode($out);
 
     $date_from = \DB::table('setting_serankings')->select('date_from')->where('id', 1)->first();
+	$count_day_serankings = ((int)$date_from->date_from+1);
+	
     $date_from = date('Y-m-d', strtotime("-$date_from->date_from days"));
     $arrSum = array();
     foreach($data as $d){
-
+		
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_HTTPHEADER , ['Authorization: Token '.$token]);
         curl_setopt($curl, CURLOPT_URL, 'https://api4.seranking.com/sites/'.$d->id.'/positions?date_from='.$date_from);
@@ -398,8 +400,7 @@ Route::get('/get-seranking-sum', function()
         curl_close($curl);
         $data = json_decode($out);
 
-        dd($data);
-
+        //dd($data);
 
 
         if(isset($data[0]->keywords) && count($data[0]->keywords) > 0){
@@ -441,7 +442,7 @@ Route::get('/get-seranking-sum', function()
             }
 
             $end_sum = array_sum($arrSum[trim($p->name_project)]);
-            $sum_osvoen = ceil($end_sum/8*30);
+            $sum_osvoen = ceil($end_sum/$count_day_serankings*30);
             $sum_osvoen_procent = ceil($sum_osvoen/$p->budget*100);
 
 

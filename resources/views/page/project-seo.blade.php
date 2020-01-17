@@ -113,7 +113,7 @@
                                             @foreach($setting_field as $key=>$val)
                                                 @if($val->value == 1 or $admin == 1)
                                                     <th class="sorting @if($key == 0) scroll_right_table @endif"
-                                                        @if($val->field == "osvoeno_seo") data-toggle="tooltip" data-placement="top" title="Сумма полученная за 8 дней включая текущий. Sum / 8*30 = Освоено" @endif
+                                                        @if($val->field == "osvoeno_seo") data-toggle="tooltip" data-placement="top" title="Сумма полученная за {об-ки периода} дней включая текущий. Sum / {об-ки периода}*30 = Освоено" @endif
                                                         @if($val->field == "osvoeno_procent_seo") data-toggle="tooltip" data-placement="top" title="Процент высчитанный из сумы Освоено" @endif
                                                         tabindex="0"
                                                         data-type="{{$val->data_type}}"
