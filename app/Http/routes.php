@@ -375,7 +375,7 @@ Route::get('/send-notice-client/{count_day}/days/{name_project}/name-project', f
 Route::get('/get-seranking-sum', function()
 {
 
-    $token = "6f54eccb8d9a79daedf23a8e325be7ad3238967e";
+    $token = "0855c66ecb112b519171b8dcb21f289aa8b0f647";
 
     $curl = curl_init();
     curl_setopt($curl, CURLOPT_HTTPHEADER , ['Authorization: Token '.$token]);

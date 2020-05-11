@@ -305,9 +305,13 @@
                                     @endforeach
                                     </tbody>
                                 </table>
+								
+								
 
                             </div>
-                            <p style="text-align: center;font-size: 22px;font-weight: bold">Среднии освоенный процент: {{round($sum/$count,2)}} % <span data-toggle="tooltip" title="" class="badge bg-red" data-original-title="В расчете участвует столбец <Освоено % сейчас> если там есть хоть какое то значение, даже 0.">?</span></p>
+							@if($sum)
+								<p style="text-align: center;font-size: 22px;font-weight: bold">Среднии освоенный процент: {{round($sum/$count,2)}} % <span data-toggle="tooltip" title="" class="badge bg-red" data-original-title="В расчете участвует столбец <Освоено % сейчас> если там есть хоть какое то значение, даже 0.">?</span></p>
+							@endif
 
                             <!-- /.box-body -->
                         </div>

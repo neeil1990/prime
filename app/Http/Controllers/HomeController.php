@@ -924,7 +924,7 @@ class HomeController extends Controller
 			return die('Nooo!');
 		}
 
-        $token = "6f54eccb8d9a79daedf23a8e325be7ad3238967e";
+        $token = "0855c66ecb112b519171b8dcb21f289aa8b0f647";
 
 		$ArTotalSum = array(
 			'name' => '',
@@ -982,7 +982,7 @@ class HomeController extends Controller
 							$editpos['position'] -= $request->col_pos;
 						}
 
-                        $apiKey = '6f54eccb8d9a79daedf23a8e325be7ad3238967e';
+                        $apiKey = '0855c66ecb112b519171b8dcb21f289aa8b0f647';
                         $url = 'https://api4.seranking.com/sites/'.$id_project[0].'/position/';
                         $context = stream_context_create([
                             'http' => [
@@ -1048,7 +1048,7 @@ class HomeController extends Controller
 
 		foreach(unserialize($back_up->ar_position) as $editpos){
 
-            $apiKey = '6f54eccb8d9a79daedf23a8e325be7ad3238967e';
+            $apiKey = '0855c66ecb112b519171b8dcb21f289aa8b0f647';
             $url = 'https://api4.seranking.com/sites/'.$editpos['id'].'/position/';
             $context = stream_context_create([
                 'http' => [
