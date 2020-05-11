@@ -387,11 +387,11 @@ Route::get('/get-seranking-sum', function()
 
     $date_from = \DB::table('setting_serankings')->select('date_from')->where('id', 1)->first();
 	$count_day_serankings = ((int)$date_from->date_from+1);
-	
+
     $date_from = date('Y-m-d', strtotime("-$date_from->date_from days"));
     $arrSum = array();
     foreach($data as $d){
-		
+
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_HTTPHEADER , ['Authorization: Token '.$token]);
         curl_setopt($curl, CURLOPT_URL, 'https://api4.seranking.com/sites/'.$d->id.'/positions?date_from='.$date_from);
@@ -402,7 +402,6 @@ Route::get('/get-seranking-sum', function()
 
         //dd($data);
 
-
         if(isset($data[0]->keywords) && count($data[0]->keywords) > 0){
             foreach($data[0]->keywords as $sum){
                 $arrSum[$d->name][] = $sum->total_sum;
@@ -410,6 +409,7 @@ Route::get('/get-seranking-sum', function()
         }
 
     }
+
 
     $project_contexts = \DB::table('project_contexts')->get();
     foreach($project_contexts as $c){
@@ -428,12 +428,14 @@ Route::get('/get-seranking-sum', function()
         }
     }
 
-
     $name = \DB::table('project_seos')->get();
     foreach($name as $p){
         $setting_payouts = \DB::table('setting_payouts')->where('id',1)->first();
 
         if(isset($arrSum[trim($p->name_project)])){
+
+            if($p->promotion_type == 'traffic')
+                continue;
 
             if(empty($p->procent_seo) or $p->enable_procent_seo == 1){
                 $p->procent_seo = $setting_payouts->procent_seo;
@@ -569,7 +571,7 @@ Route::get('/get-balanse-yandex', function()
            $id_com = \DB::table('project_contexts')->where('id',$ya->id_company)->first();
 		   if(empty($id_com))
 			   continue;
-		   
+
             $summa = (float)$ostatok_balanse_yandex-(float)$id_com->ost_bslsnse_ya;
             if($summa >= 1000){
 

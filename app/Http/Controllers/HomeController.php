@@ -705,8 +705,8 @@ class HomeController extends Controller
                 ->where('status', '1')
                 ->where('our_project','0')
                 ->get();
-				
-				
+
+
 
 			$count_seo_client = \DB::table('project_seos')->where([
 			        ['status', '1'],
@@ -872,12 +872,12 @@ class HomeController extends Controller
 			//dd($arSeeForProject);
 
 		}
-		
-		
+
+
 		if(!isset($arMaxBudjet['context']['MyTarget']))
 			$arMaxBudjet['context']['MyTarget'] = [];
-		
-		
+
+
 		if($this->admin() == 1) {
 
 			return view('index', [
@@ -1791,7 +1791,7 @@ class HomeController extends Controller
                     $arrBudget['budget'][] = $u->budget;
                     $arrBudget['osvoeno'][] = $u->osvoeno;
                 }
-            
+
 
 
         }
@@ -1999,7 +1999,7 @@ class HomeController extends Controller
         }else{
             $count_archive = 1;
         }
-        
+
         return view('page.personal',[
             'itog_sum' =>  array_sum($arrItog['zp']),
             'count_user' => count($countArchive['active']),
@@ -2822,6 +2822,7 @@ class HomeController extends Controller
 
         $add = ProjectSeo::create([
             'name_project' => $request['name_project'],
+            'promotion_type' => $request['promotion_type'],
             'status' => $request['status'],
             'our_project' => $request['our_project'],
             'budget' => $request['budget'],

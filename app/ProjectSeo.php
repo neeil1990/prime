@@ -11,6 +11,9 @@ class ProjectSeo extends Model
         'status',
         'our_project',
         'name_project',
+
+        'promotion_type',
+
         'budget',
         'osvoeno',
         'osvoeno_procent',
@@ -72,6 +75,7 @@ class ProjectSeo extends Model
                 'bonus_add' => trim($data['bonus_add']),
                 'bonus_enable' => trim($data['bonus_enable']),
                 'name_project' => $data['name_project'],
+                'promotion_type' => $data['promotion_type'],
                 'budget' => $data['budget'],
                 'osvoeno' => $data['osvoeno'],
                 'osvoeno_procent' => $data['osvoeno_procent'],

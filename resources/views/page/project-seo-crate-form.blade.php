@@ -38,6 +38,25 @@
 
                             </div>
 
+                            <div class="form-group{{ $errors->has('promotion_type') ? ' has-error' : '' }}">
+                                <label class="col-md-4 control-label">
+                                    <i class="fa fa-arrows" style="color: grey"></i>
+                                    Способ продвижения
+                                </label>
+
+                                <div class="col-md-6">
+                                    <select name="promotion_type" id="promotion_type" class="form-control" required>
+                                        <option value="position">Позиции</option>
+                                        <option value="traffic">Трафик</option>
+                                    </select>
+                                    @if ($errors->first('promotion_type'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('promotion_type') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Бюджет</label>
 
@@ -87,7 +106,7 @@
                                 <label class="col-md-4 control-label"><i class="fa fa-arrows" style="color: grey"></i> Назначить главным</label>
 
                                 <div class="col-md-6">
-                                    <select name="id_glavn_user" id="id_glavn_user">
+                                    <select name="id_glavn_user" id="id_glavn_user" class="form-control">
                                         @foreach($users as $user)
                                             <option value="{{$user->id}}">{{$user->name}}</option>
                                         @endforeach
