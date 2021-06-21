@@ -693,12 +693,14 @@ class HomeController extends Controller
 				date('Y-m-d', strtotime('-98 days')),
 				date('Y-m-d', strtotime('-105 days')),
 				date('Y-m-d', strtotime('-112 days')),
+				date('Y-m-d', strtotime('-119 days')),
 			);
 
 			$stat_users = \DB::table('stat_users')
 				->whereIn('date_day',$arDate)
 				->orderBy('date_day', 'desc')
 				->get();
+				
 			$users_all = User::all();
 			$progect_seo = \DB::table('project_seos')->where('status', '1')->get();
 			$progect_context = \DB::table('project_contexts')
@@ -762,6 +764,7 @@ class HomeController extends Controller
 					}
 				}
 			}
+			
 
 
 			$osvoeno_all = \DB::table('stats')

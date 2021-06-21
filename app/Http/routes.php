@@ -559,7 +559,17 @@ Route::get('/get-balanse-yandex', function()
         curl_close($curl);
 
         $ac_ya = json_decode($result);
-
+		
+		if(isset($ac_ya->error_code)){
+			
+			\DB::table('logs')->insert([
+			'progect' => 'yandex',
+			'what_is_done' => $ya->login.': '.$ac_ya->error_detail,
+			'who_did' => 'API direct.yandex','created_at' => date('Y-m-d H:i:s')
+			]);
+		}
+		
+		
         if(empty($ac_ya->data->Accounts) or empty($ya->token_yandex)){
             $home = new \App\Http\Controllers\HomeController();
             $ostatok_balanse_yandex = $home->get_price_auto_direct($ya->login);
@@ -614,7 +624,8 @@ Route::get('/get-balanse-yandex', function()
                     'ost_bslsnse_ya' => $ostatok_balanse_yandex
                 ));
         }
-
+		
+	
     }
     \DB::table('logs')->insert(
         array('progect' => 'yandex', 'what_is_done' => 'Обновление скрипта direct.yandex','who_did' => 'API direct.yandex','created_at' => date('Y-m-d H:i:s'))
