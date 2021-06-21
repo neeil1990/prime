@@ -240,7 +240,7 @@
                     $(function(){
                         var url = window.location.pathname;
                        if(url == '/'){
-                           $('.title_dashboard').text('Главная');
+                           $('.title_dashboard').text($('.content[data-text]').data('text'));
                            $('.menu3').addClass('active');
                        }
                         if(url == '/pass-seo'){
@@ -428,7 +428,6 @@
 
                 $('.box-body').scroll(function(){
                     if($(this).scrollLeft() == 0){
-                        console.log('123');
                         $('.scroll_right_table').removeAttr('style');
                     }else {
                         $('.scroll_right_table').css({

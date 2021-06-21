@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <section class="content">
+    <section class="content" data-text="Главная">
 
         <div class="row">
 

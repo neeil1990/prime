@@ -2,7 +2,7 @@
 
 
 @section('content')
-    <section class="content">
+    <section class="content" data-text="Главная (Последнее обновление данных: {{$all_user_create_at}})">
 
         <div class="row">
 
@@ -305,8 +305,8 @@
                                     @endforeach
                                     </tbody>
                                 </table>
-								
-								
+
+
 
                             </div>
 							@if($sum)

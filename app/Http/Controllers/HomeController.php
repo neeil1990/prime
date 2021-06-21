@@ -700,7 +700,7 @@ class HomeController extends Controller
 				->whereIn('date_day',$arDate)
 				->orderBy('date_day', 'desc')
 				->get();
-				
+
 			$users_all = User::all();
 			$progect_seo = \DB::table('project_seos')->where('status', '1')->get();
 			$progect_context = \DB::table('project_contexts')
@@ -764,7 +764,7 @@ class HomeController extends Controller
 					}
 				}
 			}
-			
+
 
 
 			$osvoeno_all = \DB::table('stats')
@@ -889,6 +889,7 @@ class HomeController extends Controller
 				'arStatForAdminUser' => $arStatForAdminUser,
 				'arSeeForProjectUserAdmin' => $arSeeForProjectUserAdmin,
 				'all_user' => $all_user_summa,
+				'all_user_create_at' => $all_user->created_at,
 				'context_ya_go' => $context_ya_go,
 				'osvoeno_all' => $osvoeno_all,
 				'count_seo_client' => $count_seo_client,
